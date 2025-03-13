@@ -1,11 +1,10 @@
-# YA-5bx: Your 11-Minute Fitness Revolution
+# YA-5bx: Your 11-Minute Fitness Revolution 💪
 
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Vue 3](https://img.shields.io/badge/Vue-3-brightgreen.svg)](https://v3.vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vuetify](https://img.shields.io/badge/Vuetify-%231867C0.svg?style=flat&logo=vuetify&logoColor=white)](https://vuetifyjs.com/)
 
-**Welcome to YA-5bx!** This isn’t just another workout app; it’s a turbo-charged, no-equipment-needed, 11-minute daily grind inspired by the Royal Canadian Air Force’s legendary 5BX plan. Built with Vue 3, TypeScript, and Vuetify, this app is a sleek, offline-first powerhouse designed to whip you into shape, one chart at a time.
+**Welcome to YA-5bx!** 👋 This isn’t just another workout app; it’s a turbo-charged, no-equipment-needed, 11-minute daily grind inspired by the Royal Canadian Air Force’s legendary 5BX plan. Built with Vue 3, TypeScript, and Vuetify, this app is a sleek, offline-first powerhouse designed to whip you into shape, one chart at a time.
 
 ## 💪 What is YA-5bx?
 
@@ -34,7 +33,7 @@ YA-5bx is your personal fitness companion, designed to help you achieve your fit
 - **Vuetify:** A Material Design component framework for Vue.js for building beautiful user interfaces.
 - **Local Storage:** To store your progress locally.
 
-## 🛠️ Getting Started
+## 🛠️ Getting Started 🚀
 
 1.  **Clone the repository:**
 
@@ -62,7 +61,7 @@ YA-5bx is your personal fitness companion, designed to help you achieve your fit
     npm run dev
     ```
 
-5.  **Build the project for production**
+5.  **Build the project for production:**
     ```bash
     npm run build
     ```
