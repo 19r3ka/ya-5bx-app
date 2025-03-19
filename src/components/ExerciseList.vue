@@ -5,10 +5,10 @@
         <v-avatar class="me-3">
           <v-img :src="exercise.illustration" alt="Exercise Image" />
         </v-avatar>
-        <span>{{ exercise.name }}</span>
+        <span>{{ $t(`${exercise.translationKey}.name`) }}</span>
       </v-expansion-panel-title>
       <v-expansion-panel-text>
-        <p>{{ exercise.description }}</p>
+        <p>{{ $t(`${exercise.translationKey}.description`) }}</p>
         <v-img :src="exercise.illustration" alt="Exercise Image" class="mt-4" />
       </v-expansion-panel-text>
     </v-expansion-panel>

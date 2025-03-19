@@ -1,45 +1,38 @@
 [
   {
     "id": "E1",
-    "name": "Standing Forward Bend to Upward Salute Flow",
-    "description": "Feet astride, arms upward. Perform a forward bend to touch the floor, then stretch upward into a backward bend. Emphasis on fluid motion rather than keeping knees locked.",
+    "translationKey": "exercise.e1",
     "illustration": "./illustrations/5bx_c1_e01.png"
   },
   {
     "id": "E2",
-    "name": "Half Sit-Up (Canadian Forces Standard)",
-    "description": "Back lying, feet 6 inches apart. Lift head/shoulders just enough to see heels while keeping legs straight. Focused on core engagement without full sit-up range.",
+    "translationKey": "exercise.e2",
     "illustration": "./illustrations/5bx_c1_e02.png"
   },
   {
     "id": "E3",
-    "name": "Prone Alternating Leg Lift",
-    "description": "Front lying with palms under thighs. Alternately raise straightened legs while lifting head, ensuring thighs clear palms. Counts emphasize controlled alternation.",
+    "translationKey": "exercise.e3",
     "illustration": "./illustrations/5bx_c1_e03.png"
   },
   {
     "id": "E4",
-    "name": "Knee-Modified Full Range Push-Up",
-    "description": "From kneeling plank position, perform push-ups with full arm extension and chest-to-floor contact. Maintains straight line from knees to shoulders.",
+    "translationKey": "exercise.e4",
     "illustration": "./illustrations/5bx_c1_e04.png"
   },
   {
     "id": "E5",
-    "name": "High-Step Scissor Jump Combo",
-    "description": "Alternate between high-step stationary run and scissor switch jumps. Transition smoothly between exercises, maintaining rhythm and form.",
+    "translationKey": "exercise.e5",
     "illustration": "./illustrations/5bx_c1_e05.png"
   },
 
   {
     "id": "E51",
-    "name": "High-Step Stationary Run",
-    "description": "Stationary run counting steps each time left foot touches floor. Maintain 4-inch foot elevation. Base component for interval training.",
+    "translationKey": "exercise.e51",
     "illustration": "Search: 'RCAF 5BX running in place diagram'"
   },
   {
     "id": "E52",
-    "name": "Scissor Switch Jumps",
-    "description": "From staggered stance, jump to alternate arm/leg positions mid-air. Maintain shoulder-high arm position and controlled landing.",
+    "translationKey": "exercise.e52",
     "illustration": "Search: '5BX scissor jump form'"
   },
   {

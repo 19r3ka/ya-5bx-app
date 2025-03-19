@@ -7,13 +7,13 @@
 
     <!-- Chart Description -->
     <v-card-text>
-      <p>{{ CHART_CARD_DESCRIPTION_LABEL }}</p>
+      <p>{{ $t('chartCard.description') }}</p>
     </v-card-text>
 
     <!-- Exercises Section -->
     <v-divider></v-divider>
     <v-card-subtitle class="mt-4">{{
-      EXERCISE_DESCRIPTION_SECTION_LABEL
+      $t('chartCard.exerciseDescriptions')
     }}</v-card-subtitle>
     <v-card-text>
       <ExerciseList :exercises="chartExercises" />
@@ -21,7 +21,7 @@
 
     <!-- Levels Section -->
     <v-card-subtitle class="mt-4">{{
-      EXERCISE_LEVEL_REPS_SECTION_LABEL
+      $t('chartCard.exerciseRepetitionsByLevel')
     }}</v-card-subtitle>
     <v-card-text>
       <ExerciseTable :exercises="chartExercises" :levels="chartLevels" />
@@ -43,12 +43,6 @@
   const props = defineProps<{
     chart: Chart
   }>()
-
-  //   TODO: Refactor for i18n integration. "EN" by default
-  const EXERCISE_DESCRIPTION_SECTION_LABEL = 'Exercise Descriptions'
-  const EXERCISE_LEVEL_REPS_SECTION_LABEL = 'Exercise Repetitions by Level'
-  const CHART_CARD_DESCRIPTION_LABEL =
-    'This chart is designed to help you improve your fitness level.'
 
   const exercises = exerciseData as Exercise[]
   const levels = levelData as Level[]

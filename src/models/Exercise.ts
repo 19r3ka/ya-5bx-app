@@ -5,7 +5,6 @@ export type ExerciseId = `E${number}`
 // Interface for the Exercise model
 export interface Exercise {
   id: ExerciseId
-  name: string
-  description: string
+  translationKey: string // Key to the translation in the i18n messages
   illustration: string // Path to asset
 }
