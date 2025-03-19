@@ -1,0 +1,116 @@
+[
+  {
+    "id": "C1",
+    "name": "Chart 1",
+    "exerciseIds": ["E1", "E2", "E3", "E4", "E5"],
+    "levelIds": [
+      "C1-D-",
+      "C1-D",
+      "C1-D+",
+      "C1-C-",
+      "C1-C",
+      "C1-C+",
+      "C1-B-",
+      "C1-B",
+      "C1-B+",
+      "C1-A-",
+      "C1-A",
+      "C1-A+"
+    ]
+  },
+  {
+    "id": "C2",
+    "name": "Chart 2",
+    "exerciseIds": ["E6", "E7", "E8", "E9", "E10"],
+    "levelIds": [
+      "C2-D-",
+      "C2-D",
+      "C2-D+",
+      "C2-C-",
+      "C2-C",
+      "C2-C+",
+      "C2-B-",
+      "C2-B",
+      "C2-B+",
+      "C2-A-",
+      "C2-A",
+      "C2-A+"
+    ]
+  },
+  {
+    "id": "C3",
+    "name": "Chart 3",
+    "exerciseIds": ["E11", "E12", "E13", "E14", "E15"],
+    "levelIds": [
+      "C3-D-",
+      "C3-D",
+      "C3-D+",
+      "C3-C-",
+      "C3-C",
+      "C3-C+",
+      "C3-B-",
+      "C3-B",
+      "C3-B+",
+      "C3-A-",
+      "C3-A",
+      "C3-A+"
+    ]
+  },
+  {
+    "id": "C4",
+    "name": "Chart 4",
+    "exerciseIds": ["E16", "E17", "E18", "E19", "E20"],
+    "levelIds": [
+      "C4-D-",
+      "C4-D",
+      "C4-D+",
+      "C4-C-",
+      "C4-C",
+      "C4-C+",
+      "C4-B-",
+      "C4-B",
+      "C4-B+",
+      "C4-A-",
+      "C4-A",
+      "C4-A+"
+    ]
+  },
+  {
+    "id": "C5",
+    "name": "Chart 5",
+    "exerciseIds": ["E21", "E22", "E23", "E24", "E25"],
+    "levelIds": [
+      "C5-D-",
+      "C5-D",
+      "C5-D+",
+      "C5-C-",
+      "C5-C",
+      "C5-C+",
+      "C5-B-",
+      "C5-B",
+      "C5-B+",
+      "C5-A-",
+      "C5-A",
+      "C5-A+"
+    ]
+  },
+  {
+    "id": "C6",
+    "name": "Chart 6",
+    "exerciseIds": ["E26", "E27", "E28", "E29", "E30"],
+    "levelIds": [
+      "C6-D-",
+      "C6-D",
+      "C6-D+",
+      "C6-C-",
+      "C6-C",
+      "C6-C+",
+      "C6-B-",
+      "C6-B",
+      "C6-B+",
+      "C6-A-",
+      "C6-A",
+      "C6-A+"
+    ]
+  }
+]
