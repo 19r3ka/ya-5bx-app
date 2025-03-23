@@ -7,8 +7,6 @@
           <th v-for="exercise in exercises" :key="exercise.id">
             {{ $t(`${exercise.translationKey}.name`) }}
           </th>
-          <th>{{ $t('exerciseTable.runHeader') }}</th>
-          <th>{{ $t('exerciseTable.walkHeader') }}</th>
         </tr>
       </thead>
       <tbody>

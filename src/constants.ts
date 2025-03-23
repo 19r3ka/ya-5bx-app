@@ -15,3 +15,8 @@ export const EXERCISE_LEVELS = [
   'A',
   'A+',
 ]
+export const LOCALSTORAGE_USER_KEY = 'ya-5bx_user'
+export const SECONDS_IN_A_YEAR = 31536000 // 365 days * 24 hours * 60 minutes * 60 seconds
+export const STARTER_LEVEL = 'C1_D-'
+export const MINIMUM_REQUIRED_AGE = 6
+export const LEVEL_ID_SEPARATOR = '_'

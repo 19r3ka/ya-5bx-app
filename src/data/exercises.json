@@ -1,255 +1,56 @@
 [
   {
+    "id": "E01",
+    "translationKey": "exercise.e01",
+    "illustration": "./illustrations/5bx_c1_e01.png",
+    "icon": "./icons/5bx_e01.svg"
+  },
+  {
+    "id": "E02",
+    "translationKey": "exercise.e02",
+    "illustration": "./illustrations/5bx_c1_e02.png",
+    "icon": "./icons/5bx_e02.svg"
+  },
+  {
     "id": "E1",
     "translationKey": "exercise.e1",
-    "illustration": "./illustrations/5bx_c1_e01.png"
+    "illustration": "./illustrations/5bx_c1_e1.png",
+    "icon": "./icons/5bx_c1_e1.svg"
   },
   {
     "id": "E2",
     "translationKey": "exercise.e2",
-    "illustration": "./illustrations/5bx_c1_e02.png"
+    "illustration": "./illustrations/5bx_c1_e2.png",
+    "icon": "./icons/5bx_c1_e2.svg"
   },
   {
     "id": "E3",
     "translationKey": "exercise.e3",
-    "illustration": "./illustrations/5bx_c1_e03.png"
+    "illustration": "./illustrations/5bx_c1_e3.png",
+    "icon": "./icons/5bx_c1_e3.svg"
   },
   {
     "id": "E4",
     "translationKey": "exercise.e4",
-    "illustration": "./illustrations/5bx_c1_e04.png"
+    "illustration": "./illustrations/5bx_c1_e4.png",
+    "icon": "./icons/5bx_c1_e4.svg"
   },
   {
     "id": "E5",
     "translationKey": "exercise.e5",
-    "illustration": "./illustrations/5bx_c1_e05.png"
+    "illustration": "./illustrations/5bx_c1_e5.png",
+    "icon": "./icons/5bx_c1_e5.svg"
   },
-
   {
     "id": "E51",
     "translationKey": "exercise.e51",
-    "illustration": "Search: 'RCAF 5BX running in place diagram'"
+    "illustration": "Search: 'RCAF 5BX running in place diagram'",
+    "icon": "./icons/5bx_c1_e51.svg"
   },
   {
     "id": "E52",
     "translationKey": "exercise.e52",
-    "illustration": "Search: '5BX scissor jump form'"
-  },
-  {
-    "id": "E6",
-    "name": "Dynamic Toe Touch with Back Arch",
-    "description": "Feet astride, arms upward. Touch floor with bounce, then stretch upward into backward bend. Knees may bend slightly to avoid strain. Continuous fluid motion.",
-    "illustration": "Search: '5BX Chart 2 Exercise 1 toe touch back arch'"
-  },
-  {
-    "id": "E7",
-    "name": "Anchored Full Sit-Up",
-    "description": "Back lying, feet 6\" apart. Sit up to vertical position with feet optionally anchored. Slight knee bend permitted. Full range of motion required.",
-    "illustration": "Search: 'RCAF anchored sit-up diagram'"
-  },
-  {
-    "id": "E8",
-    "name": "Classic Superman Hold",
-    "description": "Front lying with palms under thighs. Simultaneously lift head, shoulders, and both straight legs until thighs clear palms. Isometric hold at peak position.",
-    "illustration": "Search: 'Superman exercise palms under thighs variation'"
-  },
-  {
-    "id": "E9",
-    "name": "Military Standard Push-Up",
-    "description": "Front plank position. Lower body until chest touches floor with elbows at 45° angle. Full arm extension required on ascent. Maintain straight line from heels to head.",
-    "illustration": "Search: '5BX Chart 2 push-up form diagram'"
-  },
-  {
-    "id": "E10",
-    "name": "Astride Run with Jumping Jacks",
-    "description": "Alternate between stationary astride run with 4-inch foot elevation and full-range jumping jacks. Maintain rhythm and form during transitions.",
-    "illustration": "Search: 'RCAF astride run jumping jack combo'"
-  },
-  {
-    "id": "E101",
-    "name": "Standard Astride Run",
-    "description": "Maintain 4-inch foot elevation during stationary run. Counts based on left foot contacts. Prepares for jump intervals.",
-    "illustration": "Search: 'RCAF basic stationary run form'"
-  },
-  {
-    "id": "E102",
-    "name": "Military Astride Jumps",
-    "description": "Full-range jumping jacks: arms raise sideways to shoulder height, feet spread wider than shoulder width. Strict return to starting position.",
-    "illustration": "Search: '5BX astride jump diagram'"
-  },
-
-  {
-    "id": "E11",
-    "name": "Lateral Toe Touch Sequence",
-    "description": "Feet astride. Alternate touching 6\" outside left/between/outside right foot, followed by full backward bend. Direction reverses halfway through set.",
-    "illustration": "Search: '5BX lateral toe touch sequence'"
-  },
-  {
-    "id": "E12",
-    "name": "Hands-Behind-Head Sit-Up",
-    "description": "Back lying with hands clasped behind head. Sit up to vertical while maintaining foot contact. Anchoring permitted only if necessary.",
-    "illustration": "Search: 'RCAF hands behind head sit-up'"
-  },
-  {
-    "id": "E13",
-    "name": "Interlocked Superman",
-    "description": "Front lying with hands clasped behind back. Lift chest and legs simultaneously, maintaining straight legs and full upper/lower body clearance from floor.",
-    "illustration": "Search: 'Superman exercise hands interlocked variation'"
-  },
-  {
-    "id": "E14",
-    "name": "Three-Point Cobra Push-Up",
-    "description": "Chin-to-floor -> forehead-to-floor -> push-up sequence. Distinct pauses at each position. No continuous motion permitted.",
-    "illustration": "Search: '5BX three-stage cobra push-up'"
-  },
-  {
-    "id": "E15",
-    "name": "Elevated Step Run into Half Squat",
-    "description": "Alternate between 4-inch step run and 110° knee bend squats. Transition smoothly between exercises, maintaining rhythm and form.",
-    "illustration": "Search: '5BX elevated step run half squat combo'"
-  },
-
-  {
-    "id": "E151",
-    "name": "Elevated Step Run",
-    "description": "Continuous stationary run maintaining consistent 4-inch foot lift. Foundation for squat interval training.",
-    "illustration": "Search: 'RCAF sustained running drill'"
-  },
-  {
-    "id": "E152",
-    "name": "Half Knee Bend Squats",
-    "description": "Precise 110° knee bends with hands on hips. Maintain upright torso and full foot contact. No forward lean permitted.",
-    "illustration": "Search: '5BX half knee bend standards'"
-  },
-
-  {
-    "id": "E16",
-    "name": "Overhead Arm Circle Toe Touch",
-    "description": "Lateral toe touches combined with continuous overhead arm circles during backbend. Full 360° arm rotation past vertical required.",
-    "illustration": "Search: '5BX overhead arm circle exercise'"
-  },
-  {
-    "id": "E17",
-    "name": "Straight-Leg Toe Reach Sit-Up",
-    "description": "Back lying with arms overhead. Sit up while maintaining straight legs and arm-head contact. Toe touch required at peak position.",
-    "illustration": "Search: 'RCAF straight leg sit-up diagram'"
-  },
-  {
-    "id": "E18",
-    "name": "T-Superman Hold",
-    "description": "Front lying with arms extended sideways. Lift chest and legs while maintaining T-arm position. Full body clearance from floor required.",
-    "illustration": "Search: 'Superman T-hold exercise variation'"
-  },
-  {
-    "id": "E19",
-    "name": "Wide-Grip Chest Press-Up",
-    "description": "Hands positioned 12\" from ears. Full chest-to-floor contact required. Emphasizes pectoral major engagement.",
-    "illustration": "Search: '5BX wide grip push-up diagram'"
-  },
-  {
-    "id": "E20",
-    "name": "High-Knee into Squat Jump",
-    "description": "Alternate between waist-high knee run and squat jumps. Transition smoothly between exercises, maintaining rhythm and form.",
-    "illustration": "Search: '5BX high knee run squat jump combo'"
-  },
-  {
-    "id": "E201",
-    "name": "High-Knee Sustained Run",
-    "description": "Waist-high knee lift during stationary run. Each left foot contact counts as one step. Base for footwork drills.",
-    "illustration": "Search: 'RCAF high knee run form'"
-  },
-  {
-    "id": "E202",
-    "name": "Alternating Semi-Squat Jumps",
-    "description": "Half-crouch jumps with alternating foot positions. Requires mid-air foot position change and controlled landing.",
-    "illustration": "Search: '5BX semi-squat jump sequence'"
-  },
-
-  {
-    "id": "E21",
-    "name": "Trifecta Forward Bend",
-    "description": "Feet astride, hands clasped. Sequence: floor touch -> left knee touch -> right knee touch -> full backbend. Continuous motion cycle.",
-    "illustration": "Search: '5BX trifecta bend exercise'"
-  },
-  {
-    "id": "E22",
-    "name": "Kneeling Elbow Floor Touch",
-    "description": "From kneeling position, forward bend until elbows touch floor. Maintain seated heel contact throughout movement.",
-    "illustration": "Search: 'RCAF kneeling elbow touch drill'"
-  },
-  {
-    "id": "E23",
-    "name": "Prone Chest Elevation",
-    "description": "Front lying with head on hands. Lift upper torso while keeping legs straight. Focus on thoracic extension.",
-    "illustration": "Search: '5BX prone chest lift exercise'"
-  },
-  {
-    "id": "E24",
-    "name": "Cobra Push-Back",
-    "description": "Push-up to upward dog position with exaggerated back arch and head lift. Maintain straight leg alignment.",
-    "illustration": "Search: 'RCAF cobra push-back variation'"
-  },
-  {
-    "id": "E25",
-    "name": "High-Knee into Spread Jump",
-    "description": "Alternate between waist-high knee run and spread eagle jumps. Transition smoothly between exercises, maintaining rhythm and form.",
-    "illustration": "Search: '5BX high knee run spread jump combo'"
-  },
-
-  {
-    "id": "E251",
-    "name": "Waist-High Knee Run",
-    "description": "Stationary run requiring knee elevation to waist level. Strict step counting via left foot contacts.",
-    "illustration": "Search: 'RCAF high-step running form'"
-  },
-  {
-    "id": "E252",
-    "name": "Spread Eagle Stance Jumps",
-    "description": "From crouch position, jump to spread stance with overhead arm swing. Requires audible foot contact on landing.",
-    "illustration": "Search: '5BX spread eagle jump standards'"
-  },
-
-  {
-    "id": "E26",
-    "name": "Reverse Grip Lateral Flex",
-    "description": "Reverse clasp grip overhead. Lateral floor touches with mid-line press, followed by circular backbend. Direction reversal at midpoint.",
-    "illustration": "Search: '5BX reverse clasp lateral bend'"
-  },
-  {
-    "id": "E27",
-    "name": "V-Up Toe Tap",
-    "description": "Simultaneous leg/arm lift to V-position. Requires finger-to-toe contact with full back/leg clearance from floor.",
-    "illustration": "Search: 'RCAF V-up sit-up diagram'"
-  },
-  {
-    "id": "E28",
-    "name": "Superman Press Pulse",
-    "description": "Overhead arm position during Superman. Additional backward press at peak position. Full anterior chain engagement.",
-    "illustration": "Search: '5BX superman press back variation'"
-  },
-  {
-    "id": "E29",
-    "name": "Plyometric Chest Tap Push-Up",
-    "description": "Explosive push-up with mid-air chest slap. Audible contact required. Maintain rigid plank position during flight phase.",
-    "illustration": "Search: 'RCAF chest slap push-up demo'"
-  },
-  {
-    "id": "E30",
-    "name": "High-Knee Jack Jump Combo",
-    "description": "Alternate between waist-high knee run and toe-touch jack jumps. Transition smoothly between exercises, maintaining rhythm and form.",
-    "illustration": "Search: '5BX high knee run jack jump combo'"
-  },
-
-  {
-    "id": "E301",
-    "name": "Sustained High-Knee Run",
-    "description": "Continuous waist-high knee running. Maintain upright posture and consistent rhythm.",
-    "illustration": "Search: 'RCAF sustained high knee run'"
-  },
-  {
-    "id": "E302",
-    "name": "Toe-Touch Jack Jumps",
-    "description": "Squat jump with mid-air toe touch at waist height. Requires straight legs and audible hand-foot contact.",
-    "illustration": "Search: '5BX jack jump toe touch diagram'"
+    "illustration": "Search: '5BX scissor jump form'",
+    "icon": "./icons/5bx_c1_e52.svg"
   }
 ]

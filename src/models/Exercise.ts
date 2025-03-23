@@ -7,4 +7,6 @@ export interface Exercise {
   id: ExerciseId
   translationKey: string // Key to the translation in the i18n messages
   illustration: string // Path to asset
+  icon: string // Path to asset
+  reps?: number
 }

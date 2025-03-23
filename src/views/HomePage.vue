@@ -2,25 +2,29 @@
   <v-container>
     <v-row>
       <v-col cols="12" md="6" lg="4">
-        <!-- TODO: remove this hack for when there is no chart to load -->
-        <ChartCard :chart="chart" v-if="chart" />
-        <p v-else>No chart to display</p>
+        <template v-if="user">
+          <WelcomeCard />
+          <WorkoutOptions @click="handleClick" />
+          <LevelOverview />
+          <LevelDetails :level-id="user.currentLevel" />
+        </template>
+        <template v-else>
+          <p>Login ASAP</p>
+        </template>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script setup lang="ts">
-  import type { Chart } from '@/models/Chart'
-  import ChartCard from '@/components/ChartCard.vue'
-  import chartData from '@/data/charts.json'
+  import WelcomeCard from '@/components/WelcomeCard.vue'
+  import WorkoutOptions from '@/components/WorkoutOptions.vue'
+  import LevelOverview from '@/components/LevelOverview.vue'
+  import LevelDetails from '@/components/LevelDetails.vue'
+  import { useUser } from '@/composables/useUser'
 
-  const charts = chartData as Chart[]
-
-  const chartId = 'C1' // default chart to load for now.
-
-  const chart = charts.find((chart) => chart.id === chartId)
-  if (!chart) {
-    console.error(`Chart with ID ${chartId} not found`)
+  const { user } = useUser()
+  function handleClick() {
+    console.log('Clicked!')
   }
 </script>

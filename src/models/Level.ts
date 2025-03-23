@@ -4,7 +4,7 @@ import type { ChartId } from './Chart'
 export type Grade = 'D-' | 'D+' | 'C-' | 'C+' | 'B-' | 'B+' | 'A-' | 'A+'
 
 // Define the id format using a template literal type
-export type LevelId = `${ChartId}-${Grade}`
+export type LevelId = `${ChartId}_${Grade}`
 
 // Level interface
 export interface Level {
