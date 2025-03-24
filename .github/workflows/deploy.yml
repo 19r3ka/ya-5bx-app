@@ -11,7 +11,7 @@ on:
 
 # Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write # Allow GitHub:actions bot to make changes like semver in package.json
   pages: write
   id-token: write
 
