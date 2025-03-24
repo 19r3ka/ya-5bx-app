@@ -1,0 +1,84 @@
+{
+  "chartCard": {
+    "description": "This is a static display of the exercises and levels in this chart",
+    "exerciseDescriptions": "Exercise Descriptions",
+    "exerciseRepetitionsByLevel": "Exercise Repetitions by Level"
+  },
+  "exerciseTable": {
+    "levelHeader": "Level",
+    "runHeader": "1-mile run",
+    "walkHeader": "2-mile walk",
+    "minutesPerExercise": "Minutes for each exercise"
+  },
+  "homePage": {
+    "noChart": "No chart to display",
+    "loading": "Loading..."
+  },
+  "onboarding": {
+    "title": "Welcome to the 5BX App!",
+    "nameLabel": "Name (optional)",
+    "dobLabel": "Date of Birth",
+    "userGreetings": "Hello, {name}!",
+    "age": "You are {age} years old.",
+    "goalLevel": "Your recommended goal level is {goalLevel}.",
+    "submit": "Get Started",
+    "defaultName": "App user",
+    "introduction": "To get started, please provide some basic information.",
+    "dobExplanation": "Your date of birth helps us personalize your experience and provide age-appropriate start and target exercise levels.",
+    "nameExplanation": "Your name will be used to personalize your profile and in-app communications.",
+    "validationMessages": {
+      "dobRequired": "Date of birth is required",
+      "dobTooRecent": "Date of birth must be at least 6 years ago"
+    }
+  },
+  "levelOverview": {
+    "title": "Level Overview",
+    "chart": "Chart",
+    "level": "Level",
+    "days": "Days"
+  },
+  "levelDetails": {
+    "title": "Level Details"
+  },
+  "welcomeCard": {
+    "greeting": "Welcome, {name}"
+  },
+  "exercise": {
+    "e01": {
+      "name": "1-mile Run",
+      "description": "Run 1 mile at a steady pace. Use a track, a fitness app or measure a route in advance to ensure accurate distance."
+    },
+    "e02": {
+      "name": "2-mile Walk",
+      "description": "Walk 2 miles at a steady pace. Use a fitness app or measure a route in advance to ensure accurate distance."
+    },
+    "e1": {
+      "name": "Standing Forward Bend to Upward Salute Flow",
+      "description": "Feet astride, arms upward. Perform a forward bend to touch the floor, then stretch upward into a backward bend. Emphasis on fluid motion rather than keeping knees locked."
+    },
+    "e2": {
+      "name": "Half Sit-Up (Canadian Forces Standard)",
+      "description": "Back lying, feet 6 inches apart. Lift head/shoulders just enough to see heels while keeping legs straight. Focused on core engagement without full sit-up range."
+    },
+    "e3": {
+      "name": "Prone Alternating Leg Lift",
+      "description": "Front lying with palms under thighs. Alternately raise straightened legs while lifting head, ensuring thighs clear palms. Counts emphasize controlled alternation."
+    },
+    "e4": {
+      "name": "Knee-Modified Full Range Push-Up",
+      "description": "From kneeling plank position, perform push-ups with full arm extension and chest-to-floor contact. Maintains straight line from knees to shoulders."
+    },
+    "e5": {
+      "name": "High-Step Scissor Jump Combo",
+      "description": "Alternate between high-step stationary run and scissor switch jumps. Transition smoothly between exercises, maintaining rhythm and form."
+    },
+    "e51": {
+      "name": "High-Step Stationary Run",
+      "description": "Stationary run counting steps each time left foot touches floor. Maintain 4-inch foot elevation. Base component for interval training."
+    },
+    "e52": {
+      "name": "Scissor Switch Jumps",
+      "description": "From staggered stance, jump to alternate arm/leg positions mid-air. Maintain shoulder-high arm position and controlled landing."
+    }
+  }
+}

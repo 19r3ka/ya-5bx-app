@@ -1,0 +1,85 @@
+{
+  "chartCard": {
+    "description": "Ceci est un affichage statique des exercices et des niveaux de ce tableau",
+    "exerciseDescriptions": "Descriptions des exercices",
+    "exerciseRepetitionsByLevel": "Répétitions d'exercices par niveau"
+  },
+  "exerciseTable": {
+    "levelHeader": "Niveau",
+    "runHeader": "Course d'1 mile",
+    "walkHeader": "Marche de 2 miles",
+    "minutesPerExercise": "Minutes pour chaque exercice"
+  },
+  "homePage": {
+    "noChart": "Aucun tableau à afficher",
+    "loading": "Chargement..."
+  },
+  "onboarding": {
+    "title": "Bienvenue sur l'application 5BX !",
+    "nameLabel": "Nom (facultatif)",
+    "dobLabel": "Date de naissance",
+    "userGreetings": "Bonjour, {name} !",
+    "age": "Vous avez {age} ans.",
+    "goalLevel": "Votre niveau d'objectif recommandé est {goalLevel}.",
+    "submit": "Commencer",
+    "defaultName": "Utilisateur de l'application",
+    "introduction": "Pour commencer, veuillez fournir quelques informations de base. Ca restera strictement entre nous.",
+    "dobExplanation": "Votre date de naissance nous aide à personnaliser votre expérience et à fournir des niveaux d'exercice de départ et cibles adaptés à votre âge.",
+    "nameExplanation": "Votre petit nom sera utilisé pour personnaliser votre profil et les communications dans l'application.",
+    "validationMessages": {
+      "dobRequired": "La date de naissance est requise",
+      "dobTooRecent": "La date de naissance doit remonter à 6 ans minimum"
+    }
+  },
+  "levelOverview": {
+    "title": "Aperçu du niveau",
+    "chart": "Tableau",
+    "level": "Niveau",
+    "days": "Jours"
+  },
+  "levelDetails": {
+    "title": "Le niveau en détail"
+  },
+
+  "welcomeCard": {
+    "greeting": "Bienvenue, {name}"
+  },
+  "exercise": {
+    "e01": {
+      "name": "Course d'1 mile",
+      "description": "Courir 1 mile à un rythme régulier. Utilisez une piste, une application de fitness ou mesurez un itinéraire à l'avance pour garantir une distance précise."
+    },
+    "e02": {
+      "name": "Marche de 2 miles",
+      "description": "Marcher 2 miles à un rythme régulier. Utilisez une application de fitness ou mesurez un itinéraire à l'avance pour garantir une distance précise."
+    },
+    "e1": {
+      "name": "Flexion avant debout avec élévation des bras",
+      "description": "Pieds écartés, bras levés. Effectuez une flexion avant pour toucher le sol, puis étirez-vous vers le haut en vous cambrant vers l'arrière. Mettez l'accent sur un mouvement fluide plutôt que de garder les genoux verrouillés."
+    },
+    "e2": {
+      "name": "Demi-redressement assis (norme des Forces canadiennes)",
+      "description": "Allongé sur le dos, pieds écartés de 15 cm. Soulevez la tête et les épaules juste assez pour voir vos talons tout en gardant les jambes droites. Concentrez-vous sur l'engagement du tronc sans effectuer une amplitude complète de redressement assis."
+    },
+    "e3": {
+      "name": "Élévation alternée des jambes en position ventrale",
+      "description": "Allongé sur le ventre, paumes sous les cuisses. Soulevez alternativement les jambes tendues tout en levant la tête, en veillant à ce que les cuisses dépassent les paumes. Les comptes mettent l'accent sur une alternance contrôlée."
+    },
+    "e4": {
+      "name": "Pompe modifiée avec genoux au sol",
+      "description": "À partir d'une position de planche sur les genoux, effectuez des pompes avec une extension complète des bras et un contact poitrine-sol. Maintenez une ligne droite des genoux aux épaules."
+    },
+    "e5": {
+      "name": "Combinaison de course sur place avec sauts en ciseaux",
+      "description": "Alternez entre une course sur place avec des pas hauts et des sauts avec changement de position des bras et des jambes. Passez en douceur entre les exercices, en maintenant le rythme et la forme."
+    },
+    "e51": {
+      "name": "Course sur place avec pas hauts",
+      "description": "Course sur place en comptant les pas chaque fois que le pied gauche touche le sol. Maintenez une élévation des pieds de 10 cm. Composant de base pour l'entraînement par intervalles."
+    },
+    "e52": {
+      "name": "Sauts avec changement de position en ciseaux",
+      "description": "À partir d'une position décalée, sautez pour alterner la position des bras et des jambes en l'air. Maintenez les bras à hauteur des épaules et un atterrissage contrôlé."
+    }
+  }
+}

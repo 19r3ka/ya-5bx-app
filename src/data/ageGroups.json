@@ -1,0 +1,20 @@
+[
+  { "minAge": 6, "maxAge": 6, "goalLevel": "C1_B" },
+  { "minAge": 7, "maxAge": 7, "goalLevel": "C1_A" },
+  { "minAge": 8, "maxAge": 8, "goalLevel": "C2_D-" },
+  { "minAge": 9, "maxAge": 9, "goalLevel": "C2_C-" },
+  { "minAge": 10, "maxAge": 10, "goalLevel": "C2_B-" },
+  { "minAge": 11, "maxAge": 11, "goalLevel": "C2_A-" },
+  { "minAge": 12, "maxAge": 12, "goalLevel": "C3_D+" },
+  { "minAge": 13, "maxAge": 13, "goalLevel": "C3_C+" },
+  { "minAge": 14, "maxAge": 14, "goalLevel": "C3_B+" },
+  { "minAge": 15, "maxAge": 15, "goalLevel": "C4_D-" },
+  { "minAge": 16, "maxAge": 17, "goalLevel": "C4_C+" },
+  { "minAge": 18, "maxAge": 24, "goalLevel": "C5_C" },
+  { "minAge": 25, "maxAge": 29, "goalLevel": "C4_A+" },
+  { "minAge": 30, "maxAge": 34, "goalLevel": "C4_C-" },
+  { "minAge": 35, "maxAge": 39, "goalLevel": "C3_B" },
+  { "minAge": 40, "maxAge": 44, "goalLevel": "C3_C" },
+  { "minAge": 45, "maxAge": 49, "goalLevel": "C2_A+" },
+  { "minAge": 50, "maxAge": 60, "goalLevel": "C2_C+" }
+]
