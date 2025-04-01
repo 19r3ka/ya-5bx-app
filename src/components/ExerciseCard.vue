@@ -13,11 +13,13 @@
   </v-card>
 </template>
 <script setup lang="ts">
+  import { computed } from 'vue'
   import type { Exercise } from '@/models/Exercise'
 
   const props = defineProps<{
     exercise: Exercise
   }>()
 
-  const { icon, reps } = props.exercise
+  const icon = computed(() => props.exercise.icon)
+  const reps = computed(() => props.exercise.reps)
 </script>
