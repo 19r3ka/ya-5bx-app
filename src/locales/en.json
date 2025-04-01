@@ -43,6 +43,9 @@
   "welcomeCard": {
     "greeting": "Welcome, {name}"
   },
+  "workoutCard": {
+    "title": "Today's Workout"
+  },
   "exercise": {
     "e01": {
       "name": "1-mile Run",

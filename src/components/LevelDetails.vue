@@ -29,26 +29,15 @@
 
 <script setup lang="ts">
   import ExerciseCard from '@/components/ExerciseCard.vue'
-  import levelsData from '@/data/levels.json'
   import type { LevelId } from '@/models/Level'
-  import { getChartExercises } from '@/utils/charts'
-  import { extractChartAndLevel } from '@/utils/levels'
+  import { getExercisesForLevel } from '@/utils/levels'
 
   // take a Levelid as prop
   const props = defineProps<{
     levelId: LevelId
   }>()
 
-  const [userChart] = extractChartAndLevel(props.levelId)
-
-  const levelExercises = getChartExercises(userChart)
-  const levelReps =
-    levelsData.find((level) => level.id === props.levelId)?.reps || []
-
-  //   for each exercise object, add a "reps" attribute corresponding to the reps in levelReps. Index is key.
-  levelExercises.forEach((exercise, index) => {
-    exercise.reps = levelReps[index]
-  })
+  const levelExercises = getExercisesForLevel(props.levelId)
 
   // Replace with your actual data fetching logic
   const [firstFourExercises, lastThreeExercises] = [
