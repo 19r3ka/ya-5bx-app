@@ -1,0 +1,37 @@
+{
+  "ex_1": {
+    "displayName": "Toe Touch",
+    "variants": {
+      "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
+      "modern_safe": { "volume_scaler_coefficient": 1.0 }
+    }
+  },
+  "ex_2": {
+    "displayName": "Sit Up / Crunch",
+    "variants": {
+      "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
+      "modern_safe": { "volume_scaler_coefficient": 0.8 }
+    }
+  },
+  "ex_3": {
+    "displayName": "Leg Lift",
+    "variants": {
+      "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
+      "modern_safe": { "volume_scaler_coefficient": 1.0 }
+    }
+  },
+  "ex_4": {
+    "displayName": "Push Up",
+    "variants": {
+      "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
+      "modern_safe": { "volume_scaler_coefficient": 1.0 }
+    }
+  },
+  "ex_5": {
+    "displayName": "Stationary Run / Jumps",
+    "variants": {
+      "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
+      "modern_safe": { "volume_scaler_coefficient": 1.0 }
+    }
+  }
+}

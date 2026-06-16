@@ -1,0 +1,8 @@
+[
+  { "ageMax": 20, "requiredSessions": 1 },
+  { "ageMin": 21, "ageMax": 29, "requiredSessions": 2 },
+  { "ageMin": 30, "ageMax": 39, "requiredSessions": 4 },
+  { "ageMin": 40, "ageMax": 49, "requiredSessions": 7 },
+  { "ageMin": 50, "ageMax": 59, "requiredSessions": 8 },
+  { "ageMin": 60, "requiredSessions": 10 }
+]
