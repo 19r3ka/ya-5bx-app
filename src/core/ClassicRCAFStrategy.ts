@@ -71,6 +71,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
       durationSeconds: 120,
       displayName: 'Toe Touch',
       description: `Perform Toe Touch repetitions: ${ex1Reps}`,
+      translationKey: 'exercise.e1',
     })
 
     // 2. Exercise 2: Sit Up / Crunch (Safe Mode switches to Crunch)
@@ -81,6 +82,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
       durationSeconds: 60,
       displayName: ex2Name,
       description: `Perform ${ex2Name} repetitions: ${ex2Reps}`,
+      translationKey: 'exercise.e2',
     })
 
     // 3. Exercise 3: Leg Lift
@@ -90,6 +92,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
       durationSeconds: 60,
       displayName: 'Leg Lift',
       description: `Perform Leg Lift repetitions: ${ex3Reps}`,
+      translationKey: 'exercise.e3',
     })
 
     // 4. Exercise 4: Push Up
@@ -99,6 +102,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
       durationSeconds: 60,
       displayName: 'Push Up',
       description: `Perform Push Up repetitions: ${ex4Reps}`,
+      translationKey: 'exercise.e4',
     })
 
     // 5. Exercise 5: Aerobic
@@ -110,6 +114,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
         durationSeconds: 360,
         displayName: 'Stationary Run',
         description: `Perform ${scaledSteps} stationary steps`,
+        translationKey: 'exercise.e5',
       })
     } else if (context.aerobicSelection === AerobicOption.OUTDOOR_RUN_1_MILE) {
       const minutes = chartData.outdoor_run_target_minutes
@@ -119,6 +124,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
         durationSeconds,
         displayName: 'Outdoor Run (1 Mile)',
         description: `Run 1 Mile in target: ${minutes} minutes`,
+        translationKey: 'exercise.e5',
       })
     } else {
       const minutes = chartData.walk_target_minutes
@@ -128,6 +134,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
         durationSeconds,
         displayName: 'Walk (2 Miles)',
         description: `Walk 2 Miles in target: ${minutes} minutes`,
+        translationKey: 'exercise.e5',
       })
     }
 

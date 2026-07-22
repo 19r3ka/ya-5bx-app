@@ -55,6 +55,7 @@ export interface WorkoutInterval {
   durationSeconds: number
   displayName: string
   description: string
+  translationKey?: string
 }
 
 export interface WorkoutStateSnapshot {
@@ -64,6 +65,10 @@ export interface WorkoutStateSnapshot {
   elapsedSecondsInCurrentInterval: number
   totalElapsedSeconds: number
   lastUpdatedTimestamp: number
+}
+
+export interface SessionSnapshot extends WorkoutStateSnapshot {
+  intervals: WorkoutInterval[]
 }
 
 export interface WorkoutGenerationContext {

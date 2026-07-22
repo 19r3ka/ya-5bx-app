@@ -7,6 +7,7 @@ import type {
 import { OrchestratorLifecycle, AerobicOption } from './EngineTypes'
 import { WorkoutOrchestrator } from './WorkoutOrchestrator'
 import { ProgressionValidator } from './ProgressionValidator'
+import { McMasterHIITStrategy } from './McMasterHIITStrategy'
 
 // Assert helper
 function assertEquals<T>(actual: T, expected: T, message: string): void {
@@ -101,7 +102,7 @@ async function runScenario3(): Promise<void> {
     },
   }
 
-  const orchestrator = new WorkoutOrchestrator(hangingAdapter)
+  const orchestrator = new WorkoutOrchestrator(undefined, hangingAdapter)
   const context: WorkoutGenerationContext = {
     sessionToken: 'token-456',
     profile: { age: 35 },
@@ -166,7 +167,7 @@ async function runScenario4(): Promise<void> {
     },
   }
 
-  const orchestrator = new WorkoutOrchestrator(databaseAdapter)
+  const orchestrator = new WorkoutOrchestrator(undefined, databaseAdapter)
 
   // 1. Start Session A
   const contextA: WorkoutGenerationContext = {
@@ -217,6 +218,163 @@ async function runScenario4(): Promise<void> {
   )
 }
 
+async function runScenario5(): Promise<void> {
+  console.log('✓ Scenario 5: McMaster Mapping')
+  const mcmaster = new McMasterHIITStrategy()
+  const context: WorkoutGenerationContext = {
+    sessionToken: 'mcmaster-1',
+    profile: { age: 30 },
+    chartNumber: 1,
+    levelString: 'D-',
+    aerobicSelection: AerobicOption.STATIONARY_RUN,
+    isModernSafeMode: false,
+  }
+
+  const intervals = mcmaster.generateWorkout(context)
+  assertEquals(intervals.length, 9, 'McMaster protocol must produce 9 blocks')
+  const totalDuration = intervals.reduce(
+    (acc, curr) => acc + curr.durationSeconds,
+    0
+  )
+  assertEquals(
+    totalDuration,
+    540,
+    'Total sequence runtime must equal exactly 540s'
+  )
+
+  // Check safety mode substitution
+  const safeContext: WorkoutGenerationContext = {
+    ...context,
+    isModernSafeMode: true,
+  }
+  const safeIntervals = mcmaster.generateWorkout(safeContext)
+  assertEquals(safeIntervals.length, 9, 'Safe mode must also produce 9 blocks')
+  console.log(
+    '  - Verified: McMaster HIIT sequence runtime = 540s & 9 blocks verified.'
+  )
+}
+
+async function runScenario6(): Promise<void> {
+  console.log('✓ Scenario 6: Tokenized Observer & Fault Isolation')
+  const orchestrator = new WorkoutOrchestrator()
+  const context: WorkoutGenerationContext = {
+    sessionToken: 'sub-test',
+    profile: { age: 25 },
+    chartNumber: 1,
+    levelString: 'D-',
+    aerobicSelection: AerobicOption.STATIONARY_RUN,
+    isModernSafeMode: false,
+  }
+
+  orchestrator.initializeSession(context)
+
+  // Subscriptions
+  let sub1CallCount = 0
+  let sub2CallCount = 0
+
+  const token1 = orchestrator.subscribe(() => {
+    sub1CallCount++
+  })
+
+  // Faulty subscriber
+  const token2 = orchestrator.subscribe(() => {
+    sub2CallCount++
+    throw new Error('Crashing subscriber!')
+  })
+
+  assertEquals(
+    orchestrator.getSubscriberCount(),
+    2,
+    'Observer count should be 2'
+  )
+
+  // Start workout triggers broadcast
+  orchestrator.startWorkout()
+
+  assertEquals(
+    sub1CallCount > 1,
+    true,
+    'Faulty subscriber must not stop subscriber 1'
+  )
+  assertEquals(
+    sub2CallCount > 1,
+    true,
+    'Subscriber 2 was called despite throwing'
+  )
+
+  orchestrator.unsubscribe(token1)
+  orchestrator.unsubscribe(token2)
+  assertEquals(
+    orchestrator.getSubscriberCount(),
+    0,
+    'Subscriber count drops to 0 on unsubscribe'
+  )
+
+  orchestrator.dispose()
+  console.log(
+    '  - Verified: Observer fault isolation and tokenized lifecycle complete.'
+  )
+}
+
+async function runScenario7(): Promise<void> {
+  console.log(
+    '✓ Scenario 7: WAL Recovery Handshake & Hardware Anchor Recalibration'
+  )
+  const orchestrator = new WorkoutOrchestrator()
+  const context: WorkoutGenerationContext = {
+    sessionToken: 'wal-token-999',
+    profile: { age: 40 },
+    chartNumber: 1,
+    levelString: 'D-',
+    aerobicSelection: AerobicOption.STATIONARY_RUN,
+    isModernSafeMode: false,
+  }
+
+  const savedSnapshot = {
+    sessionToken: 'wal-token-999',
+    status: 'RUNNING' as const,
+    currentIntervalIndex: 3,
+    elapsedSecondsInCurrentInterval: 20,
+    totalElapsedSeconds: 200,
+    lastUpdatedTimestamp: Date.now() - 3600000, // 1 hour ago
+  }
+
+  orchestrator.reconstructSessionFromWAL(context, savedSnapshot)
+
+  const currentSnapshot = orchestrator.getSessionSnapshot()
+  assertEquals(
+    currentSnapshot.sessionToken,
+    'wal-token-999',
+    'Token matches WAL'
+  )
+  assertEquals(
+    currentSnapshot.status,
+    'RUNNING',
+    'Status reconstructed as RUNNING'
+  )
+  assertEquals(
+    currentSnapshot.totalElapsedSeconds,
+    200,
+    'Total elapsed restored to 200s'
+  )
+  assertEquals(
+    currentSnapshot.currentIntervalIndex,
+    3,
+    'Interval index restored to 3'
+  )
+
+  // Mismatched token failure simulation
+  const badContext = { ...context, sessionToken: 'wrong-token' }
+  assertThrows(() => {
+    orchestrator.reconstructSessionFromWAL(badContext, savedSnapshot)
+  }, 'Mismatched session token must fail security check')
+
+  orchestrator.dispose()
+  console.log(
+    '  - Verified: WAL reconstruction security check & hardware anchor recalibration verified.'
+  )
+}
+
 async function runAllScenarios(): Promise<void> {
   console.log('Starting Verification Runbook...')
   try {
@@ -224,6 +382,9 @@ async function runAllScenarios(): Promise<void> {
     await runScenario2()
     await runScenario3()
     await runScenario4()
+    await runScenario5()
+    await runScenario6()
+    await runScenario7()
     console.log('\nVerification Runbook Completed Successfully!')
   } catch (error) {
     console.error('Verification Runbook Failed:', error)

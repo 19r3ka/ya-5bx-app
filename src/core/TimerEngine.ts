@@ -112,6 +112,29 @@ export class TimerEngine {
     this.delegate.onTick(elapsedInInterval, totalElapsedSeconds)
   }
 
+  public restoreState(
+    totalElapsedSeconds: number,
+    currentIntervalIndex: number,
+    status: 'RUNNING' | 'PAUSED'
+  ): void {
+    this.currentIntervalIndex = currentIntervalIndex
+    if (status === 'RUNNING') {
+      this.isRunning = true
+      this.isPaused = false
+      // Recalibrate hardware anchor: current time minus recorded elapsed ms
+      this.startAnchorHardwareTimestamp =
+        performance.now() - totalElapsedSeconds * 1000
+      this.startTicker()
+    } else if (status === 'PAUSED') {
+      this.isRunning = true
+      this.isPaused = true
+      this.startAnchorHardwareTimestamp =
+        performance.now() - totalElapsedSeconds * 1000
+      this.pauseAnchorTimestamp = performance.now()
+      this.stopTicker()
+    }
+  }
+
   public dispose(): void {
     this.stopTicker()
     this.delegate = null

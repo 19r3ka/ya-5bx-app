@@ -1,6 +1,7 @@
 {
   "ex_1": {
     "displayName": "Toe Touch",
+    "translationKey": "exercise.e1",
     "variants": {
       "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
       "modern_safe": { "volume_scaler_coefficient": 1.0 }
@@ -8,6 +9,7 @@
   },
   "ex_2": {
     "displayName": "Sit Up / Crunch",
+    "translationKey": "exercise.e2",
     "variants": {
       "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
       "modern_safe": { "volume_scaler_coefficient": 0.8 }
@@ -15,6 +17,7 @@
   },
   "ex_3": {
     "displayName": "Leg Lift",
+    "translationKey": "exercise.e3",
     "variants": {
       "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
       "modern_safe": { "volume_scaler_coefficient": 1.0 }
@@ -22,6 +25,7 @@
   },
   "ex_4": {
     "displayName": "Push Up",
+    "translationKey": "exercise.e4",
     "variants": {
       "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
       "modern_safe": { "volume_scaler_coefficient": 1.0 }
@@ -29,6 +33,23 @@
   },
   "ex_5": {
     "displayName": "Stationary Run / Jumps",
+    "translationKey": "exercise.e5",
+    "variants": {
+      "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
+      "modern_safe": { "volume_scaler_coefficient": 1.0 }
+    }
+  },
+  "mcmaster_active": {
+    "displayName": "HIIT High Intensity Cycling / Sprint",
+    "translationKey": "exercise.mcmaster_active",
+    "variants": {
+      "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
+      "modern_safe": { "volume_scaler_coefficient": 1.0 }
+    }
+  },
+  "mcmaster_recovery": {
+    "displayName": "HIIT Walking Recovery",
+    "translationKey": "exercise.mcmaster_recovery",
     "variants": {
       "classic_rcaf": { "volume_scaler_coefficient": 1.0 },
       "modern_safe": { "volume_scaler_coefficient": 1.0 }
