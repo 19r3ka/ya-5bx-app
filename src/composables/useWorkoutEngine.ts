@@ -1,4 +1,4 @@
-import { shallowRef, readonly, type DeepReadonly, type Ref } from 'vue'
+import { ref, shallowRef, readonly, type DeepReadonly, type Ref } from 'vue'
 import { WorkoutOrchestrator } from '../core/WorkoutOrchestrator'
 import type {
   SessionSnapshot,
@@ -21,6 +21,7 @@ export function useWorkoutEngine(
 
   // Shallow Ref binding for atomic O(1) immutable snapshot updates
   const currentSnapshot: Ref<SessionSnapshot | null> = shallowRef(null)
+  const elapsedSeconds = ref(0)
 
   let subscriberToken: string | null = null
 
@@ -28,7 +29,13 @@ export function useWorkoutEngine(
     if (!subscriberToken && globalOrchestrator) {
       subscriberToken = globalOrchestrator.subscribe(
         (snapshot: SessionSnapshot): void => {
-          currentSnapshot.value = snapshot
+          elapsedSeconds.value = snapshot.elapsedSecondsInCurrentInterval
+          if (
+            snapshot.currentIntervalIndex !==
+            currentSnapshot.value?.currentIntervalIndex
+          ) {
+            currentSnapshot.value = snapshot
+          }
         }
       )
     }
@@ -74,6 +81,7 @@ export function useWorkoutEngine(
     snapshot: readonly(currentSnapshot) as DeepReadonly<
       Ref<SessionSnapshot | null>
     >,
+    elapsedSeconds: readonly(elapsedSeconds) as DeepReadonly<Ref<number>>,
     mountEngine,
     unmountEngine,
     initializeSession,

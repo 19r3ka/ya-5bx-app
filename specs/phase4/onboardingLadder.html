@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YA-5BX Onboarding - The Ladder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;600&family=JetBrains+Mono:wght@600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 29, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 200, 128, 0.1);
+        }
+        .step-pulse {
+            animation: pulse-amber 2s infinite ease-in-out;
+        }
+        @keyframes pulse-amber {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(245, 166, 35, 0); }
+        }
+        body {
+            background-color: #111319;
+            color: #e2e2eb;
+            overflow-x: hidden;
+        }
+        .ladder-row {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-dim": "#111319",
+                "tertiary-fixed": "#dde1ff",
+                "secondary-dim": "#1A5A5A",
+                "on-primary-fixed": "#291800",
+                "surface-container": "#1e1f26",
+                "outline-variant": "#524534",
+                "on-secondary": "#003737",
+                "primary": "#ffc880",
+                "error-container": "#93000a",
+                "primary-fixed-dim": "#ffb955",
+                "on-error-container": "#ffdad6",
+                "background": "#111319",
+                "on-secondary-fixed-variant": "#004f50",
+                "on-primary": "#452b00",
+                "tertiary": "#c8cfff",
+                "tertiary-container": "#a3b2ff",
+                "on-secondary-container": "#003e3e",
+                "on-primary-fixed-variant": "#633f00",
+                "primary-fixed": "#ffddb4",
+                "surface-elevated": "#22263A",
+                "primary-container": "#f5a623",
+                "secondary": "#4ddada",
+                "text-secondary": "#B0B8D4",
+                "on-tertiary-fixed-variant": "#2f408d",
+                "outline": "#9f8e7a",
+                "secondary-fixed": "#6ff7f6",
+                "on-surface": "#e2e2eb",
+                "on-primary-container": "#644000",
+                "on-tertiary-fixed": "#001356",
+                "surface-tint": "#ffb955",
+                "on-surface-variant": "#d7c3ae",
+                "on-tertiary-container": "#2f418e",
+                "text-primary": "#E8EAF6",
+                "surface-container-lowest": "#0c0e14",
+                "secondary-fixed-dim": "#4ddada",
+                "on-tertiary": "#142876",
+                "primary-dim": "#7A5312",
+                "surface-container-high": "#282a30",
+                "inverse-on-surface": "#2e3037",
+                "surface-container-low": "#191b22",
+                "surface": "#1A1D27",
+                "secondary-container": "#00b3b3",
+                "surface-bright": "#373940",
+                "on-error": "#690005",
+                "success": "#4CAF50",
+                "surface-variant": "#33343b",
+                "text-tertiary": "#6B7399",
+                "inverse-surface": "#e2e2eb",
+                "inverse-primary": "#835500",
+                "on-background": "#e2e2eb",
+                "tertiary-fixed-dim": "#b9c3ff",
+                "error": "#CF6679",
+                "on-secondary-fixed": "#002020",
+                "surface-container-highest": "#33343b"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "grid-unit": "4px",
+                "container-padding": "24px",
+                "touch-target-min": "48px",
+                "stepper-button": "64px",
+                "gutter": "16px",
+                "section-gap": "24px"
+            },
+            "fontFamily": {
+                "caption": ["Inter"],
+                "timer-display": ["JetBrains Mono"],
+                "body-lg": ["Inter"],
+                "section-header": ["Barlow Condensed"],
+                "exercise-name": ["Barlow Condensed"],
+                "rep-target": ["JetBrains Mono"],
+                "body-emphasis": ["Inter"],
+                "body": ["Inter"]
+            },
+            "fontSize": {
+                "caption": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                "timer-display": ["72px", {"lineHeight": "80px", "letterSpacing": "-2px", "fontWeight": "600"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "section-header": ["20px", {"lineHeight": "24px", "letterSpacing": "1.5px", "fontWeight": "600"}],
+                "exercise-name": ["32px", {"lineHeight": "40px", "letterSpacing": "0.5px", "fontWeight": "700"}],
+                "rep-target": ["48px", {"lineHeight": "56px", "fontWeight": "600"}],
+                "body-emphasis": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-surface w-full top-0 sticky z-50">
+<div class="flex items-center justify-between px-container-padding h-touch-target-min w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">fitness_center</span>
+<h1 class="font-section-header text-section-header uppercase tracking-widest text-primary">YA-5BX SESSION</h1>
+</div>
+<div class="flex items-center">
+<button class="p-2 hover:bg-surface-elevated rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col px-container-padding pb-32 max-w-2xl mx-auto w-full pt-8">
+<!-- Onboarding Progress -->
+<div class="flex justify-between items-center mb-8 gap-2">
+<div class="h-1 flex-grow bg-primary rounded-full"></div>
+<div class="h-1 flex-grow bg-primary rounded-full"></div>
+<div class="h-1 flex-grow bg-primary rounded-full relative overflow-hidden">
+<div class="absolute inset-0 bg-primary-container animate-[shimmer_2s_infinite]"></div>
+</div>
+<div class="h-1 flex-grow bg-surface-variant rounded-full"></div>
+</div>
+<!-- Header Content -->
+<section class="mb-section-gap">
+<h2 class="font-exercise-name text-exercise-name text-text-primary uppercase mb-2">The Ladder</h2>
+<p class="font-body text-body text-on-surface-variant">The 5BX system is built on a progression of levels. You advance by completing targets within your specific chart.</p>
+</section>
+<!-- The Ladder Visual -->
+<div class="flex flex-col gap-4 relative">
+<!-- Chart 1: The Start -->
+<div class="ladder-row relative bg-surface-elevated border-2 border-primary rounded-xl p-4 flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<span class="font-section-header text-primary uppercase tracking-widest">Chart 1</span>
+<span class="font-caption text-caption text-primary-container bg-primary/10 px-2 py-0.5 rounded">ACTIVE LEVEL</span>
+</div>
+<div class="grid grid-cols-6 gap-2">
+<div class="h-12 flex flex-col items-center justify-center bg-surface-container rounded-lg border border-primary relative">
+<span class="font-timer-display text-sm leading-tight text-primary">D-</span>
+<!-- Starting Indicator -->
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
+<span class="font-caption text-caption text-primary font-bold whitespace-nowrap">YOU START HERE</span>
+<span class="material-symbols-outlined text-primary text-xl">arrow_downward</span>
+</div>
+</div>
+<div class="h-12 flex items-center justify-center bg-surface-container/50 rounded-lg border border-outline-variant">
+<span class="font-timer-display text-sm leading-tight text-on-surface-variant">D</span>
+</div>
+<div class="h-12 flex items-center justify-center bg-surface-container/50 rounded-lg border border-outline-variant">
+<span class="font-timer-display text-sm leading-tight text-on-surface-variant">D+</span>
+</div>
+<div class="h-12 flex items-center justify-center bg-surface-container/50 rounded-lg border border-outline-variant">
+<span class="font-timer-display text-sm leading-tight text-on-surface-variant">C-</span>
+</div>
+<div class="h-12 flex items-center justify-center bg-surface-container/50 rounded-lg border border-outline-variant">
+<span class="font-timer-display text-sm leading-tight text-on-surface-variant">C</span>
+</div>
+<div class="h-12 flex items-center justify-center bg-surface-container/50 rounded-lg border border-outline-variant">
+<span class="font-timer-display text-sm leading-tight text-on-surface-variant">C+</span>
+</div>
+</div>
+</div>
+<!-- Chart 2: Dimmed -->
+<div class="ladder-row bg-surface opacity-40 rounded-xl p-4 flex flex-col gap-3 grayscale">
+<span class="font-section-header text-on-surface-variant uppercase tracking-widest">Chart 2</span>
+<div class="grid grid-cols-6 gap-2">
+<div class="h-8 bg-surface-container rounded border border-outline-variant"></div>
+<div class="h-8 bg-surface-container rounded border border-outline-variant"></div>
+<div class="h-8 bg-surface-container rounded border border-outline-variant"></div>
+<div class="h-8 bg-surface-container rounded border border-outline-variant"></div>
+<div class="h-8 bg-surface-container rounded border border-outline-variant"></div>
+<div class="h-8 bg-surface-container rounded border border-outline-variant"></div>
+</div>
+</div>
+<!-- Chart 3: Goal Chart Highlight -->
+<div class="ladder-row relative bg-surface-container-high border-2 border-secondary-container/50 rounded-xl p-4 flex flex-col gap-3 step-pulse">
+<div class="flex justify-between items-center">
+<span class="font-section-header text-secondary uppercase tracking-widest">Chart 3</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-caption text-caption text-secondary font-bold uppercase">Target Zone</span>
+</div>
+</div>
+<div class="grid grid-cols-6 gap-2">
+<div class="h-10 bg-secondary-dim/30 rounded-lg border border-secondary/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary/40 text-sm">lock</span>
+</div>
+<div class="h-10 bg-secondary-dim/30 rounded-lg border border-secondary/30"></div>
+<div class="h-10 bg-secondary-dim/30 rounded-lg border border-secondary/30"></div>
+<div class="h-10 bg-secondary-dim/30 rounded-lg border border-secondary/30"></div>
+<div class="h-10 bg-secondary-dim/30 rounded-lg border border-secondary/30"></div>
+<div class="h-10 bg-secondary-dim/30 rounded-lg border border-secondary/30"></div>
+</div>
+<!-- Floating Callout -->
+<div class="absolute -right-4 top-1/2 -translate-y-1/2 translate-x-full hidden md:flex items-center gap-2">
+<div class="w-8 h-[2px] bg-secondary/50"></div>
+<div class="glass-panel p-3 rounded-lg max-w-[200px]">
+<p class="font-caption text-caption text-secondary-fixed">Based on your age, Chart 3 is your physiological maintenance goal.</p>
+</div>
+</div>
+</div>
+<!-- Charts 4-6: Dimmed -->
+<div class="flex flex-col gap-2">
+<div class="ladder-row h-12 bg-surface opacity-25 rounded-lg flex items-center px-4 border border-outline-variant/30">
+<span class="font-section-header text-xs text-on-surface-variant uppercase">Chart 4</span>
+</div>
+<div class="ladder-row h-10 bg-surface opacity-15 rounded-lg flex items-center px-4 border border-outline-variant/20">
+<span class="font-section-header text-xs text-on-surface-variant uppercase">Chart 5</span>
+</div>
+<div class="ladder-row h-8 bg-surface opacity-10 rounded-lg flex items-center px-4 border border-outline-variant/10">
+<span class="font-section-header text-xs text-on-surface-variant uppercase">Chart 6 (Elite)</span>
+</div>
+</div>
+</div>
+<!-- Instructional Card -->
+<div class="mt-section-gap glass-panel p-container-padding rounded-xl border-l-4 border-primary">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">info</span>
+<div>
+<h3 class="font-body-emphasis text-primary mb-1">How to Advance</h3>
+<p class="font-caption text-text-secondary leading-relaxed">
+                        Each day you'll perform 5 exercises. Once you can complete the target repetitions for your level within the time limit, you'll move to the next step (e.g., D- to D). 
+                    </p>
+</div>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="mt-auto pt-10">
+<button class="w-full bg-primary-container h-touch-target-min rounded-lg font-body-emphasis text-on-primary-container flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+<span>Understood, Let's Begin</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Bottom Nav (Hidden for Transactional Onboarding per rules) -->
+<!-- Suppressed to prioritize the Canvas -->
+<script>
+        // Micro-interaction for ladder rows
+        document.querySelectorAll('.ladder-row').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                if (!row.classList.contains('opacity-10')) {
+                   row.style.transform = 'translateX(4px)';
+                }
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body></html>

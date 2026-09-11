@@ -29,6 +29,13 @@
     "validationMessages": {
       "dobRequired": "La date de naissance est requise",
       "dobTooRecent": "La date de naissance doit remonter à 6 ans minimum"
+    },
+    "ready": {
+      "namePlaceholder": "Nom de la recrue",
+      "confirmEmptyTitle": "Laisser le nom vide ?",
+      "confirmEmptyMessage": "Vous n'avez pas renseigné de nom. Souhaitez-vous continuer en tant que Recrue ?",
+      "confirmEmptyProceed": "Continuer en tant que Recrue",
+      "confirmEmptyCancel": "Renseigner un nom"
     }
   },
   "levelOverview": {

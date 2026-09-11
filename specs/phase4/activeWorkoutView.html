@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom pulsing effect for the timer container when active */
+        @keyframes border-pulse {
+            0% { border-color: rgba(245, 166, 35, 0.2); }
+            50% { border-color: rgba(245, 166, 35, 1); }
+            100% { border-color: rgba(245, 166, 35, 0.2); }
+        }
+        .timer-pulse {
+            animation: border-pulse 2s infinite;
+        }
+        /* Hide scrollbars but keep functionality */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#111319",
+                    "tertiary-fixed": "#dde1ff",
+                    "secondary-dim": "#1A5A5A",
+                    "on-primary-fixed": "#291800",
+                    "surface-container": "#1e1f26",
+                    "outline-variant": "#524534",
+                    "on-secondary": "#003737",
+                    "primary": "#ffc880",
+                    "error-container": "#93000a",
+                    "primary-fixed-dim": "#ffb955",
+                    "on-error-container": "#ffdad6",
+                    "background": "#111319",
+                    "on-secondary-fixed-variant": "#004f50",
+                    "on-primary": "#452b00",
+                    "tertiary": "#c8cfff",
+                    "tertiary-container": "#a3b2ff",
+                    "on-secondary-container": "#003e3e",
+                    "on-primary-fixed-variant": "#633f00",
+                    "primary-fixed": "#ffddb4",
+                    "surface-elevated": "#22263A",
+                    "primary-container": "#f5a623",
+                    "secondary": "#4ddada",
+                    "text-secondary": "#B0B8D4",
+                    "on-tertiary-fixed-variant": "#2f408d",
+                    "outline": "#9f8e7a",
+                    "secondary-fixed": "#6ff7f6",
+                    "on-surface": "#e2e2eb",
+                    "on-primary-container": "#644000",
+                    "on-tertiary-fixed": "#001356",
+                    "surface-tint": "#ffb955",
+                    "on-surface-variant": "#d7c3ae",
+                    "on-tertiary-container": "#2f418e",
+                    "text-primary": "#E8EAF6",
+                    "surface-container-lowest": "#0c0e14",
+                    "secondary-fixed-dim": "#4ddada",
+                    "on-tertiary": "#142876",
+                    "primary-dim": "#7A5312",
+                    "surface-container-high": "#282a30",
+                    "inverse-on-surface": "#2e3037",
+                    "surface-container-low": "#191b22",
+                    "surface": "#1A1D27",
+                    "secondary-container": "#00b3b3",
+                    "surface-bright": "#373940",
+                    "on-error": "#690005",
+                    "success": "#4CAF50",
+                    "surface-variant": "#33343b",
+                    "text-tertiary": "#6B7399",
+                    "inverse-surface": "#e2e2eb",
+                    "inverse-primary": "#835500",
+                    "on-background": "#e2e2eb",
+                    "tertiary-fixed-dim": "#b9c3ff",
+                    "error": "#CF6679",
+                    "on-secondary-fixed": "#002020",
+                    "surface-container-highest": "#33343b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "grid-unit": "4px",
+                    "container-padding": "24px",
+                    "touch-target-min": "48px",
+                    "stepper-button": "64px",
+                    "gutter": "16px",
+                    "section-gap": "24px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "timer-display": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "section-header": ["Barlow Condensed"],
+                    "exercise-name": ["Barlow Condensed"],
+                    "rep-target": ["JetBrains Mono"],
+                    "body-emphasis": ["Inter"],
+                    "body": ["Inter"]
+            },
+            "fontSize": {
+                    "caption": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "timer-display": ["72px", {"lineHeight": "80px", "letterSpacing": "-2px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "section-header": ["20px", {"lineHeight": "24px", "letterSpacing": "1.5px", "fontWeight": "600"}],
+                    "exercise-name": ["32px", {"lineHeight": "40px", "letterSpacing": "0.5px", "fontWeight": "700"}],
+                    "rep-target": ["48px", {"lineHeight": "56px", "fontWeight": "600"}],
+                    "body-emphasis": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-dim text-on-surface min-h-screen flex flex-col font-body selection:bg-primary selection:text-on-primary overflow-x-hidden">
+<!-- Top App Bar (Shared Component Strategy) -->
+<header class="w-full top-0 sticky z-50 bg-surface flex items-center justify-between px-container-padding h-touch-target-min max-w-screen-xl mx-auto transition-colors duration-200">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="fitness_center">fitness_center</span>
+<h1 class="font-section-header text-section-header uppercase tracking-widest text-primary">YA-5BX SESSION</h1>
+</div>
+<!-- Progress Dots Integration -->
+<div class="flex gap-2 items-center">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+</div>
+<button aria-label="Pause Workout" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-elevated transition-colors">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="pause_circle">pause_circle</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col px-container-padding py-section-gap max-w-screen-md mx-auto w-full relative">
+<!-- Distance UI: Timer Section -->
+<section class="flex flex-col items-center justify-center mb-10 text-center">
+<div class="inline-block p-8 border-2 border-primary/20 rounded-2xl timer-pulse bg-surface-container-low mb-4">
+<span class="font-timer-display text-timer-display text-primary-container tabular-nums" id="main-timer">01:47</span>
+</div>
+<h2 class="font-exercise-name text-exercise-name text-text-primary uppercase mb-2">STRETCHING</h2>
+<p class="font-caption text-caption text-text-secondary uppercase tracking-[2px]">Circuit 2 of 4 • Set 1</p>
+</section>
+<!-- Dynamic Visualization (Bento Style Layout) -->
+<div class="grid grid-cols-1 gap-gutter mb-section-gap">
+<!-- Rep Stepper Card -->
+<div class="bg-surface rounded-xl p-6 border-l-4 border-primary-container flex flex-col items-center justify-between">
+<span class="font-section-header text-section-header text-text-secondary self-start mb-4">REPS PERFORMED</span>
+<div class="flex items-center justify-center gap-12 w-full py-4">
+<button aria-label="Decrease reps" class="w-stepper-button h-stepper-button rounded-xl bg-surface-elevated border-2 border-outline-variant flex items-center justify-center text-primary active:scale-95 transition-all shadow-lg shadow-black/20" onclick="decrementReps()">
+<span class="material-symbols-outlined text-3xl" data-icon="remove">remove</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-rep-target text-rep-target text-on-surface" id="rep-count">10</span>
+<span class="font-caption text-caption text-text-tertiary">CURRENT</span>
+</div>
+<button aria-label="Increase reps" class="w-stepper-button h-stepper-button rounded-xl bg-surface-elevated border-2 border-primary flex items-center justify-center text-primary active:scale-95 transition-all shadow-lg shadow-black/20" onclick="incrementReps()">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Call to Action -->
+<div class="mt-auto pt-6 space-y-6">
+<button class="w-full h-touch-target-min bg-primary-container text-on-primary-fixed font-body-emphasis rounded-lg text-lg uppercase tracking-wider flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined font-bold" data-icon="check_circle">check_circle</span>
+                LOG <span class="mx-1" id="log-rep-text">10</span> REPS
+            </button>
+<!-- Next Exercise Hint Card -->
+<div class="bg-surface-container rounded-xl p-4 flex items-center gap-4 border border-outline-variant/30 opacity-80 group hover:opacity-100 transition-opacity">
+<div class="w-16 h-16 rounded-lg bg-surface-elevated overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="A focused professional athlete in a dark, high-end gym setting performing high-knees. The lighting is dramatic and moody with amber highlights. Professional sports photography style, minimalist background with industrial textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGqeFaxT_KtFepfeCiwzsbhSEQ_WGIfasvZ7Mf1PZc17Ms0taBKwctjzMjO3MG5uBhtgvbTn13qrj28x1W_p4JWbd8fItYnqrKGOa4REKT_wV970dw6gj0g6X9wTMMmV7BFVnIb9DNfzngcdvmPH3jaCb2LNG-sRsVUWVBi95FVdWNGA0fc78ckbsC10-nz3WGmzajD3QOqybJ3TMYTwqZEF6NPk3SnPupEFez7VeFBPQHlrl29d7s7lXg30RVNi3MAiJ0AY3JWPct"/>
+</div>
+<div class="flex-grow">
+<span class="font-caption text-caption text-text-tertiary uppercase">Up Next</span>
+<h3 class="font-body-emphasis text-on-surface">HIGH KNEES</h3>
+</div>
+<span class="material-symbols-outlined text-text-tertiary" data-icon="arrow_forward_ios">arrow_forward_ios</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Shared Component Strategy - Hidden for task focus but included for shell consistency) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-safe bg-surface h-20 z-50 border-t-2 border-surface-variant md:hidden">
+<a class="flex flex-col items-center justify-center text-text-secondary font-body" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-caption text-caption">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-body-emphasis" href="#">
+<span class="material-symbols-outlined fill-icon" data-icon="exercise">exercise</span>
+<span class="font-caption text-caption">Workout</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-secondary font-body" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="font-caption text-caption">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-secondary font-body" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-caption text-caption">Settings</span>
+</a>
+</nav>
+<script>
+        let reps = 10;
+        const repCountEl = document.getElementById('rep-count');
+        const logRepTextEl = document.getElementById('log-rep-text');
+
+        function updateRepDisplay() {
+            repCountEl.innerText = reps;
+            logRepTextEl.innerText = reps;
+            
+            // Micro-interaction
+            repCountEl.classList.remove('scale-110');
+            void repCountEl.offsetWidth; // trigger reflow
+            repCountEl.classList.add('transition-transform', 'duration-100', 'scale-110');
+            setTimeout(() => repCountEl.classList.remove('scale-110'), 100);
+        }
+
+        function incrementReps() {
+            reps++;
+            updateRepDisplay();
+        }
+
+        function decrementReps() {
+            if (reps > 0) {
+                reps--;
+                updateRepDisplay();
+            }
+        }
+
+        // Mock Timer Logic
+        let totalSeconds = 107; // 01:47
+        const timerEl = document.getElementById('main-timer');
+
+        setInterval(() => {
+            if(totalSeconds > 0) {
+                totalSeconds--;
+                const mins = Math.floor(totalSeconds / 60);
+                const secs = totalSeconds % 60;
+                timerEl.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+    </script>
+</body></html>

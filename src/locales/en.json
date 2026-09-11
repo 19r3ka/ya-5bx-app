@@ -29,6 +29,13 @@
     "validationMessages": {
       "dobRequired": "Date of birth is required",
       "dobTooRecent": "Date of birth must be at least 6 years ago"
+    },
+    "ready": {
+      "namePlaceholder": "Recruit Name",
+      "confirmEmptyTitle": "Leave name blank?",
+      "confirmEmptyMessage": "You haven't entered a name. Would you like to proceed as Recruit?",
+      "confirmEmptyProceed": "Continue as Recruit",
+      "confirmEmptyCancel": "Enter Name"
     }
   },
   "levelOverview": {

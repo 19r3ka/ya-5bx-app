@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YA-5BX - Onboarding Step 5</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Barlow+Condensed:wght@600;700&amp;family=JetBrains+Mono:wght@600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pip {
+            background-color: #f5a623;
+            box-shadow: 0 0 8px #f5a623;
+        }
+        .pulse-border {
+            animation: pulse-amber 2s infinite;
+        }
+        @keyframes pulse-amber {
+            0% { border-color: rgba(245, 166, 35, 0.4); }
+            50% { border-color: rgba(245, 166, 35, 1); }
+            100% { border-color: rgba(245, 166, 35, 0.4); }
+        }
+        body {
+            background-color: #0F1117;
+            color: #e2e2eb;
+            overflow-x: hidden;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-body">
+<!-- Top Navigation Anchor (Manual Suppression logic: No BottomNavBar here as it's Onboarding) -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface flex items-center justify-between px-container-padding h-touch-target-min z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">fitness_center</span>
+<h1 class="font-section-header text-section-header uppercase tracking-widest text-primary">YA-5BX SESSION</h1>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</header>
+<main class="max-w-md mx-auto px-container-padding pt-8 pb-32 min-h-screen flex flex-col">
+<!-- Progress Pips -->
+<div class="flex justify-center gap-3 mb-10">
+<div class="w-7 h-1.5 rounded-full bg-secondary-dim"></div>
+<div class="w-7 h-1.5 rounded-full bg-secondary-dim"></div>
+<div class="w-7 h-1.5 rounded-full bg-secondary-dim"></div>
+<div class="w-7 h-1.5 rounded-full bg-secondary-dim"></div>
+<div class="w-12 h-1.5 rounded-full active-pip"></div>
+</div>
+<!-- Header -->
+<div class="mb-8">
+<h2 class="font-section-header text-[28px] leading-tight text-primary uppercase tracking-wider mb-2">How to Log a Set</h2>
+<p class="text-text-secondary font-body">Follow the tutorial below to master the input flow.</p>
+</div>
+<!-- Interactive Tutorial Card -->
+<div class="bg-surface rounded-xl border-l-4 border-primary p-6 relative overflow-hidden mb-10 transition-all duration-300">
+<!-- Background Decoration (Atmospheric) -->
+<div class="absolute -right-10 -top-10 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">exercise</span>
+</div>
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-exercise-name text-exercise-name text-text-primary uppercase">Push-Ups</h3>
+<p class="text-secondary font-caption uppercase tracking-widest">Target: 15 REPS</p>
+</div>
+<div class="bg-surface-elevated px-3 py-1 rounded text-primary font-timer-display text-lg tabular-nums">
+                    00:45
+                </div>
+</div>
+<!-- Stepper Component -->
+<div class="flex flex-col items-center py-4 bg-surface-container rounded-lg mb-6 border border-outline-variant">
+<div class="flex items-center justify-between w-full px-8">
+<!-- Minus Button -->
+<button class="w-stepper-button h-stepper-button rounded-xl bg-surface-elevated border-2 border-outline-variant flex items-center justify-center text-text-primary active:scale-95 transition-transform" id="minus-btn">
+<span class="material-symbols-outlined text-3xl">remove</span>
+</button>
+<!-- Value Display -->
+<div class="text-center">
+<span class="font-rep-target text-rep-target text-primary" id="rep-count">12</span>
+<p class="font-caption text-text-secondary uppercase tracking-tighter">REPS</p>
+</div>
+<!-- Plus Button -->
+<button class="w-stepper-button h-stepper-button rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container active:scale-95 transition-transform" id="plus-btn">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+</div>
+<!-- Instructions with Visual Cue -->
+<div class="flex items-start gap-3 p-4 bg-secondary-dim/20 rounded-lg border border-secondary-dim/40">
+<span class="material-symbols-outlined text-secondary">info</span>
+<p class="text-sm text-on-secondary-container leading-relaxed">
+                    Tap <span class="font-bold text-text-primary">-</span> or <span class="font-bold text-text-primary">+</span> to adjust your actual performance, then tap the checkmark to log the set.
+                </p>
+</div>
+</div>
+<!-- Feedback UI (Hidden initially) -->
+<div class="hidden text-center mb-6 animate-bounce" id="feedback-msg">
+<span class="text-success font-body-emphasis flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">check_circle</span> Set logged successfully!
+            </span>
+</div>
+<!-- Action Button -->
+<div class="mt-auto pt-6">
+<button class="w-full h-14 bg-primary-container text-on-primary-fixed font-body-emphasis rounded-lg text-lg flex items-center justify-center gap-2 transition-all hover:brightness-110 active:scale-[0.98] pulse-border border-2" id="log-set-btn">
+                Log Set
+                <span class="material-symbols-outlined">check</span>
+</button>
+<p class="text-center text-text-tertiary text-caption mt-4 uppercase tracking-widest">Step 5 of 5</p>
+</div>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        const countEl = document.getElementById('rep-count');
+        const plusBtn = document.getElementById('plus-btn');
+        const minusBtn = document.getElementById('minus-btn');
+        const logBtn = document.getElementById('log-set-btn');
+        const feedbackMsg = document.getElementById('feedback-msg');
+
+        let count = 12;
+
+        plusBtn.addEventListener('click', () => {
+            count++;
+            countEl.textContent = count;
+            countEl.classList.add('scale-110', 'text-secondary');
+            setTimeout(() => countEl.classList.remove('scale-110', 'text-secondary'), 100);
+        });
+
+        minusBtn.addEventListener('click', () => {
+            if (count > 0) {
+                count--;
+                countEl.textContent = count;
+                countEl.classList.add('scale-90', 'text-error');
+                setTimeout(() => countEl.classList.remove('scale-90', 'text-error'), 100);
+            }
+        });
+
+        logBtn.addEventListener('click', () => {
+            logBtn.classList.remove('pulse-border');
+            logBtn.innerHTML = 'Set Recorded';
+            logBtn.classList.replace('bg-primary-container', 'bg-success');
+            logBtn.classList.replace('text-on-primary-fixed', 'text-white');
+            feedbackMsg.classList.remove('hidden');
+            
+            // Interaction: Haptic-like visual feedback
+            document.body.style.backgroundColor = '#1A5A5A';
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#0F1117';
+            }, 150);
+        });
+    </script>
+</body></html>
