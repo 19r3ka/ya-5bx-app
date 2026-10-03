@@ -50,6 +50,10 @@
       </v-col>
     </v-row>
 
+    <v-alert v-if="showRetryError" type="error" density="compact" class="mb-4">
+      Failed to save session telemetry. Please tap Save to try again.
+    </v-alert>
+
     <div class="pt-4 mb-4">
       <v-btn
         color="primary-container"
@@ -58,7 +62,8 @@
         rounded="lg"
         class="text-on-primary-fixed"
         @click="save"
-        :disabled="!selected"
+        :disabled="!selected || isSealing"
+        :loading="isSealing"
       >
         <span class="fc-body-strong">Save & continue</span>
         <v-icon end>mdi-chevron-right</v-icon>
@@ -91,10 +96,24 @@
 
 <script setup lang="ts">
   import { ref, computed, onMounted, onUnmounted } from 'vue'
+  import { TelemetryService } from '@/core/telemetry/TelemetryService'
+
+  const props = defineProps<{
+    sessionToken: string
+  }>()
+
+  const emit = defineEmits<{
+    (e: 'saved'): void
+    (e: 'seal-failed'): void
+  }>()
 
   const SEAL_TIMEOUT = 60
   const selected = ref<'great' | 'sore' | null>(null)
   const remainingSeconds = ref(SEAL_TIMEOUT)
+  const isSealing = ref(false)
+  const showRetryError = ref(false)
+  const telemetry = new TelemetryService()
+
   const countdownPct = computed(
     () => ((SEAL_TIMEOUT - remainingSeconds.value) / SEAL_TIMEOUT) * 100
   )
@@ -110,30 +129,40 @@
 
   onUnmounted(() => {
     if (timer) clearInterval(timer)
+    if (!selected.value && !isSealing.value) {
+      autoSeal()
+    }
   })
 
-  function autoSeal() {
+  async function autoSeal() {
+    if (isSealing.value) return
+    isSealing.value = true
     if (timer) clearInterval(timer)
-    emit('saved', { stiffOrSore: true, sealStatus: 'SEALED_CONSERVATIVE' })
+    try {
+      await telemetry.sealSessionTelemetryAsync(props.sessionToken, true, true)
+      emit('saved')
+    } catch {
+      emit('seal-failed')
+    }
   }
 
-  function save() {
-    if (!selected.value) return
+  async function save() {
+    if (!selected.value || isSealing.value) return
+    isSealing.value = true
+    showRetryError.value = false
     if (timer) clearInterval(timer)
-    emit('saved', {
-      stiffOrSore: selected.value === 'sore',
-      sealStatus: 'SEALED_USER_CONFIRMED',
-    })
+    try {
+      await telemetry.sealSessionTelemetryAsync(
+        props.sessionToken,
+        selected.value === 'sore',
+        false
+      )
+      emit('saved')
+    } catch {
+      isSealing.value = false
+      showRetryError.value = true
+    }
   }
-
-  const emit = defineEmits<{
-    saved: [
-      data: {
-        stiffOrSore: boolean
-        sealStatus: 'SEALED_USER_CONFIRMED' | 'SEALED_CONSERVATIVE'
-      },
-    ]
-  }>()
 </script>
 
 <style scoped>

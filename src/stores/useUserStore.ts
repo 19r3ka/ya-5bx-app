@@ -10,12 +10,17 @@ export interface UserProfile {
   age?: number
   currentLevel?: string
   goalLevel?: string
+  preferredAerobic?: string
   isOnboardingCompleted: boolean
 }
 
 export const useUserStore = defineStore('user', {
   state: () => {
-    let savedDraft = { step: 1, age: null as number | null, aerobic: 'run' }
+    let savedDraft = {
+      step: 1,
+      age: null as number | null,
+      aerobic: 'stationary',
+    }
     try {
       const draftStr = localStorage.getItem(STORAGE_KEY_ONBOARDING_DRAFT)
       if (draftStr) {
@@ -23,7 +28,7 @@ export const useUserStore = defineStore('user', {
         savedDraft = {
           step: parsed.step ?? parsed.currentStep ?? 1,
           age: parsed.age ?? null,
-          aerobic: parsed.aerobic ?? 'run',
+          aerobic: parsed.aerobic ?? 'stationary',
         }
       }
     } catch {
@@ -75,9 +80,19 @@ export const useUserStore = defineStore('user', {
       this.draftAerobic = val
       this.persistDraft()
     },
+    setPreferredAerobic(aerobic: string) {
+      if (this.profile) {
+        this.profile.preferredAerobic = aerobic
+        localStorage.setItem(
+          LOCALSTORAGE_USER_KEY,
+          JSON.stringify(this.profile)
+        )
+      }
+    },
     completeOnboarding(profileData?: Partial<UserProfile>) {
       this.profile = {
         isOnboardingCompleted: true,
+        preferredAerobic: this.draftAerobic,
         ...profileData,
       }
       localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(this.profile))

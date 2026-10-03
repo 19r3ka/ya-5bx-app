@@ -32,8 +32,8 @@
             <!-- Render Timer OR Rest Panel -->
             <WorkoutTimerClock
               v-if="tutorialElapsed < 59"
+              :duration-seconds="59"
               :elapsed-seconds="tutorialElapsed"
-              :total-interval-seconds="59"
             />
             <div v-else>
               <WorkoutRepOverridePanel

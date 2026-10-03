@@ -1,79 +1,93 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* src/style.css — global non-Vuetify classes only */
+/* Rule: <style scoped> is forbidden except for keyframes (rules.md §2) */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Progression map grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: 32px repeat(12, 1fr);
+  gap: 4px;
+  min-width: 700px;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.header-cell {
+  height: 32px;
+  line-height: 32px;
 }
-a:hover {
-  color: #535bf2;
+.progression-cell {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.cell-current {
+  background: rgb(var(--v-theme-primary));
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.cell-completed {
+  background: rgba(var(--v-theme-secondary), 0.2);
 }
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.cell-goal {
+  border: 1.5px solid rgb(var(--v-theme-primary));
+  background: transparent;
 }
-button:hover {
-  border-color: #646cff;
+.cell-eligible {
+  border: 1.5px solid rgb(var(--v-theme-warning));
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.cell-locked {
+  background: rgb(var(--v-theme-surface-elevated));
+  opacity: 0.25;
 }
 
-.card {
-  padding: 2em;
+.legend-current {
+  width: 16px;
+  height: 16px;
+  background: rgb(var(--v-theme-primary));
+}
+.legend-done {
+  width: 16px;
+  height: 16px;
+  background: rgba(var(--v-theme-secondary), 0.2);
+}
+.legend-goal {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid rgb(var(--v-theme-primary));
+}
+.legend-locked {
+  width: 16px;
+  height: 16px;
+  background: rgb(var(--v-theme-surface-elevated));
+  opacity: 0.25;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Accent borders — not coverable by Vuetify border utilities */
+.border-accent {
+  border: 1px solid rgba(var(--v-theme-primary-container), 0.3);
+}
+.border-top-accent {
+  border-top: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
+}
+.border-surface-variant {
+  border: 1px solid rgba(var(--v-theme-outline-variant), 0.4);
+}
+.border-b-surface-variant {
+  border-bottom: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Keyframe animations (only permitted scoped-like use) */
+@keyframes pulse-amber {
+  0%,
+  100% {
+    opacity: 1;
   }
-  a:hover {
-    color: #747bff;
+  50% {
+    opacity: 0.4;
   }
-  button {
-    background-color: #f9f9f9;
+}
+@keyframes fc-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

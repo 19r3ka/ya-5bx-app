@@ -46,7 +46,7 @@
                   v-model="aerobicDraft"
                   color="secondary"
                   hide-details
-                  @update:model-value="emit('update:aerobic', $event as string)"
+                  @update:model-value="onAerobicChange($event as string)"
                 >
                   <v-radio
                     v-for="opt in aerobicOptions"
@@ -104,15 +104,38 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
+
+  const props = withDefaults(
+    defineProps<{
+      modelValue?: string
+    }>(),
+    {
+      modelValue: 'stationary',
+    }
+  )
 
   const emit = defineEmits<{
     (e: 'next'): void
     (e: 'update:aerobic', val: string): void
+    (e: 'update:modelValue', val: string): void
   }>()
 
   const expandedPanel = ref<number | undefined>(4)
-  const aerobicDraft = ref('road-running')
+  const aerobicDraft = ref(props.modelValue)
+
+  watch(
+    () => props.modelValue,
+    (val) => {
+      if (val) aerobicDraft.value = val
+    }
+  )
+
+  function onAerobicChange(val: string) {
+    aerobicDraft.value = val
+    emit('update:aerobic', val)
+    emit('update:modelValue', val)
+  }
 
   const exercises = [
     {
@@ -143,14 +166,18 @@
   ]
 
   const aerobicOptions = [
-    { label: 'Road Running', value: 'road-running', icon: 'mdi-run' },
-    { label: 'Brisk Walking', value: 'brisk-walking', icon: 'mdi-walk' },
+    { label: 'Outdoor Run / Road Running', value: 'outdoor', icon: 'mdi-run' },
+    { label: 'Brisk Walking', value: 'walk', icon: 'mdi-walk' },
     {
       label: 'Running on Spot',
-      value: 'running-spot',
+      value: 'stationary',
       icon: 'mdi-shoe-sneaker',
     },
-    { label: 'Stationary Bike', value: 'stationary-bike', icon: 'mdi-bike' },
+    {
+      label: 'Stationary Bike / Treadmill',
+      value: 'treadmill',
+      icon: 'mdi-bike',
+    },
   ]
 </script>
 

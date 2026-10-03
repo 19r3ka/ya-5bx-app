@@ -1,15 +1,17 @@
 import { ref, shallowRef, readonly, type DeepReadonly, type Ref } from 'vue'
 import { WorkoutOrchestrator } from '../core/WorkoutOrchestrator'
-import type {
-  SessionSnapshot,
-  WorkoutGenerationContext,
-  WorkoutStateSnapshot,
-  IWorkoutStrategy,
-  IPersistenceAdapter,
+import {
+  type SessionSnapshot,
+  type WorkoutGenerationContext,
+  type WorkoutStateSnapshot,
+  type IWorkoutStrategy,
+  type IPersistenceAdapter,
+  OrchestratorLifecycle,
 } from '../core/EngineTypes'
 
-// Global or composable-scoped orchestrator instance
+// Global orchestrator instance and context cache
 let globalOrchestrator: WorkoutOrchestrator | null = null
+let lastContext: WorkoutGenerationContext | null = null
 
 export function useWorkoutEngine(
   strategy?: IWorkoutStrategy,
@@ -20,8 +22,14 @@ export function useWorkoutEngine(
   }
 
   // Shallow Ref binding for atomic O(1) immutable snapshot updates
-  const currentSnapshot: Ref<SessionSnapshot | null> = shallowRef(null)
-  const elapsedSeconds = ref(0)
+  const currentSnapshot: Ref<SessionSnapshot | null> = shallowRef(
+    globalOrchestrator ? globalOrchestrator.getSessionSnapshot() : null
+  )
+  const elapsedSeconds = ref(
+    globalOrchestrator
+      ? globalOrchestrator.getSessionSnapshot().elapsedSecondsInCurrentInterval
+      : 0
+  )
 
   let subscriberToken: string | null = null
 
@@ -31,8 +39,11 @@ export function useWorkoutEngine(
         (snapshot: SessionSnapshot): void => {
           elapsedSeconds.value = snapshot.elapsedSecondsInCurrentInterval
           if (
+            !currentSnapshot.value ||
             snapshot.currentIntervalIndex !==
-            currentSnapshot.value?.currentIntervalIndex
+              currentSnapshot.value.currentIntervalIndex ||
+            snapshot.status !== currentSnapshot.value.status ||
+            snapshot.sessionToken !== currentSnapshot.value.sessionToken
           ) {
             currentSnapshot.value = snapshot
           }
@@ -49,11 +60,13 @@ export function useWorkoutEngine(
   }
 
   const initializeSession = (context: WorkoutGenerationContext): void => {
+    lastContext = context
     mountEngine()
     globalOrchestrator?.initializeSession(context)
   }
 
   const startWorkout = (): void => {
+    mountEngine()
     globalOrchestrator?.startWorkout()
   }
 
@@ -66,16 +79,48 @@ export function useWorkoutEngine(
   }
 
   const abandonCurrentSessionAsync = async (): Promise<void> => {
-    await globalOrchestrator?.abandonCurrentSessionAsync()
+    if (globalOrchestrator) {
+      await globalOrchestrator.abandonCurrentSessionAsync()
+      currentSnapshot.value = globalOrchestrator.getSessionSnapshot()
+    }
+  }
+
+  const restartWorkout = (context?: WorkoutGenerationContext): void => {
+    const ctx = context || lastContext
+    if (ctx && globalOrchestrator) {
+      const currentLifecycle = globalOrchestrator.getLifecycle()
+      if (
+        currentLifecycle === OrchestratorLifecycle.RUNNING ||
+        currentLifecycle === OrchestratorLifecycle.PAUSED
+      ) {
+        if (currentLifecycle === OrchestratorLifecycle.RUNNING) {
+          globalOrchestrator.pauseWorkout()
+        }
+      }
+      globalOrchestrator.dispose()
+      subscriberToken = null
+      mountEngine()
+      const newCtx = {
+        ...ctx,
+        sessionToken: crypto.randomUUID(),
+      }
+      lastContext = newCtx
+      globalOrchestrator.initializeSession(newCtx)
+      globalOrchestrator.startWorkout()
+    }
   }
 
   const reconstructSessionFromWAL = (
     context: WorkoutGenerationContext,
     savedSnapshot: WorkoutStateSnapshot
   ): void => {
+    lastContext = context
     mountEngine()
     globalOrchestrator?.reconstructSessionFromWAL(context, savedSnapshot)
   }
+
+  // Ensure engine is mounted
+  mountEngine()
 
   return {
     snapshot: readonly(currentSnapshot) as DeepReadonly<
@@ -88,6 +133,7 @@ export function useWorkoutEngine(
     startWorkout,
     pauseWorkout,
     resumeWorkout,
+    restartWorkout,
     abandonCurrentSessionAsync,
     reconstructSessionFromWAL,
     getLifecycle: () => globalOrchestrator?.getLifecycle(),

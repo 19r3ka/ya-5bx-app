@@ -101,19 +101,21 @@
             class="pa-4 d-flex align-center justify-space-between rounded-lg border-accent"
           >
             <div class="d-flex align-center ga-4">
-              <v-avatar color="surface-dim" class="text-content-tertiary">
-                <v-icon>mdi-run</v-icon>
+              <v-avatar color="surface-elevated" class="text-primary">
+                <v-icon>{{ selectedOption?.icon ?? 'mdi-run' }}</v-icon>
               </v-avatar>
               <div>
-                <p class="fc-body-strong text-content-tertiary">
-                  Aerobic Exercise
+                <p class="fc-body-strong text-on-surface">
+                  {{ selectedOption?.label ?? 'Aerobic Exercise' }}
                 </p>
-                <p class="fc-caption text-content-tertiary font-italic">
-                  Select type below
+                <p class="fc-caption text-content-tertiary">
+                  Finishing Movement · 6 Minutes
                 </p>
               </div>
             </div>
-            <v-icon color="content-tertiary">mdi-dots-horizontal</v-icon>
+            <span class="fc-timer text-content-secondary font-size-18"
+              >06:00</span
+            >
           </v-card>
         </div>
       </v-card>
@@ -172,16 +174,28 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, computed, watch } from 'vue'
   import { useRouter } from 'vue-router'
   import { useAudioFeedback } from '@/composables/useAudioFeedback'
+  import { useWorkoutEngine } from '@/composables/useWorkoutEngine'
+  import { useProgressionStore } from '@/stores/useProgressionStore'
+  import { useUserStore } from '@/stores/useUserStore'
+  import { AerobicOption } from '@/core/EngineTypes'
   import AppHelpDialog from '@/components/common/AppHelpDialog.vue'
 
   const router = useRouter()
   const { unlock } = useAudioFeedback()
+  const { initializeSession, startWorkout } = useWorkoutEngine()
+  const progressionStore = useProgressionStore()
+  const userStore = useUserStore()
   const showHelp = ref(false)
 
-  const aerobic = ref('stationary')
+  const aerobic = ref(userStore.profile?.preferredAerobic ?? 'stationary')
+
+  watch(aerobic, (newVal) => {
+    userStore.setPreferredAerobic(newVal)
+  })
+
   const options = [
     { value: 'outdoor', label: 'Outdoor run', icon: 'mdi-pine-tree' },
     { value: 'treadmill', label: 'Treadmill', icon: 'mdi-speedometer' },
@@ -189,8 +203,37 @@
     { value: 'walk', label: 'Brisk walk', icon: 'mdi-walk' },
   ]
 
+  const selectedOption = computed(() =>
+    options.find((o) => o.value === aerobic.value)
+  )
+
+  const mapAerobicOption = (val: string): AerobicOption => {
+    switch (val) {
+      case 'outdoor':
+        return AerobicOption.OUTDOOR_RUN_1_MILE
+      case 'walk':
+        return AerobicOption.WALK_2_MILES
+      case 'treadmill':
+      case 'stationary':
+      default:
+        return AerobicOption.STATIONARY_RUN
+    }
+  }
+
   function beginWorkout() {
     unlock()
+    initializeSession({
+      sessionToken: crypto.randomUUID(),
+      profile: {
+        age: userStore.profile?.age ?? 30,
+        name: userStore.profile?.name,
+      },
+      chartNumber: progressionStore.currentChart,
+      levelString: progressionStore.currentLevel,
+      aerobicSelection: mapAerobicOption(aerobic.value),
+      isModernSafeMode: false,
+    })
+    startWorkout()
     if (router) {
       router.push({ name: 'active-workout' })
     }

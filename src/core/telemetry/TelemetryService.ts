@@ -34,7 +34,9 @@ export class TelemetryService {
     const updatedRecord: CompletedSessionRecord = {
       ...record,
       userFlaggedStiffOrSore: isStiffOrSore,
-      telemetryStatus: isConservative ? 'SEALED_CONSERVATIVE' : 'SEALED',
+      telemetryStatus: isConservative
+        ? 'SEALED_CONSERVATIVE'
+        : 'SEALED_USER_CONFIRMED',
     }
 
     await this.adapter.commitCompletedWorkoutAsync(updatedRecord)

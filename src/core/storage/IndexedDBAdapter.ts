@@ -42,13 +42,11 @@ export class IndexedDBAdapter {
   ): Promise<void> {
     const db = await this.openAsync()
     return new Promise((resolve, reject) => {
-      // Phase 1: Write record to IndexedDB
       const tx = db.transaction(['sessions'], 'readwrite')
       const store = tx.objectStore('sessions')
-      const request = store.put(record)
+      store.put(record)
 
-      request.onsuccess = () => {
-        // Phase 2: Await success, then clear local storage state/WAL
+      tx.oncomplete = () => {
         if (typeof localStorage !== 'undefined') {
           localStorage.removeItem('ya_5bx_wal')
           localStorage.removeItem(`workout_checkpoint_${record.sessionToken}`)
@@ -56,9 +54,9 @@ export class IndexedDBAdapter {
         resolve()
       }
 
-      request.onerror = (event: Event) => {
-        reject((event.target as IDBRequest).error)
-      }
+      tx.onerror = () => reject(tx.error ?? new Error('IDB transaction error'))
+      tx.onabort = () =>
+        reject(new Error('IDB transaction aborted — WAL preserved'))
     })
   }
 

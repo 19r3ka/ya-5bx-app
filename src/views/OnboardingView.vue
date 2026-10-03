@@ -40,7 +40,11 @@
       </v-window-item>
 
       <v-window-item :value="4" class="fill-height pt-16">
-        <Step4Exercises @update:aerobic="onUpdateAerobic" @next="nextStep" />
+        <Step4Exercises
+          :model-value="userStore.draftAerobic"
+          @update:aerobic="onUpdateAerobic"
+          @next="nextStep"
+        />
       </v-window-item>
 
       <v-window-item :value="5" class="fill-height pt-16">
@@ -107,6 +111,9 @@
     userStore.completeOnboarding({
       name: payload.name || undefined,
       age: userStore.draftAge ?? undefined,
+      currentLevel: 'C1_D-',
+      goalLevel: `C${derivedGoalChart.value}_A+`,
+      preferredAerobic: userStore.draftAerobic,
     })
     if (router) {
       if (payload.startWorkout) {

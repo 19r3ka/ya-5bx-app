@@ -1,6 +1,6 @@
 export type TelemetryStatus =
   | 'PENDING_TELEMETRY'
-  | 'SEALED'
+  | 'SEALED_USER_CONFIRMED'
   | 'SEALED_CONSERVATIVE'
 
 export interface CompletedSessionRecord {

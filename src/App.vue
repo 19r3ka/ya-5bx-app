@@ -1,14 +1,14 @@
 <script setup lang="ts">
   import { onMounted } from 'vue'
   import { useRoute } from 'vue-router'
-  import { useUser } from './composables/useUser'
+  import { useProgressionStore } from '@/stores/useProgressionStore'
   import BottomNav from '@/components/layout/BottomNav.vue'
 
-  const { loadUser } = useUser()
   const route = useRoute()
+  const progressionStore = useProgressionStore()
 
-  onMounted(() => {
-    loadUser()
+  onMounted(async () => {
+    await progressionStore.initAsync()
   })
 </script>
 

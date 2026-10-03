@@ -10,6 +10,7 @@ import type {
   LevelHistorySnapshot,
   ValidationResult,
 } from '../core/EngineTypes'
+import { useUserStore } from './useUserStore'
 
 export const useProgressionStore = defineStore('progression', () => {
   const adapter = new IndexedDBAdapter()
@@ -19,11 +20,16 @@ export const useProgressionStore = defineStore('progression', () => {
   const isHydrated = ref(false)
   const rawHistory = shallowRef<CompletedSessionRecord[]>([])
 
-  const currentChart = ref(1)
+  const currentChart = ref<number>(1)
   const currentLevel = ref('D-')
-  const userProfile = ref<UserProfile>({ age: 30 })
 
   const initAsync = async (): Promise<void> => {
+    const userStore = useUserStore()
+    const rawLevel = userStore.profile?.currentLevel ?? 'C1_D-'
+    const [chartStr, levelStr] = rawLevel.split('_')
+    currentChart.value = parseInt(chartStr.replace('C', ''), 10) || 1
+    currentLevel.value = levelStr || 'D-'
+
     await adapter.openAsync()
     const history = await adapter.getAllSessionsAsync()
     rawHistory.value = history
@@ -38,6 +44,11 @@ export const useProgressionStore = defineStore('progression', () => {
   const validationResult = computed<ValidationResult | null>(() => {
     if (!isHydrated.value) {
       return null
+    }
+
+    const userStore = useUserStore()
+    const userProfile: UserProfile = {
+      age: userStore.profile?.age ?? 30,
     }
 
     const contiguousVolume = HistoryAggregator.calculateContiguousVolume(
@@ -57,7 +68,7 @@ export const useProgressionStore = defineStore('progression', () => {
       userFlaggedStiffOrSore,
     }
 
-    return validator.validate(userProfile.value, snapshot)
+    return validator.validate(userProfile, snapshot)
   })
 
   return {
@@ -65,7 +76,6 @@ export const useProgressionStore = defineStore('progression', () => {
     rawHistory,
     currentChart,
     currentLevel,
-    userProfile,
     initAsync,
     reloadHistoryAsync,
     validationResult,

@@ -72,6 +72,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
       displayName: 'Toe Touch',
       description: `Perform Toe Touch repetitions: ${ex1Reps}`,
       translationKey: 'exercise.e1',
+      targetReps: ex1Reps,
     })
 
     // 2. Exercise 2: Sit Up / Crunch (Safe Mode switches to Crunch)
@@ -83,6 +84,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
       displayName: ex2Name,
       description: `Perform ${ex2Name} repetitions: ${ex2Reps}`,
       translationKey: 'exercise.e2',
+      targetReps: ex2Reps,
     })
 
     // 3. Exercise 3: Leg Lift
@@ -93,6 +95,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
       displayName: 'Leg Lift',
       description: `Perform Leg Lift repetitions: ${ex3Reps}`,
       translationKey: 'exercise.e3',
+      targetReps: ex3Reps,
     })
 
     // 4. Exercise 4: Push Up
@@ -103,6 +106,7 @@ export class ClassicRCAFStrategy implements IWorkoutStrategy {
       displayName: 'Push Up',
       description: `Perform Push Up repetitions: ${ex4Reps}`,
       translationKey: 'exercise.e4',
+      targetReps: ex4Reps,
     })
 
     // 5. Exercise 5: Aerobic

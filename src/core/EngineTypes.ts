@@ -56,6 +56,11 @@ export interface WorkoutInterval {
   displayName: string
   description: string
   translationKey?: string
+  /**
+   * Target repetitions for rep-based exercises. Omitted for timed/aerobic
+   * intervals (e.g. the run/walk block) which are not counted in reps.
+   */
+  targetReps?: number
 }
 
 export interface WorkoutStateSnapshot {

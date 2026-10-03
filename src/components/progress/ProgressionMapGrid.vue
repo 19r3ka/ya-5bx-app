@@ -17,40 +17,41 @@
       <h3 class="fc-section text-on-surface text-uppercase">
         STRENGTH HIERARCHY
       </h3>
-      <span class="fc-caption text-on-surface-variant text-uppercase"
-        >CHART 1 - 6</span
+      <span class="fc-caption text-content-secondary text-uppercase"
+        >CHART C1 - C6</span
       >
     </div>
 
-    <div class="pa-4 pa-md-8 overflow-x-auto">
+    <div class="pa-4 pa-md-8 overflow-x-auto no-scrollbar">
       <div class="grid-container mx-auto">
         <!-- Header Row -->
         <div class="d-flex align-center justify-center"></div>
         <div
           v-for="grade in grades"
           :key="grade"
-          class="fc-caption text-on-surface-variant text-center header-cell"
+          class="fc-caption text-content-tertiary text-center header-cell"
         >
           {{ grade }}
         </div>
 
-        <!-- Matrix Rows -->
+        <!-- Matrix Rows C1 through C6 -->
         <template v-for="chart in 6" :key="chart">
-          <div class="fc-caption text-on-surface-variant d-flex align-center">
+          <div class="fc-caption text-content-secondary d-flex align-center">
             C{{ chart }}
           </div>
           <div
             v-for="(grade, gIdx) in grades"
             :key="grade"
-            class="pa-1 d-flex align-center justify-center"
+            class="d-flex align-center justify-center"
           >
             <div
               :class="getCellClass(chart, gIdx)"
-              class="progression-cell rounded-lg d-flex align-center justify-center transition-all cursor-pointer"
+              class="progression-cell rounded-lg d-flex align-center justify-center cursor-pointer"
+              :title="`Chart ${chart} · ${grade} (${getCellState(chart, gIdx)})`"
             >
               <v-icon
                 v-if="getCellState(chart, gIdx) === 'completed'"
-                size="x-small"
+                size="14"
                 color="secondary"
                 >mdi-check</v-icon
               >
@@ -62,7 +63,7 @@
 
     <!-- Legend -->
     <div
-      class="pa-6 bg-surface d-flex flex-wrap ga-6 align-center justify-center"
+      class="pa-6 bg-surface-elevated d-flex flex-wrap ga-6 align-center justify-center border-t-accent"
     >
       <div class="d-flex align-center ga-2">
         <div class="rounded legend-current"></div>
@@ -128,10 +129,23 @@
     const gChart = goalParsed.value.chart
     const gLevelIdx = goalParsed.value.levelIdx
 
-    if (chart === curChart && levelIdx === curLevelIdx) return 'current'
-    if (chart < curChart || (chart === curChart && levelIdx < curLevelIdx))
+    const levelStr = `C${chart}_${grades[levelIdx]}`
+    const isExplicitlyCompleted =
+      props.completedLevelIds && props.completedLevelIds.includes(levelStr)
+
+    if (chart === curChart && levelIdx === curLevelIdx) {
+      return 'current'
+    }
+    if (
+      isExplicitlyCompleted ||
+      chart < curChart ||
+      (chart === curChart && levelIdx < curLevelIdx)
+    ) {
       return 'completed'
-    if (chart === gChart && levelIdx === gLevelIdx) return 'goal'
+    }
+    if (chart === gChart && levelIdx === gLevelIdx) {
+      return 'goal'
+    }
     return 'locked'
   }
 
@@ -150,59 +164,80 @@
 </script>
 
 <style scoped>
-  .grid-container {
-    display: grid;
-    grid-template-columns: 32px repeat(12, 1fr);
-    gap: 4px;
-    min-width: 700px;
-  }
-  .header-cell {
-    height: 32px;
-    line-height: 32px;
-  }
-  .progression-cell {
-    width: 28px;
-    height: 28px;
-  }
-  .cell-current {
-    background: rgb(var(--v-theme-primary));
-  }
-  .cell-completed {
-    background: rgba(var(--v-theme-secondary), 0.2);
-  }
-  .cell-goal {
-    border: 1.5px solid rgb(var(--v-theme-primary));
-    background: transparent;
-  }
-  .cell-locked {
-    background: rgb(var(--v-theme-surface-elevated));
-    opacity: 0.25;
-  }
   .border-surface-variant {
     border: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
   }
   .border-b-surface-variant {
     border-bottom: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
   }
+  .border-t-accent {
+    border-top: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 36px repeat(12, minmax(28px, 1fr));
+    gap: 8px;
+    min-width: 680px;
+  }
+  .header-cell {
+    height: 28px;
+    font-size: 12px;
+  }
+  .progression-cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-width: 28px;
+    min-height: 28px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .progression-cell:hover {
+    transform: scale(1.1);
+  }
+  .cell-current {
+    background-color: rgb(var(--v-theme-primary-container));
+    border: 2px solid rgb(var(--v-theme-primary));
+    box-shadow: 0 0 12px rgba(245, 166, 35, 0.4);
+  }
+  .cell-completed {
+    background-color: rgb(var(--v-theme-secondary-dim));
+    color: rgb(var(--v-theme-secondary));
+  }
+  .cell-goal {
+    border: 2px dashed rgb(var(--v-theme-secondary));
+    background-color: rgba(var(--v-theme-surface-elevated), 0.3);
+  }
+  .cell-locked {
+    background-color: rgb(var(--v-theme-surface-elevated));
+    opacity: 0.3;
+  }
   .legend-current {
     width: 16px;
     height: 16px;
-    background: rgb(var(--v-theme-primary));
+    background-color: rgb(var(--v-theme-primary-container));
+    border: 1.5px solid rgb(var(--v-theme-primary));
   }
   .legend-done {
     width: 16px;
     height: 16px;
-    background: rgba(var(--v-theme-secondary), 0.2);
+    background-color: rgb(var(--v-theme-secondary-dim));
   }
   .legend-goal {
     width: 16px;
     height: 16px;
-    border: 1.5px solid rgb(var(--v-theme-primary));
+    border: 1.5px dashed rgb(var(--v-theme-secondary));
+    background-color: transparent;
   }
   .legend-locked {
     width: 16px;
     height: 16px;
-    background: rgb(var(--v-theme-surface-elevated));
-    opacity: 0.25;
+    background-color: rgb(var(--v-theme-surface-elevated));
+    opacity: 0.3;
   }
 </style>

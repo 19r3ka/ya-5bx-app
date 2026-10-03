@@ -11,6 +11,7 @@ export class HistoryAggregator {
     // Iterate history strictly backwards (newest first)
     for (let i = history.length - 1; i >= 0; i--) {
       const record = history[i]
+      if (record.telemetryStatus === 'PENDING_TELEMETRY') continue
       if (
         record.chartNumber === targetChart &&
         record.levelString === targetLevel
