@@ -96,6 +96,7 @@
             chartNumber: store.currentChart,
             levelString: store.currentLevel,
             durationSeconds: snap.totalElapsedSeconds,
+            aerobicCompleted: true,
           }
           await store.telemetryService.stagePendingSessionAsync(record)
           completedToken.value = snap.sessionToken

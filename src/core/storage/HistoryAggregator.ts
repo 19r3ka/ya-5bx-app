@@ -12,6 +12,8 @@ export class HistoryAggregator {
     for (let i = history.length - 1; i >= 0; i--) {
       const record = history[i]
       if (record.telemetryStatus === 'PENDING_TELEMETRY') continue
+      // Stopping the aerobic block early voids the session for progression.
+      if (record.aerobicCompleted === false) continue
       if (
         record.chartNumber === targetChart &&
         record.levelString === targetLevel

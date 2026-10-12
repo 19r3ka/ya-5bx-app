@@ -23,6 +23,7 @@
         "
         variant="text"
         color="primary"
+        :disabled="isRestPhase"
         aria-label="Pause or Resume Workout"
         @click="togglePause"
       ></v-btn>
@@ -64,14 +65,41 @@
         </p>
       </section>
 
-      <!-- Dynamic Visualization (Rep-based exercises only) -->
-      <div class="mb-8">
+      <!-- Rep validation (Ex 1–4): disabled while the interval runs, enabled
+           during the rest/transition gate that precedes the next exercise -->
+      <div v-if="isRepPhase" class="mb-8">
         <WorkoutRepOverridePanel
-          v-if="isRepPhase"
           :default-reps="currentInterval?.targetReps ?? 0"
           :exercise-name="currentInterval?.displayName ?? ''"
+          :disabled="!isRestPhase"
           @logged="onLogged"
         />
+      </div>
+
+      <!-- Aerobic completion (final exercise): explicit outcome CTAs -->
+      <div v-else-if="isAerobicPhase" class="mb-8 d-flex flex-column ga-4">
+        <v-btn
+          color="primary-container"
+          block
+          size="x-large"
+          rounded="lg"
+          class="text-on-primary-container"
+          prepend-icon="mdi-check-circle"
+          @click="finishAerobic(true)"
+        >
+          <span class="fc-section">Done {{ aerobicActivityLabel }}</span>
+        </v-btn>
+        <v-btn
+          variant="outlined"
+          color="on-surface"
+          block
+          size="large"
+          rounded="lg"
+          prepend-icon="mdi-arrow-down"
+          @click="finishAerobic(false)"
+        >
+          <span class="fc-body-strong">I stopped early</span>
+        </v-btn>
       </div>
 
       <!-- Call to Action -->
@@ -223,6 +251,8 @@
     elapsedSeconds,
     pauseWorkout,
     resumeWorkout,
+    confirmReps,
+    finishSession,
     restartWorkout,
     abandonCurrentSessionAsync,
   } = useWorkoutEngine()
@@ -230,6 +260,8 @@
   const showPostWorkout = ref(false)
   const showAbandonConfirm = ref(false)
   const showSealFailedBanner = ref(false)
+  // Default to a completed aerobic block for the natural timer-expiry path.
+  const aerobicCompleted = ref(true)
 
   const isPaused = computed({
     get: () => snapshot.value?.status === 'PAUSED',
@@ -273,6 +305,21 @@
     () => (currentInterval.value?.targetReps ?? 0) > 0
   )
 
+  // REST gate: an exercise interval has ended and awaits rep confirmation.
+  const isRestPhase = computed(() => snapshot.value?.status === 'REST')
+
+  // The final aerobic block (run/walk) carries no target reps.
+  const isAerobicPhase = computed(
+    () => !isRepPhase.value && !!currentInterval.value
+  )
+
+  const aerobicActivityLabel = computed(() => {
+    const name = (currentInterval.value?.displayName ?? '').toLowerCase()
+    if (name.includes('walk')) return 'walking'
+    if (name.includes('run')) return 'running'
+    return 'moving'
+  })
+
   const remainingLabel = computed(() => {
     const duration = currentInterval.value?.durationSeconds ?? 60
     const rem = Math.max(0, duration - elapsedSeconds.value)
@@ -293,6 +340,10 @@
             chartNumber: progressionStore.currentChart,
             levelString: progressionStore.currentLevel,
             durationSeconds: snapshot.value?.totalElapsedSeconds || 660,
+            aerobicCompleted: aerobicCompleted.value,
+            loggedReps: snapshot.value?.loggedReps
+              ? [...snapshot.value.loggedReps]
+              : [],
           })
         } catch (err) {
           console.error('Failed to stage pending session:', err)
@@ -309,6 +360,8 @@
   }
 
   function togglePause() {
+    // The timer is frozen during the REST hold — pausing is not applicable.
+    if (isRestPhase.value) return
     if (isPaused.value) {
       resumeWorkout()
     } else {
@@ -332,8 +385,14 @@
     // Engine automatically advances on timer completion
   }
 
-  function onLogged() {
-    // Reps logged
+  function onLogged(reps: number) {
+    // Release the REST gate and advance to the next interval.
+    confirmReps(reps)
+  }
+
+  function finishAerobic(completed: boolean) {
+    aerobicCompleted.value = completed
+    finishSession(completed)
   }
 
   async function onSessionSaved() {

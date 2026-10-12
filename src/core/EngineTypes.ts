@@ -9,6 +9,7 @@ export enum OrchestratorLifecycle {
   READY = 'READY',
   RUNNING = 'RUNNING',
   PAUSED = 'PAUSED',
+  REST = 'REST',
   TEARDOWN_PENDING = 'TEARDOWN_PENDING',
   COMPLETED = 'COMPLETED',
 }
@@ -61,15 +62,24 @@ export interface WorkoutInterval {
    * intervals (e.g. the run/walk block) which are not counted in reps.
    */
   targetReps?: number
+  /**
+   * When true, the engine holds at this interval's boundary in a REST phase
+   * until the user confirms their rep count via `confirmReps()`.
+   */
+  requiresRepConfirmation?: boolean
 }
 
 export interface WorkoutStateSnapshot {
   sessionToken: string
-  status: 'IDLE' | 'RUNNING' | 'PAUSED' | 'COMPLETED'
+  status: 'IDLE' | 'RUNNING' | 'PAUSED' | 'REST' | 'COMPLETED'
   currentIntervalIndex: number
   elapsedSecondsInCurrentInterval: number
   totalElapsedSeconds: number
   lastUpdatedTimestamp: number
+  /** Aerobic outcome for the final interval. Undefined until the session ends. */
+  aerobicCompleted?: boolean
+  /** Reps confirmed per gated interval (index-aligned). */
+  loggedReps?: number[]
 }
 
 export interface SessionSnapshot extends WorkoutStateSnapshot {
@@ -91,6 +101,7 @@ export interface TimerEngineDelegate {
     totalElapsedSeconds: number
   ): void
   onIntervalTransition(newIntervalIndex: number): void
+  onRestRequired(intervalIndex: number): void
   onWorkoutComplete(): void
 }
 

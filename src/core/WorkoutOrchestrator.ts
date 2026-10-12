@@ -23,6 +23,8 @@ export class WorkoutOrchestrator implements TimerEngineDelegate {
   private totalElapsedSeconds = 0
   private lastUpdatedTimestamp = 0
   private intervals: WorkoutInterval[] = []
+  private loggedReps: number[] = []
+  private aerobicCompleted: boolean | undefined = undefined
 
   private subscribers = new Map<string, (snapshot: SessionSnapshot) => void>()
 
@@ -60,7 +62,15 @@ export class WorkoutOrchestrator implements TimerEngineDelegate {
     this.lastUpdatedTimestamp = Date.now()
 
     this.intervals = this.strategy.generateWorkout(context)
+    this.loggedReps = []
+    this.aerobicCompleted = undefined
     this.timerEngine = new TimerEngine(this.intervals, this)
+    this.timerEngine.setGatedIndices(
+      this.intervals
+        .map((interval, index) => ({ interval, index }))
+        .filter(({ interval }) => interval.requiresRepConfirmation === true)
+        .map(({ index }) => index)
+    )
     this.lifecycle = OrchestratorLifecycle.READY
 
     this.broadcastSnapshot()
@@ -99,6 +109,38 @@ export class WorkoutOrchestrator implements TimerEngineDelegate {
     }
     this.lifecycle = OrchestratorLifecycle.RUNNING
     this.timerEngine.resume()
+    this.broadcastSnapshot()
+  }
+
+  /**
+   * Confirms the reps performed for the interval that just ended and releases
+   * the REST hold so the workout advances to the next interval.
+   */
+  public confirmReps(reps: number): void {
+    if (this.lifecycle !== OrchestratorLifecycle.REST || !this.timerEngine) {
+      return
+    }
+    this.loggedReps[this.currentIntervalIndex] = reps
+    // Set RUNNING before releasing the gate so the transition broadcast that
+    // fires from resumeFromRest() reports the correct status.
+    this.lifecycle = OrchestratorLifecycle.RUNNING
+    this.timerEngine.resumeFromRest()
+    this.lastUpdatedTimestamp = Date.now()
+    this.broadcastSnapshot()
+  }
+
+  /**
+   * Ends the session immediately, recording whether the final aerobic block
+   * was completed in full or stopped early.
+   */
+  public finishSession(aerobicCompleted: boolean): void {
+    this.aerobicCompleted = aerobicCompleted
+    if (this.timerEngine) {
+      this.timerEngine.dispose()
+      this.timerEngine = null
+    }
+    this.lifecycle = OrchestratorLifecycle.COMPLETED
+    this.lastUpdatedTimestamp = Date.now()
     this.broadcastSnapshot()
   }
 
@@ -142,43 +184,49 @@ export class WorkoutOrchestrator implements TimerEngineDelegate {
     }
   }
 
-  public getStateSnapshot(): WorkoutStateSnapshot {
-    let status: 'IDLE' | 'RUNNING' | 'PAUSED' | 'COMPLETED' = 'IDLE'
-    if (this.lifecycle === OrchestratorLifecycle.RUNNING) {
-      status = 'RUNNING'
-    } else if (this.lifecycle === OrchestratorLifecycle.PAUSED) {
-      status = 'PAUSED'
-    } else if (this.lifecycle === OrchestratorLifecycle.COMPLETED) {
-      status = 'COMPLETED'
+  private resolveStatus():
+    | 'IDLE'
+    | 'RUNNING'
+    | 'PAUSED'
+    | 'REST'
+    | 'COMPLETED' {
+    switch (this.lifecycle) {
+      case OrchestratorLifecycle.RUNNING:
+        return 'RUNNING'
+      case OrchestratorLifecycle.PAUSED:
+        return 'PAUSED'
+      case OrchestratorLifecycle.REST:
+        return 'REST'
+      case OrchestratorLifecycle.COMPLETED:
+        return 'COMPLETED'
+      default:
+        return 'IDLE'
     }
+  }
 
+  public getStateSnapshot(): WorkoutStateSnapshot {
     return {
       sessionToken: this.currentSessionToken,
-      status,
+      status: this.resolveStatus(),
       currentIntervalIndex: this.currentIntervalIndex,
       elapsedSecondsInCurrentInterval: this.elapsedSecondsInCurrentInterval,
       totalElapsedSeconds: this.totalElapsedSeconds,
       lastUpdatedTimestamp: this.lastUpdatedTimestamp,
+      aerobicCompleted: this.aerobicCompleted,
+      loggedReps: [...this.loggedReps],
     }
   }
 
   public getSessionSnapshot(): SessionSnapshot {
-    let status: 'IDLE' | 'RUNNING' | 'PAUSED' | 'COMPLETED' = 'IDLE'
-    if (this.lifecycle === OrchestratorLifecycle.RUNNING) {
-      status = 'RUNNING'
-    } else if (this.lifecycle === OrchestratorLifecycle.PAUSED) {
-      status = 'PAUSED'
-    } else if (this.lifecycle === OrchestratorLifecycle.COMPLETED) {
-      status = 'COMPLETED'
-    }
-
     return {
       sessionToken: this.currentSessionToken,
-      status,
+      status: this.resolveStatus(),
       currentIntervalIndex: this.currentIntervalIndex,
       elapsedSecondsInCurrentInterval: this.elapsedSecondsInCurrentInterval,
       totalElapsedSeconds: this.totalElapsedSeconds,
       lastUpdatedTimestamp: this.lastUpdatedTimestamp,
+      aerobicCompleted: this.aerobicCompleted,
+      loggedReps: [...this.loggedReps],
       intervals: [...this.intervals],
     }
   }
@@ -247,6 +295,20 @@ export class WorkoutOrchestrator implements TimerEngineDelegate {
     this.broadcastSnapshot()
   }
 
+  public onRestRequired(intervalIndex: number): void {
+    this.currentIntervalIndex = intervalIndex
+    // Snap the frozen timer display to the interval's full duration (00:00).
+    this.elapsedSecondsInCurrentInterval =
+      this.intervals[intervalIndex]?.durationSeconds ??
+      this.elapsedSecondsInCurrentInterval
+    this.totalElapsedSeconds = this.intervals
+      .slice(0, intervalIndex + 1)
+      .reduce((acc, interval) => acc + interval.durationSeconds, 0)
+    this.lifecycle = OrchestratorLifecycle.REST
+    this.lastUpdatedTimestamp = Date.now()
+    this.broadcastSnapshot()
+  }
+
   public onWorkoutComplete(): void {
     this.lifecycle = OrchestratorLifecycle.COMPLETED
     this.lastUpdatedTimestamp = Date.now()
@@ -270,6 +332,10 @@ export class WorkoutOrchestrator implements TimerEngineDelegate {
       savedSnapshot.elapsedSecondsInCurrentInterval
     this.totalElapsedSeconds = savedSnapshot.totalElapsedSeconds
     this.lastUpdatedTimestamp = Date.now()
+    this.loggedReps = savedSnapshot.loggedReps
+      ? [...savedSnapshot.loggedReps]
+      : []
+    this.aerobicCompleted = savedSnapshot.aerobicCompleted
 
     // 3. Recalibrate and restore state in TimerEngine
     if (this.timerEngine) {
@@ -287,6 +353,9 @@ export class WorkoutOrchestrator implements TimerEngineDelegate {
           this.currentIntervalIndex,
           'PAUSED'
         )
+      } else if (savedSnapshot.status === 'REST') {
+        this.lifecycle = OrchestratorLifecycle.REST
+        this.timerEngine.restoreRestHold(this.currentIntervalIndex)
       } else if (savedSnapshot.status === 'COMPLETED') {
         this.lifecycle = OrchestratorLifecycle.COMPLETED
       } else {
@@ -311,5 +380,7 @@ export class WorkoutOrchestrator implements TimerEngineDelegate {
     this.elapsedSecondsInCurrentInterval = 0
     this.totalElapsedSeconds = 0
     this.lastUpdatedTimestamp = 0
+    this.loggedReps = []
+    this.aerobicCompleted = undefined
   }
 }

@@ -16,7 +16,7 @@
         icon
         rounded="lg"
         class="stepper-btn"
-        :disabled="reps <= 0"
+        :disabled="disabled || reps <= 0"
         aria-label="Decrease reps"
         @click="decrementReps"
       >
@@ -36,6 +36,7 @@
         icon
         rounded="lg"
         class="stepper-btn"
+        :disabled="disabled"
         aria-label="Increase reps"
         @click="incrementReps"
       >
@@ -52,10 +53,18 @@
       class="mt-2"
       :class="{ 'text-on-primary-container': !hasLogged }"
       :prepend-icon="hasLogged ? 'mdi-check-circle' : 'mdi-check'"
+      :disabled="disabled"
       @click="logReps"
     >
       <span class="fc-body-strong text-uppercase">{{ actionLabel }}</span>
     </v-btn>
+
+    <p
+      v-if="disabled"
+      class="fc-caption text-content-tertiary text-center mt-3 mb-0"
+    >
+      Logging unlocks when this set's timer ends.
+    </p>
   </v-card>
 </template>
 
@@ -66,8 +75,9 @@
     defineProps<{
       defaultReps: number
       exerciseName?: string
+      disabled?: boolean
     }>(),
-    { exerciseName: '' }
+    { exerciseName: '', disabled: false }
   )
 
   const emit = defineEmits<{

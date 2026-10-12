@@ -78,6 +78,14 @@ export function useWorkoutEngine(
     globalOrchestrator?.resumeWorkout()
   }
 
+  const confirmReps = (reps: number): void => {
+    globalOrchestrator?.confirmReps(reps)
+  }
+
+  const finishSession = (aerobicCompleted: boolean): void => {
+    globalOrchestrator?.finishSession(aerobicCompleted)
+  }
+
   const abandonCurrentSessionAsync = async (): Promise<void> => {
     if (globalOrchestrator) {
       await globalOrchestrator.abandonCurrentSessionAsync()
@@ -133,6 +141,8 @@ export function useWorkoutEngine(
     startWorkout,
     pauseWorkout,
     resumeWorkout,
+    confirmReps,
+    finishSession,
     restartWorkout,
     abandonCurrentSessionAsync,
     reconstructSessionFromWAL,

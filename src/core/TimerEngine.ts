@@ -14,6 +14,10 @@ export class TimerEngine {
   private intervalStartSecs: number[] = []
   private totalDurationSeconds = 0
 
+  // Interval indices whose end boundary holds the workout in a REST phase
+  private gatedIndices = new Set<number>()
+  private isHoldingAtRest = false
+
   constructor(intervals: WorkoutInterval[], delegate: TimerEngineDelegate) {
     this.intervals = [...intervals]
     this.delegate = delegate
@@ -36,9 +40,18 @@ export class TimerEngine {
     }
     this.isRunning = true
     this.isPaused = false
+    this.isHoldingAtRest = false
     this.currentIntervalIndex = 0
     this.startAnchorHardwareTimestamp = performance.now()
     this.startTicker()
+  }
+
+  public setGatedIndices(indices: number[]): void {
+    this.gatedIndices = new Set(indices)
+  }
+
+  public isResting(): boolean {
+    return this.isHoldingAtRest
   }
 
   public pause(): void {
@@ -101,7 +114,15 @@ export class TimerEngine {
       }
     }
 
-    if (newIndex !== this.currentIntervalIndex) {
+    if (newIndex > this.currentIntervalIndex) {
+      // Hold at the first gated interval boundary crossed, if any.
+      for (let k = this.currentIntervalIndex; k < newIndex; k++) {
+        if (this.gatedIndices.has(k)) {
+          this.holdAtBoundary(k)
+          this.delegate.onRestRequired(k)
+          return
+        }
+      }
       this.currentIntervalIndex = newIndex
       this.delegate.onIntervalTransition(newIndex)
     }
@@ -110,6 +131,50 @@ export class TimerEngine {
       totalElapsedSeconds - this.intervalStartSecs[this.currentIntervalIndex]
 
     this.delegate.onTick(elapsedInInterval, totalElapsedSeconds)
+  }
+
+  private holdAtBoundary(intervalIndex: number): void {
+    this.isRunning = false
+    this.isHoldingAtRest = true
+    this.currentIntervalIndex = intervalIndex
+    this.stopTicker()
+  }
+
+  /**
+   * Releases a REST hold and re-anchors the hardware clock to the start of the
+   * next interval, excluding any time spent resting from the workout timeline.
+   */
+  public resumeFromRest(): void {
+    if (!this.isHoldingAtRest) {
+      return
+    }
+    this.isHoldingAtRest = false
+
+    const nextIndex = this.currentIntervalIndex + 1
+    const nextStart = this.intervalStartSecs[nextIndex]
+    if (nextStart === undefined) {
+      this.isRunning = false
+      this.stopTicker()
+      this.delegate?.onWorkoutComplete()
+      return
+    }
+
+    // Advance the index here (not on the next tick) so the gated boundary is
+    // not re-detected, then re-anchor the clock to the next interval's start.
+    this.currentIntervalIndex = nextIndex
+    this.startAnchorHardwareTimestamp = performance.now() - nextStart * 1000
+    this.isPaused = false
+    this.isRunning = true
+    this.delegate?.onIntervalTransition(nextIndex)
+    this.startTicker()
+  }
+
+  public restoreRestHold(intervalIndex: number): void {
+    this.isRunning = false
+    this.isPaused = false
+    this.isHoldingAtRest = true
+    this.currentIntervalIndex = intervalIndex
+    this.stopTicker()
   }
 
   public restoreState(
@@ -140,5 +205,6 @@ export class TimerEngine {
     this.delegate = null
     this.intervals = []
     this.intervalStartSecs = []
+    this.isHoldingAtRest = false
   }
 }

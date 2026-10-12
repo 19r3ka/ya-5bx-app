@@ -12,4 +12,11 @@ export interface CompletedSessionRecord {
   durationSeconds: number
   telemetryStatus: TelemetryStatus
   userFlaggedStiffOrSore?: boolean
+  /**
+   * Whether the final aerobic block was completed in full. Sessions stopped
+   * early do not count toward level progression.
+   */
+  aerobicCompleted: boolean
+  /** Reps confirmed per gated exercise (index-aligned with the intervals). */
+  loggedReps?: number[]
 }
