@@ -1,20 +1,22 @@
 <!-- sdd-kit v0.2.2 -->
+
 # AGENTS.md
 
 > Core rules are identical in every repo. Only section 2 and sections 12 to 14 are repo-specific ([FILL]). Everything derivable from a file stays in that file, not here. Keep this file under ~150 lines. Applies to any AI agent or tool.
 
 ## 1. Project facts: read, don't assume
+
 Never rely on memory for versions, commands, or APIs. Read the file that owns the fact, once, and only the part you need.
 
-| Need | Read |
-|---|---|
-| Purpose, status, structure detail, config names | `README.md` |
-| Stack, versions, dependencies, scripts | Manifest: `package.json`, `pyproject.toml`, `requirements.txt`, `Cargo.toml`, `go.mod`, `Gemfile` |
-| Exact resolved versions | Lockfile: search for the one package, never read the whole file |
-| Commands and CI steps | Manifest scripts, `Makefile`, `justfile`, `.github/workflows/` |
-| Lint and format rules | `.eslintrc*`, `.prettierrc*`, `ruff`/`pyproject.toml`, `.editorconfig` |
-| Env variables | `.env.template` (names only, never values) |
-| What to build, project principles | `CONSTITUTION.md`, plus `SPEC.md`, `PLAN.md`, `TASKS.md` in the active feature folder |
+| Need                                            | Read                                                                                              |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Purpose, status, structure detail, config names | `README.md`                                                                                       |
+| Stack, versions, dependencies, scripts          | Manifest: `package.json`, `pyproject.toml`, `requirements.txt`, `Cargo.toml`, `go.mod`, `Gemfile` |
+| Exact resolved versions                         | Lockfile: search for the one package, never read the whole file                                   |
+| Commands and CI steps                           | Manifest scripts, `Makefile`, `justfile`, `.github/workflows/`                                    |
+| Lint and format rules                           | `.eslintrc*`, `.prettierrc*`, `ruff`/`pyproject.toml`, `.editorconfig`                            |
+| Env variables                                   | `.env.template` (names only, never values)                                                        |
+| What to build, project principles               | `CONSTITUTION.md`, plus `SPEC.md`, `PLAN.md`, `TASKS.md` in the active feature folder             |
 
 - Before using a library API, check its version in the manifest or lockfile.
 - If a file contradicts this document, the file wins. Flag the stale line in your final message.
@@ -22,7 +24,9 @@ Never rely on memory for versions, commands, or APIs. Read the file that owns th
 - Token economy: do not re-read files already in context. Prefer search and line ranges over whole-file reads. Skip generated and vendored folders (`node_modules`, `dist`, `.venv`).
 
 ## 2. Repo core
+
 Only what files cannot tell you. Keep it under 20 lines.
+
 - Purpose (one line): Personal fitness companion & offline-first workout app based on RCAF 5BX 11-min daily plan.
 - Test command: `npm run build && npm run lint`
 - Top-level folders (max 10 lines, detail lives in README):
@@ -34,7 +38,9 @@ Only what files cannot tell you. Keep it under 20 lines.
 - Pitfalls: Do not use Options API (use Vue 3 Composition API with `<script setup>`); keep calculations matching RCAF charts.
 
 ## 3. Source of truth
+
 Precedence when files conflict (highest first):
+
 1. The user's current instruction
 2. `CONSTITUTION.md`: project principles and quality gates (repo root)
 3. `SPEC.md`: what to build, acceptance criteria
@@ -51,12 +57,14 @@ Precedence when files conflict (highest first):
 - If the spec is ambiguous or contradicts the code, stop and ask.
 
 ## 4. Communication
+
 - Professional, grounded, concise. No slang, emojis, or filler.
 - Favor information density. Be direct, not pedantic.
 - Do not guess. If a technical path is unclear, read the code or docs, or search, before proposing.
 - Correctness and architectural integrity come before speed.
 
 ## 5. Engineering principles
+
 - KISS and DRY. No over-engineering.
 - No magic numbers, magic strings, or hardcoded config. Externalize to constants, `.env`, `settings.toml` or `mappings.toml`.
 - Config-first: read existing config files rather than embedding logic in scripts.
@@ -65,27 +73,35 @@ Precedence when files conflict (highest first):
 - Minimal dependencies: prefer the standard library or platform. Ask before adding a package.
 
 ## 6. Language standards
+
 **Python**
+
 - Use `uv` exclusively for environments and dependencies.
 - When adding a capability that needs config, update `.template/.env.template` first. If a key is missing, ask the user to supply it for the local `.env`, then proceed.
 - Follow PEP 8.
 
 **JavaScript / TypeScript**
+
 - Vite for builds, Node for runtime.
 - Vue 3 with the Composition API and `<script setup>`. Put reusable logic in composables.
 - Follow the repo's ESLint and Prettier config.
 
 **Shell**
+
 - Prefer zsh syntax when available, otherwise POSIX sh.
 
 ## 7. Boundaries
+
 **Always**
+
 - Read this file and the next task before coding.
 - Keep the diff inside the task scope.
+- Run `git branch --show-current`. It must match the active feature branch (e.g., `feat/001-baseline-phase0` or `feat/001-baseline-characterization`). If the current branch is `main`, `master`, or `chore/sdd-kit`, stop and ask for permission to create dedicated branch. Never commit directly to `main` or `master`.
 - Before shell commands that modify the filesystem or environment, state the intended action in one or two lines.
 - Log non-obvious decisions in `DECISIONS.md`.
 
 **Ask first**
+
 - Adding or upgrading a dependency.
 - Changing schema or data model.
 - Changing build, CI, or config files.
@@ -93,6 +109,7 @@ Precedence when files conflict (highest first):
 - Anything touching auth, payments, or personal data.
 
 **Never**
+
 - Read, edit, or commit secrets (`.env`, keys, tokens).
 - Push to `main` or force-push.
 - Edit `CONSTITUTION.md`, `SPEC.md`, or `PLAN.md` uninstructed.
@@ -100,16 +117,19 @@ Precedence when files conflict (highest first):
 - Delete or weaken tests to make them pass.
 
 ## 8. Testing
+
 - Framework and command: from the manifest scripts (see section 2 for the main test command).
 - Every task has a test or a verifiable check. Tests and lint must pass before a task is marked done.
 - If the same failure persists after two attempts, stop and report.
 
 ## 9. Git
+
 - One commit per task, working state only (tests green).
 - Message format: `type(scope): summary`, types: feat, fix, refactor, test, docs, chore. Add the task id.
 - Branch per feature: `feat/<slug>`. Follow `CONTRIBUTING` or husky hooks if present.
 
 ## 10. Task protocol
+
 1. Read this file and the next unchecked task in the active feature's `TASKS.md` whose dependencies are ticked. Then read only the requirements and criteria it cites and the files it lists (section 1).
 2. Restate the task, files to touch, and done-when in 2 to 3 lines.
 3. Implement only that task.
@@ -119,7 +139,9 @@ Precedence when files conflict (highest first):
 Stop and report if: the task is ambiguous, tests fail twice, out-of-scope changes are needed, or an "Ask first" item comes up.
 
 ## 11. Handoff
+
 Assume the next agent is a different model with no memory of this session.
+
 - Update `TASKS.md`: ticks and short Notes. Never rewrite a task.
 - Write `WALKTHROUGH.md` in the feature folder from the template. Mark a criterion "claimed" if no test proves it. List every deviation and assumption.
 - Append non-obvious choices to `DECISIONS.md` with Status: Proposed.
@@ -127,12 +149,15 @@ Assume the next agent is a different model with no memory of this session.
 - Review is done by the reviewer, not by you: do not mark a phase Cleared.
 
 ## 12. Known pitfalls [FILL, optional]
+
 - Ensure workout time/rep calculations adhere strictly to RCAF 5BX chart logic.
 
 ## 13. Environment notes [FILL, optional]
+
 - Node runtime with Vite, Pinia, Vuetify, and PWA plugins.
 
 ## 14. Glossary [FILL, optional]
+
 - 5BX: Five Basic Exercises (11-minute daily fitness plan originally developed by the RCAF).
 - Chart: A progression chart (1 to 6) containing 12 distinct performance levels.
 - Level: Exercise level sub-grade (D-, D, D+, C-, C, C+, B-, B, B+, A-, A, A+).
