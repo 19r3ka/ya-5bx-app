@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YA-5BX Session - Onboarding Step 4</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Barlow+Condensed:wght@600;700&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for a technical feel */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111319;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #22263A;
+            border-radius: 2px;
+        }
+        .expansion-panel-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .expanded .expansion-panel-content {
+            max-height: 500px;
+        }
+        .expanded .chevron-icon {
+            transform: rotate(180deg);
+        }
+        .pip-active {
+            width: 24px;
+            background-color: #ffc880;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#111319",
+                        "tertiary-fixed": "#dde1ff",
+                        "secondary-dim": "#1A5A5A",
+                        "on-primary-fixed": "#291800",
+                        "surface-container": "#1e1f26",
+                        "outline-variant": "#524534",
+                        "on-secondary": "#003737",
+                        "primary": "#ffc880",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#ffb955",
+                        "on-error-container": "#ffdad6",
+                        "background": "#111319",
+                        "on-secondary-fixed-variant": "#004f50",
+                        "on-primary": "#452b00",
+                        "tertiary": "#c8cfff",
+                        "tertiary-container": "#a3b2ff",
+                        "on-secondary-container": "#003e3e",
+                        "on-primary-fixed-variant": "#633f00",
+                        "primary-fixed": "#ffddb4",
+                        "surface-elevated": "#22263A",
+                        "primary-container": "#f5a623",
+                        "secondary": "#4ddada",
+                        "text-secondary": "#B0B8D4",
+                        "on-tertiary-fixed-variant": "#2f408d",
+                        "outline": "#9f8e7a",
+                        "secondary-fixed": "#6ff7f6",
+                        "on-surface": "#e2e2eb",
+                        "on-primary-container": "#644000",
+                        "on-tertiary-fixed": "#001356",
+                        "surface-tint": "#ffb955",
+                        "on-surface-variant": "#d7c3ae",
+                        "on-tertiary-container": "#2f418e",
+                        "text-primary": "#E8EAF6",
+                        "surface-container-lowest": "#0c0e14",
+                        "secondary-fixed-dim": "#4ddada",
+                        "on-tertiary": "#142876",
+                        "primary-dim": "#7A5312",
+                        "surface-container-high": "#282a30",
+                        "inverse-on-surface": "#2e3037",
+                        "surface-container-low": "#191b22",
+                        "surface": "#1A1D27",
+                        "secondary-container": "#00b3b3",
+                        "surface-bright": "#373940",
+                        "on-error": "#690005",
+                        "success": "#4CAF50",
+                        "surface-variant": "#33343b",
+                        "text-tertiary": "#6B7399",
+                        "inverse-surface": "#e2e2eb",
+                        "inverse-primary": "#835500",
+                        "on-background": "#e2e2eb",
+                        "tertiary-fixed-dim": "#b9c3ff",
+                        "error": "#CF6679",
+                        "on-secondary-fixed": "#002020",
+                        "surface-container-highest": "#33343b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-unit": "4px",
+                        "container-padding": "24px",
+                        "touch-target-min": "48px",
+                        "stepper-button": "64px",
+                        "gutter": "16px",
+                        "section-gap": "24px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "timer-display": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "section-header": ["Barlow Condensed"],
+                        "exercise-name": ["Barlow Condensed"],
+                        "rep-target": ["JetBrains Mono"],
+                        "body-emphasis": ["Inter"],
+                        "body": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "timer-display": ["72px", { "lineHeight": "80px", "letterSpacing": "-2px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "section-header": ["20px", { "lineHeight": "24px", "letterSpacing": "1.5px", "fontWeight": "600" }],
+                        "exercise-name": ["32px", { "lineHeight": "40px", "letterSpacing": "0.5px", "fontWeight": "700" }],
+                        "rep-target": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "body-emphasis": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation Bar (Shared Component Logic Applied) -->
+<header class="bg-surface sticky top-0 z-50 w-full h-touch-target-min flex items-center justify-between px-container-padding max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="fitness_center">fitness_center</span>
+<h1 class="font-section-header text-section-header uppercase tracking-widest text-primary">YA-5BX SESSION</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-elevated transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="help_outline">help_outline</span>
+</button>
+</header>
+<main class="flex-grow w-full max-w-md mx-auto px-container-padding pt-6 pb-32">
+<!-- Progress Indicators -->
+<div class="flex justify-center gap-2 mb-10">
+<div class="h-1.5 w-6 rounded-full bg-secondary"></div>
+<div class="h-1.5 w-6 rounded-full bg-secondary"></div>
+<div class="h-1.5 w-6 rounded-full bg-secondary"></div>
+<div class="h-1.5 pip-active rounded-full transition-all duration-500"></div>
+<div class="h-1.5 w-6 rounded-full bg-surface-container"></div>
+</div>
+<section class="mb-8">
+<h2 class="font-exercise-name text-exercise-name text-primary mb-2">CHOOSE YOUR DRILLS</h2>
+<p class="font-body text-text-secondary">Customize your daily 5-set circuit. Each exercise is designed for maximum functional efficiency.</p>
+</section>
+<!-- Exercise Expansion Panels Cluster -->
+<div class="space-y-4">
+<!-- 1. Stretching -->
+<div class="bg-surface rounded-lg overflow-hidden border border-surface-variant transition-all duration-300">
+<button class="w-full flex items-center justify-between p-4 h-touch-target-min text-left hover:bg-surface-elevated transition-colors" onclick="togglePanel(this)">
+<div class="flex items-center gap-4">
+<span class="font-timer-display text-[24px] text-primary w-8">01</span>
+<span class="font-body-emphasis text-on-surface">Stretching</span>
+</div>
+<span class="material-symbols-outlined text-text-tertiary chevron-icon transition-transform" data-icon="expand_more">expand_more</span>
+</button>
+<div class="expansion-panel-content">
+<div class="p-4 pt-0 border-t border-surface-variant/30 flex gap-4">
+<div class="w-24 h-24 rounded bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover rounded opacity-80" data-alt="A minimalist, high-contrast instructional illustration of a fitness enthusiast performing dynamic stretches in a dark-themed gym environment. The lighting is focused, casting soft amber glows on the muscles being worked. The visual style is professional, clean, and highly technical, reflecting a modern performance-driven aesthetic with deep black backgrounds and orange primary accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHTjTkTMzwxHwCmeDc9yXEdwBFDQImibSzqDs1nI4XPKG1nIIAnWH_8fX-qVLlwhnr9CeVMYd-AKvJi31BFc7qF3e5ccQ0N9P01Ac3PSD2fsoGYwnia5xwTxCE92mVWccLQYL8vSacTqbGFhstDoHL_9QwMuvzF_wImq_chu6T_owTeddUQGB8uhzkb4VomuNAyIZROPcSlRH1NBwwaDLugYZUrij6xvyTZaknq2LyYfcUn3ZU0XbLw_bpb0jXrt_1_IH4PI-3T3oT"/>
+</div>
+<div class="font-caption text-text-secondary">
+                            Flexibility and range of motion. Targets the spine, hamstrings, and shoulders. 
+                            <div class="mt-2 text-secondary-fixed font-body-emphasis">Duration: 2 Minutes</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Sit-ups -->
+<div class="bg-surface rounded-lg overflow-hidden border border-surface-variant transition-all duration-300">
+<button class="w-full flex items-center justify-between p-4 h-touch-target-min text-left hover:bg-surface-elevated transition-colors" onclick="togglePanel(this)">
+<div class="flex items-center gap-4">
+<span class="font-timer-display text-[24px] text-primary w-8">02</span>
+<span class="font-body-emphasis text-on-surface">Sit-ups</span>
+</div>
+<span class="material-symbols-outlined text-text-tertiary chevron-icon transition-transform" data-icon="expand_more">expand_more</span>
+</button>
+<div class="expansion-panel-content">
+<div class="p-4 pt-0 border-t border-surface-variant/30 flex gap-4">
+<div class="w-24 h-24 rounded bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover rounded opacity-80" data-alt="A sharp, detailed digital graphic of a person executing a technically perfect sit-up. The setting is a minimalist athletic space with cool blue and warm amber lighting. The style is athletic and authoritative, using dark tones and high-key highlights to emphasize form and effort. The overall mood is disciplined and professional, consistent with a high-end fitness application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVckw0QmHpWfHHL8yaAXXlVn5UO1u27TSWyc7wyxe2eNwjl0ni_IxjzwOQNeP0StR_FEy_mjvEVh7Uivk177AdLD9Eax2-aAr4Ec4sRR7uLl1DDTV6mOV2_jZoQ88-gPZym80KjaVFDD8mcVvl_lx7I6Y6HxxJf3nlUOgzM5sopDC0DDmojl08kflCTxmTDXqdJLqNgTii6nIlv_5xOGqcyVwkgUgfFatvW79piyAcotBLt0SpJ_YHPVMG1cSWV2PqxdhAE8dM3H0R"/>
+</div>
+<div class="font-caption text-text-secondary">
+                            Core stability and abdominal strength. Feet unhooked for maximum activation.
+                            <div class="mt-2 text-secondary-fixed font-body-emphasis">Target: 25 Reps</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Back Extensions -->
+<div class="bg-surface rounded-lg overflow-hidden border border-surface-variant transition-all duration-300">
+<button class="w-full flex items-center justify-between p-4 h-touch-target-min text-left hover:bg-surface-elevated transition-colors" onclick="togglePanel(this)">
+<div class="flex items-center gap-4">
+<span class="font-timer-display text-[24px] text-primary w-8">03</span>
+<span class="font-body-emphasis text-on-surface">Back extensions</span>
+</div>
+<span class="material-symbols-outlined text-text-tertiary chevron-icon transition-transform" data-icon="expand_more">expand_more</span>
+</button>
+<div class="expansion-panel-content">
+<div class="p-4 pt-0 border-t border-surface-variant/30 flex gap-4">
+<div class="w-24 h-24 rounded bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover rounded opacity-80" data-alt="A professional medical-grade fitness illustration showing the muscles involved in a back extension. The background is a dark charcoal, with the human form rendered in subtle shades of gray and highlighted in a vibrant orange primary color. The atmosphere is technical and reliable, focusing on biomechanics and safety in a minimalist digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuRCQ-E1g2aXZl_1lMW7CXWgKaKDl18wXwoNrnJXU9EVeUxgeniOaLG1QJf_LyDD-oUDD4dmymm9_DJbhXuc0AXiqb4edjina20RoRQRF2kGtMbI1rDg7aVXepAVJylTGP3GCPCbpGUF9QSYwbEw1HY1CxWVMH-0YcDznXZ-sHgqOL2CnubkqY_AxBjgFrx_vsvlfxPXFQD1hf1LZskhyrxwR6RXlpStkxum1-bN8SCVsgWQiabJhV8Y0GDX3eZrfuuoSWYp60Mifw"/>
+</div>
+<div class="font-caption text-text-secondary">
+                            Posterior chain strengthening. Critical for posture and spinal health.
+                            <div class="mt-2 text-secondary-fixed font-body-emphasis">Target: 20 Reps</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Push-ups -->
+<div class="bg-surface rounded-lg overflow-hidden border border-surface-variant transition-all duration-300">
+<button class="w-full flex items-center justify-between p-4 h-touch-target-min text-left hover:bg-surface-elevated transition-colors" onclick="togglePanel(this)">
+<div class="flex items-center gap-4">
+<span class="font-timer-display text-[24px] text-primary w-8">04</span>
+<span class="font-body-emphasis text-on-surface">Push-ups</span>
+</div>
+<span class="material-symbols-outlined text-text-tertiary chevron-icon transition-transform" data-icon="expand_more">expand_more</span>
+</button>
+<div class="expansion-panel-content">
+<div class="p-4 pt-0 border-t border-surface-variant/30 flex gap-4">
+<div class="w-24 h-24 rounded bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover rounded opacity-80" data-alt="An action-oriented digital render of an athlete in a push-up position, captured from a low angle. The scene is illuminated by dramatic side-lighting that defines the musculature against a dark, minimalist background. The color palette uses deep navy and high-visibility orange. The mood is powerful and focused, representing peak physical conditioning in a modern UI context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPah4KqQ94AOzifvZ3eK02gDUwz9LFX71oCS0ZiEd0I8YvmTgVMo8WQaPNmkXZAZXsfJB6uChi-M-QtTvHTtun2luPF__PX8oTVWHvlWCONxBNptF3m1_1620K2jzWmMY8B65U5zfj-NPJZds65F55-eu8-5h0iyLxz8fmewUNuTqelwu8CHEllhG0hETfXyDKXhT4kcrEnwSmkgRc71WCFq1V_EliXO7BX831l_LuRB_NOcRzD8HGNBKC_PtaS39PBM3HNXqq16fX"/>
+</div>
+<div class="font-caption text-text-secondary">
+                            Upper body power and endurance. Full range of motion recommended.
+                            <div class="mt-2 text-secondary-fixed font-body-emphasis">Target: 15 Reps</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. Running/Walking (Expanded by Default) -->
+<div class="bg-surface rounded-lg overflow-hidden border-2 border-primary expanded transition-all duration-300">
+<button class="w-full flex items-center justify-between p-4 h-touch-target-min text-left bg-surface-elevated transition-colors" onclick="togglePanel(this)">
+<div class="flex items-center gap-4">
+<span class="font-timer-display text-[24px] text-primary w-8">05</span>
+<span class="font-body-emphasis text-on-surface">Running/Walking</span>
+</div>
+<span class="material-symbols-outlined text-primary chevron-icon transition-transform" data-icon="expand_more">expand_more</span>
+</button>
+<div class="expansion-panel-content">
+<div class="p-4 pt-4 border-t border-surface-variant/30">
+<p class="font-caption text-text-secondary mb-4">Select your preferred aerobic finishing movement:</p>
+<div class="grid grid-cols-1 gap-3">
+<!-- Aerobic Alternative 1 -->
+<label class="flex items-center justify-between p-3 rounded bg-surface-container border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="directions_run">directions_run</span>
+<span class="font-body text-on-surface">Road Running</span>
+</div>
+<input checked="" class="w-5 h-5 text-secondary bg-surface-dim border-outline rounded-full focus:ring-secondary" name="aerobic" type="radio"/>
+</label>
+<!-- Aerobic Alternative 2 -->
+<label class="flex items-center justify-between p-3 rounded bg-surface-container border border-outline-variant/30 cursor-pointer active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-tertiary" data-icon="directions_walk">directions_walk</span>
+<span class="font-body text-on-surface">Brisk Walking</span>
+</div>
+<input class="w-5 h-5 text-secondary bg-surface-dim border-outline rounded-full focus:ring-secondary" name="aerobic" type="radio"/>
+</label>
+<!-- Aerobic Alternative 3 -->
+<label class="flex items-center justify-between p-3 rounded bg-surface-container border border-outline-variant/30 cursor-pointer active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-tertiary" data-icon="vibration">vibration</span>
+<span class="font-body text-on-surface">Running on Spot</span>
+</div>
+<input class="w-5 h-5 text-secondary bg-surface-dim border-outline rounded-full focus:ring-secondary" name="aerobic" type="radio"/>
+</label>
+<!-- Aerobic Alternative 4 -->
+<label class="flex items-center justify-between p-3 rounded bg-surface-container border border-outline-variant/30 cursor-pointer active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-tertiary" data-icon="speed">speed</span>
+<span class="font-body text-on-surface">Stationary Bike</span>
+</div>
+<input class="w-5 h-5 text-secondary bg-surface-dim border-outline rounded-full focus:ring-secondary" name="aerobic" type="radio"/>
+</label>
+</div>
+<div class="mt-4 p-3 bg-secondary-dim/20 rounded border border-secondary-dim/30">
+<div class="flex items-center gap-2 text-secondary mb-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="timer">timer</span>
+<span class="font-body-emphasis">Cardio Goal</span>
+</div>
+<p class="font-caption text-on-secondary-container">Aim for a steady heart rate for 6 consecutive minutes to maximize metabolic boost.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Continue Action -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-dim p-container-padding border-t border-surface-variant flex flex-col gap-4 z-50">
+<button class="w-full bg-primary-container h-stepper-button rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-transform group">
+<span class="font-body-emphasis text-on-primary-fixed uppercase tracking-wider">Continue to Final Step</span>
+<span class="material-symbols-outlined text-on-primary-fixed group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="text-center">
+<p class="font-caption text-text-tertiary">Step 4 of 5: Physical Configuration</p>
+</div>
+</div>
+<script>
+        function togglePanel(button) {
+            const container = button.parentElement;
+            const isExpanded = container.classList.contains('expanded');
+            
+            // Optional: Close other panels
+            /*
+            document.querySelectorAll('.expanded').forEach(el => {
+                if (el !== container) {
+                    el.classList.remove('expanded');
+                    el.classList.remove('border-primary');
+                    el.classList.add('border-surface-variant');
+                }
+            });
+            */
+
+            if (isExpanded) {
+                container.classList.remove('expanded');
+                container.classList.remove('border-primary');
+                container.classList.add('border-surface-variant');
+                button.classList.remove('bg-surface-elevated');
+            } else {
+                container.classList.add('expanded');
+                container.classList.add('border-primary');
+                container.classList.remove('border-surface-variant');
+                button.classList.add('bg-surface-elevated');
+            }
+        }
+
+        // Initialize state for the expanded one
+        window.addEventListener('DOMContentLoaded', () => {
+            const radioLabels = document.querySelectorAll('input[type="radio"]');
+            radioLabels.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    // Visual feedback for selection
+                    document.querySelectorAll('label').forEach(l => {
+                        l.classList.remove('border-outline-variant');
+                        l.classList.add('border-outline-variant/30');
+                        l.querySelector('.material-symbols-outlined').classList.replace('text-secondary', 'text-text-tertiary');
+                    });
+                    const label = e.target.closest('label');
+                    label.classList.add('border-outline-variant');
+                    label.classList.remove('border-outline-variant/30');
+                    label.querySelector('.material-symbols-outlined').classList.replace('text-text-tertiary', 'text-secondary');
+                });
+            });
+        });
+    </script>
+</body></html>

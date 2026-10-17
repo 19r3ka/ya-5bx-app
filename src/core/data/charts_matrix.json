@@ -1,0 +1,662 @@
+{
+  "1": {
+    "D-": {
+      "exercise_1_reps": 4,
+      "exercise_2_reps": 5,
+      "exercise_3_reps": 6,
+      "exercise_4_reps": 3,
+      "exercise_5_stationary_steps": 150,
+      "outdoor_run_target_minutes": 14,
+      "walk_target_minutes": 28
+    },
+    "D": {
+      "exercise_1_reps": 5,
+      "exercise_2_reps": 6,
+      "exercise_3_reps": 7,
+      "exercise_4_reps": 4,
+      "exercise_5_stationary_steps": 175,
+      "outdoor_run_target_minutes": 14.5,
+      "walk_target_minutes": 29
+    },
+    "D+": {
+      "exercise_1_reps": 6,
+      "exercise_2_reps": 7,
+      "exercise_3_reps": 8,
+      "exercise_4_reps": 5,
+      "exercise_5_stationary_steps": 200,
+      "outdoor_run_target_minutes": 15,
+      "walk_target_minutes": 30
+    },
+    "C-": {
+      "exercise_1_reps": 7,
+      "exercise_2_reps": 8,
+      "exercise_3_reps": 9,
+      "exercise_4_reps": 6,
+      "exercise_5_stationary_steps": 225,
+      "outdoor_run_target_minutes": 15.5,
+      "walk_target_minutes": 31
+    },
+    "C": {
+      "exercise_1_reps": 8,
+      "exercise_2_reps": 9,
+      "exercise_3_reps": 10,
+      "exercise_4_reps": 7,
+      "exercise_5_stationary_steps": 250,
+      "outdoor_run_target_minutes": 16,
+      "walk_target_minutes": 32
+    },
+    "C+": {
+      "exercise_1_reps": 9,
+      "exercise_2_reps": 10,
+      "exercise_3_reps": 11,
+      "exercise_4_reps": 8,
+      "exercise_5_stationary_steps": 275,
+      "outdoor_run_target_minutes": 16.5,
+      "walk_target_minutes": 33
+    },
+    "B-": {
+      "exercise_1_reps": 10,
+      "exercise_2_reps": 11,
+      "exercise_3_reps": 12,
+      "exercise_4_reps": 9,
+      "exercise_5_stationary_steps": 300,
+      "outdoor_run_target_minutes": 17,
+      "walk_target_minutes": 34
+    },
+    "B": {
+      "exercise_1_reps": 11,
+      "exercise_2_reps": 12,
+      "exercise_3_reps": 13,
+      "exercise_4_reps": 10,
+      "exercise_5_stationary_steps": 325,
+      "outdoor_run_target_minutes": 17.5,
+      "walk_target_minutes": 35
+    },
+    "B+": {
+      "exercise_1_reps": 12,
+      "exercise_2_reps": 13,
+      "exercise_3_reps": 14,
+      "exercise_4_reps": 11,
+      "exercise_5_stationary_steps": 350,
+      "outdoor_run_target_minutes": 18,
+      "walk_target_minutes": 36
+    },
+    "A-": {
+      "exercise_1_reps": 13,
+      "exercise_2_reps": 14,
+      "exercise_3_reps": 15,
+      "exercise_4_reps": 12,
+      "exercise_5_stationary_steps": 375,
+      "outdoor_run_target_minutes": 18.5,
+      "walk_target_minutes": 37
+    },
+    "A": {
+      "exercise_1_reps": 14,
+      "exercise_2_reps": 15,
+      "exercise_3_reps": 16,
+      "exercise_4_reps": 13,
+      "exercise_5_stationary_steps": 400,
+      "outdoor_run_target_minutes": 19,
+      "walk_target_minutes": 38
+    },
+    "A+": {
+      "exercise_1_reps": 15,
+      "exercise_2_reps": 16,
+      "exercise_3_reps": 17,
+      "exercise_4_reps": 14,
+      "exercise_5_stationary_steps": 425,
+      "outdoor_run_target_minutes": 19.5,
+      "walk_target_minutes": 39
+    }
+  },
+  "2": {
+    "D-": {
+      "exercise_1_reps": 6,
+      "exercise_2_reps": 7,
+      "exercise_3_reps": 8,
+      "exercise_4_reps": 5,
+      "exercise_5_stationary_steps": 200,
+      "outdoor_run_target_minutes": 13,
+      "walk_target_minutes": 26
+    },
+    "D": {
+      "exercise_1_reps": 7,
+      "exercise_2_reps": 8,
+      "exercise_3_reps": 9,
+      "exercise_4_reps": 6,
+      "exercise_5_stationary_steps": 225,
+      "outdoor_run_target_minutes": 13.5,
+      "walk_target_minutes": 27
+    },
+    "D+": {
+      "exercise_1_reps": 8,
+      "exercise_2_reps": 9,
+      "exercise_3_reps": 10,
+      "exercise_4_reps": 7,
+      "exercise_5_stationary_steps": 250,
+      "outdoor_run_target_minutes": 14,
+      "walk_target_minutes": 28
+    },
+    "C-": {
+      "exercise_1_reps": 9,
+      "exercise_2_reps": 10,
+      "exercise_3_reps": 11,
+      "exercise_4_reps": 8,
+      "exercise_5_stationary_steps": 275,
+      "outdoor_run_target_minutes": 14.5,
+      "walk_target_minutes": 29
+    },
+    "C": {
+      "exercise_1_reps": 10,
+      "exercise_2_reps": 11,
+      "exercise_3_reps": 12,
+      "exercise_4_reps": 9,
+      "exercise_5_stationary_steps": 300,
+      "outdoor_run_target_minutes": 15,
+      "walk_target_minutes": 30
+    },
+    "C+": {
+      "exercise_1_reps": 11,
+      "exercise_2_reps": 12,
+      "exercise_3_reps": 13,
+      "exercise_4_reps": 10,
+      "exercise_5_stationary_steps": 325,
+      "outdoor_run_target_minutes": 15.5,
+      "walk_target_minutes": 31
+    },
+    "B-": {
+      "exercise_1_reps": 12,
+      "exercise_2_reps": 13,
+      "exercise_3_reps": 14,
+      "exercise_4_reps": 11,
+      "exercise_5_stationary_steps": 350,
+      "outdoor_run_target_minutes": 16,
+      "walk_target_minutes": 32
+    },
+    "B": {
+      "exercise_1_reps": 13,
+      "exercise_2_reps": 14,
+      "exercise_3_reps": 15,
+      "exercise_4_reps": 12,
+      "exercise_5_stationary_steps": 375,
+      "outdoor_run_target_minutes": 16.5,
+      "walk_target_minutes": 33
+    },
+    "B+": {
+      "exercise_1_reps": 14,
+      "exercise_2_reps": 15,
+      "exercise_3_reps": 16,
+      "exercise_4_reps": 13,
+      "exercise_5_stationary_steps": 400,
+      "outdoor_run_target_minutes": 17,
+      "walk_target_minutes": 34
+    },
+    "A-": {
+      "exercise_1_reps": 15,
+      "exercise_2_reps": 16,
+      "exercise_3_reps": 17,
+      "exercise_4_reps": 14,
+      "exercise_5_stationary_steps": 425,
+      "outdoor_run_target_minutes": 17.5,
+      "walk_target_minutes": 35
+    },
+    "A": {
+      "exercise_1_reps": 16,
+      "exercise_2_reps": 17,
+      "exercise_3_reps": 18,
+      "exercise_4_reps": 15,
+      "exercise_5_stationary_steps": 450,
+      "outdoor_run_target_minutes": 18,
+      "walk_target_minutes": 36
+    },
+    "A+": {
+      "exercise_1_reps": 17,
+      "exercise_2_reps": 18,
+      "exercise_3_reps": 19,
+      "exercise_4_reps": 16,
+      "exercise_5_stationary_steps": 475,
+      "outdoor_run_target_minutes": 18.5,
+      "walk_target_minutes": 37
+    }
+  },
+  "3": {
+    "D-": {
+      "exercise_1_reps": 8,
+      "exercise_2_reps": 9,
+      "exercise_3_reps": 10,
+      "exercise_4_reps": 7,
+      "exercise_5_stationary_steps": 250,
+      "outdoor_run_target_minutes": 12,
+      "walk_target_minutes": 24
+    },
+    "D": {
+      "exercise_1_reps": 9,
+      "exercise_2_reps": 10,
+      "exercise_3_reps": 11,
+      "exercise_4_reps": 8,
+      "exercise_5_stationary_steps": 275,
+      "outdoor_run_target_minutes": 12.5,
+      "walk_target_minutes": 25
+    },
+    "D+": {
+      "exercise_1_reps": 10,
+      "exercise_2_reps": 11,
+      "exercise_3_reps": 12,
+      "exercise_4_reps": 9,
+      "exercise_5_stationary_steps": 300,
+      "outdoor_run_target_minutes": 13,
+      "walk_target_minutes": 26
+    },
+    "C-": {
+      "exercise_1_reps": 11,
+      "exercise_2_reps": 12,
+      "exercise_3_reps": 13,
+      "exercise_4_reps": 10,
+      "exercise_5_stationary_steps": 325,
+      "outdoor_run_target_minutes": 13.5,
+      "walk_target_minutes": 27
+    },
+    "C": {
+      "exercise_1_reps": 12,
+      "exercise_2_reps": 13,
+      "exercise_3_reps": 14,
+      "exercise_4_reps": 11,
+      "exercise_5_stationary_steps": 350,
+      "outdoor_run_target_minutes": 14,
+      "walk_target_minutes": 28
+    },
+    "C+": {
+      "exercise_1_reps": 13,
+      "exercise_2_reps": 14,
+      "exercise_3_reps": 15,
+      "exercise_4_reps": 12,
+      "exercise_5_stationary_steps": 375,
+      "outdoor_run_target_minutes": 14.5,
+      "walk_target_minutes": 29
+    },
+    "B-": {
+      "exercise_1_reps": 14,
+      "exercise_2_reps": 15,
+      "exercise_3_reps": 16,
+      "exercise_4_reps": 13,
+      "exercise_5_stationary_steps": 400,
+      "outdoor_run_target_minutes": 15,
+      "walk_target_minutes": 30
+    },
+    "B": {
+      "exercise_1_reps": 15,
+      "exercise_2_reps": 16,
+      "exercise_3_reps": 17,
+      "exercise_4_reps": 14,
+      "exercise_5_stationary_steps": 425,
+      "outdoor_run_target_minutes": 15.5,
+      "walk_target_minutes": 31
+    },
+    "B+": {
+      "exercise_1_reps": 16,
+      "exercise_2_reps": 17,
+      "exercise_3_reps": 18,
+      "exercise_4_reps": 15,
+      "exercise_5_stationary_steps": 450,
+      "outdoor_run_target_minutes": 16,
+      "walk_target_minutes": 32
+    },
+    "A-": {
+      "exercise_1_reps": 17,
+      "exercise_2_reps": 18,
+      "exercise_3_reps": 19,
+      "exercise_4_reps": 16,
+      "exercise_5_stationary_steps": 475,
+      "outdoor_run_target_minutes": 16.5,
+      "walk_target_minutes": 33
+    },
+    "A": {
+      "exercise_1_reps": 18,
+      "exercise_2_reps": 19,
+      "exercise_3_reps": 20,
+      "exercise_4_reps": 17,
+      "exercise_5_stationary_steps": 500,
+      "outdoor_run_target_minutes": 17,
+      "walk_target_minutes": 34
+    },
+    "A+": {
+      "exercise_1_reps": 19,
+      "exercise_2_reps": 20,
+      "exercise_3_reps": 21,
+      "exercise_4_reps": 18,
+      "exercise_5_stationary_steps": 525,
+      "outdoor_run_target_minutes": 17.5,
+      "walk_target_minutes": 35
+    }
+  },
+  "4": {
+    "D-": {
+      "exercise_1_reps": 10,
+      "exercise_2_reps": 11,
+      "exercise_3_reps": 12,
+      "exercise_4_reps": 9,
+      "exercise_5_stationary_steps": 300,
+      "outdoor_run_target_minutes": 11,
+      "walk_target_minutes": 22
+    },
+    "D": {
+      "exercise_1_reps": 11,
+      "exercise_2_reps": 12,
+      "exercise_3_reps": 13,
+      "exercise_4_reps": 10,
+      "exercise_5_stationary_steps": 325,
+      "outdoor_run_target_minutes": 11.5,
+      "walk_target_minutes": 23
+    },
+    "D+": {
+      "exercise_1_reps": 12,
+      "exercise_2_reps": 13,
+      "exercise_3_reps": 14,
+      "exercise_4_reps": 11,
+      "exercise_5_stationary_steps": 350,
+      "outdoor_run_target_minutes": 12,
+      "walk_target_minutes": 24
+    },
+    "C-": {
+      "exercise_1_reps": 13,
+      "exercise_2_reps": 14,
+      "exercise_3_reps": 15,
+      "exercise_4_reps": 12,
+      "exercise_5_stationary_steps": 375,
+      "outdoor_run_target_minutes": 12.5,
+      "walk_target_minutes": 25
+    },
+    "C": {
+      "exercise_1_reps": 14,
+      "exercise_2_reps": 15,
+      "exercise_3_reps": 16,
+      "exercise_4_reps": 13,
+      "exercise_5_stationary_steps": 400,
+      "outdoor_run_target_minutes": 13,
+      "walk_target_minutes": 26
+    },
+    "C+": {
+      "exercise_1_reps": 15,
+      "exercise_2_reps": 16,
+      "exercise_3_reps": 17,
+      "exercise_4_reps": 14,
+      "exercise_5_stationary_steps": 425,
+      "outdoor_run_target_minutes": 13.5,
+      "walk_target_minutes": 27
+    },
+    "B-": {
+      "exercise_1_reps": 16,
+      "exercise_2_reps": 17,
+      "exercise_3_reps": 18,
+      "exercise_4_reps": 15,
+      "exercise_5_stationary_steps": 450,
+      "outdoor_run_target_minutes": 14,
+      "walk_target_minutes": 28
+    },
+    "B": {
+      "exercise_1_reps": 17,
+      "exercise_2_reps": 18,
+      "exercise_3_reps": 19,
+      "exercise_4_reps": 16,
+      "exercise_5_stationary_steps": 475,
+      "outdoor_run_target_minutes": 14.5,
+      "walk_target_minutes": 29
+    },
+    "B+": {
+      "exercise_1_reps": 18,
+      "exercise_2_reps": 19,
+      "exercise_3_reps": 20,
+      "exercise_4_reps": 17,
+      "exercise_5_stationary_steps": 500,
+      "outdoor_run_target_minutes": 15,
+      "walk_target_minutes": 30
+    },
+    "A-": {
+      "exercise_1_reps": 19,
+      "exercise_2_reps": 20,
+      "exercise_3_reps": 21,
+      "exercise_4_reps": 18,
+      "exercise_5_stationary_steps": 525,
+      "outdoor_run_target_minutes": 15.5,
+      "walk_target_minutes": 31
+    },
+    "A": {
+      "exercise_1_reps": 20,
+      "exercise_2_reps": 21,
+      "exercise_3_reps": 22,
+      "exercise_4_reps": 19,
+      "exercise_5_stationary_steps": 550,
+      "outdoor_run_target_minutes": 16,
+      "walk_target_minutes": 32
+    },
+    "A+": {
+      "exercise_1_reps": 21,
+      "exercise_2_reps": 22,
+      "exercise_3_reps": 23,
+      "exercise_4_reps": 20,
+      "exercise_5_stationary_steps": 575,
+      "outdoor_run_target_minutes": 16.5,
+      "walk_target_minutes": 33
+    }
+  },
+  "5": {
+    "D-": {
+      "exercise_1_reps": 12,
+      "exercise_2_reps": 13,
+      "exercise_3_reps": 14,
+      "exercise_4_reps": 11,
+      "exercise_5_stationary_steps": 350,
+      "outdoor_run_target_minutes": 10,
+      "walk_target_minutes": 20
+    },
+    "D": {
+      "exercise_1_reps": 13,
+      "exercise_2_reps": 14,
+      "exercise_3_reps": 15,
+      "exercise_4_reps": 12,
+      "exercise_5_stationary_steps": 375,
+      "outdoor_run_target_minutes": 10.5,
+      "walk_target_minutes": 21
+    },
+    "D+": {
+      "exercise_1_reps": 14,
+      "exercise_2_reps": 15,
+      "exercise_3_reps": 16,
+      "exercise_4_reps": 13,
+      "exercise_5_stationary_steps": 400,
+      "outdoor_run_target_minutes": 11,
+      "walk_target_minutes": 22
+    },
+    "C-": {
+      "exercise_1_reps": 15,
+      "exercise_2_reps": 16,
+      "exercise_3_reps": 17,
+      "exercise_4_reps": 14,
+      "exercise_5_stationary_steps": 425,
+      "outdoor_run_target_minutes": 11.5,
+      "walk_target_minutes": 23
+    },
+    "C": {
+      "exercise_1_reps": 16,
+      "exercise_2_reps": 17,
+      "exercise_3_reps": 18,
+      "exercise_4_reps": 15,
+      "exercise_5_stationary_steps": 450,
+      "outdoor_run_target_minutes": 12,
+      "walk_target_minutes": 24
+    },
+    "C+": {
+      "exercise_1_reps": 17,
+      "exercise_2_reps": 18,
+      "exercise_3_reps": 19,
+      "exercise_4_reps": 16,
+      "exercise_5_stationary_steps": 475,
+      "outdoor_run_target_minutes": 12.5,
+      "walk_target_minutes": 25
+    },
+    "B-": {
+      "exercise_1_reps": 18,
+      "exercise_2_reps": 19,
+      "exercise_3_reps": 20,
+      "exercise_4_reps": 17,
+      "exercise_5_stationary_steps": 500,
+      "outdoor_run_target_minutes": 13,
+      "walk_target_minutes": 26
+    },
+    "B": {
+      "exercise_1_reps": 19,
+      "exercise_2_reps": 20,
+      "exercise_3_reps": 21,
+      "exercise_4_reps": 18,
+      "exercise_5_stationary_steps": 525,
+      "outdoor_run_target_minutes": 13.5,
+      "walk_target_minutes": 27
+    },
+    "B+": {
+      "exercise_1_reps": 20,
+      "exercise_2_reps": 21,
+      "exercise_3_reps": 22,
+      "exercise_4_reps": 19,
+      "exercise_5_stationary_steps": 550,
+      "outdoor_run_target_minutes": 14,
+      "walk_target_minutes": 28
+    },
+    "A-": {
+      "exercise_1_reps": 21,
+      "exercise_2_reps": 22,
+      "exercise_3_reps": 23,
+      "exercise_4_reps": 20,
+      "exercise_5_stationary_steps": 575,
+      "outdoor_run_target_minutes": 14.5,
+      "walk_target_minutes": 29
+    },
+    "A": {
+      "exercise_1_reps": 22,
+      "exercise_2_reps": 23,
+      "exercise_3_reps": 24,
+      "exercise_4_reps": 21,
+      "exercise_5_stationary_steps": 600,
+      "outdoor_run_target_minutes": 15,
+      "walk_target_minutes": 30
+    },
+    "A+": {
+      "exercise_1_reps": 23,
+      "exercise_2_reps": 24,
+      "exercise_3_reps": 25,
+      "exercise_4_reps": 22,
+      "exercise_5_stationary_steps": 625,
+      "outdoor_run_target_minutes": 15.5,
+      "walk_target_minutes": 31
+    }
+  },
+  "6": {
+    "D-": {
+      "exercise_1_reps": 14,
+      "exercise_2_reps": 15,
+      "exercise_3_reps": 16,
+      "exercise_4_reps": 13,
+      "exercise_5_stationary_steps": 400,
+      "outdoor_run_target_minutes": 9,
+      "walk_target_minutes": 18
+    },
+    "D": {
+      "exercise_1_reps": 15,
+      "exercise_2_reps": 16,
+      "exercise_3_reps": 17,
+      "exercise_4_reps": 14,
+      "exercise_5_stationary_steps": 425,
+      "outdoor_run_target_minutes": 9.5,
+      "walk_target_minutes": 19
+    },
+    "D+": {
+      "exercise_1_reps": 16,
+      "exercise_2_reps": 17,
+      "exercise_3_reps": 18,
+      "exercise_4_reps": 15,
+      "exercise_5_stationary_steps": 450,
+      "outdoor_run_target_minutes": 10,
+      "walk_target_minutes": 20
+    },
+    "C-": {
+      "exercise_1_reps": 17,
+      "exercise_2_reps": 18,
+      "exercise_3_reps": 19,
+      "exercise_4_reps": 16,
+      "exercise_5_stationary_steps": 475,
+      "outdoor_run_target_minutes": 10.5,
+      "walk_target_minutes": 21
+    },
+    "C": {
+      "exercise_1_reps": 18,
+      "exercise_2_reps": 19,
+      "exercise_3_reps": 20,
+      "exercise_4_reps": 17,
+      "exercise_5_stationary_steps": 500,
+      "outdoor_run_target_minutes": 11,
+      "walk_target_minutes": 22
+    },
+    "C+": {
+      "exercise_1_reps": 19,
+      "exercise_2_reps": 20,
+      "exercise_3_reps": 21,
+      "exercise_4_reps": 18,
+      "exercise_5_stationary_steps": 525,
+      "outdoor_run_target_minutes": 11.5,
+      "walk_target_minutes": 23
+    },
+    "B-": {
+      "exercise_1_reps": 20,
+      "exercise_2_reps": 21,
+      "exercise_3_reps": 22,
+      "exercise_4_reps": 19,
+      "exercise_5_stationary_steps": 550,
+      "outdoor_run_target_minutes": 12,
+      "walk_target_minutes": 24
+    },
+    "B": {
+      "exercise_1_reps": 21,
+      "exercise_2_reps": 22,
+      "exercise_3_reps": 23,
+      "exercise_4_reps": 20,
+      "exercise_5_stationary_steps": 575,
+      "outdoor_run_target_minutes": 12.5,
+      "walk_target_minutes": 25
+    },
+    "B+": {
+      "exercise_1_reps": 22,
+      "exercise_2_reps": 23,
+      "exercise_3_reps": 24,
+      "exercise_4_reps": 21,
+      "exercise_5_stationary_steps": 600,
+      "outdoor_run_target_minutes": 13,
+      "walk_target_minutes": 26
+    },
+    "A-": {
+      "exercise_1_reps": 23,
+      "exercise_2_reps": 24,
+      "exercise_3_reps": 25,
+      "exercise_4_reps": 22,
+      "exercise_5_stationary_steps": 625,
+      "outdoor_run_target_minutes": 13.5,
+      "walk_target_minutes": 27
+    },
+    "A": {
+      "exercise_1_reps": 24,
+      "exercise_2_reps": 25,
+      "exercise_3_reps": 26,
+      "exercise_4_reps": 23,
+      "exercise_5_stationary_steps": 650,
+      "outdoor_run_target_minutes": 14,
+      "walk_target_minutes": 28
+    },
+    "A+": {
+      "exercise_1_reps": 25,
+      "exercise_2_reps": 26,
+      "exercise_3_reps": 27,
+      "exercise_4_reps": 24,
+      "exercise_5_stationary_steps": 675,
+      "outdoor_run_target_minutes": 14.5,
+      "walk_target_minutes": 29
+    }
+  }
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YA-5BX Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;600&family=JetBrains+Mono:wght@600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #111319;
+            color: #e2e2eb;
+            -webkit-font-smoothing: antialiased;
+        }
+        .tonal-surface { background-color: #1A1D27; }
+        .tonal-elevated { background-color: #22263A; }
+        .glass-effect {
+            background: rgba(26, 29, 39, 0.7);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#111319",
+                        "secondary-dim": "#1A5A5A",
+                        "surface-container": "#1e1f26",
+                        "primary": "#ffc880",
+                        "background": "#111319",
+                        "on-primary": "#452b00",
+                        "surface-elevated": "#22263A",
+                        "primary-container": "#f5a623",
+                        "secondary": "#4ddada",
+                        "text-secondary": "#B0B8D4",
+                        "on-surface": "#e2e2eb",
+                        "surface": "#1A1D27",
+                        "secondary-container": "#00b3b3",
+                        "text-primary": "#E8EAF6",
+                        "surface-variant": "#33343b",
+                        "text-tertiary": "#6B7399"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-unit": "4px",
+                        "container-padding": "24px",
+                        "touch-target-min": "48px",
+                        "stepper-button": "64px",
+                        "gutter": "16px",
+                        "section-gap": "24px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "timer-display": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "section-header": ["Barlow Condensed"],
+                        "exercise-name": ["Barlow Condensed"],
+                        "rep-target": ["JetBrains Mono"],
+                        "body-emphasis": ["Inter"],
+                        "body": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "timer-display": ["72px", {"lineHeight": "80px", "letterSpacing": "-2px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "section-header": ["20px", {"lineHeight": "24px", "letterSpacing": "1.5px", "fontWeight": "600"}],
+                        "exercise-name": ["32px", {"lineHeight": "40px", "letterSpacing": "0.5px", "fontWeight": "700"}],
+                        "rep-target": ["48px", {"lineHeight": "56px", "fontWeight": "600"}],
+                        "body-emphasis": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-surface w-full top-0 sticky z-40">
+<div class="flex items-center justify-between px-container-padding h-touch-target-min w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">fitness_center</span>
+<h1 class="font-section-header text-section-header uppercase tracking-widest text-primary">YA-5BX SESSION</h1>
+</div>
+<button class="hover:bg-surface-elevated transition-colors duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</button>
+</div>
+</header>
+<main class="max-w-screen-xl mx-auto px-container-padding pb-32">
+<!-- Greeting Section -->
+<section class="mt-8 mb-6">
+<p class="font-caption text-text-secondary uppercase tracking-widest mb-1">DASHBOARD</p>
+<h2 class="font-exercise-name text-exercise-name text-text-primary">Good morning, Yem</h2>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-section-gap">
+<!-- TODAY'S WORKOUT MAIN CARD (Bento Style) -->
+<section class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface border-l-4 border-primary-container p-6 transition-all hover:bg-surface-container">
+<div class="flex flex-col h-full justify-between gap-6">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-section-header text-section-header text-primary mb-1">TODAY'S WORKOUT</h3>
+<p class="font-body-emphasis text-white text-xl">Chart 1 · Level D+</p>
+</div>
+<div class="bg-surface-elevated px-3 py-1 rounded-lg border border-surface-variant">
+<span class="font-timer-display text-lg text-primary">11:00</span>
+<span class="font-caption text-text-secondary ml-1">EST.</span>
+</div>
+</div>
+<!-- Progress Bar Logic -->
+<div class="space-y-2 mt-8">
+<div class="flex justify-between items-end">
+<span class="font-caption text-text-secondary">WEEKLY PROGRESS</span>
+<span class="font-body-emphasis text-secondary">3 of 4 Sessions</span>
+</div>
+<div class="w-full h-3 bg-surface-elevated rounded-full overflow-hidden flex gap-1">
+<div class="h-full bg-secondary w-1/4"></div>
+<div class="h-full bg-secondary w-1/4"></div>
+<div class="h-full bg-secondary w-1/4"></div>
+<div class="h-full bg-surface-variant w-1/4"></div>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container h-16 rounded-lg font-section-header text-xl uppercase tracking-widest flex items-center justify-center gap-3 active:scale-95 transition-transform">
+<span>Start workout</span>
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+</div>
+<!-- Atmospheric background element -->
+<div class="absolute -right-12 -top-12 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[180px]">exercise</span>
+</div>
+</section>
+<!-- STATS / QUICK VIEW -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="bg-secondary-dim rounded-xl p-5 flex flex-col justify-between h-full min-h-[160px]">
+<div class="flex justify-between">
+<span class="material-symbols-outlined text-secondary">bolt</span>
+<span class="font-caption text-secondary">STREAK</span>
+</div>
+<div>
+<p class="font-rep-target text-white">12</p>
+<p class="font-body text-on-surface">Days Active</p>
+</div>
+</div>
+<div class="bg-surface-elevated rounded-xl p-5 border border-surface-variant flex flex-col justify-between h-full min-h-[160px]">
+<div class="flex justify-between">
+<span class="material-symbols-outlined text-primary">military_tech</span>
+<span class="font-caption text-text-secondary">LEVEL</span>
+</div>
+<div>
+<p class="font-rep-target text-primary">D+</p>
+<p class="font-body text-text-secondary">Advance in 2 days</p>
+</div>
+</div>
+</div>
+<!-- LAST SESSION SUMMARY -->
+<section class="md:col-span-12">
+<div class="flex items-center gap-4 mb-4">
+<h3 class="font-section-header text-section-header uppercase text-text-secondary">Last Session Summary</h3>
+<div class="h-[1px] flex-grow bg-surface-variant"></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<!-- Exercise 1 -->
+<div class="bg-surface rounded-lg p-4 border border-surface-variant hover:border-text-tertiary transition-colors">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-text-secondary text-sm">check_circle</span>
+<p class="font-caption text-text-secondary">PUSH-UPS</p>
+</div>
+<p class="font-body-emphasis text-lg">22 Reps</p>
+</div>
+<!-- Exercise 2 -->
+<div class="bg-surface rounded-lg p-4 border border-surface-variant hover:border-text-tertiary transition-colors">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-text-secondary text-sm">check_circle</span>
+<p class="font-caption text-text-secondary">SIT-UPS</p>
+</div>
+<p class="font-body-emphasis text-lg">34 Reps</p>
+</div>
+<!-- Exercise 3 -->
+<div class="bg-surface rounded-lg p-4 border border-surface-variant hover:border-text-tertiary transition-colors">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-text-secondary text-sm">check_circle</span>
+<p class="font-caption text-text-secondary">FLEXIBILITY</p>
+</div>
+<p class="font-body-emphasis text-lg">2:00 Min</p>
+</div>
+<!-- Exercise 4 -->
+<div class="bg-surface rounded-lg p-4 border border-surface-variant hover:border-text-tertiary transition-colors">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-text-secondary text-sm">check_circle</span>
+<p class="font-caption text-text-secondary">RUNNING</p>
+</div>
+<p class="font-body-emphasis text-lg">6:00 Min</p>
+</div>
+</div>
+</section>
+<!-- DAILY MOTIVATION / TIP (Asymmetric Component) -->
+<section class="md:col-span-12 mt-4">
+<div class="relative w-full h-48 rounded-xl overflow-hidden bg-surface-elevated">
+<div class="absolute inset-0 opacity-40 mix-blend-overlay">
+<div class="w-full h-full" data-alt="A gritty, high-contrast black and white cinematic shot of a professional athlete performing a heavy deadlift in a minimalist industrial gym. The lighting is dramatic and focused, highlighting sweat and muscle definition. The overall mood is intense, disciplined, and functional, matching a high-performance fitness aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA1zve9Udjm453OduJfznO76WrZSsK3Pua2GTP2nuPBSCfhlTKlzm7BUIGh1VWIkoHUdatsbWPlI4STuRDemBM0ILT49Mbi0yGvpuCzuFEUZxadRrVxDNWNkcTmeKMqVybbltC5ID1XBOmcxTx4m5-1NmrYpfE7OTN6unRnrxmL6j_yHvf-_FVn8dLzMjGmo2lRQr0jNU2heAFKeniFunvIoYgsZ-GDSao7kdJqxT4cxR0kw_1QtfponTRBA1TfoVRbies0hT5mClXK')"></div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent p-8 flex flex-col justify-center max-w-lg">
+<h4 class="font-section-header text-primary mb-2">PRO TIP</h4>
+<p class="font-body text-text-primary italic leading-relaxed">"Consistency in the 5BX program is the key to cardiovascular durability. Don't skip the warm-up stretches today."</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-safe bg-surface z-50 h-20 border-t-2 border-surface-variant">
+<!-- Today Tab (Active) -->
+<a class="flex flex-col items-center justify-center text-primary font-body-emphasis active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-caption">Today</span>
+</a>
+<!-- Workout Tab -->
+<a class="flex flex-col items-center justify-center text-text-secondary font-body hover:bg-surface-elevated active:scale-95 transition-transform p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">exercise</span>
+<span class="font-caption">Workout</span>
+</a>
+<!-- Progress Tab -->
+<a class="flex flex-col items-center justify-center text-text-secondary font-body hover:bg-surface-elevated active:scale-95 transition-transform p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-caption">Progress</span>
+</a>
+<!-- Settings Tab -->
+<a class="flex flex-col items-center justify-center text-text-secondary font-body hover:bg-surface-elevated active:scale-95 transition-transform p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-caption">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for the "Start workout" button
+        document.querySelector('button.bg-primary-container').addEventListener('mousedown', function() {
+            this.classList.add('scale-95');
+        });
+        document.querySelector('button.bg-primary-container').addEventListener('mouseup', function() {
+            this.classList.remove('scale-95');
+        });
+        
+        // Simple entry animation for cards
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const cards = document.querySelectorAll('section, .md\\:col-span-4 > div');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(10px)';
+                card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body></html>

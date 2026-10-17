@@ -17,6 +17,7 @@ export const EXERCISE_LEVELS = [
 ]
 export const LOCAL_STORAGE_TIMER_KEY = 'ya-5bx_timer'
 export const LOCALSTORAGE_USER_KEY = 'ya-5bx_user'
+export const STORAGE_KEY_ONBOARDING_DRAFT = 'STORAGE_KEY_ONBOARDING_DRAFT'
 export const LOCAL_STORAGE_WORKOUT_KEY = 'ya-5bx_workout'
 
 export const SECONDS_IN_A_YEAR = 31536000 // 365 days * 24 hours * 60 minutes * 60 seconds

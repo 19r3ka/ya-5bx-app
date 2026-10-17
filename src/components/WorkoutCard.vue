@@ -37,25 +37,40 @@
         <p>Please go to your profile to set your level.</p>
       </div>
     </v-card-text>
+
+    <PostWorkoutDialog
+      v-if="completedToken"
+      v-model="showSummaryDialog"
+      :session-token="completedToken"
+    />
   </v-card>
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, ref } from 'vue'
+  import { computed, onMounted, ref, watch } from 'vue'
   import { useI18n } from 'vue-i18n'
   import WorkoutTimer from '@/components/WorkoutTimer.vue'
   import ExerciseCard from './ExerciseCard.vue'
+  import PostWorkoutDialog from './PostWorkoutDialog.vue'
   import { useTimer } from '@/composables/useTimer'
   import { useUser } from '@/composables/useUser'
+  import { useWorkoutEngine } from '@/composables/useWorkoutEngine'
+  import { useProgressionStore } from '@/stores/useProgressionStore'
+  import { OrchestratorLifecycle } from '@/core/EngineTypes'
+  import type { CompletedSessionRecord } from '@/core/StorageTypes'
   import { getExercisesForLevel } from '@/utils/levels'
   import type { Exercise } from '@/models/Exercise'
 
   const { user } = useUser()
   const { timer: currentTimer } = useTimer()
   const { t } = useI18n()
+  const engine = useWorkoutEngine()
+  const store = useProgressionStore()
 
   const workoutExercises = ref<Exercise[]>([])
   const hasValidLevel = ref(false)
+  const showSummaryDialog = ref(false)
+  const completedToken = ref('')
 
   const currentExercise = computed(
     () => workoutExercises.value[currentTimer.value.index]
@@ -66,6 +81,29 @@
   )
   const currentExerciseDescription = computed(() =>
     t(`${currentExercise.value?.translationKey}.description`)
+  )
+
+  watch(
+    () => engine.getLifecycle(),
+    async (newLifecycle) => {
+      if (newLifecycle === OrchestratorLifecycle.COMPLETED) {
+        const snap = engine.snapshot.value
+        if (snap) {
+          const record: Omit<CompletedSessionRecord, 'telemetryStatus'> = {
+            version: 1,
+            sessionToken: snap.sessionToken,
+            completedAt: snap.lastUpdatedTimestamp || Date.now(),
+            chartNumber: store.currentChart,
+            levelString: store.currentLevel,
+            durationSeconds: snap.totalElapsedSeconds,
+            aerobicCompleted: true,
+          }
+          await store.telemetryService.stagePendingSessionAsync(record)
+          completedToken.value = snap.sessionToken
+          showSummaryDialog.value = true
+        }
+      }
+    }
   )
 
   const loadExercises = () => {
