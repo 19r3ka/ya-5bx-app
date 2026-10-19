@@ -37,7 +37,7 @@
       Do: Confirm `DECISIONS.md` contains entries D-001, D-002, and D-003, each with `Status: Accepted`. If any is missing, BLOCKED, and stop (stop condition does not apply; continue with independent tasks only after logging).
       Done when: all three entries are present and accepted. Commit the WALKTHROUGH entry only.
 
-- [ ] **T-001 Install and configure knip**
+- [x] **T-001 Install and configure knip**
       Depends: T-000
       Files: `package.json`, `package-lock.json`, `knip.json` (new)
       Do: Run `npm install -D knip`. Create `knip.json`:

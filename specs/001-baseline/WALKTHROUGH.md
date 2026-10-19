@@ -8,9 +8,17 @@
 
 ## 1. Task results
 
-| Task  | Refs       | Result (Done / Partial / Blocked) | Evidence (test name or command output)                                   |
-| ----- | ---------- | --------------------------------- | ------------------------------------------------------------------------ |
-| T-000 | D-001..003 | Done                              | Verified DECISIONS.md contains D-001, D-002, D-003 with Status: Accepted |
+| Task  | Refs       | Result (Done / Partial / Blocked) | Evidence (test name or command output)                                         |
+| ----- | ---------- | --------------------------------- | ------------------------------------------------------------------------------ |
+| T-000 | D-001..003 | Done                              | Verified DECISIONS.md contains D-001, D-002, D-003 with Status: Accepted       |
+| T-001 | D-001      | Done                              | `npm run knip` ran to completion (exit code 1 due to unused files as expected) |
+
+## T-001 Install and configure knip
+
+- Status: DONE
+- Commands: `npm install -D knip@5`, `npm run knip`
+- Result: knip installed and configured via knip.json. `npm run knip` successfully audits unused files, devDependencies, and exports.
+  Notes: Installed knip v5 to avoid Node v24 oxc-parser ArrayBuffer allocation crash present in knip v6.
 
 ## T-000 Verify decisions recorded
 

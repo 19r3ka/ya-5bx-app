@@ -1,0 +1,8 @@
+{
+  "entry": [
+    "src/main.ts",
+    "vite.config.ts",
+    "eslint.config.js",
+    "prettier.config.js"
+  ]
+}
