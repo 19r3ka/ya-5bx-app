@@ -8,9 +8,15 @@
 
 ## 1. Task results
 
-| Task  | Refs       | Result (Done / Partial / Blocked) | Evidence (test name or command output) |
-| ----- | ---------- | --------------------------------- | -------------------------------------- |
-| T-001 | R1, AC-1.1 | Done                              | <...>                                  |
+| Task  | Refs       | Result (Done / Partial / Blocked) | Evidence (test name or command output)                                   |
+| ----- | ---------- | --------------------------------- | ------------------------------------------------------------------------ |
+| T-000 | D-001..003 | Done                              | Verified DECISIONS.md contains D-001, D-002, D-003 with Status: Accepted |
+
+## T-000 Verify decisions recorded
+
+- Status: DONE
+- Commands: inspect DECISIONS.md
+- Result: D-001, D-002, and D-003 all present with Status: Accepted.
 
 ## 2. What changed
 

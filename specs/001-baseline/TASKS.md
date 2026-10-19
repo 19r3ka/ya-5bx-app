@@ -31,7 +31,7 @@
 
 ## Phase 0: Dead-code removal
 
-- [ ] **T-000 Verify decisions recorded**
+- [x] **T-000 Verify decisions recorded**
       Depends: none
       Files: `DECISIONS.md`
       Do: Confirm `DECISIONS.md` contains entries D-001, D-002, and D-003, each with `Status: Accepted`. If any is missing, BLOCKED, and stop (stop condition does not apply; continue with independent tasks only after logging).
