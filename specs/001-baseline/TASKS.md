@@ -56,7 +56,7 @@
 Add the script `"knip": "knip"` to `package.json`. If knip rejects the config, adjust `knip.json` minimally and log the change.
 Done when: `npm run knip` runs to completion. A non-zero exit code is expected while dead files exist and is not a failure.
 
-- [ ] **T-002 Save the knip audit and baseline**
+- [x] **T-002 Save the knip audit and baseline**
       Depends: T-001
       Files: `specs/001-baseline/WALKTHROUGH.md`
       Do:

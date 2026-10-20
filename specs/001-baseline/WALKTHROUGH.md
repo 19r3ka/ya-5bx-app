@@ -12,6 +12,93 @@
 | ----- | ---------- | --------------------------------- | ------------------------------------------------------------------------------ |
 | T-000 | D-001..003 | Done                              | Verified DECISIONS.md contains D-001, D-002, D-003 with Status: Accepted       |
 | T-001 | D-001      | Done                              | `npm run knip` ran to completion (exit code 1 due to unused files as expected) |
+| T-002 | D-001      | Done                              | knip output, dynamic imports, lint summary, build recorded                     |
+
+## T-002 Save the knip audit and baseline
+
+- Status: DONE
+- Commands: `npm run knip`, `grep -rn "import(" src/`, `npm run lint 2>&1 | tail -n 5`, `npm run build`
+- Result: Knip, dynamic imports, lint baseline, and build status recorded under Dead code audit.
+
+## Dead code audit
+
+### 1. Knip output (`npm run knip`)
+
+```text
+Unused files (32)
+src/components/ChartCard.vue
+src/components/ExerciseCard.vue
+src/components/ExerciseList.vue
+src/components/ExerciseTable.vue
+src/components/LevelDetails.vue
+src/components/LevelOverview.vue
+src/components/OnboardingForm.vue
+src/components/PostWorkoutDialog.vue
+src/components/ProgressionMap.vue
+src/components/WelcomeCard.vue
+src/components/workout/ExerciseInfoSheet.vue
+src/components/WorkoutCard.vue
+src/components/WorkoutOptions.vue
+src/components/WorkoutTimer.vue
+src/components/WorkoutTimerControls.vue
+src/components/WorkoutTimerDisplay.vue
+src/composables/useTimer.ts
+src/composables/useUser.ts
+src/core/McMasterHIITStrategy.ts
+src/core/scratch/generate_matrix.js
+src/core/VerificationRunbook.ts
+src/models/AgeGroup.ts
+src/models/Chart.ts
+src/models/Exercise.ts
+src/models/Level.ts
+src/models/User.ts
+src/utils/charts.ts
+src/utils/levels.ts
+src/views/HomePage.vue
+src/views/OnboardingPage.vue
+types/timer.ts
+types/vuetify.d.ts
+Unused devDependencies (1)
+chalk  package.json:43:6
+Unused exports (10)
+EXERCISE_TIMES                       src/constants.ts:1:14
+EXERCISE_5_REPS                      src/constants.ts:3:14
+EXERCISE_LEVELS                      src/constants.ts:4:14
+LOCAL_STORAGE_TIMER_KEY              src/constants.ts:18:14
+LOCAL_STORAGE_WORKOUT_KEY            src/constants.ts:21:14
+SECONDS_IN_A_YEAR                    src/constants.ts:23:14
+STARTER_LEVEL                        src/constants.ts:24:14
+MINIMUM_REQUIRED_AGE                 src/constants.ts:25:14
+LEVEL_ID_SEPARATOR                   src/constants.ts:26:14
+calculateAge               function  src/utils/ages.ts:2:17
+Unused exported types (2)
+Grade        type       src/core/EngineTypes.ts:17:13
+UserProfile  interface  src/stores/useUserStore.ts:7:18
+```
+
+### 2. Dynamic imports (`grep -rn "import(" src/`)
+
+```text
+src/router/index.ts:7:    component: () => import('@/views/DashboardView.vue'),
+src/router/index.ts:12:    component: () => import('@/views/OnboardingView.vue'),
+src/router/index.ts:17:    component: () => import('@/views/WorkoutSetupView.vue'),
+src/router/index.ts:22:    component: () => import('@/views/ActiveWorkoutView.vue'),
+src/router/index.ts:27:    component: () => import('@/views/ProgressView.vue'),
+src/router/index.ts:32:    component: () => import('@/views/SettingsView.vue'),
+```
+
+### 3. Lint baseline (`npm run lint 2>&1 | tail -n 5`)
+
+```text
+> ya-5bx-app@0.0.4 lint
+> eslint src/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix
+```
+
+(Exit code 0, no errors or warnings reported)
+
+### 4. Build status (`npm run build`)
+
+Pass (exit code 0, built in ~8s, PWA generated).
 
 ## T-001 Install and configure knip
 
