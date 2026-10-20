@@ -91,7 +91,7 @@ Done when: `npm run knip` runs to completion. A non-zero exit code is expected w
   Done when: the build passes and every item above is logged.
   Out of scope: `src/components/workout/PostWorkoutDialog.vue`, `src/composables/useWorkoutEngine.ts`, and `src/components/WorkoutTimer.vue` are live. Never delete them.
 
-- [ ] **T-004 Remove the orphaned WAL removal line**
+- [x] **T-004 Remove the orphaned WAL removal line**
       Depends: T-003
       Files: `src/core/storage/IndexedDBAdapter.ts`
       Do: Delete the single line `localStorage.removeItem('ya_5bx_wal')` inside `tx.oncomplete`. Keep the adjacent `workout_checkpoint_` removal unchanged.

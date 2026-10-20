@@ -14,6 +14,13 @@
 | T-001 | D-001      | Done                              | `npm run knip` ran to completion (exit code 1 due to unused files as expected) |
 | T-002 | D-001      | Done                              | knip output, dynamic imports, lint summary, build recorded                     |
 | T-003 | D-001      | Done                              | Deleted 7 accepted dead files; build passes                                    |
+| T-004 | D-001      | Done                              | Removed orphaned WAL removal line; grep matches 0; build passes                |
+
+## T-004 Remove the orphaned WAL removal line
+
+- Status: DONE
+- Commands: `grep -rn "ya_5bx_wal" src/`, `npm run build`
+- Result: Line `localStorage.removeItem('ya_5bx_wal')` removed from `IndexedDBAdapter.ts`. Zero matches found in `src/`. Build passed.
 
 ## T-003 Delete the accepted dead files
 
