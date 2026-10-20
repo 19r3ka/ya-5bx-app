@@ -13,8 +13,17 @@
 | T-000 | D-001..003 | Done                              | Verified DECISIONS.md contains D-001, D-002, D-003 with Status: Accepted       |
 | T-001 | D-001      | Done                              | `npm run knip` ran to completion (exit code 1 due to unused files as expected) |
 | T-002 | D-001      | Done                              | knip output, dynamic imports, lint summary, build recorded                     |
+| T-003 | D-001      | Done                              | Deleted 7 accepted dead files; build passes                                    |
 
-## T-002 Save the knip audit and baseline
+## T-003 Delete the accepted dead files
+
+- Status: DONE
+- Commands: `git rm <7 accepted files>`, `npm run knip`, `npm run build`
+- Result: All 7 accepted dead files deleted. Build passed.
+
+  - Accepted files deleted: `src/views/HomePage.vue`, `src/components/WorkoutCard.vue`, `src/components/PostWorkoutDialog.vue`, `src/components/LevelOverview.vue`, `src/components/WelcomeCard.vue`, `src/views/OnboardingPage.vue`, `src/composables/useUser.ts`.
+  - Unlisted dead files, not deleted: `src/components/ChartCard.vue`, `src/components/ExerciseCard.vue`, `src/components/ExerciseList.vue`, `src/components/ExerciseTable.vue`, `src/components/LevelDetails.vue`, `src/components/OnboardingForm.vue`, `src/components/ProgressionMap.vue`, `src/components/workout/ExerciseInfoSheet.vue`, `src/components/WorkoutOptions.vue`, `src/components/WorkoutTimer.vue`, `src/components/WorkoutTimerControls.vue`, `src/components/WorkoutTimerDisplay.vue`, `src/composables/useTimer.ts`, `src/core/McMasterHIITStrategy.ts`, `src/core/scratch/generate_matrix.js`, `src/core/VerificationRunbook.ts`, `src/models/AgeGroup.ts`, `src/models/Chart.ts`, `src/models/Exercise.ts`, `src/models/Level.ts`, `src/models/User.ts`, `src/utils/charts.ts`, `src/utils/levels.ts`, `types/timer.ts`, `types/vuetify.d.ts`.
+  - Newly orphaned, not deleted: None.
 
 - Status: DONE
 - Commands: `npm run knip`, `grep -rn "import(" src/`, `npm run lint 2>&1 | tail -n 5`, `npm run build`

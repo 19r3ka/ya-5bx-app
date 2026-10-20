@@ -67,7 +67,7 @@ Done when: `npm run knip` runs to completion. A non-zero exit code is expected w
   4. Run `npm run build` and record pass or fail.
      Done when: all four results are recorded in WALKTHROUGH.
 
-- [ ] **T-003 Delete the accepted dead files**
+- [x] **T-003 Delete the accepted dead files**
       Depends: T-002
       Files: only the seven paths below, and only if knip lists them as unused files.
       Accepted set:
