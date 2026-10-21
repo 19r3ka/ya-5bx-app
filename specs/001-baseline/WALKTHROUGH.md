@@ -45,6 +45,13 @@
 | T-032 | R1, R2, R4 | Done                              | `app.smoke.spec.ts`: 3 tests pass                                              |
 | T-033 | R6         | Done                              | Mutation removed the break; 2 specs failed; reverted; suite green              |
 | T-034 | R6         | Done                              | 40-49 threshold 7→6; 4 specs failed; reverted; suite green                     |
+| T-035 | R3         | Done                              | Ex-1 rep source changed; 1 spec failed; reverted; suite green                  |
+
+## T-035 [transient] Sanity: ClassicRCAF rep source changed
+
+- Status: DONE
+- Commands: edit `src/core/ClassicRCAFStrategy.ts` (exercise 1 reads `exercise_2_reps`), `npm test -- src/core/ClassicRCAFStrategy.spec.ts`, `git checkout -- src/core/ClassicRCAFStrategy.ts`, `git diff --stat src/`, `npm test`
+- Result: Under mutation, 1 test failed: "uses the chart reps for the four rep intervals" expected `[4,5,6,3]` received `[5,5,6,3]`. Reverted; `git diff src/` empty; full suite 182/182 passed.
 
 ## T-034 [transient] Sanity: ProgressionValidator threshold changed
 

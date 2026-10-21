@@ -331,7 +331,7 @@ If step 4 or 5 does not produce a clean state, apply stop condition 8b.
       Spec: `src/core/ProgressionValidator.spec.ts`
       Done when: spec fails under mutation, and the clean-state procedure completes.
 
-- [ ] **T-035 [transient] Sanity: ClassicRCAF rep source changed**
+- [x] **T-035 [transient] Sanity: ClassicRCAF rep source changed**
       Depends: T-014
       File: `src/core/ClassicRCAFStrategy.ts`
       Mutation: change the rep source for one exercise, or drop the aerobic interval.
