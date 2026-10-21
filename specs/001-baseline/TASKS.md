@@ -324,7 +324,7 @@ If step 4 or 5 does not produce a clean state, apply stop condition 8b.
       Spec: `src/core/storage/HistoryAggregator.spec.ts`
       Done when: spec fails under mutation, and the clean-state procedure completes.
 
-- [ ] **T-034 [transient] Sanity: ProgressionValidator threshold changed**
+- [x] **T-034 [transient] Sanity: ProgressionValidator threshold changed**
       Depends: T-013
       File: `src/core/ProgressionValidator.ts`
       Mutation: change one required-sessions value in the 40 to 49 band from 7 to 6.
