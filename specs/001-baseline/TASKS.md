@@ -174,7 +174,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: newest-first counting; break on first mismatch; disjoint history returns 0; `PENDING_TELEMETRY` handling; `aerobicCompleted: false` voids the session.
       Done when: `npm test -- src/core/storage/HistoryAggregator.spec.ts` passes.
 
-- [ ] **T-013 Characterize `ProgressionValidator.validate`**
+- [x] **T-013 Characterize `ProgressionValidator.validate`**
       Depends: T-007
       Files: `src/core/ProgressionValidator.spec.ts` (new)
       Lock: required sessions by age at boundaries 20/21, 29/30, 39/40, 49/50, 59/60 (values from `progression_rules.json`); eligible when verified ≥ required; stiffness returns `USER_TELEMETRY_RESTRICTION` and raises the threshold; `VOLUME_QUOTA_INCOMPLETE`; `INVALID_AGE`.

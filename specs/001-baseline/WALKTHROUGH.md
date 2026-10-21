@@ -23,6 +23,13 @@
 | T-010 | R3         | Done                              | `src/utils/levels.spec.ts`: 9 tests pass                                       |
 | T-011 | R3         | Done                              | `src/utils/charts.spec.ts`: 3 tests pass                                       |
 | T-012 | R6         | Done                              | `HistoryAggregator.spec.ts`: 7 tests pass                                      |
+| T-013 | R6         | Done                              | `ProgressionValidator.spec.ts`: 19 tests pass                                  |
+
+## T-013 Characterize `ProgressionValidator.validate`
+
+- Status: DONE
+- Commands: `npm test -- src/core/ProgressionValidator.spec.ts`
+- Result: 19 tests pass. Locks required sessions by band (20 → 1, 21/29 → 2, 30/39 → 4, 40/49 → 7, 50/59 → 8, 60/100 → 10), eligibility at and above the threshold, `VOLUME_QUOTA_INCOMPLETE`, `USER_TELEMETRY_RESTRICTION` with threshold +1 (still restricted when volume is met), and `INVALID_AGE` for negative/NaN ages.
 
 ## T-012 Characterize `HistoryAggregator.calculateContiguousVolume`
 
