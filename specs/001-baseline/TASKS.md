@@ -103,7 +103,7 @@ Done when: `npm run knip` runs to completion. A non-zero exit code is expected w
       Do: If knip lists `chalk` as an unused dependency, run `npm uninstall chalk`. If not, log "kept" and make no change.
       Done when: `chalk` is absent from `package.json`, or the log says it was kept.
 
-- [ ] **T-006 Verify Phase 0**
+- [x] **T-006 Verify Phase 0**
       Depends: T-003, T-004, T-005
       Files: `specs/001-baseline/WALKTHROUGH.md`
       Do:

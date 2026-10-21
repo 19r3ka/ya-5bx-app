@@ -16,6 +16,13 @@
 | T-003 | D-001      | Done                              | Deleted 7 accepted dead files; build passes                                    |
 | T-004 | D-001      | Done                              | Removed orphaned WAL removal line; grep matches 0; build passes                |
 | T-005 | D-001      | Done                              | Uninstalled chalk dependency                                                   |
+| T-006 | D-001      | Done                              | Knip clean of removed items; build passes; lint unchanged from baseline        |
+
+## T-006 Verify Phase 0
+
+- Status: DONE
+- Commands: `npm run knip`, `npm run build`, `npm run lint`
+- Result: knip exit 1 (expected: 25 unused files remain, none of the 7 T-003 deletions, chalk absent from unused devDependencies). Build exit 0 (PWA generated). Lint exit 0 with no errors or warnings, matching the T-002 baseline.
 
 ## T-005 Remove the unused chalk dependency
 
