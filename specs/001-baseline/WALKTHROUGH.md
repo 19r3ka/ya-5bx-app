@@ -46,6 +46,14 @@
 | T-033 | R6         | Done                              | Mutation removed the break; 2 specs failed; reverted; suite green              |
 | T-034 | R6         | Done                              | 40-49 threshold 7→6; 4 specs failed; reverted; suite green                     |
 | T-035 | R3         | Done                              | Ex-1 rep source changed; 1 spec failed; reverted; suite green                  |
+| T-036 | R5         | Done                              | WAL removal moved to onsuccess; 1 spec failed; reverted; suite green           |
+
+## T-036 [transient] Sanity: WAL cleared on request success
+
+- Status: DONE
+- Commands: edit `src/core/storage/IndexedDBAdapter.ts` (move WAL removal to `request.onsuccess`), `npm test -- src/core/storage/IndexedDBAdapter.spec.ts`, `git checkout -- src/core/storage/IndexedDBAdapter.ts`, `git diff --stat src/`, `npm test`
+- Result: Under mutation, 1 test failed: "removes the WAL checkpoint only when the transaction completes" expected `true` received `false`. Reverted; `git diff src/` empty; full suite 182/182 passed.
+- Notes: The original T-018 test only checked the key after `await`, so it could not detect timing. It was strengthened in commit `8f1b3dd` to record whether the `complete` event fired before `removeItem` (transaction spy + `removeItem` spy). That spec passes on unmutated code and fails under this mutation.
 
 ## T-035 [transient] Sanity: ClassicRCAF rep source changed
 

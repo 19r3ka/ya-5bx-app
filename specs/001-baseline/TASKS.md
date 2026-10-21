@@ -338,7 +338,7 @@ If step 4 or 5 does not produce a clean state, apply stop condition 8b.
       Spec: `src/core/ClassicRCAFStrategy.spec.ts`
       Done when: spec fails under mutation, and the clean-state procedure completes.
 
-- [ ] **T-036 [transient] Sanity: WAL cleared on request success**
+- [x] **T-036 [transient] Sanity: WAL cleared on request success**
       Depends: T-018
       File: `src/core/storage/IndexedDBAdapter.ts`
       Mutation: move the WAL removal from `tx.oncomplete` to the request `onsuccess` handler.
