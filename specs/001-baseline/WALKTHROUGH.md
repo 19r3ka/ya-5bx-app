@@ -41,6 +41,15 @@
 | T-028 | R6         | Done                              | `ProgressionMapGrid.spec.ts`: 6 tests pass                                     |
 | T-029 | R2, R8     | Done                              | Onboarding specs: 9 tests pass                                                 |
 | T-030 | R8         | Done                              | `i18n.spec.ts`: 4 tests pass                                                   |
+| T-031 | R1         | Done                              | `router/index.spec.ts`: 7 tests pass                                           |
+
+## T-031 Characterize the router table
+
+- Status: DONE
+- Commands: `npm test -- src/router/index.spec.ts`
+- Result: 7 tests pass. `createWebHistory` is replaced with memory history via a `vue-router` mock. Each of the six named routes resolves to its expected path and lazy view module. Unknown `/does-not-exist` resolves with zero matched records and no name (AC-1.2 gap, D-003).
+
+## T-030 Characterize i18n plugin defaults
 
 ## T-030 Characterize i18n plugin defaults
 

@@ -290,7 +290,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
 
 ### Router and smoke
 
-- [ ] **T-031 Characterize the router table**
+- [x] **T-031 Characterize the router table**
       Depends: T-007
       Files: `src/router/index.spec.ts` (new)
       Use memory history. Each of the six named routes resolves to its view. An unknown path is not redirected today: lock that as a known gap (AC-1.2, D-003). Do not add a redirect.
