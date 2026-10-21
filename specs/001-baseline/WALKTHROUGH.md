@@ -34,6 +34,25 @@
 | T-021 | R6         | Done                              | `useProgressionStore.spec.ts`: 5 tests pass                                    |
 | T-022 | R4         | Done                              | `useWorkoutEngine.spec.ts`: 6 tests pass                                       |
 | T-023 | R4         | Done                              | `useTimer.spec.ts`: 8 tests pass                                               |
+| T-024 | R4         | Done                              | `useAudioFeedback.spec.ts`: 4 tests pass                                       |
+| T-025 | R4         | Done                              | `WorkoutRepOverridePanel.spec.ts`: 5 tests pass                                |
+
+## T-025 Characterize `WorkoutRepOverridePanel`
+
+- Status: DONE
+- Commands: `npm test -- src/components/workout/WorkoutRepOverridePanel.spec.ts`
+- Result: 5 tests pass. Locks reps seeded from `defaultReps`, increment/decrement clamp at 0, action labels (Log → Logged → Update), `logged(reps)` emission, and `disabled` gating the stepper and CTA plus the unlock hint.
+- Notes: Component mounting needs Vuetify. `vitest.config.ts` was extended with `vite-plugin-vuetify` auto-import and `test.server.deps.inline: ['vuetify']`, and specs install `createVuetify()`. Outside the T-025 file list; logged as a deviation.
+
+## T-024 Characterize `useAudioFeedback`
+
+## T-024 Characterize `useAudioFeedback`
+
+- Status: DONE
+- Commands: `npm test -- src/composables/useAudioFeedback.spec.ts`
+- Result: 4 tests pass. Locks `unlock` setting `isUnlocked`, idempotence (one AudioContext), resume only when state is `suspended`, and no throw when `AudioContext` is absent. Module state is reset with `vi.resetModules()`.
+
+## T-023 Characterize legacy `useTimer` (live path)
 
 ## T-023 Characterize legacy `useTimer` (live path)
 

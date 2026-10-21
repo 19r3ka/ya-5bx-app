@@ -252,7 +252,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
 
 ### Components (each task first applies rule 9)
 
-- [ ] **T-025 Characterize `WorkoutRepOverridePanel`**
+- [x] **T-025 Characterize `WorkoutRepOverridePanel`**
       Depends: T-007
       Files: `src/components/workout/WorkoutRepOverridePanel.spec.ts` (new)
       Lock: reps seeded from `defaultReps`; increment and decrement clamp at 0; `actionLabel` states; emits `logged(reps)`; `disabled` gates the stepper and the call-to-action.
