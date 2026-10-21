@@ -276,7 +276,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: `parseLevelId` (valid input; invalid input returns the default); `getCellState` for current, completed, goal, and locked, using explicit `completedLevelIds`; skeleton when not hydrated.
       Done when: `npm test -- src/components/progress/ProgressionMapGrid.spec.ts` passes.
 
-- [ ] **T-029 Characterize onboarding components**
+- [x] **T-029 Characterize onboarding components**
       Depends: T-007
       Files: `src/components/onboarding/Step2Age.spec.ts`, `src/components/onboarding/GoalChartCard.spec.ts`, `src/components/common/OnboardingProgress.spec.ts` (all new)
       Lock: Step2Age accepts ages 10 to 99, derives the goal chart, emits `next(age)`, and disables Continue when invalid. GoalChartCard renders chart number and age range from props. OnboardingProgress marks as active the pips at or below the current step.

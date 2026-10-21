@@ -39,6 +39,15 @@
 | T-026 | R5         | Done                              | `PostWorkoutDialog.spec.ts`: 7 tests pass                                      |
 | T-027 | R4         | Done                              | `WorkoutTimerClock.spec.ts`: 6 tests pass                                      |
 | T-028 | R6         | Done                              | `ProgressionMapGrid.spec.ts`: 6 tests pass                                     |
+| T-029 | R2, R8     | Done                              | Onboarding specs: 9 tests pass                                                 |
+
+## T-029 Characterize onboarding components
+
+- Status: DONE
+- Commands: `npm test -- src/components/onboarding/Step2Age.spec.ts src/components/onboarding/GoalChartCard.spec.ts src/components/common/OnboardingProgress.spec.ts`
+- Result: 9 tests pass. Step2Age accepts 10 and 99, rejects 9/100/null, derives GoalChartCard props (10 → chart 6, 18–25; 30 → chart 4, 30–34), and emits `next(30)`. GoalChartCard renders chart number and age range from props and updates. OnboardingProgress renders 6 pips with `step <= currentStep` active (0 → none, 6 → all).
+
+## T-028 Characterize `ProgressionMapGrid`
 
 ## T-028 Characterize `ProgressionMapGrid`
 
