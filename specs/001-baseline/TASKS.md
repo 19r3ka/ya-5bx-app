@@ -244,7 +244,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Use fake timers and a localStorage stub. Lock: `formatDisplayTime`; `startTimer`, `stopTimer`, and reset; navigation bounds; `remainingWorkoutTimeSeconds`; save and load; `beforeunload` save. Lock the increment-per-`setInterval`-tick behavior as a known gap (AC-4.1, D-003). Record the findings from T-008 in the header comment.
       Done when: `npm test -- src/composables/useTimer.spec.ts` passes.
 
-- [ ] **T-024 Characterize `useAudioFeedback`**
+- [x] **T-024 Characterize `useAudioFeedback`**
       Depends: T-007
       Files: `src/composables/useAudioFeedback.spec.ts` (new)
       Lock: `unlock` sets `isUnlocked`; idempotent on repeat; resumes a suspended AudioContext; does not throw when AudioContext is absent.
