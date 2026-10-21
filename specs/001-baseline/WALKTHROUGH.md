@@ -44,6 +44,14 @@
 | T-031 | R1         | Done                              | `router/index.spec.ts`: 7 tests pass                                           |
 | T-032 | R1, R2, R4 | Done                              | `app.smoke.spec.ts`: 3 tests pass                                              |
 | T-033 | R6         | Done                              | Mutation removed the break; 2 specs failed; reverted; suite green              |
+| T-034 | R6         | Done                              | 40-49 threshold 7→6; 4 specs failed; reverted; suite green                     |
+
+## T-034 [transient] Sanity: ProgressionValidator threshold changed
+
+- Status: DONE
+- Commands: edit `src/core/data/progression_rules.json` (40-49 requiredSessions 7→6), `npm test -- src/core/ProgressionValidator.spec.ts`, `git checkout -- src/core/data/progression_rules.json`, `git diff --stat src/`, `npm test`
+- Result: Under mutation, 4 tests failed: both 40/49 threshold cases (expected 6 to be 7), the at-threshold eligibility case, and the stiffness threshold case. Reverted; `git diff src/` empty; full suite 182/182 passed.
+- Notes: TASKS names `ProgressionValidator.ts`, but the band values live only in `src/core/data/progression_rules.json`. The mutation was applied to the data file.
 
 ## T-033 [transient] Sanity: HistoryAggregator break removed
 
@@ -53,13 +61,9 @@
 
 ## T-032 Smoke test of main flows (no browser)
 
-## T-032 Smoke test of main flows (no browser)
-
 - Status: DONE
 - Commands: `npm test -- src/__smoke__/app.smoke.spec.ts`
 - Result: 3 tests pass. Mounts `App` with a fresh Pinia, memory-history router, the real Vuetify and i18n plugins, and `useProgressionStore.initAsync` stubbed. Asserts a fresh install lands on `onboarding`, completing onboarding then navigating reaches `dashboard` with the bottom nav visible, and `workout-setup` → `active-workout` works with the bottom nav hidden. No deep assertions.
-
-## T-031 Characterize the router table
 
 ## T-031 Characterize the router table
 
@@ -69,13 +73,9 @@
 
 ## T-030 Characterize i18n plugin defaults
 
-## T-030 Characterize i18n plugin defaults
-
 - Status: DONE
 - Commands: `npm test -- src/plugins/i18n.spec.ts`
 - Result: 4 tests pass. Locks default locale `fr-FR`, fallback `en-US`, both message catalogs loading, and a French catalog lookup. Translation completeness is not asserted (Phase 1).
-
-## T-029 Characterize onboarding components
 
 ## T-029 Characterize onboarding components
 
@@ -85,21 +85,15 @@
 
 ## T-028 Characterize `ProgressionMapGrid`
 
-## T-028 Characterize `ProgressionMapGrid`
-
 - Status: DONE
 - Commands: `npm test -- src/components/progress/ProgressionMapGrid.spec.ts`
 - Result: 6 tests pass. Locks valid `currentLevelId`/`goalLevelId` parsing, empty id → C1 D-, unknown grade → D- index 0, cell states current/completed/goal/locked, explicit `completedLevelIds` overriding locked, and the skeleton when `isHydrated` is false.
 
 ## T-027 Characterize `WorkoutTimerClock`
 
-## T-027 Characterize `WorkoutTimerClock`
-
 - Status: DONE
 - Commands: `npm test -- src/components/workout/WorkoutTimerClock.spec.ts`
 - Result: 6 tests pass with fake timers. Locks mm:ss from duration minus elapsed clamped at 0, `progressPercent` (30/60 → 50, duration 0 → 0), `timer-expired` class at expiry, `expired` emission when supplied elapsed reaches the duration, and the internal ticker running only when `elapsedSeconds` is undefined.
-
-## T-026 Characterize `PostWorkoutDialog` (`workout/`)
 
 ## T-026 Characterize `PostWorkoutDialog` (`workout/`)
 
@@ -110,8 +104,6 @@
 
 ## T-025 Characterize `WorkoutRepOverridePanel`
 
-## T-025 Characterize `WorkoutRepOverridePanel`
-
 - Status: DONE
 - Commands: `npm test -- src/components/workout/WorkoutRepOverridePanel.spec.ts`
 - Result: 5 tests pass. Locks reps seeded from `defaultReps`, increment/decrement clamp at 0, action labels (Log → Logged → Update), `logged(reps)` emission, and `disabled` gating the stepper and CTA plus the unlock hint.
@@ -119,13 +111,9 @@
 
 ## T-024 Characterize `useAudioFeedback`
 
-## T-024 Characterize `useAudioFeedback`
-
 - Status: DONE
 - Commands: `npm test -- src/composables/useAudioFeedback.spec.ts`
 - Result: 4 tests pass. Locks `unlock` setting `isUnlocked`, idempotence (one AudioContext), resume only when state is `suspended`, and no throw when `AudioContext` is absent. Module state is reset with `vi.resetModules()`.
-
-## T-023 Characterize legacy `useTimer` (live path)
 
 ## T-023 Characterize legacy `useTimer` (live path)
 
@@ -136,13 +124,9 @@
 
 ## T-022 Characterize `useWorkoutEngine`
 
-## T-022 Characterize `useWorkoutEngine`
-
 - Status: DONE
 - Commands: `npm test -- src/composables/useWorkoutEngine.spec.ts`
 - Result: 6 tests pass with a mocked `WorkoutOrchestrator`. Locks one module-level orchestrator per module load, readonly snapshot, subscribe on creation / unsubscribe on `unmountEngine` / resubscribe on `mountEngine`, context cache and action delegation (`start`, `pause`, `resume`, `confirmReps`, `finishSession`), `restartWorkout` with a new `crypto.randomUUID` token plus dispose/re-init/start, and abandon delegation. Module state is reset with `vi.resetModules()` between cases.
-
-## T-021 Characterize `useProgressionStore`
 
 ## T-021 Characterize `useProgressionStore`
 
@@ -150,8 +134,6 @@
 - Commands: `npm test -- src/stores/useProgressionStore.spec.ts`
 - Result: 5 tests pass with mocked adapter, telemetry, and validator. Locks `validationResult` null before hydration, chart/level derivation from `currentLevel` (C4_B → 4/B), fallback C1_D- → chart 1/D- with age 30, contiguous volume and last-session stiffness flag wiring, `isHydrated`, and `reloadHistoryAsync` without re-init.
 - Notes: Default fallbacks are profile null → C1_D- (chart 1, level D-) and age missing → 30.
-
-## T-020 Characterize `useUserStore`
 
 ## T-020 Characterize `useUserStore`
 
