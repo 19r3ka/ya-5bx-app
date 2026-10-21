@@ -204,7 +204,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Use a mock persistence adapter. Lock: lifecycle transitions (UNINITIALIZED → READY → RUNNING → COMPLETED); `confirmReps` releases rest and sets RUNNING before broadcast; `finishSession(aerobicCompleted)`; `abandonCurrentSessionAsync`; re-initializing during an active session throws; subscribe, unsubscribe, and broadcast; WAL reconstruction. Use the scenarios in `src/core/VerificationRunbook.ts` as cases.
       Done when: `npm test -- src/core/WorkoutOrchestrator.spec.ts` passes.
 
-- [ ] **T-018 Characterize `IndexedDBAdapter`**
+- [x] **T-018 Characterize `IndexedDBAdapter`**
       Depends: T-007, T-004
       Files: `src/core/storage/IndexedDBAdapter.spec.ts` (new)
       Use `fake-indexeddb`. Lock: `openAsync` creates store `sessions` with keyPath `sessionToken` and the indexes it defines (confirm names from source); commit writes the record; `getAllSessionsAsync` returns ascending order; the WAL clear timing as it actually occurs. Record the observed timing in the test comment.

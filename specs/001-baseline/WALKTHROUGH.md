@@ -28,6 +28,14 @@
 | T-015 | R3         | Done                              | `McMasterHIITStrategy.spec.ts`: 2 tests pass                                   |
 | T-016 | R4         | Done                              | `TimerEngine.spec.ts`: 5 tests pass                                            |
 | T-017 | R4, R5     | Done                              | `WorkoutOrchestrator.spec.ts`: 9 tests pass                                    |
+| T-018 | R5         | Done                              | `IndexedDBAdapter.spec.ts`: 4 tests pass                                       |
+
+## T-018 Characterize `IndexedDBAdapter`
+
+- Status: DONE
+- Commands: `npm test -- src/core/storage/IndexedDBAdapter.spec.ts`
+- Result: 4 tests pass with `fake-indexeddb`. Locks store `sessions` with keyPath `sessionToken`, indexes `byLevel` (`['chartNumber','levelString']`) and `byDate` (`completedAt`), commit/read-by-token, `getAllSessionsAsync` ascending by `completedAt`, and WAL checkpoint removal on a successful commit.
+- Notes: The WAL key is removed in `tx.oncomplete` (`IndexedDBAdapter.ts:49-52`), after `store.put` and before the commit promise resolves. Observed by checking the key before/after `await`.
 
 ## T-017 Characterize `WorkoutOrchestrator`
 
