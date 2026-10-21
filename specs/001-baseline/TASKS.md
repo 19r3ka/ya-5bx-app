@@ -270,7 +270,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Use fake timers. Lock: mm:ss from duration minus elapsed, clamped at 0; `progressPercent`; `isExpired`; emits `expired` at 0; internal ticker active only when `elapsedSeconds` is undefined.
       Done when: `npm test -- src/components/workout/WorkoutTimerClock.spec.ts` passes.
 
-- [ ] **T-028 Characterize `ProgressionMapGrid`**
+- [x] **T-028 Characterize `ProgressionMapGrid`**
       Depends: T-007
       Files: `src/components/progress/ProgressionMapGrid.spec.ts` (new)
       Lock: `parseLevelId` (valid input; invalid input returns the default); `getCellState` for current, completed, goal, and locked, using explicit `completedLevelIds`; skeleton when not hydrated.

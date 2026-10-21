@@ -38,6 +38,15 @@
 | T-025 | R4         | Done                              | `WorkoutRepOverridePanel.spec.ts`: 5 tests pass                                |
 | T-026 | R5         | Done                              | `PostWorkoutDialog.spec.ts`: 7 tests pass                                      |
 | T-027 | R4         | Done                              | `WorkoutTimerClock.spec.ts`: 6 tests pass                                      |
+| T-028 | R6         | Done                              | `ProgressionMapGrid.spec.ts`: 6 tests pass                                     |
+
+## T-028 Characterize `ProgressionMapGrid`
+
+- Status: DONE
+- Commands: `npm test -- src/components/progress/ProgressionMapGrid.spec.ts`
+- Result: 6 tests pass. Locks valid `currentLevelId`/`goalLevelId` parsing, empty id → C1 D-, unknown grade → D- index 0, cell states current/completed/goal/locked, explicit `completedLevelIds` overriding locked, and the skeleton when `isHydrated` is false.
+
+## T-027 Characterize `WorkoutTimerClock`
 
 ## T-027 Characterize `WorkoutTimerClock`
 
