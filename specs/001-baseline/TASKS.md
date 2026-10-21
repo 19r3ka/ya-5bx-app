@@ -238,7 +238,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: module-level singleton orchestrator; readonly snapshot; subscribe on mount and unsubscribe on unmount; `initializeSession` caches context; `restartWorkout` creates a new session token; delegation of `confirmReps`, `finishSession`, pause, and resume. The singleton persists across tests: reset module state between cases.
       Done when: `npm test -- src/composables/useWorkoutEngine.spec.ts` passes.
 
-- [ ] **T-023 Characterize legacy `useTimer` (live path)**
+- [x] **T-023 Characterize legacy `useTimer` (live path)**
       Depends: T-008, T-007
       Files: `src/composables/useTimer.spec.ts` (new)
       Use fake timers and a localStorage stub. Lock: `formatDisplayTime`; `startTimer`, `stopTimer`, and reset; navigation bounds; `remainingWorkoutTimeSeconds`; save and load; `beforeunload` save. Lock the increment-per-`setInterval`-tick behavior as a known gap (AC-4.1, D-003). Record the findings from T-008 in the header comment.

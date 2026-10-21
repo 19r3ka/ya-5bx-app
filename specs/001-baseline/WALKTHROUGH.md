@@ -33,6 +33,16 @@
 | T-020 | R2         | Done                              | `useUserStore.spec.ts`: 6 tests pass                                           |
 | T-021 | R6         | Done                              | `useProgressionStore.spec.ts`: 5 tests pass                                    |
 | T-022 | R4         | Done                              | `useWorkoutEngine.spec.ts`: 6 tests pass                                       |
+| T-023 | R4         | Done                              | `useTimer.spec.ts`: 8 tests pass                                               |
+
+## T-023 Characterize legacy `useTimer` (live path)
+
+- Status: DONE
+- Commands: `npm test -- src/composables/useTimer.spec.ts`
+- Result: 8 tests pass with fake timers and a mounted host component. Locks `formatDisplayTime`, start/stop/reset, navigation clamps (-1 and 5 ignored, next at last index sets `allTimersCompleted`), `remainingWorkoutTimeSeconds` (660 initial, 540 at index 1), save/load (stopped vs running with elapsed deduction), and `beforeunload` save.
+- Notes: (1) Increment-per-`setInterval`-tick is locked as the AC-4.1 known gap. (2) `beforeunload` saves before `stopTimer`, so `timerRunning` is saved as `true`. (3) Before any navigation/load, `timer.durationSeconds` is 0, so the first tick immediately advances; tests call `goToTimer(0)` to initialize. (4) Returned from a dead component chain per T-008, but characterized as TASKS T-023 requires.
+
+## T-022 Characterize `useWorkoutEngine`
 
 ## T-022 Characterize `useWorkoutEngine`
 
