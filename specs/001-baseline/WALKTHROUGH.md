@@ -40,6 +40,15 @@
 | T-027 | R4         | Done                              | `WorkoutTimerClock.spec.ts`: 6 tests pass                                      |
 | T-028 | R6         | Done                              | `ProgressionMapGrid.spec.ts`: 6 tests pass                                     |
 | T-029 | R2, R8     | Done                              | Onboarding specs: 9 tests pass                                                 |
+| T-030 | R8         | Done                              | `i18n.spec.ts`: 4 tests pass                                                   |
+
+## T-030 Characterize i18n plugin defaults
+
+- Status: DONE
+- Commands: `npm test -- src/plugins/i18n.spec.ts`
+- Result: 4 tests pass. Locks default locale `fr-FR`, fallback `en-US`, both message catalogs loading, and a French catalog lookup. Translation completeness is not asserted (Phase 1).
+
+## T-029 Characterize onboarding components
 
 ## T-029 Characterize onboarding components
 

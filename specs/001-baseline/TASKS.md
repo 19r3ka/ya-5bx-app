@@ -282,7 +282,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: Step2Age accepts ages 10 to 99, derives the goal chart, emits `next(age)`, and disables Continue when invalid. GoalChartCard renders chart number and age range from props. OnboardingProgress marks as active the pips at or below the current step.
       Done when: `npm test -- src/components` passes for these three files.
 
-- [ ] **T-030 Characterize i18n plugin defaults**
+- [x] **T-030 Characterize i18n plugin defaults**
       Depends: T-007
       Files: `src/plugins/i18n.spec.ts` (new)
       Lock: default locale `fr-FR`; fallback `en-US`; both message catalogs load. Do not assert translation completeness (Phase 1).
