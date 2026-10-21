@@ -296,7 +296,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Use memory history. Each of the six named routes resolves to its view. An unknown path is not redirected today: lock that as a known gap (AC-1.2, D-003). Do not add a redirect.
       Done when: `npm test -- src/router/index.spec.ts` passes.
 
-- [ ] **T-032 Smoke test of main flows (no browser)**
+- [x] **T-032 Smoke test of main flows (no browser)**
       Depends: T-020, T-022, T-031
       Files: `src/__smoke__/app.smoke.spec.ts` (new)
       Mount the app with Pinia and a memory router, stubbing progression initialization. Assert only: a fresh install lands on onboarding; `completeOnboarding` leads to the dashboard; navigating to workout setup and then active workout works; the bottom navigation is hidden on the active workout route. No deep assertions.

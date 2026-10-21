@@ -42,6 +42,15 @@
 | T-029 | R2, R8     | Done                              | Onboarding specs: 9 tests pass                                                 |
 | T-030 | R8         | Done                              | `i18n.spec.ts`: 4 tests pass                                                   |
 | T-031 | R1         | Done                              | `router/index.spec.ts`: 7 tests pass                                           |
+| T-032 | R1, R2, R4 | Done                              | `app.smoke.spec.ts`: 3 tests pass                                              |
+
+## T-032 Smoke test of main flows (no browser)
+
+- Status: DONE
+- Commands: `npm test -- src/__smoke__/app.smoke.spec.ts`
+- Result: 3 tests pass. Mounts `App` with a fresh Pinia, memory-history router, the real Vuetify and i18n plugins, and `useProgressionStore.initAsync` stubbed. Asserts a fresh install lands on `onboarding`, completing onboarding then navigating reaches `dashboard` with the bottom nav visible, and `workout-setup` → `active-workout` works with the bottom nav hidden. No deep assertions.
+
+## T-031 Characterize the router table
 
 ## T-031 Characterize the router table
 
