@@ -258,7 +258,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: reps seeded from `defaultReps`; increment and decrement clamp at 0; `actionLabel` states; emits `logged(reps)`; `disabled` gates the stepper and the call-to-action.
       Done when: `npm test -- src/components/workout/WorkoutRepOverridePanel.spec.ts` passes.
 
-- [ ] **T-026 Characterize `PostWorkoutDialog` (`workout/`)**
+- [x] **T-026 Characterize `PostWorkoutDialog` (`workout/`)**
       Depends: T-019, T-007
       Files: `src/components/workout/PostWorkoutDialog.spec.ts` (new)
       Use fake timers and a mocked telemetry service. Lock: 60 s auto-seal as conservative; saving great or sore; `isSealing` dedupe; unmount with no selection seals conservative; emits `saved` and `seal-failed` when the adapter rejects.

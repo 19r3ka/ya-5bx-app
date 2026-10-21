@@ -36,6 +36,16 @@
 | T-023 | R4         | Done                              | `useTimer.spec.ts`: 8 tests pass                                               |
 | T-024 | R4         | Done                              | `useAudioFeedback.spec.ts`: 4 tests pass                                       |
 | T-025 | R4         | Done                              | `WorkoutRepOverridePanel.spec.ts`: 5 tests pass                                |
+| T-026 | R5         | Done                              | `PostWorkoutDialog.spec.ts`: 7 tests pass                                      |
+
+## T-026 Characterize `PostWorkoutDialog` (`workout/`)
+
+- Status: DONE
+- Commands: `npm test -- src/components/workout/PostWorkoutDialog.spec.ts`
+- Result: 7 tests pass with fake timers and a mocked `TelemetryService`. Locks 60 s auto-seal as conservative (`token, true, true`), great → `(token, false, false)`, sore → `(token, true, false)`, `isSealing` dedupe across manual and auto paths, unmount with no selection auto-seals conservative, manual rejection shows the retry alert without emitting, and auto-seal rejection emits `seal-failed`.
+- Notes: The TASKS wording says a rejection emits `seal-failed`; manual `save()` actually swallows it into the retry alert. Auto-seal emits it. Locked as observed.
+
+## T-025 Characterize `WorkoutRepOverridePanel`
 
 ## T-025 Characterize `WorkoutRepOverridePanel`
 
