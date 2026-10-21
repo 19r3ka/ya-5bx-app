@@ -180,7 +180,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: required sessions by age at boundaries 20/21, 29/30, 39/40, 49/50, 59/60 (values from `progression_rules.json`); eligible when verified ≥ required; stiffness returns `USER_TELEMETRY_RESTRICTION` and raises the threshold; `VOLUME_QUOTA_INCOMPLETE`; `INVALID_AGE`.
       Done when: `npm test -- src/core/ProgressionValidator.spec.ts` passes.
 
-- [ ] **T-014 Characterize `ClassicRCAFStrategy.generateWorkout`**
+- [x] **T-014 Characterize `ClassicRCAFStrategy.generateWorkout`**
       Depends: T-007
       Files: `src/core/ClassicRCAFStrategy.spec.ts` (new)
       Lock: four rep intervals plus one aerobic interval; rep scaling by `volume_scaler_coefficient`; aerobic duration by option from `charts_matrix`; throws on invalid chart or level (known gap AC-3.3, D-003).

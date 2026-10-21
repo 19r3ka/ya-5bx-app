@@ -24,6 +24,13 @@
 | T-011 | R3         | Done                              | `src/utils/charts.spec.ts`: 3 tests pass                                       |
 | T-012 | R6         | Done                              | `HistoryAggregator.spec.ts`: 7 tests pass                                      |
 | T-013 | R6         | Done                              | `ProgressionValidator.spec.ts`: 19 tests pass                                  |
+| T-014 | R3         | Done                              | `ClassicRCAFStrategy.spec.ts`: 9 tests pass                                    |
+
+## T-014 Characterize `ClassicRCAFStrategy.generateWorkout`
+
+- Status: DONE
+- Commands: `npm test -- src/core/ClassicRCAFStrategy.spec.ts`
+- Result: 9 tests pass. Locks 5 intervals (120/60/60/60 s + aerobic), chart reps, classic vs modern-safe scaling (ex_2 × 0.8 with rounding 7.2 → 7), aerobic duration per option (stationary 360 s, outdoor 840 s, walk 1680 s from chart minutes), and throws for unknown chart/level (AC-3.3 gap, D-003).
 
 ## T-013 Characterize `ProgressionValidator.validate`
 
