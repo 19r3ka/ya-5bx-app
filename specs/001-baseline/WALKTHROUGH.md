@@ -43,6 +43,15 @@
 | T-030 | R8         | Done                              | `i18n.spec.ts`: 4 tests pass                                                   |
 | T-031 | R1         | Done                              | `router/index.spec.ts`: 7 tests pass                                           |
 | T-032 | R1, R2, R4 | Done                              | `app.smoke.spec.ts`: 3 tests pass                                              |
+| T-033 | R6         | Done                              | Mutation removed the break; 2 specs failed; reverted; suite green              |
+
+## T-033 [transient] Sanity: HistoryAggregator break removed
+
+- Status: DONE
+- Commands: edit `src/core/storage/HistoryAggregator.ts` (remove else/break), `npm test -- src/core/storage/HistoryAggregator.spec.ts`, `git checkout -- src/core/storage/HistoryAggregator.ts`, `git diff --stat src/`, `npm test`
+- Result: Under mutation, 2 tests failed: "counts matching sessions newest-first until a mismatch" expected 1 received 4, and "returns 0 when the newest record is disjoint" expected 0 received 2. Reverted; `git diff src/` empty; full suite 182/182 passed.
+
+## T-032 Smoke test of main flows (no browser)
 
 ## T-032 Smoke test of main flows (no browser)
 

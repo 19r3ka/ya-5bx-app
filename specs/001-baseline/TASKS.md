@@ -317,7 +317,7 @@ Procedure for each task in this phase:
 
 If step 4 or 5 does not produce a clean state, apply stop condition 8b.
 
-- [ ] **T-033 [transient] Sanity: HistoryAggregator break removed**
+- [x] **T-033 [transient] Sanity: HistoryAggregator break removed**
       Depends: T-012
       File: `src/core/storage/HistoryAggregator.ts`
       Mutation: remove the break on first mismatch.
