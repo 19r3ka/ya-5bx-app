@@ -18,6 +18,16 @@
 | T-005 | D-001      | Done                              | Uninstalled chalk dependency                                                   |
 | T-006 | D-001      | Done                              | Knip clean of removed items; build passes; lint unchanged from baseline        |
 | T-007 | D-002      | Done                              | vitest 5.0.5 + test-utils + happy-dom + fake-indexeddb; `npm test` exits 0     |
+| T-008 | AC-4.1     | Done                              | Read-only trace: duration source, legacy timer reach, no dual-timer path       |
+
+## T-008 Trace which timer records the session
+
+- Status: DONE
+- Commands: read only (`ActiveWorkoutView.vue`, `WorkoutTimer.vue`, `useWorkoutEngine.ts`, `WorkoutOrchestrator.ts`, `useTimer.ts`, `TimerEngine.ts`); `grep -rn "useTimer(" src/`
+- Result:
+  - (a) Stored session duration is `snapshot.totalElapsedSeconds`, written into the telemetry payload at `src/views/ActiveWorkoutView.vue:342` (`durationSeconds: snapshot.value?.totalElapsedSeconds || 660`). That value is produced by `TimerEngine.tick()` from `Math.floor((performance.now() - startAnchorHardwareTimestamp) / 1000)` (`src/core/TimerEngine.ts:97-98`), pushed via `onTick(elapsedInInterval, totalElapsedSeconds)` (`TimerEngine.ts:133`), and kept by `WorkoutOrchestrator.onTick` (`WorkoutOrchestrator.ts:267-275`). It is then persisted by `TelemetryService.stagePendingSessionAsync` → `IndexedDBAdapter.commit`.
+  - (b) `useTimer`'s `elapsedSeconds` is incremented one per `setInterval` tick (`src/composables/useTimer.ts:117-119`) and reduced into `workout.remainingWorkoutTimeSeconds` (`useTimer.ts:63-71`). It reaches only display (`WorkoutTimerDisplay.vue`) and the legacy localStorage record written by `saveTimerState` (`useTimer.ts:77-84`, key `LOCAL_STORAGE_TIMER_KEY`). It never reaches `WorkoutOrchestrator` or IndexedDB.
+  - (c) No current path runs both. `ActiveWorkoutView.vue` uses only `useWorkoutEngine` (`ActiveWorkoutView.vue:244-258`); `useTimer` is imported only by `WorkoutTimer.vue` (`src/components/WorkoutTimer.vue:30`) and for `formatDisplayTime` in `WorkoutTimerDisplay.vue:25`, and both components are in knip's unused list. If `WorkoutTimer` were mounted during an active session, both timers would run independently (module-level `useTimer` state).
 
 ## T-007 Install and configure test tooling
 

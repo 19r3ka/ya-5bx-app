@@ -130,7 +130,7 @@ Done when: `npm run knip` runs to completion. A non-zero exit code is expected w
 
 ## Phase 3b: Investigation (read-only)
 
-- [ ] **T-008 Trace which timer records the session**
+- [x] **T-008 Trace which timer records the session**
       Depends: T-006
       Files: `specs/001-baseline/WALKTHROUGH.md` only
       Do: Read-only. Trace in `src/views/ActiveWorkoutView.vue`, `src/components/WorkoutTimer.vue`, `src/composables/useWorkoutEngine.ts`, and `src/core/WorkoutOrchestrator.ts`:
