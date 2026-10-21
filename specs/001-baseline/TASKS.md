@@ -154,7 +154,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: `calculateAge` (including the birthday-not-yet adjustment); `getGoalChartByAge` at boundaries 25→6, 26→5, 29→5, 30→4, 34→4, 35→3, 44→3, 45→2, 54→2, 55→1; `getAgeRangeLabel` at boundaries. Note any disagreement with `src/data/ageGroups.json` as a quirk (do not resolve).
       Done when: `npm test -- src/utils/ages.spec.ts` passes.
 
-- [ ] **T-010 Characterize `src/utils/levels.ts`**
+- [x] **T-010 Characterize `src/utils/levels.ts`**
       Depends: T-007
       Files: `src/utils/levels.spec.ts` (new)
       Lock: `getGoalLevelByAge` (in range, above maximum, below minimum); `extractChartAndLevel` including empty-string input (record the actual return); `getExercisesForLevel` (throws on unknown id; reps assignment; record whether it mutates shared exercise objects).

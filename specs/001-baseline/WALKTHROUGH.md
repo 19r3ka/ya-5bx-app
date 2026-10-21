@@ -20,6 +20,14 @@
 | T-007 | D-002      | Done                              | vitest 5.0.5 + test-utils + happy-dom + fake-indexeddb; `npm test` exits 0     |
 | T-008 | AC-4.1     | Done                              | Read-only trace: duration source, legacy timer reach, no dual-timer path       |
 | T-009 | R3         | Done                              | `src/utils/ages.spec.ts`: 34 tests pass                                        |
+| T-010 | R3         | Done                              | `src/utils/levels.spec.ts`: 9 tests pass                                       |
+
+## T-010 Characterize `src/utils/levels.ts`
+
+- Status: DONE
+- Commands: `npm test -- src/utils/levels.spec.ts`
+- Result: 9 tests pass. Locks `getGoalLevelByAge` (18 → C5_C, 25 → C4_A+, 60/61/120 → C2_C+, 5/0 → null), `extractChartAndLevel` (`C1_D-` → `['C1','D-']`, `''` → `['']`), `getExercisesForLevel` (C1_D- ids/reps, throws `Level with ID <id> not found.` for unknown level and unknown chart, mutates shared C1 exercise objects).
+- Notes: `src/data/exercises.json` contains only E01, E02, E1-E5, E51, E52. Charts C2-C6 reference E6-E30, which do not exist, so `getChartExercises` returns fresh placeholder objects for those charts. Shared-object mutation is observable only for C1.
 
 ## T-009 Characterize `src/utils/ages.ts`
 
