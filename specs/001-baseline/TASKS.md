@@ -148,7 +148,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
 
 ### Pure logic
 
-- [ ] **T-009 Characterize `src/utils/ages.ts`**
+- [x] **T-009 Characterize `src/utils/ages.ts`**
       Depends: T-007
       Files: `src/utils/ages.spec.ts` (new)
       Lock: `calculateAge` (including the birthday-not-yet adjustment); `getGoalChartByAge` at boundaries 25→6, 26→5, 29→5, 30→4, 34→4, 35→3, 44→3, 45→2, 54→2, 55→1; `getAgeRangeLabel` at boundaries. Note any disagreement with `src/data/ageGroups.json` as a quirk (do not resolve).

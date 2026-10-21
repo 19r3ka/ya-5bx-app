@@ -19,6 +19,14 @@
 | T-006 | D-001      | Done                              | Knip clean of removed items; build passes; lint unchanged from baseline        |
 | T-007 | D-002      | Done                              | vitest 5.0.5 + test-utils + happy-dom + fake-indexeddb; `npm test` exits 0     |
 | T-008 | AC-4.1     | Done                              | Read-only trace: duration source, legacy timer reach, no dual-timer path       |
+| T-009 | R3         | Done                              | `src/utils/ages.spec.ts`: 34 tests pass                                        |
+
+## T-009 Characterize `src/utils/ages.ts`
+
+- Status: DONE
+- Commands: `npm test -- src/utils/ages.spec.ts`
+- Result: 34 tests pass. Locks birthday adjustment (including Feb 29), `getGoalChartByAge` boundaries 5/25/26/29/30/34/35/44/45/54/55/80, and `getAgeRangeLabel` boundaries 5/25/26/29/30/34/35/39/40/44/45/49/50/54/55/80.
+- Notes: `getGoalChartByAge` disagrees with `src/data/ageGroups.json` (age 25 → 6 vs C4_A+ chart 4; age 18 → 6 vs C5_C chart 5). Recorded in the spec as a quirk, not resolved.
 
 ## T-008 Trace which timer records the session
 
