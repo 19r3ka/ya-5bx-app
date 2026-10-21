@@ -168,7 +168,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
 
 ### Core domain
 
-- [ ] **T-012 Characterize `HistoryAggregator.calculateContiguousVolume`**
+- [x] **T-012 Characterize `HistoryAggregator.calculateContiguousVolume`**
       Depends: T-007
       Files: `src/core/storage/HistoryAggregator.spec.ts` (new)
       Lock: newest-first counting; break on first mismatch; disjoint history returns 0; `PENDING_TELEMETRY` handling; `aerobicCompleted: false` voids the session.

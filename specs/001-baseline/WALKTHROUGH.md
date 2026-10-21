@@ -22,6 +22,13 @@
 | T-009 | R3         | Done                              | `src/utils/ages.spec.ts`: 34 tests pass                                        |
 | T-010 | R3         | Done                              | `src/utils/levels.spec.ts`: 9 tests pass                                       |
 | T-011 | R3         | Done                              | `src/utils/charts.spec.ts`: 3 tests pass                                       |
+| T-012 | R6         | Done                              | `HistoryAggregator.spec.ts`: 7 tests pass                                      |
+
+## T-012 Characterize `HistoryAggregator.calculateContiguousVolume`
+
+- Status: DONE
+- Commands: `npm test -- src/core/storage/HistoryAggregator.spec.ts`
+- Result: 7 tests pass. Locks newest-first counting, break on first non-matching record, disjoint newest → 0, PENDING_TELEMETRY skipped without breaking the chain, `aerobicCompleted: false` skipped without breaking the chain, and an aborted-only history → 0.
 
 ## T-011 Characterize `src/utils/charts.ts`
 
