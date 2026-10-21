@@ -26,6 +26,14 @@
 | T-013 | R6         | Done                              | `ProgressionValidator.spec.ts`: 19 tests pass                                  |
 | T-014 | R3         | Done                              | `ClassicRCAFStrategy.spec.ts`: 9 tests pass                                    |
 | T-015 | R3         | Done                              | `McMasterHIITStrategy.spec.ts`: 2 tests pass                                   |
+| T-016 | R4         | Done                              | `TimerEngine.spec.ts`: 5 tests pass                                            |
+
+## T-016 Characterize `TimerEngine`
+
+- Status: DONE
+- Commands: `npm test -- src/core/TimerEngine.spec.ts`
+- Result: 5 tests pass. Locks hardware-anchor elapsed (1.5 s → 1, 3.5 s → 3), pause time excluded on resume, gated boundary holds at rest and releases on `resumeFromRest` (totalElapsed 11, not 21, after a 19.5 s rest), `restoreState` RUNNING anchor recalibration, and PAUSED restore with no ticks.
+- Notes: Header records the missing visibility handling as the AC-4.4 known gap (D-003).
 
 ## T-015 Characterize `McMasterHIITStrategy.generateWorkout`
 

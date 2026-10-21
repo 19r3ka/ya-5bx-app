@@ -192,7 +192,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: nine intervals alternating active and recovery, 60 s each, 540 s total. Header comment: "Not on the workout path; see ROADMAP T-01."
       Done when: `npm test -- src/core/McMasterHIITStrategy.spec.ts` passes.
 
-- [ ] **T-016 Characterize `TimerEngine`**
+- [x] **T-016 Characterize `TimerEngine`**
       Depends: T-007, T-008
       Files: `src/core/TimerEngine.spec.ts` (new)
       Use a fake `performance.now()`. Lock: elapsed time derives from the start anchor, not from tick count; pause excludes paused time on resume; a gated boundary holds at rest until `resumeFromRest`; `restoreState` recalibrates the anchor. Mark the absence of visibility handling as a known gap (AC-4.4, D-003). Record the legacy timer's behavior in T-023, not here.
