@@ -25,6 +25,13 @@
 | T-012 | R6         | Done                              | `HistoryAggregator.spec.ts`: 7 tests pass                                      |
 | T-013 | R6         | Done                              | `ProgressionValidator.spec.ts`: 19 tests pass                                  |
 | T-014 | R3         | Done                              | `ClassicRCAFStrategy.spec.ts`: 9 tests pass                                    |
+| T-015 | R3         | Done                              | `McMasterHIITStrategy.spec.ts`: 2 tests pass                                   |
+
+## T-015 Characterize `McMasterHIITStrategy.generateWorkout`
+
+- Status: DONE
+- Commands: `npm test -- src/core/McMasterHIITStrategy.spec.ts`
+- Result: 2 tests pass. Locks nine intervals alternating `mcmaster_active`/`mcmaster_recovery`, each 60 s, 540 s total. Header comment records that it is not on the workout path (ROADMAP T-01).
 
 ## T-014 Characterize `ClassicRCAFStrategy.generateWorkout`
 

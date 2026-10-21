@@ -186,7 +186,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: four rep intervals plus one aerobic interval; rep scaling by `volume_scaler_coefficient`; aerobic duration by option from `charts_matrix`; throws on invalid chart or level (known gap AC-3.3, D-003).
       Done when: `npm test -- src/core/ClassicRCAFStrategy.spec.ts` passes.
 
-- [ ] **T-015 Characterize `McMasterHIITStrategy.generateWorkout`**
+- [x] **T-015 Characterize `McMasterHIITStrategy.generateWorkout`**
       Depends: T-007
       Files: `src/core/McMasterHIITStrategy.spec.ts` (new)
       Lock: nine intervals alternating active and recovery, 60 s each, 540 s total. Header comment: "Not on the workout path; see ROADMAP T-01."
