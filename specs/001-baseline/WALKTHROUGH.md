@@ -29,6 +29,13 @@
 | T-016 | R4         | Done                              | `TimerEngine.spec.ts`: 5 tests pass                                            |
 | T-017 | R4, R5     | Done                              | `WorkoutOrchestrator.spec.ts`: 9 tests pass                                    |
 | T-018 | R5         | Done                              | `IndexedDBAdapter.spec.ts`: 4 tests pass                                       |
+| T-019 | R5         | Done                              | `TelemetryService.spec.ts`: 5 tests pass                                       |
+
+## T-019 Characterize `TelemetryService`
+
+- Status: DONE
+- Commands: `npm test -- src/core/telemetry/TelemetryService.spec.ts`
+- Result: 5 tests pass. Locks `stagePendingSessionAsync` forcing `PENDING_TELEMETRY`, `sealSessionTelemetryAsync` setting `userFlaggedStiffOrSore` plus `SEALED_USER_CONFIRMED` or `SEALED_CONSERVATIVE`, null for an unknown token, and no `fetch` call during either operation.
 
 ## T-018 Characterize `IndexedDBAdapter`
 

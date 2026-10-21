@@ -210,7 +210,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Use `fake-indexeddb`. Lock: `openAsync` creates store `sessions` with keyPath `sessionToken` and the indexes it defines (confirm names from source); commit writes the record; `getAllSessionsAsync` returns ascending order; the WAL clear timing as it actually occurs. Record the observed timing in the test comment.
       Done when: `npm test -- src/core/storage/IndexedDBAdapter.spec.ts` passes.
 
-- [ ] **T-019 Characterize `TelemetryService`**
+- [x] **T-019 Characterize `TelemetryService`**
       Depends: T-018
       Files: `src/core/telemetry/TelemetryService.spec.ts` (new)
       Lock: `stagePendingSessionAsync` sets `PENDING_TELEMETRY`; `sealSessionTelemetryAsync` sets `userFlaggedStiffOrSore` and status `SEALED_USER_CONFIRMED` or `SEALED_CONSERVATIVE`; no network call (assert `fetch` is not called).
