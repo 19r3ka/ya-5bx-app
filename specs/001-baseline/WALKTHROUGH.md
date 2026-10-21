@@ -47,6 +47,13 @@
 | T-034 | R6         | Done                              | 40-49 threshold 7→6; 4 specs failed; reverted; suite green                     |
 | T-035 | R3         | Done                              | Ex-1 rep source changed; 1 spec failed; reverted; suite green                  |
 | T-036 | R5         | Done                              | WAL removal moved to onsuccess; 1 spec failed; reverted; suite green           |
+| T-037 | R4         | Done                              | Pause anchor adjustment removed; 1 spec failed; reverted; suite green          |
+
+## T-037 [transient] Sanity: pause time counted as elapsed
+
+- Status: DONE
+- Commands: edit `src/core/TimerEngine.ts` (remove the anchor adjustment in `resume()`), `npm test -- src/core/TimerEngine.spec.ts`, `git checkout -- src/core/TimerEngine.ts`, `git diff --stat src/`, `npm test`
+- Result: Under mutation, 1 test failed: "excludes paused time when resumed" expected the last `onTick` call with `[4, 4]` (received the accumulated value including the 5 s pause). Reverted; `git diff src/` empty; full suite 182/182 passed.
 
 ## T-036 [transient] Sanity: WAL cleared on request success
 

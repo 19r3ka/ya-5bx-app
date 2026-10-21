@@ -345,7 +345,7 @@ If step 4 or 5 does not produce a clean state, apply stop condition 8b.
       Spec: `src/core/storage/IndexedDBAdapter.spec.ts`
       Done when: spec fails under mutation, and the clean-state procedure completes.
 
-- [ ] **T-037 [transient] Sanity: pause time counted as elapsed**
+- [x] **T-037 [transient] Sanity: pause time counted as elapsed**
       Depends: T-016
       File: `src/core/TimerEngine.ts`
       Mutation: remove the pause adjustment to the start anchor on resume.
