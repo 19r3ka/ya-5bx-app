@@ -37,6 +37,15 @@
 | T-024 | R4         | Done                              | `useAudioFeedback.spec.ts`: 4 tests pass                                       |
 | T-025 | R4         | Done                              | `WorkoutRepOverridePanel.spec.ts`: 5 tests pass                                |
 | T-026 | R5         | Done                              | `PostWorkoutDialog.spec.ts`: 7 tests pass                                      |
+| T-027 | R4         | Done                              | `WorkoutTimerClock.spec.ts`: 6 tests pass                                      |
+
+## T-027 Characterize `WorkoutTimerClock`
+
+- Status: DONE
+- Commands: `npm test -- src/components/workout/WorkoutTimerClock.spec.ts`
+- Result: 6 tests pass with fake timers. Locks mm:ss from duration minus elapsed clamped at 0, `progressPercent` (30/60 → 50, duration 0 → 0), `timer-expired` class at expiry, `expired` emission when supplied elapsed reaches the duration, and the internal ticker running only when `elapsedSeconds` is undefined.
+
+## T-026 Characterize `PostWorkoutDialog` (`workout/`)
 
 ## T-026 Characterize `PostWorkoutDialog` (`workout/`)
 

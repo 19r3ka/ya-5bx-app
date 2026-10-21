@@ -264,7 +264,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Use fake timers and a mocked telemetry service. Lock: 60 s auto-seal as conservative; saving great or sore; `isSealing` dedupe; unmount with no selection seals conservative; emits `saved` and `seal-failed` when the adapter rejects.
       Done when: `npm test -- src/components/workout/PostWorkoutDialog.spec.ts` passes.
 
-- [ ] **T-027 Characterize `WorkoutTimerClock`**
+- [x] **T-027 Characterize `WorkoutTimerClock`**
       Depends: T-007
       Files: `src/components/workout/WorkoutTimerClock.spec.ts` (new)
       Use fake timers. Lock: mm:ss from duration minus elapsed, clamped at 0; `progressPercent`; `isExpired`; emits `expired` at 0; internal ticker active only when `elapsedSeconds` is undefined.
