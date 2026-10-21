@@ -232,7 +232,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
 
 ### Composables
 
-- [ ] **T-022 Characterize `useWorkoutEngine`**
+- [x] **T-022 Characterize `useWorkoutEngine`**
       Depends: T-017
       Files: `src/composables/useWorkoutEngine.spec.ts` (new)
       Lock: module-level singleton orchestrator; readonly snapshot; subscribe on mount and unsubscribe on unmount; `initializeSession` caches context; `restartWorkout` creates a new session token; delegation of `confirmReps`, `finishSession`, pause, and resume. The singleton persists across tests: reset module state between cases.

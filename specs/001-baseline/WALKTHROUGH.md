@@ -32,6 +32,15 @@
 | T-019 | R5         | Done                              | `TelemetryService.spec.ts`: 5 tests pass                                       |
 | T-020 | R2         | Done                              | `useUserStore.spec.ts`: 6 tests pass                                           |
 | T-021 | R6         | Done                              | `useProgressionStore.spec.ts`: 5 tests pass                                    |
+| T-022 | R4         | Done                              | `useWorkoutEngine.spec.ts`: 6 tests pass                                       |
+
+## T-022 Characterize `useWorkoutEngine`
+
+- Status: DONE
+- Commands: `npm test -- src/composables/useWorkoutEngine.spec.ts`
+- Result: 6 tests pass with a mocked `WorkoutOrchestrator`. Locks one module-level orchestrator per module load, readonly snapshot, subscribe on creation / unsubscribe on `unmountEngine` / resubscribe on `mountEngine`, context cache and action delegation (`start`, `pause`, `resume`, `confirmReps`, `finishSession`), `restartWorkout` with a new `crypto.randomUUID` token plus dispose/re-init/start, and abandon delegation. Module state is reset with `vi.resetModules()` between cases.
+
+## T-021 Characterize `useProgressionStore`
 
 ## T-021 Characterize `useProgressionStore`
 
