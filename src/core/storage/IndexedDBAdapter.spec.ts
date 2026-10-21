@@ -1,5 +1,5 @@
 import 'fake-indexeddb/auto'
-import { beforeAll, describe, expect, it } from 'vitest'
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
 import { IndexedDBAdapter } from '@/core/storage/IndexedDBAdapter'
 import type { CompletedSessionRecord } from '@/core/StorageTypes'
 
@@ -31,6 +31,10 @@ function deleteDatabase(): Promise<void> {
 describe('IndexedDBAdapter', () => {
   beforeAll(async () => {
     await deleteDatabase()
+  })
+
+  afterAll(() => {
+    vi.restoreAllMocks()
   })
 
   it('creates the sessions store and its indexes', async () => {
@@ -88,15 +92,40 @@ describe('IndexedDBAdapter', () => {
   // Observed timing: the checkpoint key is removed inside `tx.oncomplete`
   // (IndexedDBAdapter.ts:49-52), after `store.put` and immediately before the
   // commit promise resolves. It is not removed in the request's onsuccess.
-  it('removes the WAL checkpoint when the transaction completes', async () => {
+  it('removes the WAL checkpoint only when the transaction completes', async () => {
     const adapter = new IndexedDBAdapter()
     const session = record({ sessionToken: 'wal-session' })
     const key = `workout_checkpoint_${session.sessionToken}`
     localStorage.setItem(key, '{"saved":true}')
     expect(localStorage.getItem(key)).not.toBeNull()
 
+    let completeFired = false
+    let removedAfterComplete: boolean | null = null
+    const originalTransaction = IDBDatabase.prototype.transaction
+    vi.spyOn(IDBDatabase.prototype, 'transaction').mockImplementation(function (
+      this: IDBDatabase,
+      ...args: unknown[]
+    ) {
+      const tx = (
+        originalTransaction as (...a: unknown[]) => IDBTransaction
+      ).apply(this, args)
+      tx.addEventListener('complete', () => {
+        completeFired = true
+      })
+      return tx
+    })
+    const realRemoveItem = localStorage.removeItem.bind(localStorage)
+    const removeSpy = vi
+      .spyOn(localStorage, 'removeItem')
+      .mockImplementation((removedKey: string) => {
+        removedAfterComplete = completeFired
+        realRemoveItem(removedKey)
+      })
+
     await adapter.commitCompletedWorkoutAsync(session)
 
+    expect(removeSpy).toHaveBeenCalledWith(key)
+    expect(removedAfterComplete).toBe(true)
     expect(localStorage.getItem(key)).toBeNull()
   })
 })
