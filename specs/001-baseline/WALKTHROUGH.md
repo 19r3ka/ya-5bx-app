@@ -17,6 +17,13 @@
 | T-004 | D-001      | Done                              | Removed orphaned WAL removal line; grep matches 0; build passes                |
 | T-005 | D-001      | Done                              | Uninstalled chalk dependency                                                   |
 | T-006 | D-001      | Done                              | Knip clean of removed items; build passes; lint unchanged from baseline        |
+| T-007 | D-002      | Done                              | vitest 5.0.5 + test-utils + happy-dom + fake-indexeddb; `npm test` exits 0     |
+
+## T-007 Install and configure test tooling
+
+- Status: DONE
+- Commands: `npm install -D vitest @vue/test-utils happy-dom fake-indexeddb`, `npm test`, `npm run build`
+- Result: Installed vitest 5.0.5, @vue/test-utils 2.5.1, happy-dom 21.0.4, fake-indexeddb 6.2.6 (devDependencies only). Added `"test": "vitest run"`, `vitest.config.ts` (happy-dom, globals, `src/**/*.spec.ts`, `@` alias to `src`, passWithNoTests), and excluded `src/**/*.spec.ts` in `tsconfig.app.json`. `npm test` exits 0 with no test files; build passes.
 
 ## T-006 Verify Phase 0
 

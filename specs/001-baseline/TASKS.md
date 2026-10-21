@@ -116,7 +116,7 @@ Done when: `npm run knip` runs to completion. A non-zero exit code is expected w
 
 ## Phase 3a: Test harness
 
-- [ ] **T-007 Install and configure test tooling**
+- [x] **T-007 Install and configure test tooling**
       Depends: T-006
       Files: `package.json`, `package-lock.json`, `vitest.config.ts` (new), `tsconfig.app.json`
       Do:
