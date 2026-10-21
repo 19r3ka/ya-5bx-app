@@ -97,7 +97,7 @@ Done when: `npm run knip` runs to completion. A non-zero exit code is expected w
       Do: Delete the single line `localStorage.removeItem('ya_5bx_wal')` inside `tx.oncomplete`. Keep the adjacent `workout_checkpoint_` removal unchanged.
       Done when: `grep -rn "ya_5bx_wal" src/` returns no matches and `npm run build` passes.
 
-- [ ] **T-005 Remove the unused chalk dependency**
+- [x] **T-005 Remove the unused chalk dependency**
       Depends: T-002
       Files: `package.json`, `package-lock.json`
       Do: If knip lists `chalk` as an unused dependency, run `npm uninstall chalk`. If not, log "kept" and make no change.

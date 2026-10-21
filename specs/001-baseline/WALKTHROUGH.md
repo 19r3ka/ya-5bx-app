@@ -15,6 +15,13 @@
 | T-002 | D-001      | Done                              | knip output, dynamic imports, lint summary, build recorded                     |
 | T-003 | D-001      | Done                              | Deleted 7 accepted dead files; build passes                                    |
 | T-004 | D-001      | Done                              | Removed orphaned WAL removal line; grep matches 0; build passes                |
+| T-005 | D-001      | Done                              | Uninstalled chalk dependency                                                   |
+
+## T-005 Remove the unused chalk dependency
+
+- Status: DONE
+- Commands: `npm uninstall chalk`
+- Result: Uninstalled `chalk` devDependency. Absent from package.json.
 
 ## T-004 Remove the orphaned WAL removal line
 
