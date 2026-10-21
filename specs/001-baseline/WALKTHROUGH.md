@@ -31,6 +31,16 @@
 | T-018 | R5         | Done                              | `IndexedDBAdapter.spec.ts`: 4 tests pass                                       |
 | T-019 | R5         | Done                              | `TelemetryService.spec.ts`: 5 tests pass                                       |
 | T-020 | R2         | Done                              | `useUserStore.spec.ts`: 6 tests pass                                           |
+| T-021 | R6         | Done                              | `useProgressionStore.spec.ts`: 5 tests pass                                    |
+
+## T-021 Characterize `useProgressionStore`
+
+- Status: DONE
+- Commands: `npm test -- src/stores/useProgressionStore.spec.ts`
+- Result: 5 tests pass with mocked adapter, telemetry, and validator. Locks `validationResult` null before hydration, chart/level derivation from `currentLevel` (C4_B → 4/B), fallback C1_D- → chart 1/D- with age 30, contiguous volume and last-session stiffness flag wiring, `isHydrated`, and `reloadHistoryAsync` without re-init.
+- Notes: Default fallbacks are profile null → C1_D- (chart 1, level D-) and age missing → 30.
+
+## T-020 Characterize `useUserStore`
 
 ## T-020 Characterize `useUserStore`
 

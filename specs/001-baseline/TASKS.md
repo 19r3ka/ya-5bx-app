@@ -224,7 +224,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Use a fresh Pinia per case and a localStorage stub. Lock: hydrate profile and draft; malformed JSON is caught and yields null; `isOnboardingCompleted ?? true` default; `persistDraft` has no try/catch (lock by asserting that a thrown error propagates; known gap AC-2.3); `completeOnboarding` saves the profile, sets the default aerobic option, and removes the draft key; `setPreferredAerobic` persists.
       Done when: `npm test -- src/stores/useUserStore.spec.ts` passes.
 
-- [ ] **T-021 Characterize `useProgressionStore`**
+- [x] **T-021 Characterize `useProgressionStore`**
       Depends: T-013, T-020
       Files: `src/stores/useProgressionStore.spec.ts` (new)
       Mock the IndexedDB adapter, telemetry, and validator. Lock: `initAsync` derives chart and level from profile `currentLevel` with fallback; `validationResult` is null before hydration; `isHydrated` is set after load; contiguous volume and validator wiring; `lastSession.userFlaggedStiffOrSore` feeds the snapshot; `reloadHistoryAsync`. Record the default fallback for missing profile and age.
