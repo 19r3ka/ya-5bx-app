@@ -27,6 +27,13 @@
 | T-014 | R3         | Done                              | `ClassicRCAFStrategy.spec.ts`: 9 tests pass                                    |
 | T-015 | R3         | Done                              | `McMasterHIITStrategy.spec.ts`: 2 tests pass                                   |
 | T-016 | R4         | Done                              | `TimerEngine.spec.ts`: 5 tests pass                                            |
+| T-017 | R4, R5     | Done                              | `WorkoutOrchestrator.spec.ts`: 9 tests pass                                    |
+
+## T-017 Characterize `WorkoutOrchestrator`
+
+- Status: DONE
+- Commands: `npm test -- src/core/WorkoutOrchestrator.spec.ts`
+- Result: 9 tests pass. Locks UNINITIALIZED → READY → RUNNING → PAUSED → RUNNING → COMPLETED, `confirmReps` broadcasts RUNNING before releasing REST and records logged reps, `finishSession(aerobicCompleted)`, `abandonCurrentSessionAsync` (adapter call + reset to UNINITIALIZED), re-init guard, subscribe/unsubscribe/broadcast with faulty-subscriber isolation, and WAL reconstruction with token-integrity rejection. VerificationRunbook scenarios 1, 4 (adapted), 6, and 7 are covered.
 
 ## T-016 Characterize `TimerEngine`
 

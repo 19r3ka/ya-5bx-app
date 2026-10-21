@@ -198,7 +198,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Use a fake `performance.now()`. Lock: elapsed time derives from the start anchor, not from tick count; pause excludes paused time on resume; a gated boundary holds at rest until `resumeFromRest`; `restoreState` recalibrates the anchor. Mark the absence of visibility handling as a known gap (AC-4.4, D-003). Record the legacy timer's behavior in T-023, not here.
       Done when: `npm test -- src/core/TimerEngine.spec.ts` passes.
 
-- [ ] **T-017 Characterize `WorkoutOrchestrator`**
+- [x] **T-017 Characterize `WorkoutOrchestrator`**
       Depends: T-016
       Files: `src/core/WorkoutOrchestrator.spec.ts` (new)
       Use a mock persistence adapter. Lock: lifecycle transitions (UNINITIALIZED → READY → RUNNING → COMPLETED); `confirmReps` releases rest and sets RUNNING before broadcast; `finishSession(aerobicCompleted)`; `abandonCurrentSessionAsync`; re-initializing during an active session throws; subscribe, unsubscribe, and broadcast; WAL reconstruction. Use the scenarios in `src/core/VerificationRunbook.ts` as cases.
