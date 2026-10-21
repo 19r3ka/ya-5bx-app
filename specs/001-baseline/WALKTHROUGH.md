@@ -30,6 +30,13 @@
 | T-017 | R4, R5     | Done                              | `WorkoutOrchestrator.spec.ts`: 9 tests pass                                    |
 | T-018 | R5         | Done                              | `IndexedDBAdapter.spec.ts`: 4 tests pass                                       |
 | T-019 | R5         | Done                              | `TelemetryService.spec.ts`: 5 tests pass                                       |
+| T-020 | R2         | Done                              | `useUserStore.spec.ts`: 6 tests pass                                           |
+
+## T-020 Characterize `useUserStore`
+
+- Status: DONE
+- Commands: `npm test -- src/stores/useUserStore.spec.ts`
+- Result: 6 tests pass. Locks profile/draft hydration, malformed JSON → null profile + default draft, `isOnboardingCompleted ?? true`, onboarding completion (default aerobic from draft, profile saved, draft key removed), `setPreferredAerobic` persistence, and uncaught `persistDraft` write errors (AC-2.3 gap, D-003).
 
 ## T-019 Characterize `TelemetryService`
 

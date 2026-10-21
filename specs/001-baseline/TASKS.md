@@ -218,7 +218,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
 
 ### Stores
 
-- [ ] **T-020 Characterize `useUserStore`**
+- [x] **T-020 Characterize `useUserStore`**
       Depends: T-007
       Files: `src/stores/useUserStore.spec.ts` (new)
       Use a fresh Pinia per case and a localStorage stub. Lock: hydrate profile and draft; malformed JSON is caught and yields null; `isOnboardingCompleted ?? true` default; `persistDraft` has no try/catch (lock by asserting that a thrown error propagates; known gap AC-2.3); `completeOnboarding` saves the profile, sets the default aerobic option, and removes the draft key; `setPreferredAerobic` persists.
