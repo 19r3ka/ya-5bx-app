@@ -160,7 +160,7 @@ Scope for every task in this phase: new `*.spec.ts` files only. Do not change an
       Lock: `getGoalLevelByAge` (in range, above maximum, below minimum); `extractChartAndLevel` including empty-string input (record the actual return); `getExercisesForLevel` (throws on unknown id; reps assignment; record whether it mutates shared exercise objects).
       Done when: `npm test -- src/utils/levels.spec.ts` passes.
 
-- [ ] **T-011 Characterize `src/utils/charts.ts`**
+- [x] **T-011 Characterize `src/utils/charts.ts`**
       Depends: T-007
       Files: `src/utils/charts.spec.ts` (new)
       Lock: `getChartExercises` for a known chart, an unknown chart (record return value and console calls), and a missing exercise id (record the placeholder).

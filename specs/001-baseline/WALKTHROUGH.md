@@ -21,6 +21,13 @@
 | T-008 | AC-4.1     | Done                              | Read-only trace: duration source, legacy timer reach, no dual-timer path       |
 | T-009 | R3         | Done                              | `src/utils/ages.spec.ts`: 34 tests pass                                        |
 | T-010 | R3         | Done                              | `src/utils/levels.spec.ts`: 9 tests pass                                       |
+| T-011 | R3         | Done                              | `src/utils/charts.spec.ts`: 3 tests pass                                       |
+
+## T-011 Characterize `src/utils/charts.ts`
+
+- Status: DONE
+- Commands: `npm test -- src/utils/charts.spec.ts`
+- Result: 3 tests pass. C1 returns 7 real exercises (E1-E5, E01, E02) with no reps. Unknown chart `C9` returns `[]` and calls `console.error('Chart with ID "C9" not found.')`. Missing ids (C6 → E26-E30) return `{ id, translationKey: '', illustration: '', icon: '' }` and call `console.warn`.
 
 ## T-010 Characterize `src/utils/levels.ts`
 
