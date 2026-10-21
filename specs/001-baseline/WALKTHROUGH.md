@@ -1,8 +1,8 @@
 # WALKTHROUGH: baseline
 
-**Feature:** 001-baseline · **Tasks:** T-00x to T-00y · **Agent / model:** <tool + model> · **Date:** 2026-10-16
-**Status:** Complete | Complete with notes | Blocked
-**Verification:** Tests <pass/total> · Typecheck <ok/fail> · Lint <ok/N warnings> · Build <ok/fail>
+**Feature:** 001-baseline · **Tasks:** T-000 to T-037 · **Agent / model:** opencode / deepseek-flash · **Date:** 2026-10-21
+**Status:** Complete with notes
+**Verification:** Tests 182/182 · Typecheck ok (build) · Lint 0 warnings · Build ok
 
 > Written by the implementing agent at the end of every session. Factual and dense: no narrative, no celebration. This is the handoff to the next agent and the primary input to the reviewer. Mark a criterion "claimed" when no test or recorded check proves it.
 
@@ -375,36 +375,86 @@ Pass (exit code 0, built in ~8s, PWA generated).
 
 ## 2. What changed
 
-| File        | Change                       | Summary    |
-| ----------- | ---------------------------- | ---------- |
-| `path/file` | Modified / Created / Deleted | <one line> |
+| File                                   | Change   | Summary                                                                   |
+| -------------------------------------- | -------- | ------------------------------------------------------------------------- |
+| `package.json`, `package-lock.json`    | Modified | Added knip and test tooling scripts/deps; removed `chalk`                 |
+| `knip.json`, `vitest.config.ts`        | Created  | Dead-code audit entry points; Vitest + Vuetify harness                    |
+| `tsconfig.app.json`                    | Modified | Excluded `src/**/*.spec.ts` from the application type-check               |
+| `src/core/storage/IndexedDBAdapter.ts` | Modified | Removed the orphaned `ya_5bx_wal` removal line                            |
+| 7 dead files (T-003 set)               | Deleted  | Removed owner-accepted dead views/components/composable                   |
+| `src/**/*.spec.ts`                     | Created  | 26 characterization test files covering logic, stores, components, routes |
+| `specs/001-baseline/TASKS.md`          | Modified | All T-000 to T-037 ticked                                                 |
+| `DECISIONS.md`                         | Modified | Added D-004 (Vuetify test harness, Proposed)                              |
 
 ## 3. Acceptance criteria status
 
-| Criterion | Met? (Yes / No / Claimed) | Evidence              |
-| --------- | ------------------------- | --------------------- |
-| AC-1.1    | Yes                       | <test or manual step> |
+| Criterion | Met? (Yes / No / Claimed) | Evidence                                                           |
+| --------- | ------------------------- | ------------------------------------------------------------------ |
+| AC-1.1    | Yes                       | T-031: six named routes resolve to their view modules              |
+| AC-1.2    | Yes (gap locked)          | T-031: unknown path has zero matches, no redirect                  |
+| AC-2.1    | Yes                       | T-020, T-032: onboarding completion persists and reaches dashboard |
+| AC-2.2    | Yes                       | T-029: age validation, goal chart derivation                       |
+| AC-2.3    | Yes (gap locked)          | T-020: `persistDraft` write error propagates                       |
+| AC-3.1    | Yes                       | T-009 to T-011, T-014: ages, chart levels, reps                    |
+| AC-3.2    | Yes                       | T-014: four rep intervals plus aerobic interval                    |
+| AC-3.3    | Yes (gap locked)          | T-014: invalid chart/level throws instead of fallback              |
+| AC-4.1    | Yes (gap locked)          | T-023: legacy timer increments per interval tick                   |
+| AC-4.2    | Yes                       | T-016, T-017: monotonic anchor and lifecycle                       |
+| AC-4.3    | Yes                       | T-017, T-022, T-027: pause/finish/abandon and clock                |
+| AC-4.4    | Yes (gap locked)          | T-016: no visibility handling                                      |
+| AC-5.1    | Yes                       | T-018: IndexedDB commit keyed by session token                     |
+| AC-5.2    | Yes                       | T-019, T-026: local seal, no network call                          |
+| AC-5.3    | No                        | Target feature; no current behavior                                |
+| AC-6.1    | Yes                       | T-012, T-013, T-021: contiguous volume and validator               |
+| AC-6.2    | No                        | Target feature; no current behavior                                |
+| AC-6.3    | Yes                       | T-013, T-021: stiffness restriction raises threshold               |
+| AC-7.1    | No                        | Target feature                                                     |
+| AC-7.2    | No                        | Target feature                                                     |
+| AC-8.1    | Yes (partial)             | T-029, T-030: catalogs load and defaults; completeness is Phase 1  |
+| AC-9.1    | Claimed                   | Manual M-1; not run in this phase                                  |
+| AC-10.1   | Claimed                   | Manual M-2; not run in this phase                                  |
+| AC-10.2   | Claimed                   | Manual M-2; not run in this phase                                  |
+| AC-11.1   | No                        | Target feature; no current behavior                                |
 
 ## 4. Key decisions
 
-- <decision>: <reason>. Logged as D-0xx if non-obvious.
+- D-001: knip is the dead-code authority; only the accepted T-003 set was deleted.
+- D-002: Vitest + Vue Test Utils + happy-dom + fake-indexeddb; specs excluded from app type-check.
+- D-003: gaps are locked by tests carrying `// CHARACTERIZATION: known gap, see SPEC <AC-ID>`.
+- D-004 (Proposed): mount real Vuetify components using the app's auto-import plugin and inline `vuetify` in the Vitest server deps.
 
 ## 5. Assumptions made
 
-- <anything inferred where SPEC, PLAN, or the task was silent>
+- `getGoalChartByAge` intentionally differs from `ageGroups.json`; locked as a quirk, not resolved (T-009).
+- `charts.json` C2-C6 reference exercise ids absent from `exercises.json`; placeholders are current behavior (T-010, T-011).
+- The 40-49 progression threshold lives in `progression_rules.json`, not `ProgressionValidator.ts` (T-034).
+- WAL removal timing is defined by `tx.oncomplete`, verified with a transaction-event spy (T-018, T-036).
+- `useTimer` is only reachable from dead components, but T-023 explicitly required characterizing it; done and noted.
 
 ## 6. Deviations
 
-- <anything that differs from SPEC, PLAN, or TASKS, or touched files outside the task scope. Write "None" if none.>
+- `vitest.config.ts` was extended with `vite-plugin-vuetify` and `test.server.deps.inline: ['vuetify']` in T-025, outside the T-025 file list, to mount components. Logged as D-004.
+- T-034's mutation was applied to `src/core/data/progression_rules.json` because that is the only home of the required-sessions values.
+- The T-018 WAL test was strengthened in commit `8f1b3dd` after T-018 was initially committed, so T-036's timing mutation could fail. No product code changed.
+- T-026 task text says a rejection emits `seal-failed`; manual `save()` instead shows the retry alert. Auto-seal does emit `seal-failed`. Locked as observed.
+- T-024's commit landed after T-032 in history because the spec file was initially left untracked; the code and evidence are unchanged.
+- `npm run knip` now treats files imported by specs as used (for example `useTimer.ts` and `McMasterHIITStrategy.ts`). No deleted file reappeared; 16 unrelated dead files remain.
 
 ## 7. Known gaps and follow-ups
 
-- <noticed but out of scope; debt introduced and why>
+- Locked gaps: AC-1.2 (unknown route), AC-2.3 (draft write errors), AC-3.3 (invalid chart/level throws), AC-4.1 (legacy tick timer), AC-4.4 (no visibility pause).
+- Missing exercise records E6-E30 produce placeholders; `getGoalChartByAge` and `ageGroups.json` disagree. Both are recorded quirks for Phase 1 planning.
+- Target features remain unimplemented: wake lock (R4b), import (AC-5.3), celebration (AC-6.2), backup (AC-7.1/7.2), health gate (AC-11.1).
+- Manual checks not run: offline launch (AC-9.1, M-1), accessibility (AC-10.1/10.2, M-2).
+- Real-browser IndexedDB and timer behavior still needs a Phase 4 check (D-002 consequence).
 
 ## 8. How to verify
 
 ```sh
-<commands>
+npm test
+npm run build
+npm run lint
+npm run knip   # exit 1 expected: unrelated dead files remain
 ```
 
 ## 9. Review packet (paste to the reviewer)
@@ -412,4 +462,4 @@ Pass (exit code 0, built in ~8s, PWA generated).
 - This walkthrough
 - Relevant parts of `SPEC.md`: only the cited R and AC entries
 - The task entries from `TASKS.md`
-- Diff: `git diff main...HEAD` (or `git diff --staged`); split by phase if it exceeds ~800 lines
+- Diff: `git diff main...HEAD`; split by phase if it exceeds ~800 lines
