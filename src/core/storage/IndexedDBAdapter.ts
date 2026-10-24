@@ -48,7 +48,6 @@ export class IndexedDBAdapter {
 
       tx.oncomplete = () => {
         if (typeof localStorage !== 'undefined') {
-          localStorage.removeItem('ya_5bx_wal')
           localStorage.removeItem(`workout_checkpoint_${record.sessionToken}`)
         }
         resolve()

@@ -49,3 +49,14 @@
 - **Consequences:** + The suite is green and documents reality. − Gap tests must be deliberately flipped. A forgotten flip shows up as a failing test, which is the intended signal.
 - **Review trigger:** When the first gap-fixing phase starts.
 - **Raised by:** agent (proposed); owner (accepted).
+
+### D-004: Vuetify-aware component test harness
+
+- **Date:** 2026-10-21 · **Status:** Proposed
+- **Feature:** 001-baseline
+- **Context:** Component characterization tests must mount SFCs that use Vuetify components. Vuetify is auto-imported by `vite-plugin-vuetify` in the application, but the initial Vitest config had only the Vue plugin, so components rendered as unresolved custom elements and Vuetify's defaults injection failed.
+- **Decision:** Add `vite-plugin-vuetify({ autoImport: true })` to `vitest.config.ts` and inline `vuetify` via `test.server.deps.inline`. Component specs install the real `createVuetify()` plugin (or the app plugin) when mounting. No product code changed.
+- **Alternatives:** Stub every Vuetify component per spec (rejected: verbose, brittle, and does not exercise real props/disabled behavior). Add a global component registry (rejected: duplicates the app's auto-import configuration).
+- **Consequences:** + Faithful component mounts without a browser. − Test harness diverges slightly from the T-007 config; keeping it in sync with `vite.config.ts` is a maintenance point.
+- **Review trigger:** When Vitest or Vuetify upgrades change CSS handling or auto-import behavior.
+- **Raised by:** agent (proposed).

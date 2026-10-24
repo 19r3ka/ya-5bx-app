@@ -16,5 +16,6 @@
     "noUncheckedSideEffectImports": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*"],
+  "exclude": ["src/**/*.spec.ts"]
 }
