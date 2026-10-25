@@ -52,14 +52,14 @@
       Out of scope: adding new storage behavior; that belongs to T-02.
       Notes: Characterization block replaced by four target tests (no-throw, flag set, flag cleared, stored profile preserved, draft preserved). Spec 9/9 passes.
 
-- [ ] T-04 (M-1, R2) Create the storage warning banner component
+- [x] T-04 (M-1, R2) Create the storage warning banner component
       Refs: R2, AC-2.4
       Depends: T-02
       Files: `src/components/common/StorageWarningBanner.vue` (new), `src/components/common/StorageWarningBanner.spec.ts` (new)
       Do: A `v-banner` with `color="warning"`, `icon="mdi-database-alert-outline"`, `stacked`, text from `t('storage.writeFailed')`. Prop `visible: boolean`; render nothing when `false`. Text node only, never color-only status (Constitution §6).
       Done when: the component spec passes for visible and hidden states, and the visible template output contains the resolved key's text.
       Out of scope: mounting it in `App.vue` (T-05); adding the key (T-05 owns locales).
-      Notes:
+      Notes: 2/2 tests pass. The spec mounts a local i18n instance with the key so T-04 does not depend on T-05's catalog change.
 
 - [ ] T-05 (M-1, R2) Wire the banner and add its copy
       Refs: R2, AC-2.4
