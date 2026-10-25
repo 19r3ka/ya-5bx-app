@@ -17,6 +17,27 @@
     </header>
 
     <main class="flex-grow-1 w-100 px-6 pb-32 pt-8 mx-auto setup-container">
+      <v-alert
+        v-if="targetNotice"
+        type="warning"
+        variant="tonal"
+        density="compact"
+        class="mb-6"
+        role="status"
+      >
+        {{ $t('setup.fallbackLevel', { level: targetNotice }) }}
+      </v-alert>
+      <v-alert
+        v-if="generationFailed"
+        type="error"
+        variant="tonal"
+        density="compact"
+        class="mb-6"
+        role="alert"
+      >
+        {{ $t('setup.generationFailed') }}
+      </v-alert>
+
       <!-- Section Header -->
       <div class="mb-8">
         <h2
@@ -181,6 +202,7 @@
   import { useProgressionStore } from '@/stores/useProgressionStore'
   import { useUserStore } from '@/stores/useUserStore'
   import { AerobicOption } from '@/core/EngineTypes'
+  import { resolveSessionTarget } from '@/utils/sessionTarget'
   import AppHelpDialog from '@/components/common/AppHelpDialog.vue'
 
   const router = useRouter()
@@ -189,6 +211,8 @@
   const progressionStore = useProgressionStore()
   const userStore = useUserStore()
   const showHelp = ref(false)
+  const targetNotice = ref<string | null>(null)
+  const generationFailed = ref(false)
 
   const aerobic = ref(userStore.profile?.preferredAerobic ?? 'stationary')
 
@@ -222,20 +246,36 @@
 
   function beginWorkout() {
     unlock()
-    initializeSession({
-      sessionToken: crypto.randomUUID(),
-      profile: {
-        age: userStore.profile?.age ?? 30,
-        name: userStore.profile?.name,
-      },
-      chartNumber: progressionStore.currentChart,
-      levelString: progressionStore.currentLevel,
-      aerobicSelection: mapAerobicOption(aerobic.value),
-      isModernSafeMode: false,
-    })
-    startWorkout()
-    if (router) {
-      router.push({ name: 'active-workout' })
+
+    const target = resolveSessionTarget(
+      userStore.profile?.currentLevel,
+      progressionStore.rawHistory
+    )
+    targetNotice.value =
+      target.source === 'profile'
+        ? null
+        : `Chart ${target.chartNumber} · Level ${target.levelString}`
+    generationFailed.value = false
+
+    try {
+      initializeSession({
+        sessionToken: crypto.randomUUID(),
+        profile: {
+          age: userStore.profile?.age ?? 30,
+          name: userStore.profile?.name,
+        },
+        chartNumber: target.chartNumber,
+        levelString: target.levelString,
+        aerobicSelection: mapAerobicOption(aerobic.value),
+        isModernSafeMode: false,
+      })
+      startWorkout()
+      if (router) {
+        router.push({ name: 'active-workout' })
+      }
+    } catch (error) {
+      console.error('Failed to start the workout session', error)
+      generationFailed.value = true
     }
   }
 </script>

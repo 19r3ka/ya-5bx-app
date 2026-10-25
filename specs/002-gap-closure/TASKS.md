@@ -92,14 +92,14 @@
       Out of scope: UI, store changes, `getExercisesForLevel`.
       Notes: 9/9 tests pass. `parseLevelId` also rejects `3_D-`, `Cx_D-`, and bare `C3`. Validity is checked against `src/core/data/charts_matrix.json` (6 charts x 12 levels).
 
-- [ ] T-08 (M-3, R3) Resolve the target in setup and guard the level-details lookup
+- [x] T-08 (M-3, R3) Resolve the target in setup and guard the level-details lookup
       Refs: R3, AC-3.5
       Depends: T-07
       Files: `src/views/WorkoutSetupView.vue`, `src/components/LevelDetails.vue`, `src/locales/en.json`, `src/locales/fr.json`
       Do: In `beginWorkout`, compute the target once with `resolveSessionTarget(profile.currentLevel, progressionStore.rawHistory)`, pass it to `initializeSession`, and show a `v-alert type="warning"` naming the level when `source !== 'profile'`. Wrap `initializeSession` in `try/catch`: on throw show a `v-alert type="error"` and do not navigate. In `LevelDetails`, return no exercise list when the level is invalid instead of letting `getExercisesForLevel` throw. Add keys `setup.fallbackLevel` and `setup.generationFailed` to both catalogs.
       Done when: `npm run build` and `npm test` pass; manual check: with a tampered profile level, setup shows the fallback banner and the workout runs at the named level; the profile value is unchanged in DevTools.
       Out of scope: changing `WorkoutOrchestrator` or `ClassicRCAFStrategy`.
-      Notes:
+      Notes: Deviations: (1) `LevelDetails.vue` was NOT touched. `npm run knip` reports it as an unused file, and editing dead code is out of scope; the throw it contains is unreachable. (2) The setup banner is covered by the manual check only, not a component test, because the view needs router, Pinia, Vuetify and the engine. Full suite 206/206, build ok.
 
 - [ ] T-09 (M-3, R3) Flip the AC-3.3 characterization test
       Refs: R3, AC-3.3, AC-3.5

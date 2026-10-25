@@ -93,5 +93,9 @@
   },
   "storage": {
     "writeFailed": "Storage is unavailable. Your progress may not be saved."
+  },
+  "setup": {
+    "fallbackLevel": "Your saved level is unavailable. Using {level} for this session.",
+    "generationFailed": "The workout could not be generated. Your saved data is unchanged."
   }
 }

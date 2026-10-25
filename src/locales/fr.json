@@ -93,5 +93,9 @@
   },
   "storage": {
     "writeFailed": "Le stockage local est indisponible. Votre progression risque de ne pas être enregistrée."
+  },
+  "setup": {
+    "fallbackLevel": "Votre niveau enregistré est indisponible. Niveau utilisé pour cette séance : {level}.",
+    "generationFailed": "La séance n'a pas pu être générée. Vos données enregistrées sont inchangées."
   }
 }
