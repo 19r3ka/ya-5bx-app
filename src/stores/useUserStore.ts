@@ -3,6 +3,7 @@ import {
   STORAGE_KEY_ONBOARDING_DRAFT,
   LOCALSTORAGE_USER_KEY,
 } from '@/constants'
+import { safeRemove, safeWriteJson } from '@/utils/storage'
 
 export interface UserProfile {
   name?: string
@@ -54,19 +55,18 @@ export const useUserStore = defineStore('user', {
       draftStep: savedDraft.step,
       draftAge: savedDraft.age,
       draftAerobic: savedDraft.aerobic,
+      storageWriteFailed: false,
     }
   },
   actions: {
     persistDraft() {
-      localStorage.setItem(
-        STORAGE_KEY_ONBOARDING_DRAFT,
-        JSON.stringify({
-          step: this.draftStep,
-          currentStep: this.draftStep,
-          age: this.draftAge,
-          aerobic: this.draftAerobic,
-        })
-      )
+      const ok = safeWriteJson(STORAGE_KEY_ONBOARDING_DRAFT, {
+        step: this.draftStep,
+        currentStep: this.draftStep,
+        age: this.draftAge,
+        aerobic: this.draftAerobic,
+      })
+      this.storageWriteFailed = !ok
     },
     setDraftStep(step: number) {
       this.draftStep = step
@@ -83,9 +83,9 @@ export const useUserStore = defineStore('user', {
     setPreferredAerobic(aerobic: string) {
       if (this.profile) {
         this.profile.preferredAerobic = aerobic
-        localStorage.setItem(
+        this.storageWriteFailed = !safeWriteJson(
           LOCALSTORAGE_USER_KEY,
-          JSON.stringify(this.profile)
+          this.profile
         )
       }
     },
@@ -95,8 +95,11 @@ export const useUserStore = defineStore('user', {
         preferredAerobic: this.draftAerobic,
         ...profileData,
       }
-      localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(this.profile))
-      localStorage.removeItem(STORAGE_KEY_ONBOARDING_DRAFT)
+      const ok = safeWriteJson(LOCALSTORAGE_USER_KEY, this.profile)
+      this.storageWriteFailed = !ok
+      if (ok) {
+        safeRemove(STORAGE_KEY_ONBOARDING_DRAFT)
+      }
     },
   },
 })

@@ -34,23 +34,23 @@
       Out of scope: touching stores, components, or IndexedDB.
       Notes: 8/8 tests pass. Spec stubs `localStorage` with a fake object instead of spying on happy-dom's proxy: `vi.restoreAllMocks()` did not undo a spy on `localStorage.setItem`, which leaked into the next describe block and caused a false failure.
 
-- [ ] T-02 (M-1, R2) Guard the three user-store writes and expose the failure flag
+- [x] T-02 (M-1, R2) Guard the three user-store writes and expose the failure flag
       Refs: R2, AC-2.4, AC-2.5
       Depends: T-01
       Files: `src/stores/useUserStore.ts`, `src/stores/useUserStore.spec.ts`
       Do: Replace the bare `setItem` calls in `persistDraft`, `setPreferredAerobic` and `completeOnboarding` with `safeWriteJson`. Add state `storageWriteFailed: boolean`; set it from each result and clear it on success. In `completeOnboarding`, only remove the draft key and mark onboarding complete in storage when the profile write succeeded.
       Done when: `npm test -- src/stores/useUserStore.spec.ts` passes, including: a throwing `setItem` leaves the previous stored value unchanged, `profile` in memory is still usable, the flag is `true`; a later successful write clears the flag.
       Out of scope: any UI, `App.vue`, locale files.
-      Notes:
+      Notes: Landed in the same commit as T-03: the fix makes the AC-2.3 characterization assertion fail, and D-003 requires the flip in the same commit. On failure `completeOnboarding` keeps the draft key so the user can retry; the in-memory profile is updated and remains usable.
 
-- [ ] T-03 (M-1, R2) Flip the AC-2.3 characterization test
+- [x] T-03 (M-1, R2) Flip the AC-2.3 characterization test
       Refs: R2, AC-2.3, AC-2.5
       Depends: T-02
       Files: `src/stores/useUserStore.spec.ts`
       Do: Replace the `// CHARACTERIZATION: known gap, see SPEC AC-2.3` block (near line 60) with assertions for the target behavior: writes are caught and reported via `storageWriteFailed`, and no partial profile is persisted.
       Done when: `npm test -- src/stores/useUserStore.spec.ts` passes and `grep -n "AC-2.3" src/stores/useUserStore.spec.ts` shows no characterization comment for that criterion.
       Out of scope: adding new storage behavior; that belongs to T-02.
-      Notes:
+      Notes: Characterization block replaced by four target tests (no-throw, flag set, flag cleared, stored profile preserved, draft preserved). Spec 9/9 passes.
 
 - [ ] T-04 (M-1, R2) Create the storage warning banner component
       Refs: R2, AC-2.4
