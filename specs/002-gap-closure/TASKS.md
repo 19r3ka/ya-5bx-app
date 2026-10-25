@@ -191,3 +191,7 @@
 ## Phase reviews
 
 - M-1: not started · M-2: not started · M-3: not started · M-4: not started · M-5: not started · M-6: not started
+
+---
+
+APPROVED: v0.1 2026-10-25
