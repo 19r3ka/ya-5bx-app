@@ -25,14 +25,14 @@
 
 ## M-1: Storage write safety (delivers R2)
 
-- [ ] T-01 (M-1, R2) Add the guarded local-write helper
+- [x] T-01 (M-1, R2) Add the guarded local-write helper
       Refs: R2, AC-2.3, AC-2.4
       Depends: none
       Files: `src/utils/storage.ts` (new), `src/utils/storage.spec.ts` (new)
       Do: Implement `safeWriteJson(key, value): boolean` and `safeRemove(key): boolean`. Wrap `localStorage` access in `try/catch`; return `false` on any throw (quota, `SecurityError`, unavailable storage) and never rethrow. Skip the write entirely when serialization throws.
       Done when: `npm test -- src/utils/storage.spec.ts` passes for: success writes JSON, quota throw returns `false`, `SecurityError` returns `false`, `undefined` storage returns `false`.
       Out of scope: touching stores, components, or IndexedDB.
-      Notes:
+      Notes: 8/8 tests pass. Spec stubs `localStorage` with a fake object instead of spying on happy-dom's proxy: `vi.restoreAllMocks()` did not undo a spy on `localStorage.setItem`, which leaked into the next describe block and caused a false failure.
 
 - [ ] T-02 (M-1, R2) Guard the three user-store writes and expose the failure flag
       Refs: R2, AC-2.4, AC-2.5
