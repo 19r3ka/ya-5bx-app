@@ -19,23 +19,3 @@ export function calculateAge(dob: Date | string): number {
 
   return age
 }
-
-export function getGoalChartByAge(age: number): number {
-  if (age < 26) return 6
-  if (age <= 29) return 5
-  if (age <= 34) return 4
-  if (age <= 44) return 3
-  if (age <= 54) return 2
-  return 1
-}
-
-export function getAgeRangeLabel(age: number): string {
-  if (age < 26) return '18–25'
-  if (age <= 29) return '26–29'
-  if (age <= 34) return '30–34'
-  if (age <= 39) return '35–39'
-  if (age <= 44) return '40–44'
-  if (age <= 49) return '45–49'
-  if (age <= 54) return '50–54'
-  return '55+'
-}

@@ -22,6 +22,32 @@ describe('getGoalLevelByAge', () => {
     expect(getGoalLevelByAge(5)).toBeNull()
     expect(getGoalLevelByAge(0)).toBeNull()
   })
+
+  it.each([
+    [6, 'C1_B'],
+    [7, 'C1_A'],
+    [8, 'C2_D-'],
+    [11, 'C2_A-'],
+    [12, 'C3_D+'],
+    [15, 'C4_D-'],
+    [16, 'C4_C+'],
+    [17, 'C4_C+'],
+    [24, 'C5_C'],
+    [25, 'C4_A+'],
+    [29, 'C4_A+'],
+    [30, 'C4_C-'],
+    [34, 'C4_C-'],
+    [35, 'C3_B'],
+    [39, 'C3_B'],
+    [40, 'C3_C'],
+    [43, 'C3_C'],
+    [44, 'C3_C'],
+    [45, 'C2_A+'],
+    [49, 'C2_A+'],
+    [50, 'C2_C+'],
+  ])('returns the pinned level for age %i', (age, expected) => {
+    expect(getGoalLevelByAge(age)).toBe(expected)
+  })
 })
 
 describe('extractChartAndLevel', () => {

@@ -8,18 +8,22 @@ import levelsData from '@/data/levels.json'
 
 const ageGroups = ageGroupData as AgeGroup[]
 
-/* Get the goal Chart level for a given user age */
-export const getGoalLevelByAge = (age: number): LevelId | null => {
-  // if the user is older than the original oldest age group, default to that group's oldest age, i.e. 60
+/* Find the age table row for a given user age */
+export const getAgeGroupForAge = (age: number): AgeGroup | null => {
+  // if the user is older than the original oldest age group, default to that group, i.e. 50-60
   const olderAgeGroup = ageGroups[ageGroups.length - 1]
 
-  if (age > olderAgeGroup?.maxAge) return olderAgeGroup?.goalLevel
+  if (olderAgeGroup && age > olderAgeGroup.maxAge) return olderAgeGroup
 
   const ageGroup = ageGroups.find(
     (group: AgeGroup) => age >= group.minAge && age <= group.maxAge
   )
-  return ageGroup ? (ageGroup.goalLevel as LevelId) : null
+  return ageGroup ?? null
 }
+
+/* Get the goal Chart level for a given user age (single source: ageGroups.json) */
+export const getGoalLevelByAge = (age: number): LevelId | null =>
+  getAgeGroupForAge(age)?.goalLevel ?? null
 
 /* Extract chart and level from a given LevelId value, e.g. C1_B- */
 export const extractChartAndLevel = (levelId: string) =>

@@ -132,23 +132,23 @@
 
 ## M-5: Goal-level authority (delivers R5)
 
-- [ ] T-12 (M-5, R5) Add the single goal-level resolver
+- [x] T-12 (M-5, R5) Add the single goal-level resolver
       Refs: R5, AC-6.4
       Depends: none
       Files: `src/utils/levels.ts`, `src/utils/levels.spec.ts`
       Do: Implement `resolveGoalLevel(age: number): LevelId | null` that finds the `ageGroups.json` row containing the age. Return the last row's level above the table, `null` below the first row. Do not add a chart-only variant; callers derive the chart from the returned id.
       Done when: unit tests pass for each boundary age, below the first row, above the last row, and a spot check at 43.
       Out of scope: correcting the 30–34 row (T-14) and swapping call sites (T-13).
-      Notes:
+      Notes: Deviation: no new `resolveGoalLevel` function. `getGoalLevelByAge` in `src/utils/levels.ts` already did exactly that, so DRY won: it now delegates to a new `getAgeGroupForAge(age)` row lookup and stays the single entry point. Added 21 pinned boundary cases (6, 7, 8, 11, 12, 15, 16, 17, 24, 25, 29, 30, 34, 35, 39, 40, 43, 44, 45, 49, 50). levels.spec 30/30.
 
-- [ ] T-13 (M-5, R5) Swap the call sites and retire the second source of truth
+- [x] T-13 (M-5, R5) Swap the call sites and retire the second source of truth
       Refs: R5, AC-6.4
       Depends: T-12
       Files: `src/views/OnboardingView.vue`, `src/components/onboarding/Step2Age.vue`, `src/components/OnboardingForm.vue`, `src/utils/ages.ts`
       Do: Replace `getGoalChartByAge` usage with `resolveGoalLevel`; derive the chart with `extractChartAndLevel` where the UI needs it. Delete `getGoalChartByAge` (and its spec block) once no caller remains. Keep the `null` case explicit in each caller.
       Done when: `grep -rn "getGoalChartByAge" src` returns nothing; `npm run build` and `npm test` pass; manual check: onboarding at age 43 shows Chart 3.
       Out of scope: changing the table, adapting `GoalChartCard` props beyond what callers need.
-      Notes:
+      Notes: `getGoalChartByAge` and `getAgeRangeLabel` deleted from `src/utils/ages.ts`; only `calculateAge` remains. `OnboardingView` derives the chart from the resolved level and no longer fabricates `A+`; `Step6Ready` received a hardcoded `goal-level="A+"` that is now bound; `Step2Age` uses the same table row for both chart and range label. `OnboardingForm.vue` was NOT touched: knip reports it as unused, so the second source there is unreachable. Full suite 201/201, build ok.
 
 - [ ] T-14 (M-5, R5) Pin the age table and correct the 30–34 row
       Refs: R5, AC-6.4
