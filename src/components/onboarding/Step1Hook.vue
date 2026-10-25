@@ -6,9 +6,9 @@
         class="fc-timer text-primary text-uppercase mb-8"
         style="line-height: 1.1"
       >
-        11 MINUTES.<br />
-        NO EQUIPMENT.<br />
-        EVERY DAY.
+        {{ $t('onboarding.hook.headline1') }}<br />
+        {{ $t('onboarding.hook.headline2') }}<br />
+        {{ $t('onboarding.hook.headline3') }}
       </h1>
 
       <!-- Heritage Body Text -->
@@ -19,17 +19,14 @@
         "
       >
         <p class="fc-body-lg text-on-surface mb-6">
-          Born from the rigorous demands of the
-          <span class="text-primary font-weight-bold"
-            >Royal Canadian Air Force</span
-          >
-          in the 1950s, the 5BX (Five Basic Exercises) system was engineered for
-          maximum results in minimum time.
+          {{ $t('onboarding.hook.bodyPrefix') }}
+          <span class="text-primary font-weight-bold">{{
+            $t('onboarding.hook.airForce')
+          }}</span>
+          {{ $t('onboarding.hook.bodySuffix') }}
         </p>
         <p class="fc-body text-on-surface-variant">
-          No gym memberships. No complex gear. Just a scientifically sequenced
-          physical fitness plan designed to reach peak condition wherever you
-          are.
+          {{ $t('onboarding.hook.bodySecondary') }}
         </p>
       </div>
     </div>
@@ -44,7 +41,7 @@
         append-icon="mdi-arrow-right"
         @click="emit('next')"
       >
-        <span class="fc-section">Let's go</span>
+        <span class="fc-section">{{ $t('onboarding.hook.cta') }}</span>
       </v-btn>
     </div>
   </div>

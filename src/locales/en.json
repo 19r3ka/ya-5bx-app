@@ -31,11 +31,31 @@
       "dobTooRecent": "Date of birth must be at least 6 years ago"
     },
     "ready": {
+      "eyebrow": "ONE LAST THING",
+      "intro": "Personalize your training record before we begin the baseline assessment.",
+      "nameLabel": "Your name (Optional)",
+      "startingPoint": "YOUR STARTING POINT",
+      "currentTier": "Current Tier",
+      "objective": "Objective",
+      "currentChart": "Chart 1",
+      "goalChart": "Chart {chart}",
+      "startButton": "START MY FIRST WORKOUT",
+      "skip": "Skip for now",
       "namePlaceholder": "Recruit Name",
       "confirmEmptyTitle": "Leave name blank?",
       "confirmEmptyMessage": "You haven't entered a name. Would you like to proceed as Recruit?",
       "confirmEmptyProceed": "Continue as Recruit",
       "confirmEmptyCancel": "Enter Name"
+    },
+    "hook": {
+      "headline1": "11 MINUTES.",
+      "headline2": "NO EQUIPMENT.",
+      "headline3": "EVERY DAY.",
+      "bodyPrefix": "Born from the rigorous demands of the",
+      "airForce": "Royal Canadian Air Force",
+      "bodySuffix": "in the 1950s, the 5BX (Five Basic Exercises) system was engineered for maximum results in minimum time.",
+      "bodySecondary": "No gym memberships. No complex gear. Just a scientifically sequenced physical fitness plan designed to reach peak condition wherever you are.",
+      "cta": "Let's go"
     }
   },
   "levelOverview": {
@@ -97,5 +117,36 @@
   "setup": {
     "fallbackLevel": "Your saved level is unavailable. Using {level} for this session.",
     "generationFailed": "The workout could not be generated. Your saved data is unchanged."
+  },
+  "help": {
+    "title": "ABOUT YA-5BX",
+    "subtitle": "The 11-Minute Physical Fitness Plan",
+    "intro": "YA-5BX is based on the famous Royal Canadian Air Force 5 Basic Exercises (5BX) system designed to achieve and maintain optimal fitness in just 11 minutes a day, requiring no specialized equipment.",
+    "listIntro": "The workout consists of 5 consecutive exercises:",
+    "items": {
+      "stretching": {
+        "label": "01 Stretching",
+        "detail": "Forward & upward spinal mobility (2 min)"
+      },
+      "sitUps": {
+        "label": "02 Sit-Ups",
+        "detail": "Core abdominal conditioning (1 min)"
+      },
+      "backExtensions": {
+        "label": "03 Back Extensions",
+        "detail": "Posterior chain endurance (1 min)"
+      },
+      "pushUps": {
+        "label": "04 Push-Ups",
+        "detail": "Upper-body pushing power (1 min)"
+      },
+      "aerobic": {
+        "label": "05 Aerobic / Run",
+        "detail": "Cardiovascular output (6 min)"
+      }
+    },
+    "progressionTitle": "Progression Rule",
+    "progressionBody": "Gradually advance through charts and levels. Do not skip levels, and hold at your current level if you experience soreness or stiff muscles.",
+    "close": "Understood"
   }
 }

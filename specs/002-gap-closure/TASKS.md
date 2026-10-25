@@ -112,23 +112,23 @@
 
 ## M-4: Localization coverage (delivers R4)
 
-- [ ] T-10 (M-4, R4) Move the remaining hardcoded copy into the catalogs
+- [x] T-10 (M-4, R4) Move the remaining hardcoded copy into the catalogs
       Refs: R4, AC-8.1
       Depends: none
       Files: `src/components/onboarding/Step1Hook.vue`, `src/components/onboarding/Step6Ready.vue`, `src/components/common/AppHelpDialog.vue`, `src/locales/en.json`, `src/locales/fr.json`
       Do: Replace the literal strings with `$t()` calls: `Step1Hook` ("Royal Canadian Air Force"), `Step6Ready` ("Current Tier", "Objective", "START MY FIRST WORKOUT"), `AppHelpDialog` ("Progression Rule"). Add the keys under the existing namespaces; write French copy, not placeholders.
       Done when: `grep -n '>Royal Canadian Air Force<\|>Current Tier<\|>Objective<\|>START MY FIRST WORKOUT<\|>Progression Rule<' src` returns nothing, and both screens render in EN and FR.
       Out of scope: other components; layout changes.
-      Notes:
+      Notes: Scope expanded beyond the five strings named here. Constitution §4 forbids any hardcoded user-facing string and outranks PLAN/TASKS, so all copy in the three files was moved: `onboarding.hook.*`, `onboarding.ready.*` (10 new keys), `help.*` (16 keys), in EN and FR. The `$t ? ... : 'fallback'` ternaries were removed for KISS. Incidence: a JSON merge bug briefly replaced `onboarding.ready`; the five pre-existing keys were restored from `HEAD` and the parity test (T-11) now guards this class of error.
 
-- [ ] T-11 (M-4, R4) Add the catalog parity and used-key check
+- [x] T-11 (M-4, R4) Add the catalog parity and used-key check
       Refs: R4, AC-8.2
       Depends: T-10
       Files: `src/locales/locales.spec.ts` (new)
       Do: Flatten both catalogs and assert identical key sets and non-empty values. Scan `src/**/*.vue` for literal `$t('…')` / `t('…')` keys and assert each resolves in both locales, with a documented allowlist for dynamic keys. No new dependency.
       Done when: `npm test -- src/locales/locales.spec.ts` passes; removing one key from `fr.json` locally makes it fail (record the observed failure in Notes, then restore).
       Out of scope: lint rules; ICU/plural auditing.
-      Notes:
+      Notes: 3/3 pass. Failure observed while writing it: five missing FR keys made the used-key test fail with the exact key list (the merge bug above), so the check is proven load-bearing. Pattern matches literal `$t('...')` only; template-literal keys stay allowlisted by construction. Full suite 209/209, build ok.
 
 ## M-5: Goal-level authority (delivers R5)
 

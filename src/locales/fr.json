@@ -31,11 +31,31 @@
       "dobTooRecent": "La date de naissance doit remonter à 6 ans minimum"
     },
     "ready": {
+      "eyebrow": "UNE DERNIÈRE CHOSE",
+      "intro": "Personnalisez votre dossier d'entraînement avant de commencer l'évaluation initiale.",
+      "nameLabel": "Votre nom (facultatif)",
+      "startingPoint": "VOTRE POINT DE DÉPART",
+      "currentTier": "Palier actuel",
+      "objective": "Objectif",
+      "currentChart": "Tableau 1",
+      "goalChart": "Tableau {chart}",
+      "startButton": "COMMENCER MA PREMIÈRE SÉANCE",
+      "skip": "Passer pour l'instant",
       "namePlaceholder": "Nom de la recrue",
       "confirmEmptyTitle": "Laisser le nom vide ?",
       "confirmEmptyMessage": "Vous n'avez pas renseigné de nom. Souhaitez-vous continuer en tant que Recrue ?",
       "confirmEmptyProceed": "Continuer en tant que Recrue",
       "confirmEmptyCancel": "Renseigner un nom"
+    },
+    "hook": {
+      "headline1": "11 MINUTES.",
+      "headline2": "AUCUN ÉQUIPEMENT.",
+      "headline3": "CHAQUE JOUR.",
+      "bodyPrefix": "Né des exigences rigoureuses de l'",
+      "airForce": "Aviation royale du Canada",
+      "bodySuffix": "dans les années 1950, le système 5BX (cinq exercices de base) a été conçu pour un maximum de résultats en un minimum de temps.",
+      "bodySecondary": "Pas d'abonnement à un gym. Pas d'équipement complexe. Un programme de conditionnement physique séquencé scientifiquement pour atteindre un état optimal, où que vous soyez.",
+      "cta": "Allons-y"
     }
   },
   "levelOverview": {
@@ -97,5 +117,36 @@
   "setup": {
     "fallbackLevel": "Votre niveau enregistré est indisponible. Niveau utilisé pour cette séance : {level}.",
     "generationFailed": "La séance n'a pas pu être générée. Vos données enregistrées sont inchangées."
+  },
+  "help": {
+    "title": "À PROPOS DE YA-5BX",
+    "subtitle": "Le programme de conditionnement physique en 11 minutes",
+    "intro": "YA-5BX s'appuie sur le célèbre système des cinq exercices de base (5BX) de l'Aviation royale du Canada, conçu pour atteindre et maintenir une condition physique optimale en 11 minutes par jour, sans équipement spécialisé.",
+    "listIntro": "La séance comprend 5 exercices consécutifs :",
+    "items": {
+      "stretching": {
+        "label": "01 Étirements",
+        "detail": "Mobilité de la colonne vers l'avant et le haut (2 min)"
+      },
+      "sitUps": {
+        "label": "02 Redressements assis",
+        "detail": "Renforcement des abdominaux (1 min)"
+      },
+      "backExtensions": {
+        "label": "03 Extensions dorsales",
+        "detail": "Endurance de la chaîne postérieure (1 min)"
+      },
+      "pushUps": {
+        "label": "04 Pompes",
+        "detail": "Force de poussée du haut du corps (1 min)"
+      },
+      "aerobic": {
+        "label": "05 Aérobie / course",
+        "detail": "Capacité cardiovasculaire (6 min)"
+      }
+    },
+    "progressionTitle": "Règle de progression",
+    "progressionBody": "Progressez graduellement dans les tableaux et les niveaux. Ne sautez pas de niveaux et restez à votre niveau actuel en cas de courbatures ou de raideurs.",
+    "close": "Compris"
   }
 }
