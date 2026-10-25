@@ -83,14 +83,14 @@
 
 ## M-3: Session-target resolution (delivers R3)
 
-- [ ] T-07 (M-3, R3) Add the session-target resolver
+- [x] T-07 (M-3, R3) Add the session-target resolver
       Refs: R3, AC-3.4
       Depends: none
       Files: `src/utils/sessionTarget.ts` (new), `src/utils/sessionTarget.spec.ts` (new)
       Do: Implement `isValidChartLevel(chartNumber, levelString)` against `charts_matrix.json` (6 charts × 12 grades, no HTTP) and `resolveSessionTarget(profileLevel, history)` returning `{ chartNumber, levelString, source }`. Order: profile level if valid → most recent completed record whose chart/level is valid → `C1_D-` with `source: 'default'`. Never throw, never write. Parse level ids with `LEVEL_ID_SEPARATOR`.
       Done when: unit tests pass for: valid profile; malformed profile with valid history; malformed profile, invalid history record, then `C1_D-`; empty history; case where the profile level is valid but the chart does not exist.
       Out of scope: UI, store changes, `getExercisesForLevel`.
-      Notes:
+      Notes: 9/9 tests pass. `parseLevelId` also rejects `3_D-`, `Cx_D-`, and bare `C3`. Validity is checked against `src/core/data/charts_matrix.json` (6 charts x 12 levels).
 
 - [ ] T-08 (M-3, R3) Resolve the target in setup and guard the level-details lookup
       Refs: R3, AC-3.5
