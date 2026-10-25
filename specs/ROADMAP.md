@@ -12,9 +12,9 @@
 | RM-04 | Rename `TelemetryService` to match Constitution §1                       | R5, Constitution §1                    | 5          | D-006      | Blocked                                   |
 | RM-05 | Periodic backup prompt, JSON export, and `.tcx` export                   | R7, AC-7.1, AC-7.2                     | 4          | Q1         | Blocked                                   |
 | RM-06 | Gamified level-up celebration                                            | R6, AC-6.2                             | 5          | Q2         | Blocked                                   |
-| RM-07 | Redirect unknown URLs to the dashboard                                   | AC-1.2                                 | 1          | None       | In plan (002-gap-closure)                 |
-| RM-08 | Guarded storage writes with user-visible errors                          | AC-2.3, Constitution §1                | 1          | None       | In plan (002-gap-closure)                 |
-| RM-09 | Invalid-input fallback and error banner for workout generation           | AC-3.3                                 | 1          | None       | In plan (002-gap-closure)                 |
+| RM-07 | Redirect unknown URLs to the dashboard                                   | AC-1.2                                 | 1          | None       | Implemented (002, pending review)         |
+| RM-08 | Guarded storage writes with user-visible errors                          | AC-2.3, Constitution §1                | 1          | None       | Implemented (002, pending review)         |
+| RM-09 | Invalid-input fallback and error banner for workout generation           | AC-3.3                                 | 1          | None       | Implemented (002, pending review)         |
 | RM-10 | Backup import with schema validation and rejection                       | AC-5.3                                 | 4          | D-004      | Blocked                                   |
 | RM-11 | Pre-workout health screening and acknowledgment gate                     | R11, AC-11.1                           | 5          | Q3, D-009  | Blocked                                   |
 | RM-12 | Automated test suite                                                     | Constitution quality gates 2 and 7     | 3          | None       | Satisfied (characterization suite, D-002) |

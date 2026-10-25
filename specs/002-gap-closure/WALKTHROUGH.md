@@ -1,30 +1,30 @@
 # WALKTHROUGH: gap closure (session 1)
 
 **Feature:** 002-gap-closure · **Tasks:** T-01 to T-13 · **Agent / model:** OpenCode / DeepSeek Flash · **Date:** 2026-10-25
-**Status:** Complete with notes (M-1 to M-4 done; M-5 done except T-14, which is blocked by Q1)
-**Verification:** Tests 201/201 · Typecheck ok (`npm run build`) · Lint ok · Build ok
+**Status:** Complete (T-01 to T-15). Milestone reviews pending: reviewer subagent quota outage.
+**Verification:** Tests 220/220 · Typecheck ok (`npm run build`) · Lint ok · Build ok
 
 > Written by the implementing agent at the end of every session. Mark a criterion "claimed" when no test or recorded check proves it.
 
 ## 1. Task results
 
-| Task | Refs           | Result  | Evidence                                                              |
-| ---- | -------------- | ------- | --------------------------------------------------------------------- |
-| T-01 | R2, AC-2.3/2.4 | Done    | `src/utils/storage.spec.ts` 8/8                                       |
-| T-02 | R2, AC-2.4/2.5 | Done    | `useUserStore.spec.ts` 9/9; same commit as T-03 (D-003)               |
-| T-03 | R2, AC-2.3     | Done    | characterization block replaced; no AC-2.3 comment remains            |
-| T-04 | R2, AC-2.4     | Done    | `StorageWarningBanner.spec.ts` 2/2                                    |
-| T-05 | R2, AC-2.4     | Done    | banner mounted in `App.vue`; suite 195/195 at that point              |
-| T-06 | R1, AC-1.2/1.3 | Done    | `router/index.spec.ts` 9/9 (redirect, known routes, guard precedence) |
-| T-07 | R3, AC-3.4     | Done    | `sessionTarget.spec.ts` 9/9                                           |
-| T-08 | R3, AC-3.5     | Done    | suite 206/206, build ok                                               |
-| T-09 | R3, AC-3.3     | Done    | both AC-3.3 characterization comments removed                         |
-| T-10 | R4, AC-8.1     | Done    | three files fully localized; no hardcoded template text remains       |
-| T-11 | R4, AC-8.2     | Done    | `locales.spec.ts` 3/3; failure observed before the fix                |
-| T-12 | R5, AC-6.4     | Done    | `levels.spec.ts` 30/30, 21 pinned ages                                |
-| T-13 | R5, AC-6.4     | Done    | `grep getGoalChartByAge src` empty; suite 201/201                     |
-| T-14 | R5, AC-6.4     | Blocked | Q1 (30–34 row) unanswered                                             |
-| T-15 | close-out      | Not run | depends on T-14                                                       |
+| Task | Refs           | Result | Evidence                                                              |
+| ---- | -------------- | ------ | --------------------------------------------------------------------- |
+| T-01 | R2, AC-2.3/2.4 | Done   | `src/utils/storage.spec.ts` 8/8                                       |
+| T-02 | R2, AC-2.4/2.5 | Done   | `useUserStore.spec.ts` 9/9; same commit as T-03 (D-003)               |
+| T-03 | R2, AC-2.3     | Done   | characterization block replaced; no AC-2.3 comment remains            |
+| T-04 | R2, AC-2.4     | Done   | `StorageWarningBanner.spec.ts` 2/2                                    |
+| T-05 | R2, AC-2.4     | Done   | banner mounted in `App.vue`; suite 195/195 at that point              |
+| T-06 | R1, AC-1.2/1.3 | Done   | `router/index.spec.ts` 9/9 (redirect, known routes, guard precedence) |
+| T-07 | R3, AC-3.4     | Done   | `sessionTarget.spec.ts` 9/9                                           |
+| T-08 | R3, AC-3.5     | Done   | suite 206/206, build ok                                               |
+| T-09 | R3, AC-3.3     | Done   | both AC-3.3 characterization comments removed                         |
+| T-10 | R4, AC-8.1     | Done   | three files fully localized; no hardcoded template text remains       |
+| T-11 | R4, AC-8.2     | Done   | `locales.spec.ts` 3/3; failure observed before the fix                |
+| T-12 | R5, AC-6.4     | Done   | `levels.spec.ts` 30/30, 21 pinned ages                                |
+| T-13 | R5, AC-6.4     | Done   | `grep getGoalChartByAge src` empty; suite 201/201                     |
+| T-14 | R5, AC-6.4     | Done   | `levels.spec.ts` 49/49; 18 rows pinned; owner answered Q1 = `C4_C+`   |
+| T-15 | close-out      | Done   | this walkthrough + roadmap statuses; suite 220/220                    |
 
 ## 2. What changed
 
@@ -62,13 +62,15 @@
 | AC-3.5    | Claimed | banner is wired and translated; no component test for the view              |
 | AC-8.1    | Yes     | the three named files contain no hardcoded user-facing text                 |
 | AC-8.2    | Yes     | parity + used-key test; proven to fail on a missing FR key                  |
-| AC-6.4    | Yes     | one source, 21 pinned ages; **30–34 value pending Q1**                      |
+| AC-6.4    | Yes     | one source; all 18 rows and boundaries pinned; 30–34 = `C4_C+` (Q1)         |
 
 ## 4. Key decisions
 
 - D-008 fallback chain implemented as written; profile never written.
 - D-011 single source implemented; `getGoalLevelByAge` kept instead of adding a synonym (DRY), the two stale helpers deleted.
 - T-02 and T-03 share one commit because the fix invalidates the characterization assertion (D-003).
+- T-14: Q1 resolved by the owner in this session (`C4_C+` per the RCAF source). The data row changed and the table test pins every row literally, so an unmirrored edit fails.
+- T-15: roadmap statuses say "Implemented (002, pending review)" because nothing is merged yet.
 
 ## 5. Assumptions
 
@@ -87,7 +89,7 @@
 
 ## 7. Known gaps and follow-ups
 
-- Q1: 30–34 row, `C4_C+` (RCAF table) vs `C4_C-` (data). Blocks T-14 and T-15.
+- Milestone reviews have not run (provider quota). Treat all milestones as reviewed-by-nobody until that is redone.
 - Dead files listed by knip: `ExerciseCard`, `ExerciseList`, `ExerciseTable`, `LevelDetails`, `OnboardingForm`, `ProgressionMap`, `ExerciseInfoSheet`, `WorkoutOptions`, `WorkoutTimer`, `WorkoutTimerControls`, `WorkoutTimerDisplay`, `src/core/scratch/generate_matrix.js`, `src/core/VerificationRunbook.ts`, `src/models/User.ts`, `types/vuetify.d.ts`. Cleanup is not in this feature's scope.
 - Other components still hold hardcoded copy (dashboard, workout setup headings, onboarding steps 3-5); R8 stays partially met outside the three files named by AC-8.1.
 - First test run after `npm ci` failed 3 tests, then passed twice. Cold-start flake, not reproduced.
@@ -102,11 +104,12 @@ npm run build
 npm run lint
 grep -rn "getGoalChartByAge" src        # expect nothing
 grep -rn "CHARACTERIZATION: known gap, see SPEC AC-[123]" src  # expect only AC-4.1/4.4
+npx vitest run src/utils/levels.spec.ts src/locales/locales.spec.ts
 ```
 
 ## 9. Review packet
 
 - This walkthrough
 - SPEC v0.1 (`/tmp/opencode/002-gap-closure-SPEC.md`, pending owner save)
-- `specs/002-gap-closure/PLAN.md`, `TASKS.md` T-01 to T-13
+- `specs/002-gap-closure/PLAN.md`, `TASKS.md` T-01 to T-15
 - Diff: `git diff main...HEAD -- src/`

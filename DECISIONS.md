@@ -77,8 +77,8 @@
 - **Date:** 2026-10-25 · **Status:** Proposed
 - **Feature:** 002-gap-closure
 - **Context:** Two sources disagree. `getGoalChartByAge` (`src/utils/ages.ts`) returns a chart and the UI hardcodes goal level `A+`, while `getGoalLevelByAge` (`src/utils/levels.ts`) reads `src/data/ageGroups.json`. Example: age 28 gives Chart 5 / `C5_A+` versus `C4_A+`; age 43 gives `C3_A+` versus `C3_C`. T-009 and T-011 locked both as-is; PLAN §11.2 finding 3 assigns the resolution to Phase 1.
-- **Decision:** `src/data/ageGroups.json` is the single authoritative age table, read by one pure function `resolveGoalLevel(age)`. Callers derive the chart from the returned level id. `getGoalChartByAge` is deleted. Boundaries are inclusive; ages above the last row use the last row; ages below the first row return `null`.
+- **Decision:** `src/data/ageGroups.json` is the single authoritative age table, read by one pure function `getGoalLevelByAge(age)` (kept under its existing name; a `resolveGoalLevel` synonym was rejected as a duplicate). Callers derive the chart from the returned level id. `getGoalChartByAge` is deleted. Boundaries are inclusive; ages above the last row use the last row; ages below the first row return `null`. Q1 resolution (owner, 2026-10-25): the 30–34 row is `C4_C+` per the RCAF transcription, and the data row was corrected from `C4_C-`.
 - **Alternatives:** Keep the chart-only bands (rejected: loses per-age level granularity already present in the dataset, and keeps two sources). Keep both and document (rejected: leaves AC-6.1 data ambiguous).
-- **Consequences:** + One source of truth, deterministic and testable. − Changes onboarding goal output for several ages. − The 30–34 row is disputed (`C4_C+` in the RCAF table, `C4_C-` in the data) and stays open until the owner answers Q1 in SPEC §9.
-- **Review trigger:** If a sourced RCAF table version supersedes the current dataset, or when Q1 is answered.
+- **Consequences:** + One source of truth, deterministic and testable. − Changes onboarding goal output for several ages. − The 30–34 goal level changed from `C4_C-` to `C4_C+`; the pinned table test (`src/utils/levels.spec.ts`) fails on any unmirrored data edit.
+- **Review trigger:** If a sourced RCAF table version supersedes the current dataset.
 - **Raised by:** owner (decision 2026-10-25); agent (text).

@@ -150,32 +150,32 @@
       Out of scope: changing the table, adapting `GoalChartCard` props beyond what callers need.
       Notes: `getGoalChartByAge` and `getAgeRangeLabel` deleted from `src/utils/ages.ts`; only `calculateAge` remains. `OnboardingView` derives the chart from the resolved level and no longer fabricates `A+`; `Step6Ready` received a hardcoded `goal-level="A+"` that is now bound; `Step2Age` uses the same table row for both chart and range label. `OnboardingForm.vue` was NOT touched: knip reports it as unused, so the second source there is unreachable. Full suite 201/201, build ok.
 
-- [ ] T-14 (M-5, R5) Pin the age table and correct the 30–34 row
+- [x] T-14 (M-5, R5) Pin the age table and correct the 30–34 row
       Refs: R5, AC-6.4
       Depends: T-13; **blocked by Q1 in SPEC §9**
       Files: `src/data/ageGroups.json`, `src/utils/levels.spec.ts`
       Do: If the owner confirms C4_C+ for 30–34, change the row; otherwise leave the data and record the decision in `DECISIONS.md` under D-011. Either way, add a table-driven test that pins every row and every boundary.
       Done when: the row matches the owner's decision, the table test passes for all 18 rows, and `DECISIONS.md` states the resolution.
       Out of scope: other rows; the 18–24 boundary (confirmed correct).
-      Notes:
+      Notes: Q1 answered by the owner on 2026-10-25: "C4_C+ (RCAF source)" (choice made in this session). Row changed to `C4_C+`; `levels.spec.ts` now pins all 18 rows by literal copy plus both boundaries of every row (49/49). D-011 updated with the resolution.
 
 ## M-6: Close-out
 
-- [ ] T-15 (M-6, R1–R5) Write the walkthrough and update the roadmap
+- [x] T-15 (M-6, R1–R5) Write the walkthrough and update the roadmap
       Refs: R1, R2, R3, R4, R5
       Depends: T-05, T-06, T-09, T-11, T-14
       Files: `specs/002-gap-closure/WALKTHROUGH.md` (new), `specs/ROADMAP.md`, `DECISIONS.md`
       Do: Fill the walkthrough from the template, listing each criterion as Met or Claimed with evidence. Update the roadmap: RM-07, RM-08, RM-09 point at 002 and get their status; add `RM-13` (accessibility audit and fixes, AC-10.1/AC-10.2, Phase 6, unblocked, Target). Set D-008 and D-011 to Proposed with final text. Do not edit `specs/001-baseline/SPEC.md`.
       Done when: the walkthrough is complete, the roadmap has RM-13, and `npm test && npm run build && npm run lint` pass.
       Out of scope: marking any baseline AC as As-Built; that is the owner's review step.
-      Notes:
+      Notes: `WALKTHROUGH.md` written and updated after T-14; RM-07/08/09 moved to "Implemented (002, pending review)", RM-13 already added. D-008 and D-011 are Proposed with final text (D-011 records the Q1 resolution). Tests 220/220, build and lint ok. No baseline AC marked As-Built. Shared one commit with T-14 (data + decisions + close-out docs).
 
 ---
 
 ## Blocked / questions
 
 - **SPEC.md not yet in place.** The owner's permission rules deny agent edits to `**/SPEC.md`. Draft v0.1 is staged at `/tmp/opencode/002-gap-closure-SPEC.md`; the owner must save it as `specs/002-gap-closure/SPEC.md` before approval. (raised by agent, 2026-10-25)
-- **Q1 (SPEC §9):** 30–34 row, `C4_C+` (source) vs `C4_C-` (current data). Blocks T-14 only. (raised by agent, 2026-10-25)
+- ~~**Q1 (SPEC §9):** 30–34 row~~ Answered 2026-10-25: `C4_C+` (RCAF source); data corrected in T-14.
 
 ## Coverage matrix
 
@@ -190,7 +190,8 @@
 
 ## Phase reviews
 
-- M-1: not started · M-2: not started · M-3: not started · M-4: not started · M-5: not started · M-6: not started
+- M-1: review blocked (provider quota 429) · M-2: review blocked · M-3: review blocked · M-4: review blocked · M-5: review blocked · M-6: review blocked
+- Reviewer calls failed on 2026-10-25 with a 429 quota error (retry ~12 h). No milestone is cleared. The owner must re-run the review before merge.
 
 ---
 
