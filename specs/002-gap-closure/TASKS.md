@@ -101,14 +101,14 @@
       Out of scope: changing `WorkoutOrchestrator` or `ClassicRCAFStrategy`.
       Notes: Deviations: (1) `LevelDetails.vue` was NOT touched. `npm run knip` reports it as an unused file, and editing dead code is out of scope; the throw it contains is unreachable. (2) The setup banner is covered by the manual check only, not a component test, because the view needs router, Pinia, Vuetify and the engine. Full suite 206/206, build ok.
 
-- [ ] T-09 (M-3, R3) Flip the AC-3.3 characterization test
+- [x] T-09 (M-3, R3) Flip the AC-3.3 characterization test
       Refs: R3, AC-3.3, AC-3.5
       Depends: T-08
       Files: `src/core/ClassicRCAFStrategy.spec.ts`
       Do: Remove the `// CHARACTERIZATION: known gap, see SPEC AC-3.3` blocks (near lines 107 and 115) and assert the new contract at the boundary: the strategy still throws for an invalid key, and the setup boundary prevents the throw from reaching the user (covered by the resolver plus the setup `try/catch`).
       Done when: `npm test -- src/core/ClassicRCAFStrategy.spec.ts` passes and the suite contains no AC-3.3 characterization comment.
       Out of scope: changing strategy behavior or error messages.
-      Notes:
+      Notes: Both characterization comments removed; tests renamed to `rejects an unknown chart` / `rejects an unknown level`. Assertions unchanged because the strategy still rejects bad keys by contract; the user-facing gap is closed at the setup boundary (T-08). Suite 206/206.
 
 ## M-4: Localization coverage (delivers R4)
 
