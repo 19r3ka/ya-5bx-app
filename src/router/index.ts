@@ -31,6 +31,10 @@ const routes = [
     name: 'settings',
     component: () => import('@/views/SettingsView.vue'),
   },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: { name: 'dashboard' },
+  },
 ]
 
 const router = createRouter({

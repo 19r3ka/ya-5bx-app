@@ -72,14 +72,14 @@
 
 ## M-2: Routing recovery (delivers R1)
 
-- [ ] T-06 (M-2, R1) Add the catch-all route and flip its characterization test
+- [x] T-06 (M-2, R1) Add the catch-all route and flip its characterization test
       Refs: R1, AC-1.2, AC-1.3
       Depends: none
       Files: `src/router/index.ts`, `src/router/index.spec.ts`
       Do: Append `{ path: '/:pathMatch(.*)*', redirect: { name: 'dashboard' } }` as the last route. Replace the `does not redirect an unknown path` test with assertions that an unknown path resolves to `dashboard`, that known routes still match their own names, and that the onboarding guard in `src/main.ts` still takes precedence for an incomplete profile. Remove the `// CHARACTERIZATION: known gap, see SPEC AC-1.2` header.
       Done when: `npm test -- src/router/index.spec.ts` passes; manual check: `/nope` lands on the dashboard with onboarding complete, and on `/onboarding` when incomplete.
       Out of scope: editing `src/main.ts` guard logic.
-      Notes:
+      Notes: Router spec 9/9, full suite 197/197, build ok. The guard-precedence test re-registers the same guard from `main.ts` because importing `main.ts` mounts the app; `main.ts` itself is unchanged.
 
 ## M-3: Session-target resolution (delivers R3)
 
