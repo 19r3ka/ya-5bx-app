@@ -60,3 +60,25 @@
 - **Consequences:** + Faithful component mounts without a browser. − Test harness diverges slightly from the T-007 config; keeping it in sync with `vite.config.ts` is a maintenance point.
 - **Review trigger:** When Vitest or Vuetify upgrades change CSS handling or auto-import behavior.
 - **Raised by:** agent (proposed).
+
+### D-008: Invalid chart/level fallback policy
+
+- **Date:** 2026-10-25 · **Status:** Proposed
+- **Feature:** 002-gap-closure
+- **Context:** AC-3.3 requires an explicit error and a safe fallback when generation is asked for a chart/level that is absent from the versioned dataset. Today `ClassicRCAFStrategy` throws into `WorkoutSetupView.beginWorkout` with no handler, and the stored profile has no schema versioning (D-004 is Phase 4), so a corrupted `currentLevel` is reachable.
+- **Decision:** Resolve the session target in two steps, transiently: the profile level if it exists in `charts_matrix.json`, else the most recent completed session whose chart/level is valid, else Chart 1 / Level D-. Show a visible warning naming the level in use. Never write the resolved target back to the profile. If generation still fails for the resolved target, show an error and start no session.
+- **Alternatives:** Rewrite the profile with the fallback (rejected: mutates user data from a possibly corrupt read, unsafe before D-004). Block the session and send the user to settings (rejected: AC-3.3 requires a safe fallback; owner chose recovery on 2026-10-25).
+- **Consequences:** + The user can always train; no data loss. − A persistent corruption repeats the warning every session until it is repaired. − A repeated warning is the accepted signal that repair needs its own decision after D-004.
+- **Review trigger:** When D-004 schema versioning lands, or when import (RM-10) can introduce arbitrary levels.
+- **Raised by:** owner (decision 2026-10-25); agent (text).
+
+### D-011: Goal-level authority is the age table
+
+- **Date:** 2026-10-25 · **Status:** Proposed
+- **Feature:** 002-gap-closure
+- **Context:** Two sources disagree. `getGoalChartByAge` (`src/utils/ages.ts`) returns a chart and the UI hardcodes goal level `A+`, while `getGoalLevelByAge` (`src/utils/levels.ts`) reads `src/data/ageGroups.json`. Example: age 28 gives Chart 5 / `C5_A+` versus `C4_A+`; age 43 gives `C3_A+` versus `C3_C`. T-009 and T-011 locked both as-is; PLAN §11.2 finding 3 assigns the resolution to Phase 1.
+- **Decision:** `src/data/ageGroups.json` is the single authoritative age table, read by one pure function `resolveGoalLevel(age)`. Callers derive the chart from the returned level id. `getGoalChartByAge` is deleted. Boundaries are inclusive; ages above the last row use the last row; ages below the first row return `null`.
+- **Alternatives:** Keep the chart-only bands (rejected: loses per-age level granularity already present in the dataset, and keeps two sources). Keep both and document (rejected: leaves AC-6.1 data ambiguous).
+- **Consequences:** + One source of truth, deterministic and testable. − Changes onboarding goal output for several ages. − The 30–34 row is disputed (`C4_C+` in the RCAF table, `C4_C-` in the data) and stays open until the owner answers Q1 in SPEC §9.
+- **Review trigger:** If a sourced RCAF table version supersedes the current dataset, or when Q1 is answered.
+- **Raised by:** owner (decision 2026-10-25); agent (text).
