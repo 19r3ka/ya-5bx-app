@@ -61,14 +61,14 @@
       Out of scope: mounting it in `App.vue` (T-05); adding the key (T-05 owns locales).
       Notes: 2/2 tests pass. The spec mounts a local i18n instance with the key so T-04 does not depend on T-05's catalog change.
 
-- [ ] T-05 (M-1, R2) Wire the banner and add its copy
+- [x] T-05 (M-1, R2) Wire the banner and add its copy
       Refs: R2, AC-2.4
       Depends: T-04
       Files: `src/App.vue`, `src/locales/en.json`, `src/locales/fr.json`
       Do: Render `<StorageWarningBanner :visible="userStore.storageWriteFailed" />` above `v-main`. Add `storage.writeFailed` to both catalogs: EN "Storage is unavailable. Your progress may not be saved."; FR equivalent, reviewed for parity.
       Done when: `npm run build` and `npm test` pass; manual check: with storage blocked in DevTools, changing an onboarding draft shows the banner, and a successful write hides it.
       Out of scope: other banners; changing store logic.
-      Notes:
+      Notes: Full suite 195/195, `npm run build` ok, `npm run lint` clean. Manual DevTools check not run in this session (no browser); recorded as claimed in the walkthrough.
 
 ## M-2: Routing recovery (delivers R1)
 

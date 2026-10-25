@@ -47,7 +47,6 @@
   "levelDetails": {
     "title": "Le niveau en détail"
   },
-
   "welcomeCard": {
     "greeting": "Bienvenue, {name}"
   },
@@ -91,5 +90,8 @@
       "name": "Sauts avec changement de position en ciseaux",
       "description": "À partir d'une position décalée, sautez pour alterner la position des bras et des jambes en l'air. Maintenez les bras à hauteur des épaules et un atterrissage contrôlé."
     }
+  },
+  "storage": {
+    "writeFailed": "Le stockage local est indisponible. Votre progression risque de ne pas être enregistrée."
   }
 }

@@ -90,5 +90,8 @@
       "name": "Scissor Switch Jumps",
       "description": "From staggered stance, jump to alternate arm/leg positions mid-air. Maintain shoulder-high arm position and controlled landing."
     }
+  },
+  "storage": {
+    "writeFailed": "Storage is unavailable. Your progress may not be saved."
   }
 }
