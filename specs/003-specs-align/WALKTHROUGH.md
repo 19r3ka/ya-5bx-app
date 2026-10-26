@@ -95,6 +95,7 @@
 - **Emoji.** Wireframe glyphs in `design/ux-spec.md` are user-visible content, not headings; they are kept. The phase-5 status ticks were removed.
 - **Out-of-scope register.** This deliverable comes from the owner's instruction on 2026-10-26, beyond SPEC v0.1. It is recorded as T-14 and D-012.
 - **AC-6.2 reading.** The original criterion was a literal string match that could never pass; the owner reworded it to a link check on 2026-10-26. T-11 uses that reading.
+- **Reviewer access.** The reviewer subagent had no repository tools, so it could not inspect the diff. The command results in section 4 are the verification; the owner's PR review is the remaining review round.
 
 ## 7. Open items and exact fixes
 
