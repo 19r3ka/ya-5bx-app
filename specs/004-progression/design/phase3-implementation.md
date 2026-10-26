@@ -1,6 +1,6 @@
 # Phase 3 Implementation Specification & Tasklist
 
-**Target:** Junior AI Coding Agent (Google Antigravity CLI)
+**Target:** implementing agent (agent tooling)
 **Context:** Vue 3 + TypeScript + Vuetify 3 (PWA)
 **Objective:** Implement Telemetry, Progression Tracking, and IndexedDB Persistence.
 

@@ -82,3 +82,23 @@
 - **Consequences:** + One source of truth, deterministic and testable. − Changes onboarding goal output for several ages. − The 30–34 goal level changed from `C4_C-` to `C4_C+`; the pinned table test (`src/utils/levels.spec.ts`) fails on any unmirrored data edit.
 - **Review trigger:** If a sourced RCAF table version supersedes the current dataset.
 - **Raised by:** owner (decision 2026-10-25); agent (text).
+
+### D-012: Phase documents become numbered features; docs-only alignment
+
+- **Date:** 2026-10-26 · **Status:** Proposed
+- **Feature:** 003-specs-align
+- **Context:** The repository carried three loose phase folders (`specs/phase3` to `specs/phase5`) with plans and checklists but no spec per phase, alongside two numbered features in the kit 0.3.0 shape. The owner asked for full four-file specs per phase, evidence-backed task status, and one shared register for excluded capabilities. The agent cannot write `SPEC.md` files: the permission policy guards them.
+- **Decision:** Convert each phase into a numbered feature and move the original documents into its `design/` folder. The four kit files are thin surfaces over the moved material. The mapping is:
+
+| Phase folder | Feature folder                  | Delivered content                                                         |
+| ------------ | ------------------------------- | ------------------------------------------------------------------------- |
+| specs/phase3 | specs/004-progression           | Session persistence, telemetry sealing, progression store and map         |
+| specs/phase4 | specs/005-ux-implementation     | App shell, onboarding, dashboard, workout views, progress, settings       |
+| specs/phase5 | specs/006-production-completion | Data integrity, canonical state, performance, stylesheet, PWA and release |
+
+Numbering continues the existing sequence: 001-baseline and 002-gap-closure keep their IDs; 003-specs-align performs the conversion; 004 to 006 are the converted phases in delivery order. Finished task text is frozen; only headers, statuses and Notes change. No `src/` file changes in 003. Permanently excluded capabilities live in `specs/OUT_OF_SCOPE.md`, not in the roadmap. The owner saves every `SPEC.md`.
+
+- **Alternatives:** Rename the phase folders in place (rejected: still no per-phase spec, and links break). Rewrite the phase documents as new specs (rejected: loses the detailed design and its evidence). Keep excluded capabilities in the roadmap (rejected: they are not candidates for delivery).
+- **Consequences:** + One shape for every feature, a single roadmap and a single exclusion register. + Open phase-4 and phase-5 items are visible as unchecked tasks instead of narrative notes. − The agent depends on the owner to save specs. − Two rules now conflict: 005 requires borders through a class, 006 forbids component-scoped style blocks; the owner decides the authority.
+- **Review trigger:** When a converted feature needs new work, or when the owner changes the one-stylesheet rule.
+- **Raised by:** owner (2026-10-26); agent (text and mapping).

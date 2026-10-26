@@ -1,10 +1,8 @@
 # SPEC: Gap closure (baseline Phase 1)
 
-**Feature ID:** 002-gap-closure · **Spec version:** 0.1 · **Status:** Draft (reconstructed 2026-10-26) · **Owner:** project owner · **Updated:** 2026-10-26
+**Feature ID:** 002-gap-closure · **Spec version:** 0.2 · **Status:** Implemented · **Owner:** project owner · **Updated:** 2026-10-26
 
 > WHAT and WHY, not HOW. This is a thin delta on `specs/001-baseline/SPEC.md`: it closes Phase 1 gaps only and does not restate baseline criteria that are already met.
-
-> **Reconstruction note:** the 2026-10-25 draft lived in `/tmp/opencode/002-gap-closure-SPEC.md` and was lost when temporary storage was cleared. This file was rebuilt from `PLAN.md`, `TASKS.md`, `DECISIONS.md` and the delivered code and tests. Treat the wording as recovering intent, not as the original text; confirm before citing it as authoritative..
 
 ## 1. Purpose
 
@@ -112,7 +110,8 @@ Manual checks that no automated test covers: storage blocked in DevTools, onboar
 
 ## 10. Change log
 
-| Version | Date       | Change                                                                         |
-| ------- | ---------- | ------------------------------------------------------------------------------ |
-| 0.1     | 2026-10-25 | Initial delta spec for baseline Phase 1 gap closure                            |
-| 0.1     | 2026-10-26 | Reconstructed after the draft in `/tmp/opencode` was lost; Q1 recorded settled |
+| Version | Date       | Change                                                                                                  |
+| ------- | ---------- | ------------------------------------------------------------------------------------------------------- |
+| 0.1     | 2026-10-25 | Initial delta spec for baseline Phase 1 gap closure                                                     |
+| 0.1     | 2026-10-26 | Reconstructed after the original draft was lost when temporary storage was cleared; Q1 recorded settled |
+| 0.2     | 2026-10-26 | Status normalized to Implemented; reconstruction note removed                                           |

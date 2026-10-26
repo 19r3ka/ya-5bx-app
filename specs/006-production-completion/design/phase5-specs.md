@@ -12,11 +12,11 @@ No navigation flash risk. IDB hydration (ProgressionStore) uses skeleton loaders
 
 The following were already correctly resolved in the current repository:
 
-- Router guard (`main.ts`) ✅
-- Lazy route imports ✅
-- BottomNav hidden during `active-workout` ✅
-- Settings view + route ✅
-- Onboarding draft persistence ✅
+- Router guard (`main.ts`)
+- Lazy route imports
+- BottomNav hidden during `active-workout`
+- Settings view + route
+- Onboarding draft persistence
 
 ---
 
@@ -234,7 +234,7 @@ Pass to `ProgressionMapGrid`:
 
 ### T2-1 · `src/components/workout/WorkoutTimerClock.vue` — self-driven timer (no reactive prop thrashing)
 
-**Rule from `.antigravity/rules.md` §3:** 1Hz updates must not propagate to the parent component tree.
+**Rule from the project rules §3:** 1Hz updates must not propagate to the parent component tree.
 
 Remove `:elapsed-seconds` prop. Pass static bounds instead and drive the clock internally:
 
@@ -312,7 +312,7 @@ async function save() {
 
 ### T2-3 · `src/components/layout/BottomNav.vue` — writable computed (not ref + watch)
 
-**Gap 5 (Specialist 2):** `ref + watch` creates two sources of truth. **`.antigravity/rules.md`** §3 bans redundant reactivity cycles.
+**Gap 5 (Specialist 2):** `ref + watch` creates two sources of truth. **the project rules** §3 bans redundant reactivity cycles.
 
 ```typescript
 // REMOVE: const value = ref(...) + watch(...)

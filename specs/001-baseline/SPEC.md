@@ -1,6 +1,6 @@
 # SPEC: YA-5BX Application Baseline and Roadmap
 
-**Feature ID:** 001-baseline · **Status:** Active / Partially Implemented · **Version:** 2.2 · **Updated:** 2026-10-16
+**Feature ID:** 001-baseline · **Status:** Implemented · **Version:** 2.2 · **Updated:** 2026-10-16
 
 ## 1. Goal
 
@@ -146,3 +146,4 @@ Provide an individual with an offline-first, time-efficient daily fitness routin
 | :------ | :--------- | :-------------------- | :---------------------- | :------------------------------------- | :----------------------------------- |
 | 2.0     | 2026-10-16 | Architect / Reviewer  | Consolidated Spec       | Cleared                                | Merged baseline and target features. |
 | 2.1     | 2026-10-16 | Code conformance pass | Snapshot reconciliation | Conformed with UNVERIFIED items listed | Target items moved to ROADMAP.md.    |
+| 2.2     | 2026-10-26 | Documentation pass    | Status normalization    | Implemented                            | No requirement change.               |

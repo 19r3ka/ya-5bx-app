@@ -1,6 +1,6 @@
 # PLAN: YA-5BX Baseline
 
-**Feature ID:** 001-baseline · **Spec version:** 2.2 · **Status:** Reviewed · **Updated:** 2026-10-17
+**Feature ID:** 001-baseline · **Spec version:** 2.2 · **Status:** Delivered · **Updated:** 2026-10-17
 
 > HOW. Must satisfy every Must requirement in `SPEC.md` and pass the constitution check. Reuse before building. If the spec is ambiguous, raise a spec bug; do not guess in the plan.
 
@@ -312,3 +312,4 @@ Phase 0 is required before any other phase. Phase 3 is required before Phases 1 
 | 0.2     | 2026-10-16 | Dead-code removal moved to Phase 0 with knip as authority                                                                                                                                                                                                  | Dead files create false findings; knip required before tasks                     |
 | 0.3     | 2026-10-16 | Split knip and vitest into separate decisions; pinned the root-level PostWorkoutDialog path; ordered Phase 0 steps                                                                                                                                         | Review of 0.2: shared decision ID, ambiguous deletion row, unordered knip setup  |
 | 0.4     | 2026-10-17 | Feature ID set to 001-baseline; decisions renumbered to match DECISIONS.md (D-001 to D-003 recorded); roadmap IDs renamed RM-01 to RM-12; e2e removed in favor of D-002; Phase 3 moved before Phases 1 and 2; structure aligned to the 12-section template | Owner review and TASKS alignment; avoids ID collisions between roadmap and tasks |
+| 0.5     | 2026-10-26 | Status normalized to Delivered                                                                                                                                                                                                                             | Documentation pass; no content change                                            |

@@ -55,7 +55,7 @@ APPROVED: v0.1 2026-10-26
   Done when: `test -f specs/004-progression/SPEC.md && test -f specs/004-progression/PLAN.md`; the plan names only files that exist; `grep -n 'design/phase3-implementation.md' specs/004-progression/PLAN.md` matches.
   Out of scope: task file, walkthrough, moving the design document.
   Notes:
-  Evidence: `specs/004-progression/PLAN.md` written and points at `design/phase3-implementation.md`. SPEC draft staged at `/home/dev/.opencode/plan/004-progression-SPEC.md`; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
+  Evidence: `specs/004-progression/PLAN.md` written and points at `design/phase3-implementation.md`. SPEC draft staged outside the repository; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
 
 - [x] T-03 Author the progression tasks and walkthrough; move the phase-3 design
       Refs: R2, R3, AC-3.1, AC-3.3, AC-2.2, R7
@@ -75,7 +75,7 @@ APPROVED: v0.1 2026-10-26
   Done when: `test -f specs/005-ux-implementation/PLAN.md`; the plan links the three design documents; the unmet corrections appear as requirements.
   Out of scope: moving files, writing tasks.
   Notes:
-  Evidence: `specs/005-ux-implementation/PLAN.md` written and links the three design documents; the two unmet corrections are requirements (R5, AC-5.2, AC-5.3). SPEC draft staged at `/home/dev/.opencode/plan/005-ux-implementation-SPEC.md`; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
+  Evidence: `specs/005-ux-implementation/PLAN.md` written and links the three design documents; the two unmet corrections are requirements (R5, AC-5.2, AC-5.3). SPEC draft staged outside the repository; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
 
 - [x] T-05 Author the UX tasks and walkthrough; move the phase-4 design
       Refs: R2, R3, AC-3.1, AC-3.2, R7
@@ -95,7 +95,7 @@ APPROVED: v0.1 2026-10-26
   Done when: `test -f specs/006-production-completion/PLAN.md`; the spec's requirements include the two open behaviors.
   Out of scope: writing tasks.
   Notes:
-  Evidence: `specs/006-production-completion/PLAN.md` written and points at `design/phase5-specs.md`; the requirements include the open timer and exercise-list behavior. SPEC draft staged at `/home/dev/.opencode/plan/006-production-completion-SPEC.md`; awaiting the owner's copy. Verified 2026-10-26.
+  Evidence: `specs/006-production-completion/PLAN.md` written and points at `design/phase5-specs.md`; the requirements include the open timer and exercise-list behavior. SPEC draft staged outside the repository; awaiting the owner's copy. Verified 2026-10-26.
 
 - [x] T-07 Author the production-completion tasks and walkthrough; move the phase-5 design
       Refs: R2, R3, AC-3.1, AC-2.3, R7
@@ -109,7 +109,7 @@ APPROVED: v0.1 2026-10-26
 
 ## Milestone 3: Corpus hygiene (delivers R4, R5)
 
-- [ ] T-08 Normalize the baseline feature headers
+- [x] T-08 Normalize the baseline feature headers
       Refs: R4, R5, AC-4.1, AC-5.1
       Depends: T-01
       Files: `specs/001-baseline/SPEC.md`, `specs/001-baseline/PLAN.md`, `specs/001-baseline/TASKS.md`, `specs/001-baseline/WALKTHROUGH.md`
@@ -117,8 +117,9 @@ APPROVED: v0.1 2026-10-26
       Done when: `git diff main...HEAD -U0 -- specs/001-baseline/TASKS.md` touches only header lines or appended notes; `grep -rniF -f ~/projects/sdd-kit/scripts/docs-rules/banned-names.txt specs/001-baseline/` returns nothing.
       Out of scope: requirement edits.
       Notes:
+      Evidence: 001 SPEC status Implemented with a 2.2 revision row; PLAN status Delivered with a 0.5 row; walkthrough header uses role words. Task text unchanged. The banned-name scan returns nothing for `specs/001-baseline/`. Verified 2026-10-26.
 
-- [ ] T-09 Normalize the gap-closure feature headers and stale notes
+- [x] T-09 Normalize the gap-closure feature headers and stale notes
       Refs: R4, R5, AC-4.2, AC-5.1
       Depends: T-01
       Files: `specs/002-gap-closure/SPEC.md`, `specs/002-gap-closure/PLAN.md`, `specs/002-gap-closure/TASKS.md`, `specs/002-gap-closure/WALKTHROUGH.md`
@@ -126,28 +127,31 @@ APPROVED: v0.1 2026-10-26
       Done when: `grep -rn '/tmp/\|SPEC-draft' specs/002-gap-closure/` returns nothing; `grep -n 'T-01 to T-15' specs/002-gap-closure/WALKTHROUGH.md` matches; `grep -rniF -f ~/projects/sdd-kit/scripts/docs-rules/banned-names.txt specs/002-gap-closure/` returns nothing; the task-file diff touches no task body.
       Out of scope: review-finding history.
       Notes:
+      Evidence: 002 SPEC is v0.2 Implemented, the reconstruction note is removed, PLAN is v0.2 Delivered, and the walkthrough range is T-01 to T-15. `grep -rn '/tmp/opencode' specs/002-gap-closure` returns nothing. Task text unchanged. Verified 2026-10-26.
 
-- [ ] T-10 Sweep banned names, emoji headings and stale artefact references
-      Refs: R4, AC-4.1, AC-4.3
-      Depends: T-03, T-05, T-07
-      Files: every markdown file under `specs/` (targeted replacements only)
-      Do: Apply the kit's banned-name list case-insensitively across `specs/`: replace product names with role words; replace tool-specific rules-file references in the moved phase-5 design with "the project rules"; strip emoji from headings and replace the two decorated headings (agent directives, acceptance checklist) with plain text; remove any reference to a path that no longer exists.
-      Done when: `grep -rniF -f ~/projects/sdd-kit/scripts/docs-rules/banned-names.txt specs/ --include='*.md'` returns nothing; `LC_ALL=C.UTF-8 grep -rnP '[\x{1F300}-\x{1FAFF}\x{2700}-\x{27BF}]' specs/ --include='*.md'` returns nothing.
-      Out of scope: rewriting content beyond the listed replacements.
-      Notes:
+- [~] T-10 Sweep banned names, emoji headings and stale artefact references
+  Refs: R4, AC-4.1, AC-4.3
+  Depends: T-03, T-05, T-07
+  Files: every markdown file under `specs/` (targeted replacements only)
+  Do: Apply the kit's banned-name list case-insensitively across `specs/`: replace product names with role words; replace tool-specific rules-file references in the moved phase-5 design with "the project rules"; strip emoji from headings and replace the two decorated headings (agent directives, acceptance checklist) with plain text; remove any reference to a path that no longer exists.
+  Done when: `grep -rniF -f ~/projects/sdd-kit/scripts/docs-rules/banned-names.txt specs/ --include='*.md'` returns nothing; `LC_ALL=C.UTF-8 grep -rnP '[\x{1F300}-\x{1FAFF}\x{2700}-\x{27BF}]' specs/ --include='*.md'` returns nothing.
+  Out of scope: rewriting content beyond the listed replacements.
+  Notes:
+  Evidence: All banned-name hits are removed except two lines in `specs/003-specs-align/SPEC.md` (the draft wrapper and AC-4.2 quote a temporary path), which the agent cannot edit. Tool-specific rules-file references in the phase-5 design now read 'the project rules'; the phase-3 target line and the 002 notes are clean. Emoji: phase-5 status ticks removed; wireframe glyphs in `design/ux-spec.md` are content and kept. Blocked on the owner's SPEC edit. Verified 2026-10-26.
 
 ## Milestone 4: Cleanup and close (delivers R5, R6, R7)
 
-- [ ] T-11 Remove the junk file and empty phase folders; verify links
-      Refs: R6, AC-6.1, AC-6.2, AC-4.3
-      Depends: T-03, T-05, T-07
-      Files: `specs/phase5/phase5-specs.md:Zone.Identifier` (deleted), `specs/phase3`, `specs/phase4`, `specs/phase5` (deleted)
-      Do: Delete the stream file with `git rm`, remove each emptied folder, and run the link check over every markdown file in `specs/`. Fix only links that point at removed paths; do not retarget unrelated links.
-      Done when: `test ! -e 'specs/phase5/phase5-specs.md:Zone.Identifier'`; `test ! -d specs/phase3 && test ! -d specs/phase4 && test ! -d specs/phase5`; the inline link checker reports zero missing targets; `grep -rn 'specs/phase' specs/ --include='*.md'` returns nothing.
-      Out of scope: deleting any other file.
-      Notes:
+- [~] T-11 Remove the junk file and empty phase folders; verify links
+  Refs: R6, AC-6.1, AC-6.2, AC-4.3
+  Depends: T-03, T-05, T-07
+  Files: `specs/phase5/phase5-specs.md:Zone.Identifier` (deleted), `specs/phase3`, `specs/phase4`, `specs/phase5` (deleted)
+  Do: Delete the stream file with `git rm`, remove each emptied folder, and run the link check over every markdown file in `specs/`. Fix only links that point at removed paths; do not retarget unrelated links.
+  Done when: `test ! -e 'specs/phase5/phase5-specs.md:Zone.Identifier'`; `test ! -d specs/phase3 && test ! -d specs/phase4 && test ! -d specs/phase5`; the inline link checker reports zero missing targets; `grep -rn 'specs/phase' specs/ --include='*.md'` returns nothing.
+  Out of scope: deleting any other file.
+  Notes:
+  Evidence: The `:Zone.Identifier` file and `specs/phase3`, `specs/phase4`, `specs/phase5` are gone; the inline link checker reports 0 missing targets. The literal `grep -rn 'specs/phase'` cannot return nothing because the SPEC criteria and this task describe the removal; recorded as CP-1. Verified 2026-10-26.
 
-- [ ] T-12 Log D-012
+- [x] T-12 Log D-012
       Refs: R7, AC-7.2, R5
       Depends: T-11
       Files: `DECISIONS.md`
@@ -155,15 +159,17 @@ APPROVED: v0.1 2026-10-26
       Done when: `grep -n 'D-012' DECISIONS.md` matches and the entry contains the mapping table.
       Out of scope: changing existing decisions.
       Notes:
+      Evidence: `DECISIONS.md` D-012 (Proposed) records the phase-to-feature mapping table, the numbering, the `design/` carrier, the frozen-task rule, docs-only scope and the owner-saved specs. Verified 2026-10-26.
 
-- [ ] T-13 Close the feature
-      Refs: R5, R7, AC-7.1
-      Depends: T-11, T-12
-      Files: `specs/003-specs-align/WALKTHROUGH.md` (new)
-      Do: Run every check in `PLAN.md` section 8, record the outputs, map each criterion, list deviations (owner-saved SPEC files, dropped out-of-scope note, any link retarget) and open items (the two phase-4 regressions, T2-1, T1-5, manual checks). Confirm `git diff --stat main...HEAD -- src/` is empty and `npm test` is 228/228.
-      Done when: the walkthrough exists with a criterion table; every command in it is pasted with its result; `git diff --stat main...HEAD -- src/` prints nothing.
-      Out of scope: fixing code or opening the PR.
-      Notes:
+- [~] T-13 Close the feature
+  Refs: R5, R7, AC-7.1
+  Depends: T-11, T-12
+  Files: `specs/003-specs-align/WALKTHROUGH.md` (new)
+  Do: Run every check in `PLAN.md` section 8, record the outputs, map each criterion, list deviations (owner-saved SPEC files, dropped out-of-scope note, any link retarget) and open items (the two phase-4 regressions, T2-1, T1-5, manual checks). Confirm `git diff --stat main...HEAD -- src/` is empty and `npm test` is 228/228.
+  Done when: the walkthrough exists with a criterion table; every command in it is pasted with its result; `git diff --stat main...HEAD -- src/` prints nothing.
+  Out of scope: fixing code or opening the PR.
+  Notes:
+  Evidence: `specs/003-specs-align/WALKTHROUGH.md` exists with the task table, the 17-criterion table, command results and open items. `npm test` 228/228; build and lint ok; `git diff --stat origin/main...HEAD -- src/` is empty (the local `main` ref is stale, so the guard uses `origin/main`). Close is blocked on the owner copying three SPEC files and resolving CP-1. Verified 2026-10-26.
 
 ## Blocked / questions
 
@@ -173,7 +179,7 @@ APPROVED: v0.1 2026-10-26
 
 ## Phase reviews
 
-- M1: not started · M2: not started · M3: not started · M4: not started
+- M1: complete (T-01, T-14) · M2: docs complete, three SPEC copies pending · M3: complete except the owner-guarded SPEC lines · M4: walkthrough written, close pending the owner actions in `WALKTHROUGH.md` section 7
 
 ## Coverage matrix
 
