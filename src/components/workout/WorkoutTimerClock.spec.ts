@@ -1,11 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { createVuetify } from 'vuetify'
 import WorkoutTimerClock from '@/components/workout/WorkoutTimerClock.vue'
 
 const vuetify = createVuetify()
 
-function mountClock(props: Record<string, unknown>): ReturnType<typeof mount> {
+function mountClock(
+  props: Record<string, unknown> = {}
+): ReturnType<typeof mount> {
   return mount(WorkoutTimerClock, {
     props: { durationSeconds: 60, ...props },
     global: { plugins: [vuetify] },
@@ -18,65 +21,120 @@ function progress(wrapper: ReturnType<typeof mount>) {
 
 describe('WorkoutTimerClock', () => {
   beforeEach(() => {
-    vi.useFakeTimers()
+    vi.useFakeTimers({
+      toFake: [
+        'setTimeout',
+        'clearTimeout',
+        'setInterval',
+        'clearInterval',
+        'Date',
+        'performance',
+      ],
+    })
   })
 
   afterEach(() => {
     vi.useRealTimers()
   })
 
-  it('shows duration minus elapsed as mm:ss, clamped at 0', async () => {
-    const wrapper = mountClock({ durationSeconds: 60, elapsedSeconds: 25 })
-    expect(wrapper.find('.fc-timer').text()).toBe('00:35')
+  it('shows the duration initially and advances its own clock', async () => {
+    const wrapper = mountClock({ durationSeconds: 60 })
 
-    await wrapper.setProps({ elapsedSeconds: 65 })
-    expect(wrapper.find('.fc-timer').text()).toBe('00:00')
+    expect(wrapper.find('.fc-timer').text()).toBe('01:00')
+    expect(progress(wrapper).props('modelValue')).toBe(0)
+    expect(wrapper.emitted('started')).toHaveLength(1)
+
+    await vi.advanceTimersByTimeAsync(30_000)
+
+    expect(wrapper.find('.fc-timer').text()).toBe('00:30')
+    expect(progress(wrapper).props('modelValue')).toBe(50)
   })
 
-  it('computes the progress percentage', () => {
-    const half = mountClock({ durationSeconds: 60, elapsedSeconds: 30 })
-    expect(progress(half).props('modelValue')).toBe(50)
+  it('pauses once, freezes, and resumes from the frozen value', async () => {
+    const wrapper = mountClock({ durationSeconds: 60 })
 
-    const empty = mountClock({ durationSeconds: 0, elapsedSeconds: 0 })
-    expect(progress(empty).props('modelValue')).toBe(0)
+    await vi.advanceTimersByTimeAsync(10_000)
+    expect(wrapper.find('.fc-timer').text()).toBe('00:50')
+
+    await wrapper.setProps({ isPaused: true })
+    expect(wrapper.emitted('paused')).toHaveLength(1)
+    expect(progress(wrapper).classes()).toContain('timer-paused')
+
+    await vi.advanceTimersByTimeAsync(5_000)
+    expect(wrapper.find('.fc-timer').text()).toBe('00:50')
+
+    await wrapper.setProps({ isPaused: false })
+    await vi.advanceTimersByTimeAsync(5_000)
+
+    expect(wrapper.find('.fc-timer').text()).toBe('00:45')
+    expect(wrapper.emitted('paused')).toHaveLength(1)
   })
 
-  it('marks expiry when remaining reaches 0', async () => {
-    const wrapper = mountClock({ durationSeconds: 60, elapsedSeconds: 30 })
-    expect(wrapper.find('.timer-expired').exists()).toBe(false)
+  it('resets and emits started when the duration changes', async () => {
+    const wrapper = mountClock({ durationSeconds: 60 })
 
-    await wrapper.setProps({ elapsedSeconds: 60 })
+    await vi.advanceTimersByTimeAsync(10_000)
+    expect(wrapper.find('.fc-timer').text()).toBe('00:50')
 
-    expect(progress(wrapper).classes()).toContain('timer-expired')
+    await wrapper.setProps({ durationSeconds: 30 })
+
+    expect(wrapper.find('.fc-timer').text()).toBe('00:30')
+    expect(wrapper.emitted('started')).toHaveLength(2)
   })
 
-  it('emits expired when the supplied elapsed time reaches the duration', async () => {
-    const wrapper = mountClock({ durationSeconds: 60, elapsedSeconds: 59 })
+  it('restores mid-interval elapsed from startTimestamp once', async () => {
+    vi.setSystemTime(1_000_000)
+    const now = Date.now()
+    const wrapper = mountClock({
+      durationSeconds: 60,
+      startTimestamp: now - 10_000,
+    })
 
-    await wrapper.setProps({ elapsedSeconds: 60 })
+    await nextTick()
 
-    expect(wrapper.emitted('expired')).toBeTruthy()
+    expect(Date.now()).toBe(now)
+    expect(wrapper.props('startTimestamp')).toBe(now - 10_000)
+    expect(wrapper.find('.fc-timer').text()).toBe('00:50')
+
+    await vi.advanceTimersByTimeAsync(5_000)
+
+    expect(wrapper.find('.fc-timer').text()).toBe('00:45')
   })
 
-  it('runs the internal ticker only when elapsedSeconds is undefined', async () => {
-    const internal = mountClock({ durationSeconds: 3 })
-    expect(internal.find('.fc-timer').text()).toBe('00:03')
-
-    await vi.advanceTimersByTimeAsync(1000)
-    expect(internal.find('.fc-timer').text()).toBe('00:02')
-
-    const external = mountClock({ durationSeconds: 3, elapsedSeconds: 0 })
-    await vi.advanceTimersByTimeAsync(2000)
-    expect(external.find('.fc-timer').text()).toBe('00:03')
-    expect(external.emitted('expired')).toBeUndefined()
-  })
-
-  it('emits expired from the internal ticker at 0', async () => {
+  it('emits expired exactly once when the clock reaches zero', async () => {
     const wrapper = mountClock({ durationSeconds: 3 })
 
-    await vi.advanceTimersByTimeAsync(3000)
+    await vi.advanceTimersByTimeAsync(3_000)
 
     expect(wrapper.find('.fc-timer').text()).toBe('00:00')
-    expect(wrapper.emitted('expired')).toBeTruthy()
+    expect(wrapper.emitted('expired')).toHaveLength(1)
+    expect(progress(wrapper).classes()).toContain('timer-expired')
+
+    await vi.advanceTimersByTimeAsync(1_000)
+
+    expect(wrapper.emitted('expired')).toHaveLength(1)
+  })
+
+  it('handles a zero-duration allocation without repeating expired', async () => {
+    const wrapper = mountClock({ durationSeconds: 0 })
+
+    expect(wrapper.find('.fc-timer').text()).toBe('00:00')
+    expect(wrapper.emitted('expired')).toHaveLength(1)
+
+    await vi.advanceTimersByTimeAsync(1_000)
+
+    expect(wrapper.emitted('expired')).toHaveLength(1)
+  })
+
+  it('applies timeScale to the display clock', async () => {
+    const wrapper = mountClock({
+      durationSeconds: 59,
+      timeScale: 59 / 8,
+    })
+
+    await vi.advanceTimersByTimeAsync(8_000)
+
+    expect(wrapper.find('.fc-timer').text()).toBe('00:00')
+    expect(wrapper.emitted('expired')).toHaveLength(1)
   })
 })

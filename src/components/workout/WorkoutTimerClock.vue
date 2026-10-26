@@ -19,105 +19,154 @@
 <script setup lang="ts">
   import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 
+  const TICK_INTERVAL_MS = 250
+
   const props = withDefaults(
     defineProps<{
       durationSeconds: number
-      elapsedSeconds?: number
       startTimestamp?: number
       isPaused?: boolean
       showProgress?: boolean
+      timeScale?: number
     }>(),
     {
-      elapsedSeconds: undefined,
       startTimestamp: undefined,
       isPaused: false,
       showProgress: true,
+      timeScale: 1,
     }
   )
 
   const emit = defineEmits<{
+    (e: 'started'): void
+    (e: 'paused'): void
     (e: 'expired'): void
   }>()
 
-  // Local fallback elapsed for when elapsedSeconds is not explicitly passed
-  const localElapsed = ref(0)
-  let timerId: ReturnType<typeof setInterval> | null = null
+  const elapsedSeconds = ref(0)
+  let tickId: ReturnType<typeof setInterval> | null = null
+  let anchorNow = 0
+  let anchorElapsed = 0
+  let expiredEmitted = false
 
-  const effectiveElapsed = computed(() => {
-    if (props.elapsedSeconds !== undefined) {
-      return props.elapsedSeconds
-    }
-    return localElapsed.value
-  })
-
-  const remaining = computed(() =>
-    Math.max(0, props.durationSeconds - effectiveElapsed.value)
+  const duration = computed(() => Math.max(0, props.durationSeconds))
+  const scale = computed(() =>
+    Number.isFinite(props.timeScale) && props.timeScale > 0
+      ? props.timeScale
+      : 1
   )
-
+  const remaining = computed(() =>
+    Math.max(0, duration.value - elapsedSeconds.value)
+  )
   const isExpired = computed(() => remaining.value <= 0)
 
   const formattedTime = computed(() => {
-    const totalSecs = remaining.value
+    const totalSecs = Math.ceil(remaining.value)
     const m = Math.floor(totalSecs / 60)
     const s = totalSecs % 60
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
   })
 
   const progressPercent = computed(() =>
-    props.durationSeconds > 0
-      ? Math.min(
-          100,
-          ((props.durationSeconds - remaining.value) / props.durationSeconds) *
-            100
-        )
+    duration.value > 0
+      ? Math.min(100, (elapsedSeconds.value / duration.value) * 100)
       : 0
   )
 
-  function startInternalTicker() {
-    stopInternalTicker()
-    if (props.elapsedSeconds !== undefined) return
-
-    timerId = setInterval(() => {
-      if (!props.isPaused && remaining.value > 0) {
-        localElapsed.value++
-        if (localElapsed.value >= props.durationSeconds) {
-          stopInternalTicker()
-          emit('expired')
-        }
-      }
-    }, 1000)
+  function clampElapsed(value: number): number {
+    return Math.min(duration.value, Math.max(0, value))
   }
 
-  function stopInternalTicker() {
-    if (timerId) {
-      clearInterval(timerId)
-      timerId = null
+  function readElapsedFromAnchor(): number {
+    const deltaSeconds = (performance.now() - anchorNow) / 1000
+    return clampElapsed(anchorElapsed + deltaSeconds * scale.value)
+  }
+
+  function stopTicker() {
+    if (tickId) {
+      clearInterval(tickId)
+      tickId = null
+    }
+  }
+
+  function startTicker() {
+    stopTicker()
+    if (props.isPaused || isExpired.value) return
+
+    anchorNow = performance.now()
+    anchorElapsed = elapsedSeconds.value
+    tickId = setInterval(updateElapsed, TICK_INTERVAL_MS)
+  }
+
+  function updateElapsed() {
+    if (props.isPaused) return
+
+    elapsedSeconds.value = readElapsedFromAnchor()
+
+    if (isExpired.value) {
+      stopTicker()
+      if (!expiredEmitted) {
+        expiredEmitted = true
+        emit('expired')
+      }
+    }
+  }
+
+  function initialElapsed(): number {
+    if (props.startTimestamp === undefined) return 0
+
+    const elapsed = (Date.now() - props.startTimestamp) / 1000
+    if (!Number.isFinite(elapsed) || elapsed <= 0) return 0
+    return clampElapsed(elapsed * scale.value)
+  }
+
+  function resetClock() {
+    stopTicker()
+    expiredEmitted = false
+    elapsedSeconds.value = initialElapsed()
+
+    emit('started')
+
+    if (isExpired.value) {
+      expiredEmitted = true
+      emit('expired')
+      return
+    }
+
+    if (!props.isPaused) {
+      startTicker()
     }
   }
 
   watch(
     () => [props.durationSeconds, props.startTimestamp],
     () => {
-      localElapsed.value = 0
-      startInternalTicker()
+      resetClock()
     }
   )
 
   watch(
-    () => remaining.value,
-    (rem) => {
-      if (rem <= 0) {
-        emit('expired')
+    () => props.isPaused,
+    (paused) => {
+      if (paused) {
+        elapsedSeconds.value = readElapsedFromAnchor()
+        stopTicker()
+        emit('paused')
+        return
+      }
+
+      if (!isExpired.value) {
+        startTicker()
       }
     }
   )
 
   onMounted(() => {
-    startInternalTicker()
+    resetClock()
   })
 
   onUnmounted(() => {
-    stopInternalTicker()
+    stopTicker()
   })
 </script>
 

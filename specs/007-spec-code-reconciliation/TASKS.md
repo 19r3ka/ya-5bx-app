@@ -84,14 +84,14 @@ APPROVED: v0.4 2026-10-26
 
 ## Milestone 2: Self-driven clock and parent integration (R2)
 
-- [ ] T-005 (M-2, R2) Give the clock its own contract
+- [x] T-005 (M-2, R2) Give the clock its own contract
       Refs: R2, AC-2.1 (T2-1)
       Depends: none
       Files: `src/components/workout/WorkoutTimerClock.vue`, `src/components/workout/WorkoutTimerClock.spec.ts`
       Do: Remove the `elapsedSeconds` prop. Add `durationSeconds`, optional `startTimestamp`, `isPaused`, `showProgress` and `timeScale`. Derive elapsed from a monotonic anchor, not tick count. Emit `started` on mount/reset, `paused` when `isPaused` turns true, and `expired` exactly once at zero. Pause accumulates and stops; resume re-anchors. Reset on duration or start change.
       Done when: the component has no `elapsedSeconds`; tests cover initial display, progress, pause/resume, reset, `started`, `paused`, single `expired`, `timeScale` and zero duration; no double `expired`; tests pass.
       Out of scope: engine progression, visibility handling, wake lock.
-      Notes: `timeScale` preserves the documented 0:59 compressed tutorial demo. AC-2.2's hidden-period case is deferred with C2/C6 in SPEC §2.
+      Notes: `timeScale` preserves the documented 0:59 compressed tutorial demo. AC-2.2's hidden-period case is deferred with C2/C6 in SPEC §2. Evidence: `WorkoutTimerClock.vue` has no `elapsedSeconds` prop and uses a `performance.now()` anchor; `npx vitest run src/components/workout/WorkoutTimerClock.spec.ts` (7 passed: initial/progress, pause/resume, duration reset and `started`, startTimestamp restore, single `expired`, zero duration, `timeScale`). Full gate: `npm test` 239 passed; `npm run build`; full `npx eslint src/`.
 
 - [ ] T-006 (M-2, R2) Stop the parent tree from ticking
       Refs: R2, AC-2.1 (T2-1)
