@@ -1,0 +1,4 @@
+# Supported versions (single source).
+# OPENCODE is major.minor; NODE is the major.
+OPENCODE=2.1
+NODE=24
