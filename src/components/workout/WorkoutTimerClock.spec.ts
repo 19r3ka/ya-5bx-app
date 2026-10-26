@@ -115,6 +115,22 @@ describe('WorkoutTimerClock', () => {
     expect(wrapper.emitted('expired')).toHaveLength(1)
   })
 
+  it('emits expired when a pause lands on the deadline before the next tick', async () => {
+    const wrapper = mountClock({ durationSeconds: 3, timeScale: 100 })
+
+    await vi.advanceTimersByTimeAsync(30)
+    await wrapper.setProps({ isPaused: true })
+
+    expect(wrapper.find('.fc-timer').text()).toBe('00:00')
+    expect(wrapper.emitted('expired')).toHaveLength(1)
+    expect(wrapper.emitted('paused')).toHaveLength(1)
+
+    await wrapper.setProps({ isPaused: false })
+    await vi.advanceTimersByTimeAsync(1_000)
+
+    expect(wrapper.emitted('expired')).toHaveLength(1)
+  })
+
   it('handles a zero-duration allocation without repeating expired', async () => {
     const wrapper = mountClock({ durationSeconds: 0 })
 

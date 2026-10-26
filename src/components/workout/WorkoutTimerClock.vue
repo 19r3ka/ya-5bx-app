@@ -98,6 +98,13 @@
     tickId = setInterval(updateElapsed, TICK_INTERVAL_MS)
   }
 
+  function emitExpiredIfNeeded() {
+    if (isExpired.value && !expiredEmitted) {
+      expiredEmitted = true
+      emit('expired')
+    }
+  }
+
   function updateElapsed() {
     if (props.isPaused) return
 
@@ -105,10 +112,7 @@
 
     if (isExpired.value) {
       stopTicker()
-      if (!expiredEmitted) {
-        expiredEmitted = true
-        emit('expired')
-      }
+      emitExpiredIfNeeded()
     }
   }
 
@@ -151,6 +155,7 @@
       if (paused) {
         elapsedSeconds.value = readElapsedFromAnchor()
         stopTicker()
+        emitExpiredIfNeeded()
         emit('paused')
         return
       }
