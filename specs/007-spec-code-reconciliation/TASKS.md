@@ -104,14 +104,14 @@ APPROVED: v0.4 2026-10-26
 
 ## Milestone 3: Global style foundation and full scoped-style migration (R4)
 
-- [ ] T-007 (M-3, R4) Import and canonicalise the global sheet
+- [x] T-007 (M-3, R4) Import and canonicalise the global sheet
       Refs: R4, AC-4.1 (T3-1)
       Depends: none
       Files: `src/main.ts`, `src/style.css`, `src/App.vue`
       Do: Import `./style.css` after the typography sheet. Reword the rule comment so it no longer contains the literal `<style scoped>` phrase. Canonicalise the duplicated border, grid, cell, legend, keyframe and scrollbar classes; use the current `ProgressionMapGrid` definitions where the scoped and global values differ. Remove the empty scoped block from `App.vue`.
       Done when: `style.css` is imported exactly once; the empty `App.vue` block is gone; the canonical classes are documented in the sheet; no other component is migrated yet; tests/build pass.
       Out of scope: per-component class replacement (T-008 to T-012).
-      Notes: Required by T3-1: the sheet existed but was never loaded, so the old global classes were inert. This is not a new feature.
+      Notes: Required by T3-1: the sheet existed but was never loaded, so the old global classes were inert. This is not a new feature. Evidence: `src/main.ts` imports `./style.css` once after typography; `src/App.vue` has no style block; `src/style.css` documents the canonical layout, border, grid/cell/legend, scrollbar, component and keyframe classes using the current `ProgressionMapGrid` values. Full gate: `npm test` 240 passed; `npm run build`; full `npx eslint src/`; `npx prettier --check` on the three files.
 
 - [ ] T-008 (M-3, R4) Migrate the shared and layout components
       Refs: R4, AC-4.1 (T3-1)

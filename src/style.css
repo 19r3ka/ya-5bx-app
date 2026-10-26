@@ -1,77 +1,366 @@
 /* src/style.css — global non-Vuetify classes only */
-/* Rule: <style scoped> is forbidden except for keyframes (rules.md §2) */
+/*
+  Canonical global layer for feature 007.
+  Prefer Vuetify props and utilities. Keep only irreducible rules here:
+  keyframes, pseudo-elements, scrollbar suppression, watermark positioning,
+  exact-alpha borders, grid templates, fixed dimensions and multi-property
+  component classes.
+*/
+
+/* Layout and fixed widths */
+.max-width-600 {
+  max-width: 600px;
+}
+.matrix-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.main-content {
+  max-width: 1200px;
+}
+.timer-controls {
+  max-width: 400px;
+}
+.age-input {
+  max-width: 160px;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-50 {
+  z-index: 50;
+}
+
+/* Typography helpers without a Vuetify equivalent */
+.tracking-tight {
+  letter-spacing: -0.5px;
+}
+.tracking-wide {
+  letter-spacing: 1px;
+}
+.tracking-wider {
+  letter-spacing: 2px;
+}
+.tracking-widest {
+  letter-spacing: 0.2em;
+}
+.font-size-18 {
+  font-size: 18px;
+}
+.font-size-20 {
+  font-size: 20px;
+}
+.line-height-1 {
+  line-height: 1;
+}
+.opacity-25 {
+  opacity: 0.25;
+}
 
 /* Progression map grid */
 .grid-container {
   display: grid;
-  grid-template-columns: 32px repeat(12, 1fr);
-  gap: 4px;
-  min-width: 700px;
+  grid-template-columns: 36px repeat(12, minmax(28px, 1fr));
+  gap: 8px;
+  min-width: 680px;
 }
 .header-cell {
-  height: 32px;
-  line-height: 32px;
+  height: 28px;
+  font-size: 12px;
 }
 .progression-cell {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-width: 28px;
+  min-height: 28px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progression-cell:hover {
+  transform: scale(1.1);
 }
 .cell-current {
-  background: rgb(var(--v-theme-primary));
+  background-color: rgb(var(--v-theme-primary-container));
+  border: 2px solid rgb(var(--v-theme-primary));
+  box-shadow: 0 0 12px rgba(245, 166, 35, 0.4);
 }
 .cell-completed {
-  background: rgba(var(--v-theme-secondary), 0.2);
+  background-color: rgb(var(--v-theme-secondary-dim));
+  color: rgb(var(--v-theme-secondary));
 }
 .cell-goal {
-  border: 1.5px solid rgb(var(--v-theme-primary));
-  background: transparent;
-}
-.cell-eligible {
-  border: 1.5px solid rgb(var(--v-theme-warning));
+  border: 2px dashed rgb(var(--v-theme-secondary));
+  background-color: rgba(var(--v-theme-surface-elevated), 0.3);
 }
 .cell-locked {
-  background: rgb(var(--v-theme-surface-elevated));
-  opacity: 0.25;
+  background-color: rgb(var(--v-theme-surface-elevated));
+  opacity: 0.3;
 }
-
 .legend-current {
   width: 16px;
   height: 16px;
-  background: rgb(var(--v-theme-primary));
+  background-color: rgb(var(--v-theme-primary-container));
+  border: 1.5px solid rgb(var(--v-theme-primary));
 }
 .legend-done {
   width: 16px;
   height: 16px;
-  background: rgba(var(--v-theme-secondary), 0.2);
+  background-color: rgb(var(--v-theme-secondary-dim));
 }
 .legend-goal {
   width: 16px;
   height: 16px;
-  border: 1.5px solid rgb(var(--v-theme-primary));
+  border: 1.5px dashed rgb(var(--v-theme-secondary));
+  background-color: transparent;
 }
 .legend-locked {
   width: 16px;
   height: 16px;
-  background: rgb(var(--v-theme-surface-elevated));
-  opacity: 0.25;
+  background-color: rgb(var(--v-theme-surface-elevated));
+  opacity: 0.3;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-/* Accent borders — not coverable by Vuetify border utilities */
+/* Exact-alpha borders */
 .border-accent {
-  border: 1px solid rgba(var(--v-theme-primary-container), 0.3);
+  border: 1px solid rgba(var(--v-theme-outline-variant), 0.5);
 }
-.border-top-accent {
-  border-top: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
+.border-accent-soft {
+  border: 1px solid rgba(var(--v-theme-outline-variant), 0.3);
 }
 .border-surface-variant {
-  border: 1px solid rgba(var(--v-theme-outline-variant), 0.4);
+  border: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
 }
 .border-b-surface-variant {
   border-bottom: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
 }
+.border-top-accent {
+  border-top: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
+}
+.border-primary-soft {
+  border: 1px solid rgba(var(--v-theme-primary), 0.2);
+}
+.border-s-primary {
+  border-inline-start: 4px solid rgb(var(--v-theme-primary));
+}
+.border-s-secondary {
+  border-inline-start: 4px solid rgb(var(--v-theme-secondary));
+}
+.border-s-error {
+  border-inline-start: 4px solid rgb(var(--v-theme-error));
+}
+.border-s-primary-container {
+  border-inline-start: 4px solid rgb(var(--v-theme-primary-container));
+}
 
-/* Keyframe animations (only permitted scoped-like use) */
+/* Watermark positioning */
+.bg-watermark {
+  position: absolute;
+  opacity: 0.05;
+  pointer-events: none;
+}
+.watermark-tutorial {
+  right: -20px;
+  top: -20px;
+}
+.watermark-dashboard {
+  right: -40px;
+  top: -40px;
+}
+
+/* Shared component primitives */
+.progress-pip {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgb(var(--v-theme-surface-variant));
+  transition: background 300ms ease;
+}
+.progress-pip.active {
+  background: rgb(var(--v-theme-primary));
+}
+.bottom-nav {
+  height: 80px;
+}
+.nav-btn {
+  min-width: 64px;
+}
+.goal-card {
+  border-inline-start: 3px solid rgb(var(--v-theme-primary-container));
+}
+.card-footer {
+  border-top: 1px solid rgba(var(--v-theme-primary-container), 0.2);
+}
+.bar-chart {
+  height: 32px;
+}
+.bar {
+  width: 8px;
+  border-radius: 4px 4px 0 0;
+}
+.bar-1 {
+  height: 12px;
+  background: rgba(var(--v-theme-primary-container), 0.4);
+}
+.bar-2 {
+  height: 20px;
+  background: rgba(var(--v-theme-primary-container), 0.4);
+}
+.bar-3 {
+  height: 32px;
+  background: rgba(var(--v-theme-primary-container), 0.8);
+}
+.bar-4 {
+  height: 16px;
+  background: rgba(var(--v-theme-primary-container), 0.4);
+}
+.bar-5 {
+  height: 8px;
+  background: rgba(var(--v-theme-primary-container), 0.2);
+}
+.cardio-info,
+.tutorial-info {
+  background: rgba(var(--v-theme-secondary), 0.1);
+  border: 1px solid rgba(var(--v-theme-secondary), 0.2);
+}
+.tutorial-card {
+  border-inline-start: 4px solid rgb(var(--v-theme-primary));
+  position: relative;
+  overflow: hidden;
+}
+.tier-card-start {
+  border-inline-start: 4px solid rgb(var(--v-theme-error));
+}
+.tier-card-goal {
+  border-inline-start: 4px solid rgb(var(--v-theme-secondary));
+}
+.tier-title {
+  font-size: 24px;
+  line-height: 28px;
+}
+.submit-btn {
+  height: 64px;
+}
+.dialog-wrapper {
+  margin-bottom: 24px;
+}
+
+/* Workout components */
+.target-number {
+  font-size: 32px;
+  line-height: 40px;
+}
+.card-dialog {
+  padding-bottom: 64px !important;
+}
+.option-card {
+  height: 160px;
+  border: 2px solid transparent;
+}
+.selected-great {
+  border: 2px solid rgb(var(--v-theme-primary-container));
+}
+.selected-sore {
+  border: 2px solid rgb(var(--v-theme-primary));
+}
+.emoji-text {
+  font-size: 48px;
+  line-height: 1;
+}
+.rep-counter-card {
+  border-inline-start: 4px solid rgb(var(--v-theme-primary-container));
+}
+.stepper-btn {
+  width: 64px;
+  height: 64px;
+}
+.rep-number {
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+  animation: rep-pop 150ms ease-out;
+}
+.font-timer-display {
+  letter-spacing: -1px;
+}
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+.timer-expired {
+  animation: pulse-amber 1s ease-in-out infinite;
+}
+.timer-paused {
+  opacity: 0.6;
+}
+.timer-pulse {
+  border: 2px solid rgba(var(--v-theme-primary), 0.2);
+  animation: border-pulse 2s infinite;
+}
+
+/* View primitives */
+.accent-line {
+  height: 4px;
+  width: 48px;
+  background-color: rgb(var(--v-theme-primary));
+}
+.dot {
+  width: 8px;
+  height: 8px;
+}
+.radio-option {
+  border: 2px solid transparent;
+  background-color: rgb(var(--v-theme-surface-elevated));
+}
+.radio-selected {
+  border: 2px solid rgb(var(--v-theme-primary));
+  background-color: rgb(var(--v-theme-surface-elevated));
+}
+.btn-text {
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+.workout-card {
+  border-inline-start: 4px solid rgb(var(--v-theme-primary-container));
+}
+.tip-card {
+  border-inline-start: 4px solid rgb(var(--v-theme-primary));
+}
+.timer-text {
+  font-size: 18px;
+  line-height: 24px;
+}
+.streak-card {
+  background-color: rgba(var(--v-theme-secondary), 0.1);
+}
+.stat-card {
+  min-width: 100px;
+}
+.stat-number {
+  font-size: 24px;
+}
+.chart-container {
+  height: 128px;
+}
+.duration-label {
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+.milestone-card {
+  background-color: rgba(var(--v-theme-primary-container), 0.1);
+}
+.milestone-icon {
+  bottom: -16px;
+  right: -16px;
+  opacity: 0.1;
+  color: rgb(var(--v-theme-primary));
+}
+
+/* Keyframes */
 @keyframes pulse-amber {
   0%,
   100% {
@@ -81,13 +370,35 @@
     opacity: 0.4;
   }
 }
-@keyframes fc-fade-up {
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+.fc-fade-up {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes rep-pop {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes border-pulse {
+  0% {
+    border-color: rgba(var(--v-theme-primary), 0.2);
+  }
+  50% {
+    border-color: rgba(var(--v-theme-primary), 1);
+  }
+  100% {
+    border-color: rgba(var(--v-theme-primary), 0.2);
   }
 }

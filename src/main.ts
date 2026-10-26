@@ -5,6 +5,7 @@ import vuetify from '@/plugins/vuetify'
 import i18n from '@/plugins/i18n'
 import router from '@/router'
 import './assets/typography.css'
+import './style.css'
 
 const app = createApp(App)
 const pinia = createPinia()
