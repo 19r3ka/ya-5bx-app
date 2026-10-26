@@ -47,16 +47,17 @@ APPROVED: v0.1 2026-10-26
 
 ## Milestone 2: Phase documents become features (delivers R2, R3, R7)
 
-- [ ] T-02 Author the progression feature spec and plan
-      Refs: R2, R3, AC-2.1, AC-3.3, R7
-      Depends: T-01
-      Files: `specs/004-progression/SPEC.md` (owner-saved), `specs/004-progression/PLAN.md` (new)
-      Do: Derive requirements from the eight phase-3 outcomes: typed records, IndexedDB two-phase commit, contiguous-volume rule, telemetry staging and sealing, hydration barrier and store wiring, post-workout capture, progression map. Requirement IDs start at R1. In `PLAN.md` map each requirement to the current code paths (`src/core/StorageTypes.ts`, `src/core/storage/IndexedDBAdapter.ts`, `src/core/storage/HistoryAggregator.ts`, `src/core/telemetry/TelemetryService.ts`, `src/stores/useProgressionStore.ts`, `src/components/workout/PostWorkoutDialog.vue`, `src/components/progress/ProgressionMapGrid.vue`) and point at `design/phase3-implementation.md` for detail. Do not copy the phase-3 prose. The agent cannot write `SPEC.md`; hand the draft to the owner and tick this task only after the file exists.
-      Done when: `test -f specs/004-progression/SPEC.md && test -f specs/004-progression/PLAN.md`; the plan names only files that exist; `grep -n 'design/phase3-implementation.md' specs/004-progression/PLAN.md` matches.
-      Out of scope: task file, walkthrough, moving the design document.
-      Notes:
+- [~] T-02 Author the progression feature spec and plan
+  Refs: R2, R3, AC-2.1, AC-3.3, R7
+  Depends: T-01
+  Files: `specs/004-progression/SPEC.md` (owner-saved), `specs/004-progression/PLAN.md` (new)
+  Do: Derive requirements from the eight phase-3 outcomes: typed records, IndexedDB two-phase commit, contiguous-volume rule, telemetry staging and sealing, hydration barrier and store wiring, post-workout capture, progression map. Requirement IDs start at R1. In `PLAN.md` map each requirement to the current code paths (`src/core/StorageTypes.ts`, `src/core/storage/IndexedDBAdapter.ts`, `src/core/storage/HistoryAggregator.ts`, `src/core/telemetry/TelemetryService.ts`, `src/stores/useProgressionStore.ts`, `src/components/workout/PostWorkoutDialog.vue`, `src/components/progress/ProgressionMapGrid.vue`) and point at `design/phase3-implementation.md` for detail. Do not copy the phase-3 prose. The agent cannot write `SPEC.md`; hand the draft to the owner and tick this task only after the file exists.
+  Done when: `test -f specs/004-progression/SPEC.md && test -f specs/004-progression/PLAN.md`; the plan names only files that exist; `grep -n 'design/phase3-implementation.md' specs/004-progression/PLAN.md` matches.
+  Out of scope: task file, walkthrough, moving the design document.
+  Notes:
+  Evidence: `specs/004-progression/PLAN.md` written and points at `design/phase3-implementation.md`. SPEC draft staged at `/home/dev/.opencode/plan/004-progression-SPEC.md`; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
 
-- [ ] T-03 Author the progression tasks and walkthrough; move the phase-3 design
+- [x] T-03 Author the progression tasks and walkthrough; move the phase-3 design
       Refs: R2, R3, AC-3.1, AC-3.3, AC-2.2, R7
       Depends: T-02
       Files: `specs/004-progression/TASKS.md`, `specs/004-progression/WALKTHROUGH.md` (new), `specs/004-progression/design/phase3-implementation.md` (moved)
@@ -64,6 +65,7 @@ APPROVED: v0.1 2026-10-26
       Done when: `test -f specs/004-progression/TASKS.md && test -f specs/004-progression/WALKTHROUGH.md`; every `[x]` task has an `Evidence:` note; `grep -c 'Evidence:' specs/004-progression/TASKS.md` is 8; `test ! -d specs/phase3`.
       Out of scope: any `src/` change.
       Notes:
+      Evidence: `specs/004-progression/{TASKS,WALKTHROUGH}.md` (8 tasks, every tick has an `Evidence:` note); `design/phase3-implementation.md` moved; `specs/phase3` is gone. Verified 2026-10-26.
 
 - [ ] T-04 Author the UX feature spec and plan
       Refs: R2, AC-2.1, AC-2.2, R7
