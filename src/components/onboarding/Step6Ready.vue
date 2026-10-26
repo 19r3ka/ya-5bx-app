@@ -105,7 +105,7 @@
 
     <!-- Confirm Blank Name Dialog -->
     <v-dialog v-model="showConfirmDialog" max-width="420" persistent>
-      <v-card color="surface-elevated" rounded="xl" class="pa-6">
+      <v-card color="surface-elevated" rounded="lg" class="pa-6">
         <div class="d-flex align-center ga-3 mb-3">
           <v-icon color="secondary" size="28"
             >mdi-account-question-outline</v-icon

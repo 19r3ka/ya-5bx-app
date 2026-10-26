@@ -4,7 +4,7 @@
     max-width="500"
     @update:model-value="emit('update:modelValue', $event)"
   >
-    <v-card color="surface-elevated" rounded="xl" class="pa-6">
+    <v-card color="surface-elevated" rounded="lg" class="pa-6">
       <div class="d-flex justify-space-between align-center mb-4">
         <div class="d-flex align-center ga-2">
           <v-icon color="primary" size="28">mdi-information-outline</v-icon>

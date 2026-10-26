@@ -73,14 +73,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: other inline styles in the file.
       Notes: Use Vuetify before adding a global class. Vuetify's `.border-s-lg` declares `border-inline-start-color` after `.border-current`, so the permitted fallback is used: `.border-s-primary` in `src/style.css` sets the 4px primary start border. Evidence: inline-border grep returns zero; `border-s-primary` present in the component and global stylesheet; `npx eslint src/components/onboarding/Step3Ladder.vue` and `npm run build` pass.
 
-- [ ] T-004 (M-1, R1) Use the large card radius
+- [x] T-004 (M-1, R1) Use the large card radius
       Refs: R1, AC-1.2 (P2-3)
       Depends: none
       Files: `src/components/onboarding/Step6Ready.vue`, `src/components/common/AppHelpDialog.vue`
       Do: Change the two `rounded="xl"` cards to `rounded="lg"`.
       Done when: `grep -rn 'rounded="xl"' src/components/onboarding/Step6Ready.vue src/components/common/AppHelpDialog.vue` returns zero; both cards use the theme token.
       Out of scope: other radii and card styling.
-      Notes: The design system requires the large radius for cards.
+      Notes: The design system requires the large radius for cards. Evidence: both cards now use `rounded="lg"`; the `rounded="xl"` grep returns zero; `npx eslint` and `npm run build` pass.
 
 ## Milestone 2: Self-driven clock and parent integration (R2)
 
