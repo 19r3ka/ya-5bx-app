@@ -82,25 +82,25 @@ No runtime data. Document-level identifiers:
 
 ## 7. File changes
 
-| Path                                                               | New / Modified | Purpose                                                            |
-| ------------------------------------------------------------------ | -------------- | ------------------------------------------------------------------ |
-| `specs/003-specs-align/SPEC.md`                                    | New            | This feature's requirements (owner-saved; permission-guarded).     |
-| `specs/003-specs-align/PLAN.md`                                    | New            | This plan.                                                         |
-| `specs/003-specs-align/TASKS.md`                                   | New            | Ordered execution.                                                 |
-| `specs/003-specs-align/WALKTHROUGH.md`                             | New            | Session record.                                                    |
-| `specs/ROADMAP.md`                                                 | Modified       | Kit schema; same IDs; Built/Planned rows; out-of-scope pointer.    |
-| `specs/OUT_OF_SCOPE.md`                                            | New            | Shared register of permanently excluded capabilities with sources. |
-| `specs/004-progression/{SPEC,PLAN,TASKS,WALKTHROUGH}.md`           | New            | Phase 3 as a feature.                                              |
-| `specs/004-progression/design/phase3-implementation.md`            | Moved          | Detailed design.                                                   |
-| `specs/005-ux-implementation/{SPEC,PLAN,TASKS,WALKTHROUGH}.md`     | New            | Phase 4 as a feature.                                              |
-| `specs/005-ux-implementation/design/`                              | Moved          | UX spec, implementation plan, corrections, 16 mockups.             |
-| `specs/006-production-completion/{SPEC,PLAN,TASKS,WALKTHROUGH}.md` | New            | Phase 5 as a feature.                                              |
-| `specs/006-production-completion/design/phase5-specs.md`           | Moved          | Detailed production plan.                                          |
-| `specs/001-baseline/*.md`                                          | Modified       | True status, version, no banned names.                             |
-| `specs/002-gap-closure/*.md`                                       | Modified       | True status, version, stale notes removed.                         |
-| `DECISIONS.md`                                                     | Modified       | `D-012`.                                                           |
-| `specs/phase5/phase5-specs.md:Zone.Identifier`                     | Deleted        | Junk stream file.                                                  |
-| `specs/phase3`, `specs/phase4`, `specs/phase5`                     | Deleted        | Empty after the moves.                                             |
+| Path                                                               | New / Modified | Purpose                                                                                   |
+| ------------------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------- |
+| `specs/003-specs-align/SPEC.md`                                    | New            | This feature's requirements (owner-saved; permission-guarded).                            |
+| `specs/003-specs-align/PLAN.md`                                    | New            | This plan.                                                                                |
+| `specs/003-specs-align/TASKS.md`                                   | New            | Ordered execution.                                                                        |
+| `specs/003-specs-align/WALKTHROUGH.md`                             | New            | Session record.                                                                           |
+| `specs/ROADMAP.md`                                                 | Modified       | Kit schema; same IDs; Built/Planned rows; out-of-scope pointer.                           |
+| `specs/OUT_OF_SCOPE.md`                                            | New            | Shared register of permanently excluded capabilities with sources.                        |
+| `specs/004-progression/{SPEC,PLAN,TASKS,WALKTHROUGH}.md`           | New            | Phase 3 as a feature.                                                                     |
+| `specs/004-progression/design/phase3-implementation.md`            | Moved          | Detailed design.                                                                          |
+| `specs/005-ux-implementation/{SPEC,PLAN,TASKS,WALKTHROUGH}.md`     | New            | Phase 4 as a feature.                                                                     |
+| `specs/005-ux-implementation/design/`                              | Moved          | UX spec, implementation plan, corrections, functional-confidence notes, 22 mockup assets. |
+| `specs/006-production-completion/{SPEC,PLAN,TASKS,WALKTHROUGH}.md` | New            | Phase 5 as a feature.                                                                     |
+| `specs/006-production-completion/design/phase5-specs.md`           | Moved          | Detailed production plan.                                                                 |
+| `specs/001-baseline/*.md`                                          | Modified       | True status, version, no banned names.                                                    |
+| `specs/002-gap-closure/*.md`                                       | Modified       | True status, version, stale notes removed.                                                |
+| `DECISIONS.md`                                                     | Modified       | `D-012`.                                                                                  |
+| `specs/phase5/phase5-specs.md:Zone.Identifier`                     | Deleted        | Junk stream file.                                                                         |
+| `specs/phase3`, `specs/phase4`, `specs/phase5`                     | Deleted        | Empty after the moves.                                                                    |
 
 ## 8. Test strategy
 

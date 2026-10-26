@@ -6,12 +6,12 @@
 
 ## How to read this file
 
-1. A task is done only with an `Evidence:` note naming a file and a test or command.
+1. A task is done only with an evidence note naming a file and a test or command.
 2. The original phase-3 document is in `design/phase3-implementation.md`; where it disagrees with the code, the code wins and the deviation is recorded in `WALKTHROUGH.md` section 6.
 
 ## Conventions
 
-- Evidence format: `Evidence: <path> · <test file or command>`.
+- Evidence format: a path, then the test file or command.
 - Paths name the current tree, not the paths used when the phase started.
 - The delivered features are covered by `npm run build && npm run lint && npx vitest run`.
 

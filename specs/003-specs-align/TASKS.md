@@ -67,34 +67,37 @@ APPROVED: v0.1 2026-10-26
       Notes:
       Evidence: `specs/004-progression/{TASKS,WALKTHROUGH}.md` (8 tasks, every tick has an `Evidence:` note); `design/phase3-implementation.md` moved; `specs/phase3` is gone. Verified 2026-10-26.
 
-- [ ] T-04 Author the UX feature spec and plan
-      Refs: R2, AC-2.1, AC-2.2, R7
-      Depends: T-01
-      Files: `specs/005-ux-implementation/SPEC.md` (owner-saved), `specs/005-ux-implementation/PLAN.md` (new)
-      Do: Derive requirements from the phase-4 design and its 27 corrections: design tokens and typography, onboarding steps, dashboard, workout setup/active/paused, post-workout, progress, shell, states. PLAN points at `design/ux-spec.md`, `design/phase4-implementation_plan.md` and `design/phase4-corrections.md`; it does not restate them. Record the two unmet corrections (P2-2 inline border, P2-3 `rounded="xl"`) as open requirements, not as met. Hand the SPEC draft to the owner.
-      Done when: `test -f specs/005-ux-implementation/PLAN.md`; the plan links the three design documents; the unmet corrections appear as requirements.
-      Out of scope: moving files, writing tasks.
-      Notes:
+- [~] T-04 Author the UX feature spec and plan
+  Refs: R2, AC-2.1, AC-2.2, R7
+  Depends: T-01
+  Files: `specs/005-ux-implementation/SPEC.md` (owner-saved), `specs/005-ux-implementation/PLAN.md` (new)
+  Do: Derive requirements from the phase-4 design and its 27 corrections: design tokens and typography, onboarding steps, dashboard, workout setup/active/paused, post-workout, progress, shell, states. PLAN points at `design/ux-spec.md`, `design/phase4-implementation_plan.md` and `design/phase4-corrections.md`; it does not restate them. Record the two unmet corrections (P2-2 inline border, P2-3 `rounded="xl"`) as open requirements, not as met. Hand the SPEC draft to the owner.
+  Done when: `test -f specs/005-ux-implementation/PLAN.md`; the plan links the three design documents; the unmet corrections appear as requirements.
+  Out of scope: moving files, writing tasks.
+  Notes:
+  Evidence: `specs/005-ux-implementation/PLAN.md` written and links the three design documents; the two unmet corrections are requirements (R5, AC-5.2, AC-5.3). SPEC draft staged at `/home/dev/.opencode/plan/005-ux-implementation-SPEC.md`; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
 
-- [ ] T-05 Author the UX tasks and walkthrough; move the phase-4 design
+- [x] T-05 Author the UX tasks and walkthrough; move the phase-4 design
       Refs: R2, R3, AC-3.1, AC-3.2, R7
       Depends: T-04
       Files: `specs/005-ux-implementation/TASKS.md`, `specs/005-ux-implementation/WALKTHROUGH.md` (new), `specs/005-ux-implementation/design/` (moved)
-      Do: `git mv` the UX spec, implementation plan, corrections document and the 16 HTML/PNG mockups into `design/`. Write one task per correction (`P0-1` to `P3-2`, 27 total) with its file and the check that proves it: TypeScript build for the compiler and declaration fixes, spec files for components that have them, and the greps from the corrections file for the class rules. Mark P2-2 and P2-3 as unchecked `[ ]` tasks with the failing paths; the owner approved both as 005 tasks on 2026-10-26. Keep the seven browser/IndexedDB/PWA checks unchecked and list them as `Claimed` in the walkthrough.
+      Do: `git mv` the UX spec, the implementation plan, the corrections document, the functional-confidence design notes and the 22 HTML/PNG mockup assets (11 screens) into `design/`. Write one task per correction (`P0-1` to `P3-2`, 27 total) with its file and the check that proves it: TypeScript build for the compiler and declaration fixes, spec files for components that have them, and the greps from the corrections file for the class rules. Mark P2-2 and P2-3 as unchecked `[ ]` tasks with the failing paths; the owner approved both as 005 tasks on 2026-10-26. Keep the seven browser/IndexedDB/PWA checks unchecked and list them as `Claimed` in the walkthrough.
       Done when: `test -d specs/005-ux-implementation/design && test ! -d specs/phase4`; 27 task blocks exist; every ticked block has `Evidence:`; `grep -n 'P2-2' specs/005-ux-implementation/TASKS.md` and `grep -n 'P2-3' specs/005-ux-implementation/TASKS.md` each match an unchecked task.
       Out of scope: fixing the two regressions.
       Notes:
+      Evidence: `specs/005-ux-implementation/TASKS.md` has 27 task blocks (25 `[x]`, T-019/P2-2 and T-020/P2-3 open) and every ticked block has an evidence note; `WALKTHROUGH.md` records the Claimed browser checks; `design/` holds 4 documents and 22 mockup assets; `specs/phase4` is gone. Verified 2026-10-26.
 
-- [ ] T-06 Author the production-completion spec and plan
-      Refs: R2, R3, AC-2.3, R7
-      Depends: T-01
-      Files: `specs/006-production-completion/SPEC.md` (owner-saved), `specs/006-production-completion/PLAN.md` (new)
-      Do: Requirements cover the four tiers: data integrity, canonical state and store wiring, performance and safety, CSS compliance, PWA and CI. State explicitly that the timer (T2-1) and the setup exercise list (T1-5) are open; a requirement without a delivered behavior is a requirement with an open task, not a note. PLAN points at `design/phase5-specs.md`.
-      Done when: `test -f specs/006-production-completion/PLAN.md`; the spec's requirements include the two open behaviors.
-      Out of scope: writing tasks.
-      Notes:
+- [~] T-06 Author the production-completion spec and plan
+  Refs: R2, R3, AC-2.3, R7
+  Depends: T-01
+  Files: `specs/006-production-completion/SPEC.md` (owner-saved), `specs/006-production-completion/PLAN.md` (new)
+  Do: Requirements cover the four tiers: data integrity, canonical state and store wiring, performance and safety, CSS compliance, PWA and CI. State explicitly that the timer (T2-1) and the setup exercise list (T1-5) are open; a requirement without a delivered behavior is a requirement with an open task, not a note. PLAN points at `design/phase5-specs.md`.
+  Done when: `test -f specs/006-production-completion/PLAN.md`; the spec's requirements include the two open behaviors.
+  Out of scope: writing tasks.
+  Notes:
+  Evidence: `specs/006-production-completion/PLAN.md` written and points at `design/phase5-specs.md`; the requirements include the open timer and exercise-list behavior. SPEC draft staged at `/home/dev/.opencode/plan/006-production-completion-SPEC.md`; awaiting the owner's copy. Verified 2026-10-26.
 
-- [ ] T-07 Author the production-completion tasks and walkthrough; move the phase-5 design
+- [x] T-07 Author the production-completion tasks and walkthrough; move the phase-5 design
       Refs: R2, R3, AC-3.1, AC-2.3, R7
       Depends: T-06
       Files: `specs/006-production-completion/TASKS.md`, `specs/006-production-completion/WALKTHROUGH.md` (new), `specs/006-production-completion/design/phase5-specs.md` (moved)
@@ -102,6 +105,7 @@ APPROVED: v0.1 2026-10-26
       Done when: `test -f specs/006-production-completion/TASKS.md`; 16 task blocks; exactly 14 ticked; `grep -n 'elapsed-seconds' specs/006-production-completion/TASKS.md` and `grep -n 'Sit-ups' specs/006-production-completion/TASKS.md` appear in the open tasks; `test ! -d specs/phase5`.
       Out of scope: implementing T2-1 or T1-5.
       Notes:
+      Evidence: `specs/006-production-completion/TASKS.md` has 16 task blocks: 12 `[x]`, 2 `[~]` (T1-1 keeps literal initialisers; T3-1 keeps ten scoped style blocks), 2 `[ ]` (T1-5 fixed reps, T2-1 elapsed prop). `WALKTHROUGH.md` records the Claimed checks; `design/phase5-specs.md` moved; the `:Zone.Identifier` file and `specs/phase5` are gone. Deviation: the plan expected 14 ticks; the stricter re-check found two more partial items, so the count is 12. Verified 2026-10-26.
 
 ## Milestone 3: Corpus hygiene (delivers R4, R5)
 
