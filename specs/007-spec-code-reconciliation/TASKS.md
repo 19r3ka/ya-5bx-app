@@ -149,14 +149,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: grid state rules.
       Notes: The global classes must be updated to the grid's current values before the scoped block is removed. Evidence: the scoped block is gone, the legend now uses `.border-top-accent`, and all grid classes resolve to the canonical sheet. `npx vitest run src/components/progress/ProgressionMapGrid.spec.ts`: 6 passed; `npm run build`; full `npx eslint src/`.
 
-- [ ] T-012 (M-3, R4) Migrate the views
+- [x] T-012 (M-3, R4) Migrate the views
       Refs: R4, AC-4.1 (T3-1)
       Depends: T-011
       Files: `src/views/ActiveWorkoutView.vue`, `src/views/DashboardView.vue`, `src/views/OnboardingView.vue`, `src/views/ProgressView.vue`, `src/views/WorkoutSetupView.vue`
       Do: Remove every scoped block. Map containers to the canonical max-width classes, z-index to `.z-10`/`.z-50`, dots/timers/watermarks/bars/stat cards to the canonical sheet, and the radio selected/unselected borders to Vuetify plus the documented class. Do not change data-driven inline sizes.
       Done when: these five files contain no `<style scoped>`; tests/build/lint pass.
       Out of scope: route behavior, data flow, view content.
-      Notes: `OnboardingView`'s scoped `.v-window-item` rule is replaced by a global rule or a prop; do not leave a scoped selector.
+      Notes: `OnboardingView`'s scoped `.v-window-item` rule is replaced by a global rule or a prop; do not leave a scoped selector. Evidence: zero scoped blocks remain in `src/**/*.vue`; ActiveWorkout uses `.z-50`, `.max-width-600`, `.border-accent-soft`, `.timer-pulse`, `.timer-expired` and `.dialog-wrapper`; Dashboard uses `.z-50`, `.max-width-600` and `.watermark-dashboard`; Progress uses `.z-50`, `.border-primary-soft` and `.z-10`; Setup uses `.z-50`, `.max-width-600`, `.border-s-primary`, `.radio-*` and `w-100`; Onboarding uses `.z-10` and `.max-width-600`, and the scoped `.v-window-item` rule is unnecessary because each item already has Vuetify `.fill-height` (`height: 100% !important`). Full gate: `npm test` 240 passed; `npm run build`; full `npx eslint src/`; Prettier on all five views.
 
 - [ ] T-013 (M-3, R4) Enforce the zero-scoped contract
       Refs: R4, AC-4.1, V6 (T3-1)

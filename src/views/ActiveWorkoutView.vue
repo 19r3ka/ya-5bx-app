@@ -2,7 +2,7 @@
   <v-container class="pa-0 fill-height flex-column bg-background" fluid>
     <!-- Top Bar -->
     <header
-      class="w-100 px-6 pt-4 pb-0 bg-surface d-flex align-center justify-space-between h-touch-target-min header-bar"
+      class="w-100 px-6 pt-4 pb-0 bg-surface d-flex align-center justify-space-between h-touch-target-min z-50"
     >
       <div class="d-flex align-center ga-2">
         <v-icon color="primary">mdi-weight-lifter</v-icon>
@@ -30,7 +30,7 @@
     </header>
 
     <main
-      class="flex-grow-1 w-100 px-6 py-8 d-flex flex-column mx-auto position-relative main-container"
+      class="flex-grow-1 w-100 px-6 py-8 d-flex flex-column mx-auto position-relative max-width-600"
     >
       <v-alert
         v-if="showSealFailedBanner"
@@ -107,7 +107,7 @@
         <v-card
           v-if="nextInterval"
           color="surface"
-          class="pa-4 d-flex align-center ga-4 border-accent opacity-80 transition-opacity"
+          class="pa-4 d-flex align-center ga-4 border-accent-soft opacity-80 transition-opacity"
         >
           <v-icon size="48" color="surface-variant">mdi-run</v-icon>
           <div class="flex-grow-1">
@@ -411,52 +411,3 @@
     showSealFailedBanner.value = true
   }
 </script>
-
-<style scoped>
-  .header-bar {
-    z-index: 50;
-  }
-  .dot {
-    width: 8px;
-    height: 8px;
-  }
-  .main-container {
-    max-width: 600px;
-  }
-  .tracking-wider {
-    letter-spacing: 2px;
-  }
-  .border-accent {
-    border: 1px solid rgba(var(--v-theme-outline-variant), 0.3);
-  }
-  .dialog-wrapper {
-    margin-bottom: 24px;
-  }
-  @keyframes border-pulse {
-    0% {
-      border-color: rgba(var(--v-theme-primary), 0.2);
-    }
-    50% {
-      border-color: rgba(var(--v-theme-primary), 1);
-    }
-    100% {
-      border-color: rgba(var(--v-theme-primary), 0.2);
-    }
-  }
-  .timer-pulse {
-    border: 2px solid rgba(var(--v-theme-primary), 0.2);
-    animation: border-pulse 2s infinite;
-  }
-  .timer-expired {
-    animation: pulse-amber 1s ease-in-out infinite;
-  }
-  @keyframes pulse-amber {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.4;
-    }
-  }
-</style>

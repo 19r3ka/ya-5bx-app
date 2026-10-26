@@ -2,7 +2,7 @@
   <v-container class="pa-0 fill-height flex-column bg-background" fluid>
     <!-- Top AppBar -->
     <header
-      class="w-100 px-6 pt-4 pb-0 bg-surface d-flex align-center justify-space-between h-touch-target-min position-sticky top-0 header-bar"
+      class="w-100 px-6 pt-4 pb-0 bg-surface d-flex align-center justify-space-between h-touch-target-min position-sticky top-0 z-50"
     >
       <div class="d-flex align-center ga-4">
         <v-icon color="primary">mdi-weight-lifter</v-icon>
@@ -16,7 +16,7 @@
       ></v-btn>
     </header>
 
-    <main class="flex-grow-1 w-100 px-6 pb-32 pt-8 mx-auto setup-container">
+    <main class="flex-grow-1 w-100 px-6 pb-32 pt-8 mx-auto max-width-600">
       <v-alert
         v-if="targetNotice"
         type="warning"
@@ -49,7 +49,7 @@
       </div>
 
       <!-- Routine Overview -->
-      <v-card color="surface" rounded="lg" class="pa-6 mb-8 overview-card">
+      <v-card color="surface" rounded="lg" class="pa-6 mb-8 border-s-primary">
         <h3
           class="fc-body-strong text-primary mb-2 d-flex align-center ga-2 text-uppercase"
         >
@@ -137,7 +137,7 @@
           color="primary-container"
           size="x-large"
           rounded="lg"
-          class="px-8 text-on-primary-container h-auto py-5 start-btn"
+          class="px-8 text-on-primary-container h-auto py-5 w-100 start-btn"
           @click="beginWorkout"
         >
           <span class="fc-section text-uppercase btn-text">Begin workout</span>
@@ -285,44 +285,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .header-bar {
-    z-index: 50;
-  }
-  .setup-container {
-    max-width: 600px;
-  }
-  .tracking-wider {
-    letter-spacing: 2px;
-  }
-  .accent-line {
-    height: 4px;
-    width: 48px;
-    background-color: rgb(var(--v-theme-primary));
-  }
-  .overview-card {
-    border-left: 4px solid rgb(var(--v-theme-primary));
-  }
-  .border-accent {
-    border: 1px solid rgba(var(--v-theme-outline-variant), 0.5);
-  }
-  .font-size-18 {
-    font-size: 18px;
-  }
-  .radio-option {
-    border: 2px solid transparent;
-    background-color: rgb(var(--v-theme-surface-elevated));
-  }
-  .radio-selected {
-    border: 2px solid rgb(var(--v-theme-primary));
-    background-color: rgb(var(--v-theme-surface-elevated));
-  }
-  .start-btn {
-    width: 100%;
-  }
-  .btn-text {
-    font-size: 24px;
-    letter-spacing: 2px;
-  }
-</style>

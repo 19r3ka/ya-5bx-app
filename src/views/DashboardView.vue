@@ -2,7 +2,7 @@
   <v-container class="pa-0 fill-height flex-column bg-background" fluid>
     <!-- Top Bar -->
     <header
-      class="w-100 px-6 pt-4 pb-0 bg-surface d-flex align-center justify-space-between h-touch-target-min position-sticky top-0 header-bar"
+      class="w-100 px-6 pt-4 pb-0 bg-surface d-flex align-center justify-space-between h-touch-target-min position-sticky top-0 z-50"
     >
       <div class="d-flex align-center ga-2">
         <v-icon color="primary">mdi-weight-lifter</v-icon>
@@ -16,7 +16,7 @@
       ></v-btn>
     </header>
 
-    <main class="flex-grow-1 w-100 px-6 pb-32 pt-8 mx-auto dashboard-container">
+    <main class="flex-grow-1 w-100 px-6 pb-32 pt-8 mx-auto max-width-600">
       <v-skeleton-loader
         v-if="!progressionStore.isHydrated"
         type="card, article"
@@ -42,7 +42,7 @@
           rounded="lg"
           class="mb-6 position-relative overflow-hidden workout-card"
         >
-          <div class="position-absolute bg-watermark">
+          <div class="position-absolute bg-watermark watermark-dashboard">
             <v-icon size="180">mdi-run</v-icon>
           </div>
 
@@ -335,45 +335,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .header-bar {
-    z-index: 50;
-  }
-  .dashboard-container {
-    max-width: 600px;
-  }
-  .tracking-wider {
-    letter-spacing: 2px;
-  }
-  .workout-card {
-    border-left: 4px solid rgb(var(--v-theme-primary-container));
-  }
-  .bg-watermark {
-    right: -40px;
-    top: -40px;
-    opacity: 0.05;
-  }
-  .font-size-20 {
-    font-size: 20px;
-  }
-  .timer-text {
-    font-size: 18px;
-    line-height: 24px;
-  }
-  .streak-card {
-    background-color: rgba(var(--v-theme-secondary), 0.1);
-  }
-  .line-height-1 {
-    line-height: 1;
-  }
-  .font-size-18 {
-    font-size: 18px;
-  }
-  .border-surface-variant {
-    border: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .tip-card {
-    border-left: 4px solid rgb(var(--v-theme-primary));
-  }
-</style>

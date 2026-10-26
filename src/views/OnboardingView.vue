@@ -3,7 +3,7 @@
     <!-- Top Bar for steps 2-6 (index 2-6) -->
     <div
       v-if="currentStep > 1"
-      class="w-100 px-6 pt-4 pb-0 bg-surface position-absolute top-0 top-bar"
+      class="w-100 px-6 pt-4 pb-0 bg-surface position-absolute top-0 z-10"
     >
       <div
         class="d-flex align-center justify-space-between h-touch-target-min mx-auto max-width-600"
@@ -132,15 +132,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .top-bar {
-    z-index: 10;
-  }
-  .max-width-600 {
-    max-width: 600px;
-  }
-  .v-window-item {
-    height: 100%;
-  }
-</style>

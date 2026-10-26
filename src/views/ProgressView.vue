@@ -2,7 +2,7 @@
   <v-container class="pa-0 fill-height flex-column bg-background" fluid>
     <!-- Top AppBar -->
     <header
-      class="w-100 px-6 pt-4 pb-0 bg-surface d-flex align-center justify-space-between h-touch-target-min position-sticky top-0 app-header"
+      class="w-100 px-6 pt-4 pb-0 bg-surface d-flex align-center justify-space-between h-touch-target-min position-sticky top-0 z-50"
     >
       <div class="d-flex align-center ga-4">
         <v-icon color="primary">mdi-weight-lifter</v-icon>
@@ -123,9 +123,9 @@
 
         <v-col cols="12" md="4">
           <v-card
-            class="pa-6 rounded-lg border-primary-variant h-100 d-flex flex-column justify-space-between position-relative overflow-hidden milestone-card"
+            class="pa-6 rounded-lg border-primary-soft h-100 d-flex flex-column justify-space-between position-relative overflow-hidden milestone-card"
           >
-            <div class="position-relative z-index-10">
+            <div class="position-relative z-10">
               <h4 class="fc-section text-primary mb-2 text-uppercase">
                 NEXT MILESTONE
               </h4>
@@ -136,7 +136,7 @@
                 {{ nextMilestone.remainingText }}
               </p>
             </div>
-            <div class="position-relative mt-6 z-index-10">
+            <div class="position-relative mt-6 z-10">
               <div
                 class="d-flex justify-space-between fc-caption text-on-surface mb-2"
               >
@@ -333,43 +333,3 @@
     }
   })
 </script>
-
-<style scoped>
-  .app-header {
-    z-index: 50;
-  }
-  .main-content {
-    max-width: 1200px;
-  }
-  .stat-card {
-    min-width: 100px;
-  }
-  .stat-number {
-    font-size: 24px;
-  }
-  .chart-container {
-    height: 128px;
-  }
-  .duration-label {
-    font-size: 10px;
-    margin-bottom: 4px;
-  }
-  .milestone-card {
-    background-color: rgba(var(--v-theme-primary-container), 0.1);
-  }
-  .z-index-10 {
-    z-index: 10;
-  }
-  .milestone-icon {
-    bottom: -16px;
-    right: -16px;
-    opacity: 0.1;
-    color: rgb(var(--v-theme-primary));
-  }
-  .border-surface-variant {
-    border: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .border-primary-variant {
-    border: 1px solid rgba(var(--v-theme-primary), 0.2);
-  }
-</style>
