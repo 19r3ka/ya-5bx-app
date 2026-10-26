@@ -151,6 +151,9 @@
 </script>
 
 <style scoped>
+  .border-s-primary {
+    border-inline-start: 4px solid rgb(var(--v-theme-primary));
+  }
   .fc-fade-up {
     animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   }

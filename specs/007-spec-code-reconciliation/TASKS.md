@@ -71,7 +71,7 @@ APPROVED: v0.4 2026-10-26
       Do: Replace `style="border-left: 4px solid rgb(var(--v-theme-primary))"` with the Vuetify combination `border-s-lg border-current text-primary` (or the documented global fallback if the class combination is not reliable in the manual check).
       Done when: `grep -rn 'style=.*border' src/components/onboarding/Step3Ladder.vue` returns zero; the card still has a 4px primary left border; a component assertion or static check covers the class.
       Out of scope: other inline styles in the file.
-      Notes: Use Vuetify before adding a global class. Vuetify's `.border-s-lg` declares `border-inline-start-color` after `.border-current`, so the permitted fallback is used: `.border-s-primary` in `src/style.css` sets the 4px primary start border. Evidence: inline-border grep returns zero; `border-s-primary` present in the component and global stylesheet; `npx eslint src/components/onboarding/Step3Ladder.vue` and `npm run build` pass.
+      Notes: Use Vuetify before adding a global class. Vuetify's `.border-s-lg` declares `border-inline-start-color` after `.border-current`, so the permitted fallback is used. Because `src/style.css` is not loaded until T-007, the fallback rule is temporarily in this component's existing scoped block; T-008 to T-012 must migrate it with the rest of the block. Evidence: inline-border grep returns zero; active `.border-s-primary` rule present; `npx eslint src/components/onboarding/Step3Ladder.vue` and `npm run build` pass.
 
 - [x] T-004 (M-1, R1) Use the large card radius
       Refs: R1, AC-1.2 (P2-3)

@@ -58,9 +58,6 @@
 }
 
 /* Accent borders — not coverable by Vuetify border utilities */
-.border-s-primary {
-  border-inline-start: 4px solid rgb(var(--v-theme-primary));
-}
 .border-accent {
   border: 1px solid rgba(var(--v-theme-primary-container), 0.3);
 }

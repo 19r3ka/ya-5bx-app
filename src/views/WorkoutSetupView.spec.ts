@@ -4,8 +4,7 @@ import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia, type Pinia } from 'pinia'
 import { createVuetify } from 'vuetify'
 import chartsMatrixJson from '@/core/data/charts_matrix.json'
-import { AerobicOption } from '@/core/EngineTypes'
-import { ClassicRCAFStrategy } from '@/core/ClassicRCAFStrategy'
+import exerciseDictionaryJson from '@/core/data/exercise_dictionary.json'
 import i18n from '@/plugins/i18n'
 import WorkoutSetupView from '@/views/WorkoutSetupView.vue'
 import { useUserStore } from '@/stores/useUserStore'
@@ -102,52 +101,46 @@ describe('WorkoutSetupView session target', () => {
 
   it('renders chart-derived reps and durations for every chart/level pair', async () => {
     const { wrapper, userStore } = mountSetup()
-    const strategy = new ClassicRCAFStrategy()
-    const matrix = chartsMatrixJson as Record<string, Record<string, unknown>>
+    const matrix = chartsMatrixJson as Record<
+      string,
+      Record<string, Record<string, number>>
+    >
+    const dictionary = exerciseDictionaryJson as Record<
+      string,
+      { variants: { classic_rcaf: { volume_scaler_coefficient: number } } }
+    >
 
-    const formatDuration = (totalSeconds: number): string => {
-      const minutes = Math.floor(totalSeconds / 60)
-      const seconds = totalSeconds % 60
-      return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
-    }
+    const expectedDurations = ['02:00', '01:00', '01:00', '01:00', '06:00']
 
     for (const [chart, levels] of Object.entries(matrix)) {
-      for (const level of Object.keys(levels)) {
+      for (const [level, data] of Object.entries(levels)) {
         userStore.profile = {
           isOnboardingCompleted: true,
           currentLevel: `C${chart}_${level}`,
         }
         await nextTick()
 
-        const expected = strategy.generateWorkout({
-          sessionToken: 'setup-test',
-          profile: { age: 30 },
-          chartNumber: Number(chart),
-          levelString: level,
-          aerobicSelection: AerobicOption.STATIONARY_RUN,
-          isModernSafeMode: false,
+        const expectedTargets = [1, 2, 3, 4].map((exercise) => {
+          const coefficient =
+            dictionary[`ex_${exercise}`].variants.classic_rcaf
+              .volume_scaler_coefficient
+          const rawReps = data[`exercise_${exercise}_reps`]
+          return `${Math.round(rawReps * coefficient)} Reps`
         })
-        const cards = wrapper.findAll('[data-testid="setup-interval"]')
+        expectedTargets.push('Aerobic')
 
-        expect(cards).toHaveLength(expected.length)
+        const cards = wrapper.findAll('[data-testid="setup-interval"]')
+        expect(cards).toHaveLength(5)
         expect(
           cards.map((card) =>
             card.find('[data-testid="setup-interval-target"]').text()
           )
-        ).toEqual(
-          expected.map((interval) =>
-            interval.targetReps === undefined
-              ? 'Aerobic'
-              : `${interval.targetReps} Reps`
-          )
-        )
+        ).toEqual(expectedTargets)
         expect(
           cards.map((card) =>
             card.find('[data-testid="setup-interval-duration"]').text()
           )
-        ).toEqual(
-          expected.map((interval) => formatDuration(interval.durationSeconds))
-        )
+        ).toEqual(expectedDurations)
       }
     }
   })
