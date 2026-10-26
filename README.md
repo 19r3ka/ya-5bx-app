@@ -103,8 +103,7 @@ Web/PWA. Client-side static build deployable to any web host or usable offline a
 
 ## Roadmap
 
-- [ ] Complete active Phase specs in `specs/`
-- [ ] Add automated unit testing suite (Vitest/Playwright)
+See [`specs/ROADMAP.md`](specs/ROADMAP.md). It lists Target items (wanted, not built); items are pulled into a feature spec by ID.
 
 ## Contributing
 

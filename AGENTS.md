@@ -1,4 +1,4 @@
-<!-- sdd-kit v0.2.2 -->
+<!-- sdd-kit v0.3.0 -->
 
 # AGENTS.md
 
@@ -124,9 +124,12 @@ Precedence when files conflict (highest first):
 
 ## 9. Git
 
-- One commit per task, working state only (tests green).
-- Message format: `type(scope): summary`, types: feat, fix, refactor, test, docs, chore. Add the task id.
-- Branch per feature: `feat/<slug>`. Follow `CONTRIBUTING` or husky hooks if present.
+- Never work on the default branch. Before editing, run `git branch --show-current`.
+- On the default branch? If the active feature folder is `specs/NNN-slug/`, create and switch to `feat/NNN-slug` from an up-to-date default branch. Otherwise stop and ask. Never invent another branch name.
+- Do not create worktrees, switch to branches you did not create, or delete branches. One agent per working tree.
+- One commit per task, working state only (tests green). Message format: `type(scope): summary`, types: feat, fix, refactor, test, docs, chore. Add the task id.
+- Push only your feature branch (`git push -u origin HEAD`) at the end of a session. Never push the default branch. Merging is the owner's job.
+- Follow `CONTRIBUTING` or husky hooks if present.
 
 ## 10. Task protocol
 
