@@ -29,7 +29,7 @@
       </p>
 
       <div
-        class="d-flex justify-space-between align-center px-4 py-3 bg-surface rounded-lg border-accent"
+        class="d-flex justify-space-between align-center px-4 py-3 bg-surface rounded-lg border-surface-variant"
       >
         <span class="fc-caption text-on-surface-variant text-uppercase"
           >Target</span
@@ -52,16 +52,3 @@
     (e: 'update:modelValue', val: boolean): void
   }>()
 </script>
-
-<style scoped>
-  .tracking-wide {
-    letter-spacing: 1px;
-  }
-  .border-accent {
-    border: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .target-number {
-    font-size: 32px;
-    line-height: 40px;
-  }
-</style>

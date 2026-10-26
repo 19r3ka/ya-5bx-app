@@ -128,27 +128,3 @@
     emit('logged', reps.value)
   }
 </script>
-
-<style scoped>
-  .rep-counter-card {
-    border-left: 4px solid rgb(var(--v-theme-primary-container));
-  }
-  .stepper-btn {
-    width: 64px;
-    height: 64px;
-  }
-  .rep-number {
-    display: inline-block;
-    min-width: 80px;
-    text-align: center;
-    animation: rep-pop 150ms ease-out;
-  }
-  @keyframes rep-pop {
-    from {
-      transform: scale(1.1);
-    }
-    to {
-      transform: scale(1);
-    }
-  }
-</style>

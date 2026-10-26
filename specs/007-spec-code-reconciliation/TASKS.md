@@ -131,14 +131,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: onboarding copy and step behavior.
       Notes: The tutorial's compressed timer is preserved through T-005/T-006. Evidence: all six files have no style block; `muted-text` became `opacity-90`; static max-widths use `.max-width-400`/`.max-width-600`; the exercise index uses `.exercise-number`; the tutorial watermark uses `.watermark-tutorial`; Step6 uses `text-on-primary-container` instead of `#291800`. Full gate: `npm test` 240 passed; `npm run build`; full `npx eslint src/`; `npx prettier --write` on all seven files.
 
-- [ ] T-010 (M-3, R4) Migrate the workout components
+- [x] T-010 (M-3, R4) Migrate the workout components
       Refs: R4, AC-4.1 (T3-1)
       Depends: T-009
       Files: `src/components/workout/ExerciseInfoSheet.vue`, `src/components/workout/PostWorkoutDialog.vue`, `src/components/workout/WorkoutRepOverridePanel.vue`, `src/components/workout/WorkoutTimerClock.vue`
       Do: Remove every scoped block. Map tracking, borders, emoji/font sizes and card heights to Vuetify/global classes; move `rep-pop` and the timer animation classes to the canonical sheet. The timer classes must use the already-canonical `pulse-amber`.
       Done when: these four files contain no `<style scoped>`; the timer tests still pass; tests/build/lint pass.
       Out of scope: dialog seal lifecycle and rep rules.
-      Notes: `pulse-amber` is already global; do not duplicate it.
+      Notes: `pulse-amber` is already global; do not duplicate it. Evidence: all four files have no style block; ExerciseInfoSheet maps its surface-variant border to `.border-surface-variant`; PostWorkoutDialog uses `.text-on-primary-container`; `rep-pop` and the timer animation classes resolve to the canonical sheet. Targeted `npx vitest run` on the timer, dialog, rep panel, ActiveWorkout and tutorial specs: 24 passed. `npm run build` and full `npx eslint src/` pass; Prettier ran on all four files.
 
 - [ ] T-011 (M-3, R4) Migrate the progression grid
       Refs: R4, AC-4.1 (T3-1)

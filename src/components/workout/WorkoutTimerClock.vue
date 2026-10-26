@@ -174,27 +174,3 @@
     stopTicker()
   })
 </script>
-
-<style scoped>
-  .font-timer-display {
-    letter-spacing: -1px;
-  }
-  .tabular-nums {
-    font-variant-numeric: tabular-nums;
-  }
-  .timer-expired {
-    animation: pulse-amber 1s ease-in-out infinite;
-  }
-  .timer-paused {
-    opacity: 0.6;
-  }
-  @keyframes pulse-amber {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.4;
-    }
-  }
-</style>

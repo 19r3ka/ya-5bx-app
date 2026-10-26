@@ -60,7 +60,7 @@
         block
         size="x-large"
         rounded="lg"
-        class="text-on-primary-fixed"
+        class="text-on-primary-container"
         @click="save"
         :disabled="!selected || isSealing"
         :loading="isSealing"
@@ -164,35 +164,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .card-dialog {
-    padding-bottom: 64px !important;
-  }
-  .tracking-widest {
-    letter-spacing: 0.2em;
-  }
-  .tracking-wide {
-    letter-spacing: 1px;
-  }
-  .option-card {
-    height: 160px;
-    border: 2px solid transparent;
-  }
-  .selected-great {
-    border: 2px solid rgb(var(--v-theme-primary-container));
-  }
-  .selected-sore {
-    border: 2px solid rgb(var(--v-theme-primary));
-  }
-  .emoji-text {
-    font-size: 48px;
-    line-height: 1;
-  }
-  .border-top-accent {
-    border-top: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .text-on-primary-fixed {
-    color: #291800 !important;
-  }
-</style>
