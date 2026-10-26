@@ -158,14 +158,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: route behavior, data flow, view content.
       Notes: `OnboardingView`'s scoped `.v-window-item` rule is replaced by a global rule or a prop; do not leave a scoped selector. Evidence: zero scoped blocks remain in `src/**/*.vue`; ActiveWorkout uses `.z-50`, `.max-width-600`, `.border-accent-soft`, `.timer-pulse`, `.timer-expired` and `.dialog-wrapper`; Dashboard uses `.z-50`, `.max-width-600` and `.watermark-dashboard`; Progress uses `.z-50`, `.border-primary-soft` and `.z-10`; Setup uses `.z-50`, `.max-width-600`, `.border-s-primary`, `.radio-*` and `w-100`; Onboarding uses `.z-10` and `.max-width-600`, and the scoped `.v-window-item` rule is unnecessary because each item already has Vuetify `.fill-height` (`height: 100% !important`). Full gate: `npm test` 240 passed; `npm run build`; full `npx eslint src/`; Prettier on all five views.
 
-- [ ] T-013 (M-3, R4) Enforce the zero-scoped contract
+- [x] T-013 (M-3, R4) Enforce the zero-scoped contract
       Refs: R4, AC-4.1, V6 (T3-1)
       Depends: T-012
       Files: `src/__smoke__/style-contract.spec.ts` (new)
       Do: Add a headless Vitest contract test over `src/**/*.vue` that fails on any `<style scoped>`, the `Step3Ladder` inline border, `rounded="xl"` in the two P2-3 files, `:elapsed-seconds`, the legacy setup strings, and writable progression literals.
       Done when: the contract test passes; `grep -rn '<style scoped' src --include='*.vue'` returns zero; `grep -rn ':elapsed-seconds' src --include='*.vue'` returns zero; tests/build/lint pass; the 22-vs-10 finding is recorded in the walkthrough.
       Out of scope: a general-purpose registry (R9 is deferred).
-      Notes: This is the V6 contract for the six-defect scope and runs on the headless host.
+      Notes: This is the V6 contract for the six-defect scope and runs on the headless host. Evidence: `src/__smoke__/style-contract.spec.ts` has six checks (zero scoped blocks, Step3 inline border, P2-3 radius, no `:elapsed-seconds`, legacy setup strings, derived progression); `npx vitest run src/__smoke__/style-contract.spec.ts` 6 passed; full `npm test` 246 passed; `npm run build`; full `npx eslint src/`; both static greps return zero. The 22-vs-10 finding is recorded as F-007-1 in `specs/007-spec-code-reconciliation/WALKTHROUGH.md`.
 
 ## Milestone 4: Source-task evidence, final verification and walkthrough (R5, R6, R7)
 
