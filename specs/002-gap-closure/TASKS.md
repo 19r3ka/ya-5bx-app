@@ -174,7 +174,7 @@
 
 ## Blocked / questions
 
-- **SPEC.md not yet in place.** The owner's permission rules deny agent edits to `**/SPEC.md`. The 2026-10-25 draft in `/tmp/opencode` was lost when temp storage was cleared; it was reconstructed on 2026-10-26 as `specs/002-gap-closure/SPEC-draft.md`. The owner must move that file to `specs/002-gap-closure/SPEC.md` (`mv specs/002-gap-closure/SPEC-draft.md specs/002-gap-closure/SPEC.md`). (raised by agent 2026-10-25, updated 2026-10-26)
+- ~~**SPEC.md not yet in place.**~~ Resolved 2026-10-26: the owner saved `specs/002-gap-closure/SPEC.md` in commit `807af7f`; the reconstructed `SPEC-draft.md` was removed. The spec still carries a reconstruction note that mentions the old draft path; only the owner can edit it.
 - ~~**Q1 (SPEC §9):** 30–34 row~~ Answered 2026-10-25: `C4_C+` (RCAF source); data corrected in T-14.
 
 ## Coverage matrix
@@ -190,8 +190,25 @@
 
 ## Phase reviews
 
-- M-1: review blocked (provider quota 429) · M-2: review blocked · M-3: review blocked · M-4: review blocked · M-5: review blocked · M-6: review blocked
-- Reviewer calls failed on 2026-10-25 with a 429 quota error (retry ~12 h). No milestone is cleared. The owner must re-run the review before merge.
+- M-1 to M-6: reviewer available again on 2026-10-26. One combined review round run; findings and dispositions below. No milestone is marked cleared (owner's call).
+
+### Review round 1 (2026-10-26)
+
+The reviewer subagent has no file access in this harness, so the production, test and locale diffs were pasted inline.
+
+| #   | Finding                                                             | Disposition                                                                             |
+| --- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| 1   | `safeWriteJson`/`safeRemove` read the storage global outside `try`  | Fixed: `getStorage()` guards the lookup; test with a throwing getter added.             |
+| 2   | No test at the setup boundary for AC-3.3/AC-3.5                     | Fixed: `src/views/WorkoutSetupView.spec.ts` (4 tests: fallback, valid, throw, history). |
+| 3   | `persistDraft` writes `draftStep` for both `step` and `currentStep` | Rejected: `main` already wrote both from `draftStep`; no behavior change.               |
+| 4   | Guard-precedence test re-implements the `main.ts` guard             | Accepted risk, logged as follow-up; extracting the guard is out of scope.               |
+| 5   | Removed age characterization blocks instead of flipping them        | Fixed: replacement test asserts no chart-only export and pins 18/25 to the table.       |
+| 6   | History assumed newest-last                                         | Fixed: newest chosen by `completedAt`; out-of-order test added.                         |
+| 7   | Failed draft removal after a successful profile write is silent     | Rejected: profile is safe, stale draft is harmless; the warning copy would be false.    |
+| 8   | Table tests miss below-first/above-last                             | Rejected: already covered by the 5/0 → `null` and 61/120 → last-row tests.              |
+| 9   | Locale test does not detect hardcoded copy                          | Rejected: AC-8.1 is verified by the grep gate plus the three component specs.           |
+
+Evidence: suite 228/228, `npm run build` ok, `npm run lint` clean.
 
 ---
 
