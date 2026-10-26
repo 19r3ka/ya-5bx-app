@@ -6,7 +6,7 @@
         <h3 class="fc-body-strong text-on-surface mb-1">
           Peak fitness target for age group {{ ageRange }}
         </h3>
-        <p class="fc-body text-on-surface-variant mb-0 muted-text">
+        <p class="fc-body text-on-surface-variant mb-0 opacity-90">
           Targeting Chart {{ chartNumber }} for optimal metabolic efficiency,
           cardiovascular longevity, and core stabilization.
         </p>
@@ -33,45 +33,3 @@
     ageRange: string
   }>()
 </script>
-
-<style scoped>
-  .goal-card {
-    border-left: 3px solid rgb(var(--v-theme-primary-container));
-  }
-  .muted-text {
-    opacity: 0.9;
-  }
-  .card-footer {
-    border-top: 1px solid rgba(var(--v-theme-primary-container), 0.2);
-  }
-  .bar-chart {
-    height: 32px;
-  }
-  .bar {
-    width: 8px;
-    border-radius: 4px 4px 0 0;
-  }
-  .bar-1 {
-    height: 12px;
-    background: rgba(var(--v-theme-primary-container), 0.4);
-  }
-  .bar-2 {
-    height: 20px;
-    background: rgba(var(--v-theme-primary-container), 0.4);
-  }
-  .bar-3 {
-    height: 32px;
-    background: rgba(var(--v-theme-primary-container), 0.8);
-  }
-  .bar-4 {
-    height: 16px;
-    background: rgba(var(--v-theme-primary-container), 0.4);
-  }
-  .bar-5 {
-    height: 8px;
-    background: rgba(var(--v-theme-primary-container), 0.2);
-  }
-  .tracking-tight {
-    letter-spacing: -0.5px;
-  }
-</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height d-flex flex-column justify-space-between pa-6">
-    <div class="mt-8 w-100 mx-auto" style="max-width: 400px">
+    <div class="mt-8 w-100 mx-auto max-width-400">
       <h1 class="fc-section text-primary text-center tracking-widest mb-2">
         ONBOARDING STEP 02
       </h1>
@@ -91,12 +91,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .tracking-widest {
-    letter-spacing: 0.2em;
-  }
-  .age-input {
-    max-width: 160px;
-  }
-</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height d-flex flex-column justify-space-between pa-6">
-    <div class="flex-grow-1 w-100 mx-auto" style="max-width: 600px">
+    <div class="flex-grow-1 w-100 mx-auto max-width-600">
       <h2 class="fc-exercise text-primary text-uppercase mb-2">
         CHOOSE YOUR DRILLS
       </h2>
@@ -18,9 +18,7 @@
         <v-expansion-panel v-for="(exercise, index) in exercises" :key="index">
           <v-expansion-panel-title class="h-touch-target-min">
             <div class="d-flex align-center ga-4 w-100">
-              <span
-                class="fc-timer text-primary"
-                style="font-size: 24px; line-height: 24px; width: 32px"
+              <span class="fc-timer text-primary exercise-number"
                 >0{{ index + 1 }}</span
               >
               <span class="fc-body-strong text-on-surface">{{
@@ -88,7 +86,7 @@
       </v-expansion-panels>
     </div>
 
-    <div class="w-100 mt-6 mx-auto" style="max-width: 600px">
+    <div class="w-100 mt-6 mx-auto max-width-600">
       <v-btn
         color="primary-container"
         block
@@ -180,16 +178,3 @@
     },
   ]
 </script>
-
-<style scoped>
-  .border-top-accent {
-    border-top: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .border-accent {
-    border: 1px solid rgba(var(--v-theme-outline-variant), 0.5);
-  }
-  .cardio-info {
-    background: rgba(var(--v-theme-secondary), 0.1);
-    border: 1px solid rgba(var(--v-theme-secondary), 0.2);
-  }
-</style>

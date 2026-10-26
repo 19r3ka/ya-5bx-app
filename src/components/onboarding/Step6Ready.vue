@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height d-flex flex-column pa-6">
-    <div class="flex-grow-1 w-100 mx-auto" style="max-width: 600px">
+    <div class="flex-grow-1 w-100 mx-auto max-width-600">
       <div class="mb-8 mt-8">
         <h2 class="fc-exercise text-primary text-uppercase mb-2">
           {{ $t('onboarding.ready.eyebrow') }}
@@ -78,13 +78,13 @@
       </div>
     </div>
 
-    <div class="w-100 mx-auto" style="max-width: 600px">
+    <div class="w-100 mx-auto max-width-600">
       <v-btn
         color="primary-container"
         block
         size="x-large"
         rounded="md"
-        class="mb-4 text-on-primary-fixed submit-btn"
+        class="mb-4 text-on-primary-container submit-btn"
         @click="handleProceed(true)"
       >
         <span class="fc-exercise font-size-20">{{
@@ -177,31 +177,3 @@
     })
   }
 </script>
-
-<style scoped>
-  .tracking-wide {
-    letter-spacing: 1px;
-  }
-  .tier-card-start {
-    border-left: 4px solid rgb(var(--v-theme-error));
-  }
-  .tier-card-goal {
-    border-left: 4px solid rgb(var(--v-theme-secondary));
-  }
-  .tier-title {
-    font-size: 24px;
-    line-height: 28px;
-  }
-  .line-height-1 {
-    line-height: 1;
-  }
-  .submit-btn {
-    height: 64px;
-  }
-  .font-size-20 {
-    font-size: 20px;
-  }
-  .text-on-primary-fixed {
-    color: #291800 !important;
-  }
-</style>

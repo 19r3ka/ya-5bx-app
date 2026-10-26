@@ -122,14 +122,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: the unused legacy components' product behavior.
       Notes: `ProgressionMap.vue` and `WorkoutTimer.vue` are legacy but are still in scope per the owner's "all components" decision. Evidence: all five files have no style block; AppHelpDialog uses the canonical `.border-surface-variant`; WorkoutTimer uses the `.timer-controls` class instead of the id; `ProgressionMap` uses `.matrix-container`; `BottomNav` uses `.bottom-nav`, `.border-top-accent`, `.nav-btn`; `OnboardingProgress` uses `.progress-pip`. Full gate: `npm test` 240 passed; `npm run build`; full `npx eslint src/`.
 
-- [ ] T-009 (M-3, R4) Migrate the onboarding components
+- [x] T-009 (M-3, R4) Migrate the onboarding components
       Refs: R4, AC-4.1 (T3-1)
       Depends: T-008
       Files: `src/components/onboarding/GoalChartCard.vue`, `src/components/onboarding/Step2Age.vue`, `src/components/onboarding/Step3Ladder.vue`, `src/components/onboarding/Step4Exercises.vue`, `src/components/onboarding/Step5Tutorial.vue`, `src/components/onboarding/Step6Ready.vue`
       Do: Remove every scoped block. Map tracking, opacity, radii and layout to Vuetify/global classes; move the goal bars, tier borders, tutorial watermark/info panel and submit height to the canonical sheet; keep P2-2 and P2-3 changes.
       Done when: these six files contain no `<style scoped>`; tests/build/lint pass.
       Out of scope: onboarding copy and step behavior.
-      Notes: The tutorial's compressed timer is preserved through T-005/T-006.
+      Notes: The tutorial's compressed timer is preserved through T-005/T-006. Evidence: all six files have no style block; `muted-text` became `opacity-90`; static max-widths use `.max-width-400`/`.max-width-600`; the exercise index uses `.exercise-number`; the tutorial watermark uses `.watermark-tutorial`; Step6 uses `text-on-primary-container` instead of `#291800`. Full gate: `npm test` 240 passed; `npm run build`; full `npx eslint src/`; `npx prettier --write` on all seven files.
 
 - [ ] T-010 (M-3, R4) Migrate the workout components
       Refs: R4, AC-4.1 (T3-1)

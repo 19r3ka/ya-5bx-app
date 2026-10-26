@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-6 fill-height flex-column">
-    <div class="flex-grow-1 w-100 mt-8 mx-auto" style="max-width: 600px">
+    <div class="flex-grow-1 w-100 mt-8 mx-auto max-width-600">
       <h2 class="fc-exercise text-on-surface text-uppercase mb-2">
         The Ladder
       </h2>
@@ -110,7 +110,7 @@
       </v-card>
     </div>
 
-    <div class="w-100 mx-auto" style="max-width: 600px">
+    <div class="w-100 mx-auto max-width-600">
       <v-btn
         color="primary-container"
         block
@@ -149,28 +149,3 @@
     'A+',
   ]
 </script>
-
-<style scoped>
-  .border-s-primary {
-    border-inline-start: 4px solid rgb(var(--v-theme-primary));
-  }
-  .fc-fade-up {
-    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  .opacity-25 {
-    opacity: 0.25;
-  }
-  .opacity-40 {
-    opacity: 0.4;
-  }
-</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height d-flex flex-column pa-6">
-    <div class="mb-8 mt-8 w-100 mx-auto" style="max-width: 600px">
+    <div class="mb-8 mt-8 w-100 mx-auto max-width-600">
       <h2 class="fc-exercise text-primary mb-2 text-uppercase">
         How to Log a Set
       </h2>
@@ -9,10 +9,12 @@
       </p>
     </div>
 
-    <div class="flex-grow-1 w-100 mx-auto" style="max-width: 600px">
+    <div class="flex-grow-1 w-100 mx-auto max-width-600">
       <!-- Interactive Tutorial Card -->
       <v-card color="surface" rounded="lg" class="pa-6 tutorial-card mb-8">
-        <v-icon size="120" class="position-absolute bg-watermark"
+        <v-icon
+          size="120"
+          class="position-absolute bg-watermark watermark-tutorial"
           >mdi-run</v-icon
         >
 
@@ -65,7 +67,7 @@
       </v-card>
     </div>
 
-    <div class="w-100 mx-auto" style="max-width: 600px">
+    <div class="w-100 mx-auto max-width-600">
       <v-expand-transition>
         <v-btn
           v-if="isLogged"
@@ -101,23 +103,3 @@
     isLogged.value = true
   }
 </script>
-
-<style scoped>
-  .tutorial-card {
-    border-left: 4px solid rgb(var(--v-theme-primary));
-    position: relative;
-    overflow: hidden;
-  }
-  .bg-watermark {
-    right: -20px;
-    top: -20px;
-    opacity: 0.05;
-  }
-  .tracking-wide {
-    letter-spacing: 1px;
-  }
-  .tutorial-info {
-    background: rgba(var(--v-theme-secondary), 0.1);
-    border: 1px solid rgba(var(--v-theme-secondary), 0.2);
-  }
-</style>
