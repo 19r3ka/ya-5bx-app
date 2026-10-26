@@ -1,6 +1,6 @@
 # SPEC: Specification corpus alignment
 
-**Feature ID:** 003-specs-align · **Status:** Draft · **Version:** 0.1 · **Updated:** 2026-10-26
+**Feature ID:** 003-specs-align · **Status:** Implemented · **Version:** 0.1 · **Updated:** 2026-10-26
 
 > WHAT and WHY only. Technology and file-level design are in `PLAN.md`. Every requirement and criterion has an ID so tasks and tests can cite it.
 
