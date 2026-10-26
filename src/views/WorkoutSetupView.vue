@@ -62,81 +62,37 @@
 
         <div class="d-flex flex-column ga-3">
           <v-card
+            v-for="interval in previewIntervals"
+            :key="interval.exerciseId"
             color="surface"
             class="pa-4 d-flex align-center justify-space-between rounded-lg border-accent"
+            data-testid="setup-interval"
           >
             <div class="d-flex align-center ga-4">
               <v-avatar color="surface-elevated" class="text-primary">
-                <v-icon>mdi-human-handsup</v-icon>
+                <v-icon>{{ intervalIcon(interval) }}</v-icon>
               </v-avatar>
               <div>
-                <p class="fc-body-strong text-on-surface">Stretching</p>
-                <p class="fc-caption text-content-tertiary">
-                  Warm-up · 2 Minutes
+                <p
+                  class="fc-body-strong text-on-surface"
+                  data-testid="setup-interval-name"
+                >
+                  {{ interval.displayName }}
+                </p>
+                <p
+                  class="fc-caption text-content-tertiary"
+                  data-testid="setup-interval-target"
+                >
+                  {{ intervalTargetLabel(interval) }}
                 </p>
               </div>
             </div>
-            <span class="fc-timer text-content-secondary font-size-18"
-              >02:00</span
+            <span
+              class="fc-timer text-content-secondary font-size-18"
+              data-testid="setup-interval-duration"
             >
-          </v-card>
-
-          <v-card
-            color="surface"
-            class="pa-4 d-flex align-center justify-space-between rounded-lg border-accent"
-          >
-            <div class="d-flex align-center ga-4">
-              <v-avatar color="surface-elevated" class="text-primary">
-                <v-icon>mdi-weight-lifter</v-icon>
-              </v-avatar>
-              <div>
-                <p class="fc-body-strong text-on-surface">Sit-ups</p>
-                <p class="fc-caption text-content-tertiary">3 Sets · 15 Reps</p>
-              </div>
-            </div>
-            <span class="fc-rep-target text-content-secondary font-size-18"
-              >45 Total</span
-            >
-          </v-card>
-
-          <v-card
-            color="surface"
-            class="pa-4 d-flex align-center justify-space-between rounded-lg border-accent"
-          >
-            <div class="d-flex align-center ga-4">
-              <v-avatar color="surface-elevated" class="text-primary">
-                <v-icon>mdi-human</v-icon>
-              </v-avatar>
-              <div>
-                <p class="fc-body-strong text-on-surface">Push-ups</p>
-                <p class="fc-caption text-content-tertiary">
-                  2 Sets · Max Reps
-                </p>
-              </div>
-            </div>
-            <v-icon color="content-tertiary">mdi-trending-up</v-icon>
-          </v-card>
-
-          <v-card
-            color="surface"
-            class="pa-4 d-flex align-center justify-space-between rounded-lg border-accent"
-          >
-            <div class="d-flex align-center ga-4">
-              <v-avatar color="surface-elevated" class="text-primary">
-                <v-icon>{{ selectedOption?.icon ?? 'mdi-run' }}</v-icon>
-              </v-avatar>
-              <div>
-                <p class="fc-body-strong text-on-surface">
-                  {{ selectedOption?.label ?? 'Aerobic Exercise' }}
-                </p>
-                <p class="fc-caption text-content-tertiary">
-                  Finishing Movement · 6 Minutes
-                </p>
-              </div>
-            </div>
-            <span class="fc-timer text-content-secondary font-size-18"
-              >06:00</span
-            >
+              {{ formatDuration(interval.durationSeconds) }}
+            </span>
           </v-card>
         </div>
       </v-card>
@@ -201,7 +157,8 @@
   import { useWorkoutEngine } from '@/composables/useWorkoutEngine'
   import { useProgressionStore } from '@/stores/useProgressionStore'
   import { useUserStore } from '@/stores/useUserStore'
-  import { AerobicOption } from '@/core/EngineTypes'
+  import { ClassicRCAFStrategy } from '@/core/ClassicRCAFStrategy'
+  import { AerobicOption, type WorkoutInterval } from '@/core/EngineTypes'
   import { resolveSessionTarget } from '@/utils/sessionTarget'
   import AppHelpDialog from '@/components/common/AppHelpDialog.vue'
 
@@ -211,10 +168,22 @@
   const progressionStore = useProgressionStore()
   const userStore = useUserStore()
   const showHelp = ref(false)
-  const targetNotice = ref<string | null>(null)
   const generationFailed = ref(false)
+  const strategy = new ClassicRCAFStrategy()
 
   const aerobic = ref(userStore.profile?.preferredAerobic ?? 'stationary')
+
+  const sessionTarget = computed(() =>
+    resolveSessionTarget(
+      userStore.profile?.currentLevel,
+      progressionStore.rawHistory
+    )
+  )
+  const targetNotice = computed(() =>
+    sessionTarget.value.source === 'profile'
+      ? null
+      : `Chart ${sessionTarget.value.chartNumber} · Level ${sessionTarget.value.levelString}`
+  )
 
   watch(aerobic, (newVal) => {
     userStore.setPreferredAerobic(newVal)
@@ -244,17 +213,54 @@
     }
   }
 
+  const previewIntervals = computed<WorkoutInterval[]>(() => {
+    try {
+      return strategy.generateWorkout({
+        sessionToken: 'setup-preview',
+        profile: {
+          age: userStore.profile?.age ?? 30,
+          name: userStore.profile?.name,
+        },
+        chartNumber: sessionTarget.value.chartNumber,
+        levelString: sessionTarget.value.levelString,
+        aerobicSelection: mapAerobicOption(aerobic.value),
+        isModernSafeMode: false,
+      })
+    } catch {
+      return []
+    }
+  })
+
+  const formatDuration = (totalSeconds: number): string => {
+    const minutes = Math.floor(totalSeconds / 60)
+    const seconds = totalSeconds % 60
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+  }
+
+  const intervalTargetLabel = (interval: WorkoutInterval): string =>
+    interval.targetReps === undefined
+      ? 'Aerobic'
+      : `${interval.targetReps} Reps`
+
+  const intervalIcon = (interval: WorkoutInterval): string => {
+    switch (interval.exerciseId) {
+      case 'ex_1':
+        return 'mdi-human-handsup'
+      case 'ex_2':
+        return 'mdi-weight-lifter'
+      case 'ex_3':
+        return 'mdi-human'
+      case 'ex_4':
+        return 'mdi-dumbbell'
+      default:
+        return selectedOption.value?.icon ?? 'mdi-run'
+    }
+  }
+
   function beginWorkout() {
     unlock()
 
-    const target = resolveSessionTarget(
-      userStore.profile?.currentLevel,
-      progressionStore.rawHistory
-    )
-    targetNotice.value =
-      target.source === 'profile'
-        ? null
-        : `Chart ${target.chartNumber} · Level ${target.levelString}`
+    const target = sessionTarget.value
     generationFailed.value = false
 
     try {

@@ -55,14 +55,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: history fallback, profile shape, validation rules.
       Notes: Resolves the owner decision left open in 006 T-004 by choosing derived state. Evidence: `src/stores/useProgressionStore.ts`, `src/stores/useProgressionStore.spec.ts` · `npx vitest run src/stores/useProgressionStore.spec.ts` (6 passed) · `npm run build` · `npx eslint src/stores/useProgressionStore.ts src/stores/useProgressionStore.spec.ts` · literal grep returns zero.
 
-- [ ] T-002 (M-1, R3) Build the setup list from the chart and level
+- [x] T-002 (M-1, R3) Build the setup list from the chart and level
       Refs: R3, AC-3.1 (T1-5)
       Depends: T-001
       Files: `src/views/WorkoutSetupView.vue`, `src/views/WorkoutSetupView.spec.ts`
       Do: Resolve the target once with `resolveSessionTarget`, build a preview with `ClassicRCAFStrategy.generateWorkout`, render the five intervals with `v-for`, show target reps when present and duration for every interval, and remove the fixed "3 Sets · 15 Reps" and "45 Total" strings. Reuse the same target in `beginWorkout`.
       Done when: a single test iterates every chart/level pair in `src/core/data/charts_matrix.json` and asserts the rendered reps and durations match the oracle; chart-1/D- and chart-3/D+ are examples, not the full coverage; the fixed strings are gone; build and tests pass.
       Out of scope: session generation rules, aerobic option list, start-flow error handling.
-      Notes: The strategy is the single source for reps, names and durations; no sets/total values are invented.
+      Notes: The strategy is the single source for reps, names and durations; no sets/total values are invented. Evidence: `src/views/WorkoutSetupView.vue`, `src/views/WorkoutSetupView.spec.ts` · `npx vitest run src/views/WorkoutSetupView.spec.ts` (8 passed, including every chart/level pair) · `npm run build` · `npx eslint` · legacy-string grep returns zero.
 
 - [ ] T-003 (M-1, R1) Remove the inline border from the ladder
       Refs: R1, AC-1.1 (P2-2)
