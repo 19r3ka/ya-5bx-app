@@ -97,10 +97,7 @@
 
 ## 7. Open items and exact fixes
 
-1. Copy the three staged specs (owner):
-   `cp /home/dev/.opencode/plan/004-progression-SPEC.md specs/004-progression/SPEC.md`
-   `cp /home/dev/.opencode/plan/005-ux-implementation-SPEC.md specs/005-ux-implementation/SPEC.md`
-   `cp /home/dev/.opencode/plan/006-production-completion-SPEC.md specs/006-production-completion/SPEC.md`
+1. Copy the three staged drafts (004, 005, 006) from the agent's plan directory into the matching feature folder; the close-out message carries the exact commands.
 2. Trim the draft wrapper from `specs/003-specs-align/SPEC.md` (first five lines, including the copy instruction and the guard note).
 3. Reword AC-4.2 so it does not contain a temporary path or a draft file name.
 4. Resolve CP-1 (below) for AC-6.2.

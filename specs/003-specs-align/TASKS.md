@@ -127,7 +127,7 @@ APPROVED: v0.1 2026-10-26
       Done when: `grep -rn '/tmp/\|SPEC-draft' specs/002-gap-closure/` returns nothing; `grep -n 'T-01 to T-15' specs/002-gap-closure/WALKTHROUGH.md` matches; `grep -rniF -f ~/projects/sdd-kit/scripts/docs-rules/banned-names.txt specs/002-gap-closure/` returns nothing; the task-file diff touches no task body.
       Out of scope: review-finding history.
       Notes:
-      Evidence: 002 SPEC is v0.2 Implemented, the reconstruction note is removed, PLAN is v0.2 Delivered, and the walkthrough range is T-01 to T-15. `grep -rn '/tmp/opencode' specs/002-gap-closure` returns nothing. Task text unchanged. Verified 2026-10-26.
+      Evidence: 002 SPEC is v0.2 Implemented, the reconstruction note is removed, PLAN is v0.2 Delivered, and the walkthrough range is T-01 to T-15. a search for the old temporary path in `specs/002-gap-closure` returns nothing. Task text unchanged. Verified 2026-10-26.
 
 - [~] T-10 Sweep banned names, emoji headings and stale artefact references
   Refs: R4, AC-4.1, AC-4.3
