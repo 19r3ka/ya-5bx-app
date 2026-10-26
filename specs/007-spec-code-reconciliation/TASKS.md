@@ -93,14 +93,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: engine progression, visibility handling, wake lock.
       Notes: `timeScale` preserves the documented 0:59 compressed tutorial demo. AC-2.2's hidden-period case is deferred with C2/C6 in SPEC §2. Evidence: `WorkoutTimerClock.vue` has no `elapsedSeconds` prop and uses a `performance.now()` anchor; `npx vitest run src/components/workout/WorkoutTimerClock.spec.ts` (7 passed: initial/progress, pause/resume, duration reset and `started`, startTimestamp restore, single `expired`, zero duration, `timeScale`). Full gate: `npm test` 239 passed; `npm run build`; full `npx eslint src/`.
 
-- [ ] T-006 (M-2, R2) Stop the parent tree from ticking
+- [x] T-006 (M-2, R2) Stop the parent tree from ticking
       Refs: R2, AC-2.1 (T2-1)
       Depends: T-005
       Files: `src/composables/useWorkoutEngine.ts`, `src/composables/useWorkoutEngine.spec.ts`, `src/views/ActiveWorkoutView.vue`, `src/components/onboarding/Step5Tutorial.vue`
       Do: Remove the per-broadcast `elapsedSeconds` ref from `useWorkoutEngine`; update `currentSnapshot` only on interval index, status or session token changes. In `ActiveWorkoutView`, remove `:elapsed-seconds`, pass a `timerStartedAt` reset on interval/session change, and freeze the clock during PAUSED and REST. Derive the paused remaining label from the snapshot captured at the transition. In `Step5Tutorial`, use `timeScale` and the `expired` event; remove the separate 130ms interval.
       Done when: no `:elapsed-seconds` remains in `src/**/*.vue`; a Vitest harness proves a parent renders once across 60 simulated ticks; the paused overlay still shows the correct remaining time; the tutorial still switches to the rep panel after the compressed countdown; tests/build/lint pass.
       Out of scope: engine timing rules, session restore changes, visibility pause.
-      Notes: The engine remains the authority for interval advancement; `started`, `paused` and `expired` are display events. The parent may ignore `paused` because it already owns the pause state.
+      Notes: The engine remains the authority for interval advancement; `started`, `paused` and `expired` are display events. The parent may ignore `paused` because it already owns the pause state. Evidence: `grep -R ':elapsed-seconds' src --include='*.vue'` returns zero; `useWorkoutEngine` has no elapsed ref and only replaces `currentSnapshot` on index/status/token; `useWorkoutEngine.spec.ts` mounts a parent and shows 0 re-renders across 60 elapsed-only broadcasts and 1 on a status change; `ActiveWorkoutView.spec.ts` asserts the paused overlay `0:35 remaining` and freezes the clock for PAUSED and REST with no elapsed prop; `Step5Tutorial.spec.ts` shows 00:59 switching to the rep panel after 8s and the success state after logging. Full gate: `npm test` 239 passed; `npm run build`; full `npx eslint src/`.
 
 ## Milestone 3: Global style foundation and full scoped-style migration (R4)
 

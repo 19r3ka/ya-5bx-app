@@ -1,4 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent, h, nextTick } from 'vue'
+import { mount } from '@vue/test-utils'
 import {
   AerobicOption,
   type SessionSnapshot,
@@ -164,6 +166,49 @@ describe('useWorkoutEngine', () => {
       expect.objectContaining({ sessionToken: newToken })
     )
     expect(mocks.instance.startWorkout).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not expose elapsed state or re-render on elapsed-only broadcasts', async () => {
+    const { useWorkoutEngine } = await loadComposable()
+    const api = useWorkoutEngine()
+
+    expect(api.elapsedSeconds).toBeUndefined()
+
+    let renders = 0
+    const Parent = defineComponent({
+      setup() {
+        const parentApi = useWorkoutEngine()
+        return () => {
+          renders += 1
+          return h('div', parentApi.snapshot.value?.status ?? 'none')
+        }
+      },
+    })
+    const wrapper = mount(Parent)
+    renders = 0
+
+    const base = mocks.snapshot as unknown as SessionSnapshot
+    for (let elapsed = 1; elapsed <= 60; elapsed++) {
+      const tick = {
+        ...base,
+        elapsedSecondsInCurrentInterval: elapsed,
+        totalElapsedSeconds: elapsed,
+      }
+      mocks.callbacks.forEach((callback) => callback(tick))
+    }
+
+    await nextTick()
+    expect(renders).toBe(0)
+    expect(api.snapshot.value?.status).toBe('IDLE')
+
+    const running = { ...base, status: 'RUNNING' }
+    mocks.callbacks.forEach((callback) => callback(running))
+
+    await nextTick()
+    expect(renders).toBe(1)
+    expect(api.snapshot.value?.status).toBe('RUNNING')
+
+    wrapper.unmount()
   })
 
   it('delegates abandon to the orchestrator', async () => {

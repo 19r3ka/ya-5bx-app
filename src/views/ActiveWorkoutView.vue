@@ -50,9 +50,8 @@
         <div class="d-inline-block pa-6 rounded-lg mb-4 timer-pulse bg-surface">
           <WorkoutTimerClock
             :duration-seconds="currentInterval?.durationSeconds ?? 60"
-            :elapsed-seconds="elapsedSeconds"
-            :is-paused="isPaused"
-            @expired="onTimerExpired"
+            :start-timestamp="timerStartedAt"
+            :is-paused="isPaused || isRestPhase"
           />
         </div>
         <h2 class="fc-exercise text-on-surface text-uppercase mb-2">
@@ -248,7 +247,6 @@
   const progressionStore = useProgressionStore()
   const {
     snapshot,
-    elapsedSeconds,
     pauseWorkout,
     resumeWorkout,
     confirmReps,
@@ -297,6 +295,14 @@
     () => snapshot.value?.currentIntervalIndex ?? 0
   )
   const totalIntervals = computed(() => snapshot.value?.intervals?.length ?? 5)
+  const timerStartedAt = ref(Date.now())
+
+  watch(
+    () => [currentIntervalIndex.value, currentSessionToken.value] as const,
+    () => {
+      timerStartedAt.value = Date.now()
+    }
+  )
 
   // Rep-based intervals (those carrying a target rep count) surface the rep
   // logging panel. The aerobic run/walk block has no targetReps, so it stays
@@ -322,7 +328,8 @@
 
   const remainingLabel = computed(() => {
     const duration = currentInterval.value?.durationSeconds ?? 60
-    const rem = Math.max(0, duration - elapsedSeconds.value)
+    const elapsed = snapshot.value?.elapsedSecondsInCurrentInterval ?? 0
+    const rem = Math.max(0, duration - elapsed)
     const m = Math.floor(rem / 60)
     const s = rem % 60
     return `${m}:${s.toString().padStart(2, '0')}`
@@ -379,10 +386,6 @@
     if (router) {
       router.push({ name: 'dashboard' })
     }
-  }
-
-  function onTimerExpired() {
-    // Engine automatically advances on timer completion
   }
 
   function onLogged(reps: number) {

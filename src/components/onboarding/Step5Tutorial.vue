@@ -31,9 +31,10 @@
           <div v-if="!isLogged">
             <!-- Render Timer OR Rest Panel -->
             <WorkoutTimerClock
-              v-if="tutorialElapsed < 59"
+              v-if="!tutorialExpired"
               :duration-seconds="59"
-              :elapsed-seconds="tutorialElapsed"
+              :time-scale="TUTORIAL_TIME_SCALE"
+              @expired="tutorialExpired = true"
             />
             <div v-else>
               <WorkoutRepOverridePanel
@@ -83,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted, onUnmounted } from 'vue'
+  import { ref } from 'vue'
   import WorkoutTimerClock from '../workout/WorkoutTimerClock.vue'
   import WorkoutRepOverridePanel from '../workout/WorkoutRepOverridePanel.vue'
 
@@ -91,23 +92,13 @@
     (e: 'next'): void
   }>()
 
-  const tutorialElapsed = ref(0)
+  // Display 59 clock-seconds in about 8 real seconds.
+  const TUTORIAL_TIME_SCALE = 59 / 8
+  const tutorialExpired = ref(false)
   const isLogged = ref(false)
-  let intervalId: ReturnType<typeof setInterval> | null = null
-
-  onMounted(() => {
-    intervalId = setInterval(() => {
-      if (tutorialElapsed.value < 59) tutorialElapsed.value++
-    }, 130) // 59 steps × 130ms ≈ 7.7s real time
-  })
-
-  onUnmounted(() => {
-    if (intervalId) clearInterval(intervalId)
-  })
 
   function handleLog() {
     isLogged.value = true
-    if (intervalId) clearInterval(intervalId)
   }
 </script>
 
