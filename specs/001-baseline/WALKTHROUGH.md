@@ -1,6 +1,6 @@
 # WALKTHROUGH: baseline
 
-**Feature:** 001-baseline · **Tasks:** T-000 to T-037 · **Agent / model:** opencode / deepseek-flash · **Date:** 2026-10-21
+**Feature:** 001-baseline · **Tasks:** T-000 to T-037 · **Agent / model:** implementing agent / implementing model · **Date:** 2026-10-21
 **Status:** Complete with notes
 **Verification:** Tests 182/182 · Typecheck ok (build) · Lint 0 warnings · Build ok
 

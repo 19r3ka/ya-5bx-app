@@ -1,6 +1,6 @@
 # PLAN: Gap closure (baseline Phase 1)
 
-**Feature ID:** 002-gap-closure · **Spec version:** 0.1 · **Status:** Draft (awaiting SPEC.md and owner approval) · **Updated:** 2026-10-25
+**Feature ID:** 002-gap-closure · **Spec version:** 0.2 · **Status:** Delivered · **Updated:** 2026-10-25
 
 > HOW. Must satisfy every Must requirement in `SPEC.md` and pass the constitution check. Reuse before building. If the spec is ambiguous, raise a spec bug; do not guess in the plan.
 
@@ -182,6 +182,7 @@ Errors: `safeWriteJson` returns `false` and never throws; `resolveSessionTarget`
 
 ## 12. Revision log
 
-| Version | Date       | Change                           | Reason                   |
-| ------- | ---------- | -------------------------------- | ------------------------ |
-| 0.1     | 2026-10-25 | Initial plan for 002-gap-closure | Baseline phase 1 closure |
+| Version | Date       | Change                           | Reason                                |
+| ------- | ---------- | -------------------------------- | ------------------------------------- |
+| 0.1     | 2026-10-25 | Initial plan for 002-gap-closure | Baseline phase 1 closure              |
+| 0.2     | 2026-10-26 | Status normalized to Delivered   | Documentation pass; no content change |

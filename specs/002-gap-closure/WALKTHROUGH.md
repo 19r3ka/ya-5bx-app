@@ -1,6 +1,6 @@
 # WALKTHROUGH: gap closure (session 1)
 
-**Feature:** 002-gap-closure · **Tasks:** T-01 to T-13 · **Agent / model:** OpenCode / DeepSeek Flash · **Date:** 2026-10-25
+**Feature:** 002-gap-closure · **Tasks:** T-01 to T-15 · **Agent / model:** implementing agent / implementing model · **Date:** 2026-10-25
 **Status:** Complete (T-01 to T-15). One review round run on 2026-10-26; findings fixed or rejected with reasons (TASKS.md, review round 1).
 **Verification:** Tests 228/228 · Typecheck ok (`npm run build`) · Lint ok · Build ok
 
@@ -84,7 +84,7 @@
 2. `OnboardingForm.vue` untouched (T-13): knip reports it unused.
 3. T-10 expanded from five strings to full localization of the three files: Constitution §4 outranks PLAN/TASKS.
 4. T-12 adds no new function: `getGoalLevelByAge` already was the pure resolver.
-5. `SPEC.md` is not in the repo: the owner's permission rules deny agent edits to `**/SPEC.md`. Draft v0.1 was staged at `/tmp/opencode/002-gap-closure-SPEC.md`.
+5. `SPEC.md` was absent at the time: the owner's permission rules deny agent edits to `**/SPEC.md`. A draft was staged outside the repository and the owner saved it later.
 6. Milestone reviews could not run: the reviewer subagent failed with provider quota (429, retry ~12 h).
 
 ## 7. Known gaps and follow-ups
@@ -113,6 +113,6 @@ npx vitest run src/utils/levels.spec.ts src/locales/locales.spec.ts src/views/Wo
 ## 9. Review packet
 
 - This walkthrough
-- SPEC v0.1 (`/tmp/opencode/002-gap-closure-SPEC.md`, pending owner save)
+- SPEC v0.2 (`specs/002-gap-closure/SPEC.md`)
 - `specs/002-gap-closure/PLAN.md`, `TASKS.md` T-01 to T-15
 - Diff: `git diff main...HEAD -- src/`
