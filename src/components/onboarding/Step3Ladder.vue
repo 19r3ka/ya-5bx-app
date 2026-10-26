@@ -94,8 +94,7 @@
       <v-card
         color="surface-elevated"
         rounded="lg"
-        class="pa-4 mb-8"
-        style="border-left: 4px solid rgb(var(--v-theme-primary))"
+        class="pa-4 mb-8 border-s-primary"
       >
         <div class="d-flex ga-4">
           <v-icon color="primary" class="mt-1">mdi-information</v-icon>
