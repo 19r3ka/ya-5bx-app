@@ -169,14 +169,14 @@ APPROVED: v0.4 2026-10-26
 
 ## Milestone 4: Source-task evidence, final verification and walkthrough (R5, R6, R7)
 
-- [ ] T-014 (M-4, R5) Close the source tasks with evidence
+- [x] T-014 (M-4, R5) Close the source tasks with evidence
       Refs: R5, R6, AC-5.1, AC-6.1, V9
       Depends: T-001 to T-013
       Files: `specs/005-ux-implementation/TASKS.md`, `specs/006-production-completion/TASKS.md`, `specs/007-spec-code-reconciliation/TASKS.md`, `specs/007-spec-code-reconciliation/WALKTHROUGH.md`
       Do: Audit 005 T-019/T-020 and 006 T-004/T-008/T-011/T-014. Mark them done only with the exact 007 test/grep/build/lint or DEVICE evidence. Revert every unevidenced tick to `CLAIMED`. Append the owner's approval for the four open 006 items to `specs/006-production-completion/TASKS.md` only when the owner's **go** explicitly covers 006; otherwise leave them open and report. Add short notes; do not rewrite task history. Record the audit in `WALKTHROUGH.md`.
       Done when: every 007 tick cites a test, static/build/lint command, or DEVICE record; no task is marked done from a claim or owner statement alone; every unevidenced 005/006 tick is `CLAIMED`; the evidence paths exist.
       Out of scope: reclassifying unrelated 006 tasks (T-001/T-002/T-003/T-010/T-012) without their own evidence.
-      Notes: The 007 scope does not re-verify the unrelated claimed tasks. If 006 has no approval line, T-014 stops and reports instead of ticking 006.
+      Notes: The 007 scope does not re-verify the unrelated claimed tasks. If 006 has no approval line, T-014 stops and reports instead of ticking 006. Evidence: 005 T-019/T-020 and 006 T-004/T-008/T-011/T-014 are [x] with 007 test/grep/build notes. All six audit greps return zero (`style="border`, `rounded="xl"`, `<style scoped`, `:elapsed-seconds`, legacy setup strings, writable progression literals). Targeted Vitest for the store, setup, clock, active view and style contract: 30 passed. Full suite 246 passed; build and lint pass. Both source files already carry `APPROVED: v0.1 2026-10-26`; the audit notes clarify 005's T-021/T-022 header typo and 006's stale execution blocker. Audit recorded in `WALKTHROUGH.md` §9.
 
 - [ ] T-015 (M-4, R7) Run the final gate and write the walkthrough
       Refs: R7, AC-5.1, AC-7.1, V7, V8

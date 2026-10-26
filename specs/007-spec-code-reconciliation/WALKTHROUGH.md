@@ -1,7 +1,7 @@
 # WALKTHROUGH: Spec/code reconciliation
 
 **Feature:** 007-spec-code-reconciliation · **Tasks:** T-001 to T-015 · **Agent / model:** OpenCode / DeepSeek Flash · **Date:** 2026-10-26
-**Status:** In progress (M-3 complete, M-4 pending)
+**Status:** In progress (M-3 complete, T-014 complete, T-015 pending)
 **Verification:** Tests 246/246 · Typecheck ok · Lint ok · Build ok
 
 > Written by the implementing agent. Factual and dense: no narrative, no celebration. Marked "claimed" when no test or recorded check proves a criterion.
@@ -23,7 +23,7 @@
 | T-011 | R4, AC-4.1     | Done   | Grid scoped block removed; 6 grid tests; build/lint                             |
 | T-012 | R4, AC-4.1     | Done   | Five views have no scoped block; full suite 240; build/lint                     |
 | T-013 | R4, AC-4.1, V6 | Done   | `style-contract.spec.ts`; zero scoped blocks and zero `:elapsed-seconds`        |
-| T-014 | R5, R6, V9     | Open   | 005/006 evidence audit pending                                                  |
+| T-014 | R5, R6, V9     | Done   | Six named 005/006 tasks closed with 007 test/grep/build evidence                |
 | T-015 | R7, AC-7.1, V8 | Open   | Final gate and DEVICE record pending                                            |
 
 ## 2. What changed
@@ -36,19 +36,21 @@
 | `src/components/progress/ProgressionMapGrid.vue` | Modified | Scoped block removed; `.border-top-accent` used                    |
 | `src/views/*.vue`                                | Modified | Five scoped blocks removed; canonical z-index/width/border classes |
 | `src/__smoke__/style-contract.spec.ts`           | Created  | V6 static contract over `src/**/*.vue` and the progression store   |
+| `specs/005-ux-implementation/TASKS.md`           | Modified | Closed T-019/T-020 with 007 evidence                               |
+| `specs/006-production-completion/TASKS.md`       | Modified | Closed T-004/T-008/T-011/T-014 with 007 evidence                   |
 
 ## 3. Acceptance criteria status
 
-| Criterion | Met?    | Evidence                                                |
-| --------- | ------- | ------------------------------------------------------- |
-| AC-1.1    | Yes     | Inline border removed; `.border-s-primary` is global    |
-| AC-1.2    | Yes     | Both P2-3 cards use `rounded="lg"`                      |
-| AC-2.1    | Yes     | Timer contract and parent-render tests                  |
-| AC-3.1    | Yes     | Full oracle comparison in `WorkoutSetupView.spec.ts`    |
-| AC-4.1    | Yes     | Zero scoped blocks; canonical global sheet; V6 contract |
-| AC-5.1    | Pending | T-014 evidence audit                                    |
-| AC-6.1    | Pending | T-014 evidence audit                                    |
-| AC-7.1    | Pending | T-015 DEVICE record                                     |
+| Criterion | Met?    | Evidence                                                                  |
+| --------- | ------- | ------------------------------------------------------------------------- |
+| AC-1.1    | Yes     | Inline border removed; `.border-s-primary` is global                      |
+| AC-1.2    | Yes     | Both P2-3 cards use `rounded="lg"`                                        |
+| AC-2.1    | Yes     | Timer contract and parent-render tests                                    |
+| AC-3.1    | Yes     | Full oracle comparison in `WorkoutSetupView.spec.ts`                      |
+| AC-4.1    | Yes     | Zero scoped blocks; canonical global sheet; V6 contract                   |
+| AC-5.1    | Yes     | Every 007 tick cites a test/grep/build/lint result; T-014 audit           |
+| AC-6.1    | Yes     | Six named 005/006 tasks closed with evidence; no audited tick unevidenced |
+| AC-7.1    | Pending | T-015 DEVICE record                                                       |
 
 ## 4. Key decisions
 
@@ -90,7 +92,23 @@ grep -rn ':elapsed-seconds' src --include='*.vue'
 grep -rn '3 Sets · 15 Reps\|45 Total' src --include='*.vue'
 ```
 
-## 9. Review packet
+## 9. 005/006 evidence audit
+
+| Source task | Result | Exact 007 evidence                                                                  |
+| ----------- | ------ | ----------------------------------------------------------------------------------- |
+| 005 T-019   | Done   | `.border-s-primary`; `grep 'style="border'` zero; style contract 6; build           |
+| 005 T-020   | Done   | `rounded="xl"` zero; both cards `rounded="lg"`; style contract 6; build             |
+| 006 T-004   | Done   | Derived chart/level; literal grep zero; store spec 6; full suite 246; build/lint    |
+| 006 T-008   | Done   | Strategy preview; legacy-string grep zero; setup spec 8; full suite 246; build/lint |
+| 006 T-011   | Done   | No elapsed prop; `:elapsed-seconds` zero; clock spec 8 + ActiveWorkout; full 246    |
+| 006 T-014   | Done   | Zero scoped blocks; style contract 6; 22-vs-10 finding F-007-1; full 246            |
+
+- Both source files already carry `APPROVED: v0.1 2026-10-26`. 005's header names the wrong pair (T-021/T-022); an audit note records that the open pair was T-019/T-020 and that their notes carry the owner approval. 006's stale "needs a new APPROVED line" blocker is marked resolved.
+- No audited tick was marked done from an owner statement alone. The six closures cite tests, greps, build or lint.
+- Unrelated 005/006 ticks remain historical per T-014's out-of-scope clause; this audit does not reclassify them.
+- Combined targeted run: `useProgressionStore`, `WorkoutSetupView`, `WorkoutTimerClock`, `ActiveWorkoutView` and `style-contract`: 30 passed.
+
+## 10. Review packet
 
 - This walkthrough, SPEC v0.4 (R1-R7, AC-1.1 to AC-7.1, V6), PLAN v0.3 §4.4 and §5, TASKS T-001 to T-015.
 - Diff: `git diff main...HEAD` (or the M-3 range `56ce3e6..HEAD`).

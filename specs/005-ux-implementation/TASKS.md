@@ -5,6 +5,8 @@
 APPROVED: v0.1 2026-10-26
 
 > The approval covers the two open corrections (T-021, T-022), which the owner approved on 2026-10-26. The remaining tasks are a historical record of delivered work and are already proven.
+>
+> 007 audit 2026-10-26: the two open corrections were T-019 (P2-2) and T-020 (P2-3); their notes record the same owner approval. T-021/T-022 are already delivered. Both open corrections are now closed with 007 evidence.
 
 ## How to read this file
 
@@ -186,23 +188,23 @@ APPROVED: v0.1 2026-10-26
       Out of scope: other class families.
       Notes: Evidence: `grep -rn 'text-text-' src --include='*.vue'` returns 0 matches.
 
-- [ ] T-019 (P2-2) Remove the inline border style
+- [x] T-019 (P2-2) Remove the inline border style
       Refs: R5, AC-5.3
       Depends: none
       Files: `src/components/onboarding/Step3Ladder.vue`
       Do: Replace the inline left border on the highlighted card with a class from the design system.
       Done when: `grep -rn 'style="border' src --include='*.vue'` returns 0 matches and the highlight still renders.
       Out of scope: other inline styles that are data-driven.
-      Notes: Open. Current hit: `Step3Ladder.vue:98`. Approved by the owner on 2026-10-26.
+      Notes: Open. Current hit: `Step3Ladder.vue:98`. Approved by the owner on 2026-10-26. 007 audit 2026-10-26: closed by 007 T-003/T-009. `Step3Ladder.vue` uses the canonical `.border-s-primary`; `grep -rn 'style="border' src --include='*.vue'` returns zero; `src/__smoke__/style-contract.spec.ts` (6 passed); `npm run build` passes.
 
-- [ ] T-020 (P2-3) Use the large card radius
+- [x] T-020 (P2-3) Use the large card radius
       Refs: R5, AC-5.2
       Depends: none
       Files: `src/components/onboarding/Step6Ready.vue`, `src/components/common/AppHelpDialog.vue`
       Do: Replace the extra-large radius with the large radius required by the design system.
       Done when: `grep -rn 'rounded="xl"' src --include='*.vue'` returns 0 matches and both cards use `rounded="lg"`.
       Out of scope: other card styling.
-      Notes: Open. Current hits: `Step6Ready.vue:108`, `AppHelpDialog.vue:7`. Approved by the owner on 2026-10-26.
+      Notes: Open. Current hits: `Step6Ready.vue:108`, `AppHelpDialog.vue:7`. Approved by the owner on 2026-10-26. 007 audit 2026-10-26: closed by 007 T-004. Both cards use `rounded="lg"`; `grep -rn 'rounded="xl"' src --include='*.vue'` returns zero; `src/__smoke__/style-contract.spec.ts` (6 passed); `npm run build` passes.
 
 - [x] T-021 (P2-4) Replace invalid surface colour props
       Refs: R5, AC-5.1

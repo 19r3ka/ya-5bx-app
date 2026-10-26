@@ -50,14 +50,14 @@ APPROVED: v0.1 2026-10-26
 
 ## Milestone 2: Tier 1, canonical state and wiring (R2, R3)
 
-- [~] T-004 (T1-1) Derive the position from the profile only
-  Refs: R2, AC-2.1, AC-2.4
-  Depends: T-003
-  Files: `src/stores/useProgressionStore.ts`
-  Do: Remove the literal initialisers so chart and level exist only after derivation from `userStore.profile.currentLevel`.
-  Done when: `grep -rn 'currentChart = ref(1)' src/stores` returns 0 and hydration still yields the profile position.
-  Out of scope: the profile shape.
-  Notes: Partly met. Derivation exists in `initAsync` (`useProgressionStore.ts:27-31`), but the refs are still initialised literally at `:23-24` and the grep still finds one hit. Either the placeholders are accepted as pre-hydration defaults, or they move behind a derived state. Owner decision needed.
+- [x] T-004 (T1-1) Derive the position from the profile only
+      Refs: R2, AC-2.1, AC-2.4
+      Depends: T-003
+      Files: `src/stores/useProgressionStore.ts`
+      Do: Remove the literal initialisers so chart and level exist only after derivation from `userStore.profile.currentLevel`.
+      Done when: `grep -rn 'currentChart = ref(1)' src/stores` returns 0 and hydration still yields the profile position.
+      Out of scope: the profile shape.
+      Notes: Partly met. Derivation exists in `initAsync` (`useProgressionStore.ts:27-31`), but the refs are still initialised literally at `:23-24` and the grep still finds one hit. Either the placeholders are accepted as pre-hydration defaults, or they move behind a derived state. Owner decision needed. 007 audit 2026-10-26: closed by 007 T-001. `currentChart` and `currentLevel` are computed from `profileTarget`; `grep -rn 'currentChart = ref(1)\|currentLevel = ref' src/stores` returns zero; `npx vitest run src/stores/useProgressionStore.spec.ts` (6 passed); full suite 246 passed; build and lint pass.
 
 - [x] T-005 (T1-2) Persist a complete position on onboarding completion
       Refs: R2, AC-2.2
@@ -86,14 +86,14 @@ APPROVED: v0.1 2026-10-26
       Out of scope: the last-session fallback list, which is defensive when chart data is absent.
       Notes: Evidence: `src/views/DashboardView.vue:222` (name), computed chart and level, `:132` (advance text), `:332` (setup route) · `npm run build`.
 
-- [ ] T-008 (T1-5) Build the exercise list from the chart and level
+- [x] T-008 (T1-5) Build the exercise list from the chart and level
       Refs: R3, AC-3.5
       Depends: T-006
       Files: `src/views/WorkoutSetupView.vue`
       Do: Replace the fixed sets, reps and totals with values from the current chart and level, using the strategy output or the progression store.
       Done when: the setup list changes with the level and matches the chart table.
       Out of scope: the start flow, which is already wired with audio unlock and session initialisation.
-      Notes: Not met. `WorkoutSetupView.vue:94` shows "3 Sets · 15 Reps" and `:98` shows "45 Total" as fixed strings; the start flow at `:247-261` is wired. Approved for a future go, not executed in 003.
+      Notes: Not met. `WorkoutSetupView.vue:94` shows "3 Sets · 15 Reps" and `:98` shows "45 Total" as fixed strings; the start flow at `:247-261` is wired. Approved for a future go, not executed in 003. 007 audit 2026-10-26: closed by 007 T-002. `WorkoutSetupView.vue` renders `previewIntervals` from `ClassicRCAFStrategy.generateWorkout`; the legacy-string grep returns zero; `npx vitest run src/views/WorkoutSetupView.spec.ts` (8 passed, every chart/level pair against the oracle); style contract 6 passed; full suite 246 passed; build and lint pass.
 
 - [x] T-009 (T1-6) Wire the active screen to the engine
       Refs: R3, AC-3.3
@@ -115,14 +115,14 @@ APPROVED: v0.1 2026-10-26
 
 ## Milestone 3: Tier 2, performance and seal lifecycle (R1, R4)
 
-- [ ] T-011 (T2-1) Make the clock self-driven
+- [x] T-011 (T2-1) Make the clock self-driven
       Refs: R4, AC-4.1, AC-4.2
       Depends: T-009
       Files: `src/components/workout/WorkoutTimerClock.vue`, `src/views/ActiveWorkoutView.vue`
       Do: Remove the elapsed-seconds prop; accept static start and duration, tick locally, and emit expiry.
       Done when: no per-tick prop is passed and the parent does not re-render each second.
       Out of scope: the engine clock.
-      Notes: Not met. The component still declares `elapsedSeconds` (`WorkoutTimerClock.vue:25`) and the view passes it each tick; a local fallback exists but the contract is unchanged. Approved for a future go, not executed in 003.
+      Notes: Not met. The component still declares `elapsedSeconds` (`WorkoutTimerClock.vue:25`) and the view passes it each tick; a local fallback exists but the contract is unchanged. Approved for a future go, not executed in 003. 007 audit 2026-10-26: closed by 007 T-005/T-006. The clock has no `elapsedSeconds` prop and derives from a monotonic anchor; `grep -rn ':elapsed-seconds' src --include='*.vue'` returns zero; `npx vitest run src/components/workout/WorkoutTimerClock.spec.ts` (8 passed) and `src/views/ActiveWorkoutView.spec.ts` cover pause/resume, single expiry, paused label and the parent render count; full suite 246 passed; build and lint pass.
 
 - [x] T-012 (T2-2) Fix the dialog seal lifecycle
       Refs: R1, AC-1.3
@@ -144,14 +144,14 @@ APPROVED: v0.1 2026-10-26
 
 ## Milestone 4: Tier 3, styling (R5)
 
-- [~] T-014 (T3-1) Replace the boilerplate stylesheet and centralise rules
-  Refs: R5, AC-5.1, AC-5.2
-  Depends: none
-  Files: `src/style.css`, component styles
-  Do: Replace the framework template CSS with the global app classes and move colour and border rules out of component scopes.
-  Done when: the global sheet owns those rules and `grep -rln '<style scoped>' src/components src/views` returns only keyframe-only blocks.
-  Out of scope: data-driven inline sizes.
-  Notes: Partly met. `src/style.css` is replaced and holds the app classes, but ten components still contain scoped blocks, including `ProgressionMapGrid.vue`, whose border class was introduced by the 005 correction P2-5. The 005 rule (border via class, not inline) and this rule (no scoped styles) conflict; the owner decides which wins before this task closes.
+- [x] T-014 (T3-1) Replace the boilerplate stylesheet and centralise rules
+      Refs: R5, AC-5.1, AC-5.2
+      Depends: none
+      Files: `src/style.css`, component styles
+      Do: Replace the framework template CSS with the global app classes and move colour and border rules out of component scopes.
+      Done when: the global sheet owns those rules and `grep -rln '<style scoped>' src/components src/views` returns only keyframe-only blocks.
+      Out of scope: data-driven inline sizes.
+      Notes: Partly met. `src/style.css` is replaced and holds the app classes, but ten components still contain scoped blocks, including `ProgressionMapGrid.vue`, whose border class was introduced by the 005 correction P2-5. The 005 rule (border via class, not inline) and this rule (no scoped styles) conflict; the owner decides which wins before this task closes. 007 audit 2026-10-26: closed by 007 T-007 to T-013. `src/style.css` is imported once from `src/main.ts`; `grep -rn '<style scoped' src --include='*.vue'` returns zero; `src/__smoke__/style-contract.spec.ts` (6 passed); full suite 246 passed; build and lint pass. The actual starting count was 22 `.vue` scoped blocks vs SPEC's 10; the +12 difference is recorded as F-007-1 in `specs/007-spec-code-reconciliation/WALKTHROUGH.md`.
 
 ## Milestone 5: Tier 4, delivery (R6)
 
@@ -177,7 +177,7 @@ APPROVED: v0.1 2026-10-26
 
 - **Owner decision (T-004):** accept the literal initialisers as pre-hydration defaults, or require a fully derived position and remove them.
 - **Owner decision (T-014):** the 005 design-system rule and the phase-5 one-stylesheet rule conflict; choose the authority.
-- **Execution:** T-008, T-011 and the closures above need a new `APPROVED:` line.
+- **Execution:** T-008, T-011 and the closures above need a new `APPROVED:` line. Resolved 2026-10-26: the `APPROVED: v0.1 2026-10-26` line at the top covers these closures; 007 T-014 applied it with the evidence above.
 - **Manual checks:** seven phase-5 checks are unrun; repeated in the walkthrough.
 
 ## Phase reviews
