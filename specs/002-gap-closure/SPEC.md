@@ -4,7 +4,7 @@
 
 > WHAT and WHY, not HOW. This is a thin delta on `specs/001-baseline/SPEC.md`: it closes Phase 1 gaps only and does not restate baseline criteria that are already met.
 
-> **Reconstruction note:** the 2026-10-25 draft lived in `/tmp/opencode/002-gap-closure-SPEC.md` and was lost when temporary storage was cleared. This file was rebuilt from `PLAN.md`, `TASKS.md`, `DECISIONS.md` and the delivered code and tests. Treat the wording as recovering intent, not as the original text; confirm before citing it as authoritative. To adopt it: `mv specs/002-gap-closure/SPEC-draft.md specs/002-gap-closure/SPEC.md` (the agent cannot write `SPEC.md`).
+> **Reconstruction note:** the 2026-10-25 draft lived in `/tmp/opencode/002-gap-closure-SPEC.md` and was lost when temporary storage was cleared. This file was rebuilt from `PLAN.md`, `TASKS.md`, `DECISIONS.md` and the delivered code and tests. Treat the wording as recovering intent, not as the original text; confirm before citing it as authoritative..
 
 ## 1. Purpose
 
