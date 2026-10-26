@@ -1,9 +1,3 @@
-# SPEC draft: Specification corpus alignment
-
-> Draft for the owner. The agent cannot write `specs/003-specs-align/SPEC.md` because the permission policy guards `SPEC.md` files. Save it with:
-> `cp /home/dev/.opencode/plan/003-specs-align-SPEC.md specs/003-specs-align/SPEC.md`
-> Then review and edit freely; the text below is a proposal, not an approval.
-
 # SPEC: Specification corpus alignment
 
 **Feature ID:** 003-specs-align · **Status:** Draft · **Version:** 0.1 · **Updated:** 2026-10-26
@@ -84,7 +78,7 @@ The existing 001 and 002 features are close to the kit shape but carry stale sta
 **R4**
 
 - AC-4.1: Given `specs/` after the feature, when a case-insensitive search for the kit's banned product names runs over its markdown, then there are zero matches.
-- AC-4.2: Given `specs/002-gap-closure`, when its headers are read, then the spec and plan statuses reflect the merged state, the walkthrough task range is T-01 to T-15, and no note points at `/tmp/opencode` or `SPEC-draft.md`.
+- AC-4.2: Given `specs/002-gap-closure`, when its headers are read, then the spec and plan statuses reflect the merged state, the walkthrough task range is T-01 to T-15, and no note points at a temporary path or a draft file.
 - AC-4.3 (edge): Given any markdown link in `specs/`, when it is resolved, then its target file exists.
 
 **R5**

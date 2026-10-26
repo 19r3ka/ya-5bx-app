@@ -47,15 +47,16 @@ APPROVED: v0.1 2026-10-26
 
 ## Milestone 2: Phase documents become features (delivers R2, R3, R7)
 
-- [~] T-02 Author the progression feature spec and plan
-  Refs: R2, R3, AC-2.1, AC-3.3, R7
-  Depends: T-01
-  Files: `specs/004-progression/SPEC.md` (owner-saved), `specs/004-progression/PLAN.md` (new)
-  Do: Derive requirements from the eight phase-3 outcomes: typed records, IndexedDB two-phase commit, contiguous-volume rule, telemetry staging and sealing, hydration barrier and store wiring, post-workout capture, progression map. Requirement IDs start at R1. In `PLAN.md` map each requirement to the current code paths (`src/core/StorageTypes.ts`, `src/core/storage/IndexedDBAdapter.ts`, `src/core/storage/HistoryAggregator.ts`, `src/core/telemetry/TelemetryService.ts`, `src/stores/useProgressionStore.ts`, `src/components/workout/PostWorkoutDialog.vue`, `src/components/progress/ProgressionMapGrid.vue`) and point at `design/phase3-implementation.md` for detail. Do not copy the phase-3 prose. The agent cannot write `SPEC.md`; hand the draft to the owner and tick this task only after the file exists.
-  Done when: `test -f specs/004-progression/SPEC.md && test -f specs/004-progression/PLAN.md`; the plan names only files that exist; `grep -n 'design/phase3-implementation.md' specs/004-progression/PLAN.md` matches.
-  Out of scope: task file, walkthrough, moving the design document.
-  Notes:
-  Evidence: `specs/004-progression/PLAN.md` written and points at `design/phase3-implementation.md`. SPEC draft staged outside the repository; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
+- [x] T-02 Author the progression feature spec and plan
+      Refs: R2, R3, AC-2.1, AC-3.3, R7
+      Depends: T-01
+      Files: `specs/004-progression/SPEC.md` (owner-saved), `specs/004-progression/PLAN.md` (new)
+      Do: Derive requirements from the eight phase-3 outcomes: typed records, IndexedDB two-phase commit, contiguous-volume rule, telemetry staging and sealing, hydration barrier and store wiring, post-workout capture, progression map. Requirement IDs start at R1. In `PLAN.md` map each requirement to the current code paths (`src/core/StorageTypes.ts`, `src/core/storage/IndexedDBAdapter.ts`, `src/core/storage/HistoryAggregator.ts`, `src/core/telemetry/TelemetryService.ts`, `src/stores/useProgressionStore.ts`, `src/components/workout/PostWorkoutDialog.vue`, `src/components/progress/ProgressionMapGrid.vue`) and point at `design/phase3-implementation.md` for detail. Do not copy the phase-3 prose. The agent cannot write `SPEC.md`; hand the draft to the owner and tick this task only after the file exists.
+      Done when: `test -f specs/004-progression/SPEC.md && test -f specs/004-progression/PLAN.md`; the plan names only files that exist; `grep -n 'design/phase3-implementation.md' specs/004-progression/PLAN.md` matches.
+      Out of scope: task file, walkthrough, moving the design document.
+      Notes:
+      Evidence: `specs/004-progression/SPEC.md` now exists (owner-saved): 7 requirements, criteria for each, status Implemented. `PLAN.md` matches it and points at `design/phase3-implementation.md`. Verified 2026-10-26.
+      Evidence: `specs/004-progression/PLAN.md` written and points at `design/phase3-implementation.md`. SPEC draft staged outside the repository; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
 
 - [x] T-03 Author the progression tasks and walkthrough; move the phase-3 design
       Refs: R2, R3, AC-3.1, AC-3.3, AC-2.2, R7
@@ -67,15 +68,16 @@ APPROVED: v0.1 2026-10-26
       Notes:
       Evidence: `specs/004-progression/{TASKS,WALKTHROUGH}.md` (8 tasks, every tick has an `Evidence:` note); `design/phase3-implementation.md` moved; `specs/phase3` is gone. Verified 2026-10-26.
 
-- [~] T-04 Author the UX feature spec and plan
-  Refs: R2, AC-2.1, AC-2.2, R7
-  Depends: T-01
-  Files: `specs/005-ux-implementation/SPEC.md` (owner-saved), `specs/005-ux-implementation/PLAN.md` (new)
-  Do: Derive requirements from the phase-4 design and its 27 corrections: design tokens and typography, onboarding steps, dashboard, workout setup/active/paused, post-workout, progress, shell, states. PLAN points at `design/ux-spec.md`, `design/phase4-implementation_plan.md` and `design/phase4-corrections.md`; it does not restate them. Record the two unmet corrections (P2-2 inline border, P2-3 `rounded="xl"`) as open requirements, not as met. Hand the SPEC draft to the owner.
-  Done when: `test -f specs/005-ux-implementation/PLAN.md`; the plan links the three design documents; the unmet corrections appear as requirements.
-  Out of scope: moving files, writing tasks.
-  Notes:
-  Evidence: `specs/005-ux-implementation/PLAN.md` written and links the three design documents; the two unmet corrections are requirements (R5, AC-5.2, AC-5.3). SPEC draft staged outside the repository; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
+- [x] T-04 Author the UX feature spec and plan
+      Refs: R2, AC-2.1, AC-2.2, R7
+      Depends: T-01
+      Files: `specs/005-ux-implementation/SPEC.md` (owner-saved), `specs/005-ux-implementation/PLAN.md` (new)
+      Do: Derive requirements from the phase-4 design and its 27 corrections: design tokens and typography, onboarding steps, dashboard, workout setup/active/paused, post-workout, progress, shell, states. PLAN points at `design/ux-spec.md`, `design/phase4-implementation_plan.md` and `design/phase4-corrections.md`; it does not restate them. Record the two unmet corrections (P2-2 inline border, P2-3 `rounded="xl"`) as open requirements, not as met. Hand the SPEC draft to the owner.
+      Done when: `test -f specs/005-ux-implementation/PLAN.md`; the plan links the three design documents; the unmet corrections appear as requirements.
+      Out of scope: moving files, writing tasks.
+      Notes:
+      Evidence: `specs/005-ux-implementation/SPEC.md` now exists (owner-saved): 6 requirements, including the two unmet corrections as R5 criteria. `PLAN.md` links the design documents. Verified 2026-10-26.
+      Evidence: `specs/005-ux-implementation/PLAN.md` written and links the three design documents; the two unmet corrections are requirements (R5, AC-5.2, AC-5.3). SPEC draft staged outside the repository; awaiting the owner's copy because `SPEC.md` is permission-guarded. Verified 2026-10-26.
 
 - [x] T-05 Author the UX tasks and walkthrough; move the phase-4 design
       Refs: R2, R3, AC-3.1, AC-3.2, R7
@@ -87,15 +89,16 @@ APPROVED: v0.1 2026-10-26
       Notes:
       Evidence: `specs/005-ux-implementation/TASKS.md` has 27 task blocks (25 `[x]`, T-019/P2-2 and T-020/P2-3 open) and every ticked block has an evidence note; `WALKTHROUGH.md` records the Claimed browser checks; `design/` holds 4 documents and 22 mockup assets; `specs/phase4` is gone. Verified 2026-10-26.
 
-- [~] T-06 Author the production-completion spec and plan
-  Refs: R2, R3, AC-2.3, R7
-  Depends: T-01
-  Files: `specs/006-production-completion/SPEC.md` (owner-saved), `specs/006-production-completion/PLAN.md` (new)
-  Do: Requirements cover the four tiers: data integrity, canonical state and store wiring, performance and safety, CSS compliance, PWA and CI. State explicitly that the timer (T2-1) and the setup exercise list (T1-5) are open; a requirement without a delivered behavior is a requirement with an open task, not a note. PLAN points at `design/phase5-specs.md`.
-  Done when: `test -f specs/006-production-completion/PLAN.md`; the spec's requirements include the two open behaviors.
-  Out of scope: writing tasks.
-  Notes:
-  Evidence: `specs/006-production-completion/PLAN.md` written and points at `design/phase5-specs.md`; the requirements include the open timer and exercise-list behavior. SPEC draft staged outside the repository; awaiting the owner's copy. Verified 2026-10-26.
+- [x] T-06 Author the production-completion spec and plan
+      Refs: R2, R3, AC-2.3, R7
+      Depends: T-01
+      Files: `specs/006-production-completion/SPEC.md` (owner-saved), `specs/006-production-completion/PLAN.md` (new)
+      Do: Requirements cover the four tiers: data integrity, canonical state and store wiring, performance and safety, CSS compliance, PWA and CI. State explicitly that the timer (T2-1) and the setup exercise list (T1-5) are open; a requirement without a delivered behavior is a requirement with an open task, not a note. PLAN points at `design/phase5-specs.md`.
+      Done when: `test -f specs/006-production-completion/PLAN.md`; the spec's requirements include the two open behaviors.
+      Out of scope: writing tasks.
+      Notes:
+      Evidence: `specs/006-production-completion/SPEC.md` now exists (owner-saved): 6 requirements, with the open timer and exercise-list behavior as criteria. `PLAN.md` points at `design/phase5-specs.md`. Verified 2026-10-26.
+      Evidence: `specs/006-production-completion/PLAN.md` written and points at `design/phase5-specs.md`; the requirements include the open timer and exercise-list behavior. SPEC draft staged outside the repository; awaiting the owner's copy. Verified 2026-10-26.
 
 - [x] T-07 Author the production-completion tasks and walkthrough; move the phase-5 design
       Refs: R2, R3, AC-3.1, AC-2.3, R7
@@ -129,15 +132,16 @@ APPROVED: v0.1 2026-10-26
       Notes:
       Evidence: 002 SPEC is v0.2 Implemented, the reconstruction note is removed, PLAN is v0.2 Delivered, and the walkthrough range is T-01 to T-15. a search for the old temporary path in `specs/002-gap-closure` returns nothing. Task text unchanged. Verified 2026-10-26.
 
-- [~] T-10 Sweep banned names, emoji headings and stale artefact references
-  Refs: R4, AC-4.1, AC-4.3
-  Depends: T-03, T-05, T-07
-  Files: every markdown file under `specs/` (targeted replacements only)
-  Do: Apply the kit's banned-name list case-insensitively across `specs/`: replace product names with role words; replace tool-specific rules-file references in the moved phase-5 design with "the project rules"; strip emoji from headings and replace the two decorated headings (agent directives, acceptance checklist) with plain text; remove any reference to a path that no longer exists.
-  Done when: `grep -rniF -f ~/projects/sdd-kit/scripts/docs-rules/banned-names.txt specs/ --include='*.md'` returns nothing; `LC_ALL=C.UTF-8 grep -rnP '[\x{1F300}-\x{1FAFF}\x{2700}-\x{27BF}]' specs/ --include='*.md'` returns nothing.
-  Out of scope: rewriting content beyond the listed replacements.
-  Notes:
-  Evidence: All banned-name hits are removed except two lines in `specs/003-specs-align/SPEC.md` (the draft wrapper and AC-4.2 quote a temporary path), which the agent cannot edit. Tool-specific rules-file references in the phase-5 design now read 'the project rules'; the phase-3 target line and the 002 notes are clean. Emoji: phase-5 status ticks removed; wireframe glyphs in `design/ux-spec.md` are content and kept. Blocked on the owner's SPEC edit. Verified 2026-10-26.
+- [x] T-10 Sweep banned names, emoji headings and stale artefact references
+      Refs: R4, AC-4.1, AC-4.3
+      Depends: T-03, T-05, T-07
+      Files: every markdown file under `specs/` (targeted replacements only)
+      Do: Apply the kit's banned-name list case-insensitively across `specs/`: replace product names with role words; replace tool-specific rules-file references in the moved phase-5 design with "the project rules"; strip emoji from headings and replace the two decorated headings (agent directives, acceptance checklist) with plain text; remove any reference to a path that no longer exists.
+      Done when: `grep -rniF -f ~/projects/sdd-kit/scripts/docs-rules/banned-names.txt specs/ --include='*.md'` returns nothing; `LC_ALL=C.UTF-8 grep -rnP '[\x{1F300}-\x{1FAFF}\x{2700}-\x{27BF}]' specs/ --include='*.md'` returns nothing.
+      Out of scope: rewriting content beyond the listed replacements.
+      Notes:
+      Evidence: `grep -rniF -f .../banned-names.txt specs/ --include='*.md'` returns 0 matches. The draft wrapper and the AC-4.2 wording that carried a temporary path are gone. Decorative ticks were removed from the phase-5 design; wireframe glyphs in `design/ux-spec.md` are content and kept. Verified 2026-10-26.
+      Evidence: All banned-name hits are removed except two lines in `specs/003-specs-align/SPEC.md` (the draft wrapper and AC-4.2 quote a temporary path), which the agent cannot edit. Tool-specific rules-file references in the phase-5 design now read 'the project rules'; the phase-3 target line and the 002 notes are clean. Emoji: phase-5 status ticks removed; wireframe glyphs in `design/ux-spec.md` are content and kept. Blocked on the owner's SPEC edit. Verified 2026-10-26.
 
 ## Milestone 4: Cleanup and close (delivers R5, R6, R7)
 
@@ -173,13 +177,14 @@ APPROVED: v0.1 2026-10-26
 
 ## Blocked / questions
 
-- **SPEC.md is permission-guarded for the agent.** `003-specs-align/SPEC.md` is saved. The 004, 005 and 006 specs are still authored as drafts for the owner to save; see the close-out report. Raised 2026-10-26, partially resolved.
+- **Resolved 2026-10-26:** the owner saved `SPEC.md` for 004, 005 and 006 and removed the 003 draft wrapper and the temporary-path wording in AC-4.2.
 - **Resolved 2026-10-26:** the owner approved phase-4 corrections P2-2 (inline border on `Step3Ladder.vue:98`) and P2-3 (`rounded="xl"` on `Step6Ready.vue:108`, `AppHelpDialog.vue:7`) as 005 tasks. They stay unfixed in 003.
 - **Resolved 2026-10-26:** the owner asked for a shared register of permanently out-of-scope capabilities. T-14 creates `specs/OUT_OF_SCOPE.md` and the roadmap links it.
+- **Open (CP-1):** AC-6.2 requires zero markdown matches for `specs/phase`, but AC-2.2 and AC-6.2 itself contain the string, so it cannot pass. Proposed reword is in `WALKTHROUGH.md` section 7. Owner decision needed before T-11 and T-13 close.
 
 ## Phase reviews
 
-- M1: complete (T-01, T-14) · M2: docs complete, three SPEC copies pending · M3: complete except the owner-guarded SPEC lines · M4: walkthrough written, close pending the owner actions in `WALKTHROUGH.md` section 7
+- M1: complete (T-01, T-14) · M2: complete (T-02 to T-07) · M3: complete (T-08 to T-10) · M4: T-12 done; T-11 and T-13 wait on CP-1
 
 ## Coverage matrix
 

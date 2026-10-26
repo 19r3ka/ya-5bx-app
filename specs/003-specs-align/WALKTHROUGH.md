@@ -11,18 +11,18 @@
 | Task | Result  | Evidence                                                                                               |
 | ---- | ------- | ------------------------------------------------------------------------------------------------------ |
 | T-01 | Done    | `specs/ROADMAP.md`: 15 rows, 9 Target, 2 Planned, 4 Built, five-column header                          |
-| T-02 | Partial | `PLAN.md` written; `SPEC.md` is a staged draft, not yet copied by the owner                            |
+| T-02 | Done    | `SPEC.md` saved (7 requirements); `PLAN.md` matches                                                    |
 | T-03 | Done    | 8 tasks with evidence; `design/phase3-implementation.md` moved; no `specs/phase3`                      |
-| T-04 | Partial | `PLAN.md` written; `SPEC.md` staged                                                                    |
+| T-04 | Done    | `SPEC.md` saved (6 requirements); `PLAN.md` matches                                                    |
 | T-05 | Done    | 27 tasks (25 ticked, P2-2 and P2-3 open); `design/` 26 files; no `specs/phase4`                        |
-| T-06 | Partial | `PLAN.md` written; `SPEC.md` staged                                                                    |
+| T-06 | Done    | `SPEC.md` saved (6 requirements); `PLAN.md` matches                                                    |
 | T-07 | Done    | 16 tasks (12 ticked, 2 partial, 2 open); `design/phase5-specs.md` moved; junk deleted                  |
 | T-08 | Done    | 001 statuses normalized; revision rows added; vendor names removed                                     |
 | T-09 | Done    | 002 statuses normalized; reconstruction note and temporary-path references removed; range T-01 to T-15 |
-| T-10 | Partial | All hits fixed except two lines in the owner-guarded `003-specs-align/SPEC.md`                         |
+| T-10 | Done    | Banned-name scan returns 0 matches; wrapper and AC-4.2 wording removed                                 |
 | T-11 | Partial | Junk and folders gone; links resolve; the literal `specs/phase` grep cannot pass (spec defect CP-1)    |
 | T-12 | Done    | `DECISIONS.md` D-012 with the mapping table                                                            |
-| T-13 | Partial | This record; final close needs the owner's four actions in section 7                                   |
+| T-13 | Partial | This record; T-11 and T-13 wait on the CP-1 wording decision                                           |
 | T-14 | Done    | `specs/OUT_OF_SCOPE.md`: four sourced rows, five rules, linked from the roadmap                        |
 
 ## 2. What changed
@@ -40,25 +40,25 @@
 
 ## 3. Acceptance criteria status
 
-| Criterion | Met?    | Evidence                                                                                                                        |
-| --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------ | ------ | ------------------------------------------- |
-| AC-1.1    | Yes     | Header is `ID                                                                                                                   | Description | Source | Status | Pulled into`; statuses are the four values. |
-| AC-1.2    | Yes     | RM-07 is Built and cites `specs/002-gap-closure` (R1, AC-1.2).                                                                  |
-| AC-1.3    | Yes     | RM-14 is Planned and cites `specs/006-production-completion` (R4).                                                              |
-| AC-2.1    | **No**  | 004, 005 and 006 have `PLAN.md`, `TASKS.md`, `WALKTHROUGH.md`; each `SPEC.md` is staged for the owner and absent.               |
-| AC-2.2    | Yes     | Phase documents and 22 assets are under the owning `design/`; no phase folders remain.                                          |
-| AC-2.3    | Partial | The undelivered items are unchecked tasks in 005 and 006; their `SPEC.md` criteria require the owner's copy.                    |
-| AC-3.1    | Yes     | 8/8, 25/25 and 12/12 ticked tasks carry an evidence note.                                                                       |
-| AC-3.2    | Yes     | Browser checks are Claimed in the 004, 005 and 006 walkthroughs.                                                                |
-| AC-3.3    | Yes     | 004 names `components/workout/PostWorkoutDialog.vue`, `components/progress/ProgressionMapGrid.vue` and `SEALED_USER_CONFIRMED`. |
-| AC-4.1    | **No**  | Two matches remain, both in the owner-guarded `003-specs-align/SPEC.md` (section 7).                                            |
-| AC-4.2    | Yes     | 002 spec and plan are Implemented/Delivered, the range is T-01 to T-15, and the temporary path is gone.                         |
-| AC-4.3    | Yes     | Inline link check: 0 missing targets.                                                                                           |
-| AC-5.1    | Yes     | 001 and 002 task files: no task line or body changed; headers and revision rows only.                                           |
-| AC-6.1    | Yes     | `:Zone.Identifier` deleted; `specs/phase3`, `specs/phase4`, `specs/phase5` absent.                                              |
-| AC-6.2    | **No**  | Impossible as written: the criterion and AC-2.2 name `specs/phase` themselves. See CP-1.                                        |
-| AC-7.1    | Yes     | Every requirement has a task; every task cites R or AC IDs.                                                                     |
-| AC-7.2    | Yes     | D-012 records mapping, numbering, the `design/` carrier and the frozen-task rule.                                               |
+| Criterion | Met?   | Evidence                                                                                                                        |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| AC-1.1    | Yes    | Header uses the five kit columns; statuses are the four values.                                                                 |
+| AC-1.2    | Yes    | RM-07 is Built and cites `specs/002-gap-closure` (R1, AC-1.2).                                                                  |
+| AC-1.3    | Yes    | RM-14 is Planned and cites `specs/006-production-completion` (R4).                                                              |
+| AC-2.1    | Yes    | 004, 005 and 006 each hold `SPEC.md`, `PLAN.md`, `TASKS.md` and `WALKTHROUGH.md`.                                               |
+| AC-2.2    | Yes    | Phase documents and 22 assets are under the owning `design/`; no phase folders remain.                                          |
+| AC-2.3    | Yes    | Undelivered items are unchecked tasks and criteria in 005 (R5) and 006 (R3, R4).                                                |
+| AC-3.1    | Yes    | 8/8, 25/25 and 12/12 ticked tasks carry an evidence note.                                                                       |
+| AC-3.2    | Yes    | Browser checks are Claimed in the 004, 005 and 006 walkthroughs.                                                                |
+| AC-3.3    | Yes    | 004 names `components/workout/PostWorkoutDialog.vue`, `components/progress/ProgressionMapGrid.vue` and `SEALED_USER_CONFIRMED`. |
+| AC-4.1    | Yes    | Banned-name scan over `specs/` returns 0 matches.                                                                               |
+| AC-4.2    | Yes    | 002 spec and plan are Implemented/Delivered, the range is T-01 to T-15, and the temporary path is gone.                         |
+| AC-4.3    | Yes    | Inline link check: 0 missing targets.                                                                                           |
+| AC-5.1    | Yes    | 001 and 002 task files: no task line or body changed; headers and revision rows only.                                           |
+| AC-6.1    | Yes    | `:Zone.Identifier` deleted; `specs/phase3`, `specs/phase4`, `specs/phase5` absent.                                              |
+| AC-6.2    | **No** | Impossible as written: the criterion and AC-2.2 name `specs/phase` themselves. See CP-1.                                        |
+| AC-7.1    | Yes    | Every requirement has a task; every task cites R or AC IDs.                                                                     |
+| AC-7.2    | Yes    | D-012 records mapping, numbering, the `design/` carrier and the frozen-task rule.                                               |
 
 ## 4. Commands and results
 
@@ -97,11 +97,9 @@
 
 ## 7. Open items and exact fixes
 
-1. Copy the three staged drafts (004, 005, 006) from the agent's plan directory into the matching feature folder; the close-out message carries the exact commands.
-2. Trim the draft wrapper from `specs/003-specs-align/SPEC.md` (first five lines, including the copy instruction and the guard note).
-3. Reword AC-4.2 so it does not contain a temporary path or a draft file name.
-4. Resolve CP-1 (below) for AC-6.2.
-5. After 1 to 4: tick T-02, T-04, T-06, T-10, T-11, T-13.
+1. The three feature specs are saved; the 003 wrapper and the temporary-path wording in AC-4.2 are gone.
+2. Resolve CP-1 (below) for AC-6.2.
+3. After CP-1: tick T-11 and T-13.
 
 **Spec change proposal CP-1 — AC-6.2.** Problem: AC-6.2 requires zero markdown matches for `specs/phase`, but AC-2.2 and AC-6.2 itself name those folders, so the criterion can never pass. Proposed change: "Given the repository after the feature, when markdown links are resolved and non-historical documents are scanned, then no reference points at a removed phase folder; the only mentions are in this feature's own history and acceptance criteria." Why: the intent is no stale navigation, and the current wording makes the feature unclosable by construction.
 
