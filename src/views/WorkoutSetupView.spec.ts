@@ -109,41 +109,74 @@ describe('WorkoutSetupView session target', () => {
       string,
       { variants: { classic_rcaf: { volume_scaler_coefficient: number } } }
     >
+    const radios = wrapper.findAll('input[type="radio"]')
+    expect(radios).toHaveLength(4)
 
-    const expectedDurations = ['02:00', '01:00', '01:00', '01:00', '06:00']
+    const modes: {
+      radioIndex: number
+      durationSeconds: (data: Record<string, number>) => number
+    }[] = [
+      { radioIndex: 2, durationSeconds: () => 360 },
+      {
+        radioIndex: 0,
+        durationSeconds: (data: Record<string, number>) =>
+          data.outdoor_run_target_minutes * 60,
+      },
+      {
+        radioIndex: 3,
+        durationSeconds: (data: Record<string, number>) =>
+          data.walk_target_minutes * 60,
+      },
+    ]
+    const formatDuration = (totalSeconds: number): string => {
+      const minutes = Math.floor(totalSeconds / 60)
+      const seconds = totalSeconds % 60
+      return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+    }
 
-    for (const [chart, levels] of Object.entries(matrix)) {
-      for (const [level, data] of Object.entries(levels)) {
-        userStore.profile = {
-          isOnboardingCompleted: true,
-          currentLevel: `C${chart}_${level}`,
+    for (const mode of modes) {
+      await radios[mode.radioIndex].setValue()
+      await nextTick()
+
+      for (const [chart, levels] of Object.entries(matrix)) {
+        for (const [level, data] of Object.entries(levels)) {
+          userStore.profile = {
+            isOnboardingCompleted: true,
+            currentLevel: `C${chart}_${level}`,
+          }
+          await nextTick()
+
+          const expectedTargets = [1, 2, 3, 4].map((exercise) => {
+            const coefficient =
+              dictionary[`ex_${exercise}`].variants.classic_rcaf
+                .volume_scaler_coefficient
+            const rawReps = data[`exercise_${exercise}_reps`]
+            return `${Math.round(rawReps * coefficient)} Reps`
+          })
+          expectedTargets.push('Aerobic')
+
+          const cards = wrapper.findAll('[data-testid="setup-interval"]')
+          expect(cards).toHaveLength(5)
+          expect(
+            cards.map((card) =>
+              card.find('[data-testid="setup-interval-target"]').text()
+            )
+          ).toEqual(expectedTargets)
+          expect(
+            cards.map((card) =>
+              card.find('[data-testid="setup-interval-duration"]').text()
+            )
+          ).toEqual([
+            '02:00',
+            '01:00',
+            '01:00',
+            '01:00',
+            formatDuration(mode.durationSeconds(data)),
+          ])
         }
-        await nextTick()
-
-        const expectedTargets = [1, 2, 3, 4].map((exercise) => {
-          const coefficient =
-            dictionary[`ex_${exercise}`].variants.classic_rcaf
-              .volume_scaler_coefficient
-          const rawReps = data[`exercise_${exercise}_reps`]
-          return `${Math.round(rawReps * coefficient)} Reps`
-        })
-        expectedTargets.push('Aerobic')
-
-        const cards = wrapper.findAll('[data-testid="setup-interval"]')
-        expect(cards).toHaveLength(5)
-        expect(
-          cards.map((card) =>
-            card.find('[data-testid="setup-interval-target"]').text()
-          )
-        ).toEqual(expectedTargets)
-        expect(
-          cards.map((card) =>
-            card.find('[data-testid="setup-interval-duration"]').text()
-          )
-        ).toEqual(expectedDurations)
       }
     }
-  })
+  }, 30000)
 
   it('updates the preview when the aerobic option changes', async () => {
     const { wrapper, userStore } = mountSetup()

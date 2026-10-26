@@ -62,7 +62,7 @@ APPROVED: v0.4 2026-10-26
       Do: Resolve the target once with `resolveSessionTarget`, build a preview with `ClassicRCAFStrategy.generateWorkout`, render the five intervals with `v-for`, show target reps when present and duration for every interval, and remove the fixed "3 Sets · 15 Reps" and "45 Total" strings. Reuse the same target in `beginWorkout`.
       Done when: a single test iterates every chart/level pair in `src/core/data/charts_matrix.json` and asserts the rendered reps and durations match the oracle; chart-1/D- and chart-3/D+ are examples, not the full coverage; the fixed strings are gone; build and tests pass.
       Out of scope: session generation rules, aerobic option list, start-flow error handling.
-      Notes: The strategy is the single source for reps, names and durations; no sets/total values are invented. Evidence: `src/views/WorkoutSetupView.vue`, `src/views/WorkoutSetupView.spec.ts` · `npx vitest run src/views/WorkoutSetupView.spec.ts` (8 passed, including every chart/level pair) · `npm run build` · `npx eslint` · legacy-string grep returns zero.
+      Notes: The strategy is the single source for reps, names and durations; no sets/total values are invented. Evidence: `src/views/WorkoutSetupView.vue`, `src/views/WorkoutSetupView.spec.ts` · `npx vitest run src/views/WorkoutSetupView.spec.ts` (8 passed; every chart/level pair checked for reps and for stationary, outdoor and walk durations, with expectations derived from `charts_matrix.json` and `exercise_dictionary.json`) · `npm run build` · `npx eslint` · legacy-string grep returns zero.
 
 - [x] T-003 (M-1, R1) Remove the inline border from the ladder
       Refs: R1, AC-1.1 (P2-2)
