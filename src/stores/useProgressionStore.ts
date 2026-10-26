@@ -11,25 +11,24 @@ import type {
   ValidationResult,
 } from '../core/EngineTypes'
 import { useUserStore } from './useUserStore'
+import { FALLBACK_TARGET, parseLevelId } from '../utils/sessionTarget'
 
 export const useProgressionStore = defineStore('progression', () => {
   const adapter = new IndexedDBAdapter()
   const telemetryService = new TelemetryService(adapter)
   const validator = new ProgressionValidator()
+  const userStore = useUserStore()
 
   const isHydrated = ref(false)
   const rawHistory = shallowRef<CompletedSessionRecord[]>([])
 
-  const currentChart = ref<number>(1)
-  const currentLevel = ref('D-')
+  const profileTarget = computed(
+    () => parseLevelId(userStore.profile?.currentLevel) ?? FALLBACK_TARGET
+  )
+  const currentChart = computed(() => profileTarget.value.chartNumber)
+  const currentLevel = computed(() => profileTarget.value.levelString)
 
   const initAsync = async (): Promise<void> => {
-    const userStore = useUserStore()
-    const rawLevel = userStore.profile?.currentLevel ?? 'C1_D-'
-    const [chartStr, levelStr] = rawLevel.split('_')
-    currentChart.value = parseInt(chartStr.replace('C', ''), 10) || 1
-    currentLevel.value = levelStr || 'D-'
-
     await adapter.openAsync()
     const history = await adapter.getAllSessionsAsync()
     rawHistory.value = history
@@ -46,7 +45,6 @@ export const useProgressionStore = defineStore('progression', () => {
       return null
     }
 
-    const userStore = useUserStore()
     const userProfile: UserProfile = {
       age: userStore.profile?.age ?? 30,
     }

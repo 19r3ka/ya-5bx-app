@@ -93,6 +93,27 @@ describe('useProgressionStore', () => {
     expect(store.isHydrated).toBe(true)
   })
 
+  it('updates chart and level when the profile changes after hydration', async () => {
+    const user = useUserStore()
+    user.profile = {
+      age: 40,
+      currentLevel: 'C4_B',
+      isOnboardingCompleted: true,
+    }
+    const store = useProgressionStore()
+
+    await store.initAsync()
+
+    user.profile = {
+      age: 40,
+      currentLevel: 'C2_C+',
+      isOnboardingCompleted: true,
+    }
+
+    expect(store.currentChart).toBe(2)
+    expect(store.currentLevel).toBe('C+')
+  })
+
   it('falls back to chart 1, level D- when the profile is missing', async () => {
     const user = useUserStore()
     user.profile = null

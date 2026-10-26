@@ -46,14 +46,14 @@ APPROVED: v0.4 2026-10-26
 
 ## Milestone 1: Canonical data, setup targets and 005 corrections (R1, R3, R4)
 
-- [ ] T-001 (M-1, R4) Derive the progression position from the profile
+- [x] T-001 (M-1, R4) Derive the progression position from the profile
       Refs: R4, AC-4.1 (T1-1)
       Depends: none
       Files: `src/stores/useProgressionStore.ts`, `src/stores/useProgressionStore.spec.ts`
       Do: Replace the writable `currentChart = ref(1)` and `currentLevel = ref('D-')` initialisers with computed values parsed from `userStore.profile?.currentLevel` via `parseLevelId`; use `FALLBACK_TARGET` for the missing/unparsable case; leave `initAsync` responsible only for adapter/history hydration.
       Done when: no writable literal initialisers remain; the existing profile and fallback tests pass; a test shows the values update when the profile changes; `grep -rn 'currentChart = ref(1)\|currentLevel = ref' src/stores` returns zero.
       Out of scope: history fallback, profile shape, validation rules.
-      Notes: Resolves the owner decision left open in 006 T-004 by choosing derived state.
+      Notes: Resolves the owner decision left open in 006 T-004 by choosing derived state. Evidence: `src/stores/useProgressionStore.ts`, `src/stores/useProgressionStore.spec.ts` · `npx vitest run src/stores/useProgressionStore.spec.ts` (6 passed) · `npm run build` · `npx eslint src/stores/useProgressionStore.ts src/stores/useProgressionStore.spec.ts` · literal grep returns zero.
 
 - [ ] T-002 (M-1, R3) Build the setup list from the chart and level
       Refs: R3, AC-3.1 (T1-5)
