@@ -1,8 +1,8 @@
 # WALKTHROUGH: gap closure (session 1)
 
 **Feature:** 002-gap-closure · **Tasks:** T-01 to T-13 · **Agent / model:** OpenCode / DeepSeek Flash · **Date:** 2026-10-25
-**Status:** Complete (T-01 to T-15). Milestone reviews pending: reviewer subagent quota outage.
-**Verification:** Tests 220/220 · Typecheck ok (`npm run build`) · Lint ok · Build ok
+**Status:** Complete (T-01 to T-15). One review round run on 2026-10-26; findings fixed or rejected with reasons (TASKS.md, review round 1).
+**Verification:** Tests 228/228 · Typecheck ok (`npm run build`) · Lint ok · Build ok
 
 > Written by the implementing agent at the end of every session. Mark a criterion "claimed" when no test or recorded check proves it.
 
@@ -50,19 +50,19 @@
 
 ## 3. Acceptance criteria status
 
-| Criterion | Met?    | Evidence                                                                    |
-| --------- | ------- | --------------------------------------------------------------------------- |
-| AC-1.2    | Yes     | router test: unknown path redirects to `dashboard`                          |
-| AC-1.3    | Yes     | known routes keep names; guard test lands on `onboarding`                   |
-| AC-2.3    | Yes     | four target tests replace the characterization test                         |
-| AC-2.4    | Yes     | storage spec (throw paths) + banner spec; DevTools check not run            |
-| AC-2.5    | Yes     | stored profile unchanged, draft kept, flag clears on success                |
-| AC-3.3    | Yes     | strategy still rejects bad keys; setup resolves first and catches the throw |
-| AC-3.4    | Yes     | resolver spec covers profile/history/default order                          |
-| AC-3.5    | Claimed | banner is wired and translated; no component test for the view              |
-| AC-8.1    | Yes     | the three named files contain no hardcoded user-facing text                 |
-| AC-8.2    | Yes     | parity + used-key test; proven to fail on a missing FR key                  |
-| AC-6.4    | Yes     | one source; all 18 rows and boundaries pinned; 30–34 = `C4_C+` (Q1)         |
+| Criterion | Met? | Evidence                                                                     |
+| --------- | ---- | ---------------------------------------------------------------------------- |
+| AC-1.2    | Yes  | router test: unknown path redirects to `dashboard`                           |
+| AC-1.3    | Yes  | known routes keep names; guard test lands on `onboarding`                    |
+| AC-2.3    | Yes  | four target tests replace the characterization test                          |
+| AC-2.4    | Yes  | storage spec (throw paths) + banner spec; DevTools check not run             |
+| AC-2.5    | Yes  | stored profile unchanged, draft kept, flag clears on success                 |
+| AC-3.3    | Yes  | setup spec: invalid profile -> `C1_D-` + named warning; profile unchanged    |
+| AC-3.4    | Yes  | resolver spec covers profile/history/default order                           |
+| AC-3.5    | Yes  | setup spec: a thrown generation shows `[role="alert"]` and does not navigate |
+| AC-8.1    | Yes  | the three named files contain no hardcoded user-facing text                  |
+| AC-8.2    | Yes  | parity + used-key test; proven to fail on a missing FR key                   |
+| AC-6.4    | Yes  | one source; all 18 rows and boundaries pinned; 30–34 = `C4_C+` (Q1)          |
 
 ## 4. Key decisions
 
@@ -89,7 +89,10 @@
 
 ## 7. Known gaps and follow-ups
 
-- Milestone reviews have not run (provider quota). Treat all milestones as reviewed-by-nobody until that is redone.
+- Review round 1 closed 9 findings: 4 fixed, 5 rejected with reasons (TASKS.md).
+- Guard-precedence test re-implements the `main.ts` guard instead of importing it; a shared guard module is follow-up work.
+- A failed draft removal after a successful profile write is silent by design (stale draft is harmless).
+- Other view components still hardcoded (e.g. "Begin workout" in setup); R8 follow-up.
 - Dead files listed by knip: `ExerciseCard`, `ExerciseList`, `ExerciseTable`, `LevelDetails`, `OnboardingForm`, `ProgressionMap`, `ExerciseInfoSheet`, `WorkoutOptions`, `WorkoutTimer`, `WorkoutTimerControls`, `WorkoutTimerDisplay`, `src/core/scratch/generate_matrix.js`, `src/core/VerificationRunbook.ts`, `src/models/User.ts`, `types/vuetify.d.ts`. Cleanup is not in this feature's scope.
 - Other components still hold hardcoded copy (dashboard, workout setup headings, onboarding steps 3-5); R8 stays partially met outside the three files named by AC-8.1.
 - First test run after `npm ci` failed 3 tests, then passed twice. Cold-start flake, not reproduced.
@@ -104,7 +107,7 @@ npm run build
 npm run lint
 grep -rn "getGoalChartByAge" src        # expect nothing
 grep -rn "CHARACTERIZATION: known gap, see SPEC AC-[123]" src  # expect only AC-4.1/4.4
-npx vitest run src/utils/levels.spec.ts src/locales/locales.spec.ts
+npx vitest run src/utils/levels.spec.ts src/locales/locales.spec.ts src/views/WorkoutSetupView.spec.ts
 ```
 
 ## 9. Review packet

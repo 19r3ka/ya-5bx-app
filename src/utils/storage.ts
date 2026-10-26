@@ -6,8 +6,16 @@
  * Callers must never see those exceptions: they get `false` instead.
  */
 
-function hasLocalStorage(): boolean {
-  return typeof localStorage !== 'undefined'
+/**
+ * Reading the storage global can itself throw (cookies disabled, blocked
+ * context), so even the lookup is guarded.
+ */
+function getStorage(): Storage | null {
+  try {
+    return typeof localStorage === 'undefined' ? null : localStorage
+  } catch {
+    return null
+  }
 }
 
 export function safeWriteJson(key: string, value: unknown): boolean {
@@ -19,12 +27,14 @@ export function safeWriteJson(key: string, value: unknown): boolean {
     return false
   }
 
-  if (serialized === undefined || !hasLocalStorage()) {
+  const storage = getStorage()
+
+  if (serialized === undefined || storage === null) {
     return false
   }
 
   try {
-    localStorage.setItem(key, serialized)
+    storage.setItem(key, serialized)
     return true
   } catch {
     return false
@@ -32,12 +42,14 @@ export function safeWriteJson(key: string, value: unknown): boolean {
 }
 
 export function safeRemove(key: string): boolean {
-  if (!hasLocalStorage()) {
+  const storage = getStorage()
+
+  if (storage === null) {
     return false
   }
 
   try {
-    localStorage.removeItem(key)
+    storage.removeItem(key)
     return true
   } catch {
     return false

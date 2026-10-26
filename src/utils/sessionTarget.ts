@@ -50,7 +50,8 @@ export function parseLevelId(
 /**
  * Chooses a usable training target without touching stored data (D-008):
  * profile level, then the newest completed session with a valid level,
- * then Chart 1 / Level D-.
+ * then Chart 1 / Level D-. "Newest" is decided by `completedAt`, not by
+ * array position, so an out-of-order history cannot pick an older session.
  */
 export function resolveSessionTarget(
   profileLevel: string | undefined,
@@ -65,15 +66,23 @@ export function resolveSessionTarget(
     return { ...fromProfile, source: 'profile' }
   }
 
-  for (let i = history.length - 1; i >= 0; i--) {
-    const record = history[i]
+  let newest: CompletedSessionRecord | null = null
 
-    if (record && isValidChartLevel(record.chartNumber, record.levelString)) {
-      return {
-        chartNumber: record.chartNumber,
-        levelString: record.levelString,
-        source: 'history',
-      }
+  for (const record of history) {
+    if (!isValidChartLevel(record.chartNumber, record.levelString)) {
+      continue
+    }
+
+    if (newest === null || record.completedAt >= newest.completedAt) {
+      newest = record
+    }
+  }
+
+  if (newest !== null) {
+    return {
+      chartNumber: newest.chartNumber,
+      levelString: newest.levelString,
+      source: 'history',
     }
   }
 

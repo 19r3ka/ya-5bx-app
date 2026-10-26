@@ -72,6 +72,19 @@ describe('resolveSessionTarget', () => {
     })
   })
 
+  it('uses completedAt, not array order, to pick the newest session', () => {
+    const history = [
+      record({ chartNumber: 4, levelString: 'A', completedAt: 2_000 }),
+      record({ chartNumber: 2, levelString: 'B-', completedAt: 1_000 }),
+    ]
+
+    expect(resolveSessionTarget(undefined, history)).toEqual({
+      chartNumber: 4,
+      levelString: 'A',
+      source: 'history',
+    })
+  })
+
   it('skips invalid history records and keeps looking', () => {
     const history = [
       record({ chartNumber: 2, levelString: 'A-' }),

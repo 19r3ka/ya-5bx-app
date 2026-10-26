@@ -98,3 +98,28 @@ describe('safeRemove', () => {
     expect(safeRemove('test_key')).toBe(false)
   })
 })
+
+describe('guarded global access', () => {
+  it('returns false when reading the storage global throws', () => {
+    const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage')
+
+    try {
+      Object.defineProperty(globalThis, 'localStorage', {
+        configurable: true,
+        get() {
+          throw new DOMException('denied', 'SecurityError')
+        },
+      })
+
+      expect(() => safeWriteJson('test_key', 1)).not.toThrow()
+      expect(safeWriteJson('test_key', 1)).toBe(false)
+      expect(safeRemove('test_key')).toBe(false)
+    } finally {
+      if (original) {
+        Object.defineProperty(globalThis, 'localStorage', original)
+      } else {
+        Reflect.deleteProperty(globalThis, 'localStorage')
+      }
+    }
+  })
+})
