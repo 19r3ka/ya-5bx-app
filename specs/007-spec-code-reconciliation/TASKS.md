@@ -178,14 +178,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: reclassifying unrelated 006 tasks (T-001/T-002/T-003/T-010/T-012) without their own evidence.
       Notes: The 007 scope does not re-verify the unrelated claimed tasks. If 006 has no approval line, T-014 stops and reports instead of ticking 006. Evidence: 005 T-019/T-020 and 006 T-004/T-008/T-011/T-014 are [x] with 007 test/grep/build notes. All six audit greps return zero (`style="border`, `rounded="xl"`, `<style scoped`, `:elapsed-seconds`, legacy setup strings, writable progression literals). Targeted Vitest for the store, setup, clock, active view and style contract: 30 passed. Full suite 246 passed; build and lint pass. Both source files already carry `APPROVED: v0.1 2026-10-26`; the audit notes clarify 005's T-021/T-022 header typo and 006's stale execution blocker. Audit recorded in `WALKTHROUGH.md` §9.
 
-- [ ] T-015 (M-4, R7) Run the final gate and write the walkthrough
+- [x] T-015 (M-4, R7) Run the final gate and write the walkthrough
       Refs: R7, AC-5.1, AC-7.1, V7, V8
       Depends: T-014
       Files: `specs/007-spec-code-reconciliation/WALKTHROUGH.md`, `walkthroughs.md`
       Do: Run the full gate: `npm test`, `npm run build`, `npm run lint`, `npx prettier --check` on changed files, all static greps, and the manual visual checklist from PLAN §5.2. Record the device/manual result separately from automated evidence.
       Done when: tests pass with the new count; build, lint and format check pass; all six defects have evidence; the walkthrough states deviations, assumptions and unresolved deferred checks; the session audit entry is appended; the DEVICE record covers Lenovo Miixpad, Pixel 8 and Pixel 9 or names a BLOCKED device.
       Out of scope: browser/PWA checks deferred by SPEC v0.4 §2.
-      Notes: No `[x]` is claimed for C1-C10, R8 or R9. The T3-1 visual parity record is mandatory under R7.
+      Notes: No `[x]` is claimed for C1-C10, R8 or R9. The T3-1 visual parity record is mandatory under R7. Evidence: `npm test` 34 files / 246 tests passed; `npm run build` passed; `npm run lint` (`--fix`) left no diff; `npx eslint src/` passed; `npx prettier --check` passed on every changed supported file (`.gitkeep` and `versions` have no parser and were excluded); `git diff main...HEAD --check` clean; all six static greps return zero; writable progression grep zero. DEVICE: Lenovo Miixpad, Pixel 8 and Pixel 9 are `BLOCKED` (unavailable to this agent), the PLAN §5.2 checklist was not executed, and no visual parity is claimed. AC-7.1 and R7 remain unresolved; the walkthrough records this. The session audit is appended to `walkthroughs.md` in the follow-up audit commit.
 
 ## Deferred / owner decisions
 
