@@ -37,15 +37,3 @@
     set: (val: string) => router.push({ name: val }),
   })
 </script>
-
-<style scoped>
-  .bottom-nav {
-    height: 80px;
-  }
-  .border-top-accent {
-    border-top: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .nav-btn {
-    min-width: 64px;
-  }
-</style>

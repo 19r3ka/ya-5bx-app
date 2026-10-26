@@ -12,7 +12,7 @@
       <v-row>
         <v-col cols="12" align="center" justify="center">
           <WorkoutTimerControls
-            id="timer-controls"
+            class="timer-controls"
             :isRunning="isRunning"
             @timer:runOrStop="runOrStopTimer"
             @timer:skip="advanceTimer"
@@ -44,9 +44,3 @@
   const advanceTimer = () => goToNextTimer()
   const resetTimers = () => resetWorkout()
 </script>
-
-<style scoped>
-  #timer-controls {
-    max-width: 400px;
-  }
-</style>

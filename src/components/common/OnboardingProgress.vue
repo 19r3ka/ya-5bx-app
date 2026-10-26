@@ -14,16 +14,3 @@
     currentStep: number
   }>()
 </script>
-
-<style scoped>
-  .progress-pip {
-    width: 24px;
-    height: 4px;
-    border-radius: 2px;
-    background: rgb(var(--v-theme-surface-variant));
-    transition: background 300ms ease;
-  }
-  .progress-pip.active {
-    background: rgb(var(--v-theme-primary));
-  }
-</style>

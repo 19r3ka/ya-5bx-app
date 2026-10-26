@@ -113,14 +113,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: per-component class replacement (T-008 to T-012).
       Notes: Required by T3-1: the sheet existed but was never loaded, so the old global classes were inert. This is not a new feature. Evidence: `src/main.ts` imports `./style.css` once after typography; `src/App.vue` has no style block; `src/style.css` documents the canonical layout, border, grid/cell/legend, scrollbar, component and keyframe classes using the current `ProgressionMapGrid` values. Full gate: `npm test` 240 passed; `npm run build`; full `npx eslint src/`; `npx prettier --check` on the three files.
 
-- [ ] T-008 (M-3, R4) Migrate the shared and layout components
+- [x] T-008 (M-3, R4) Migrate the shared and layout components
       Refs: R4, AC-4.1 (T3-1)
       Depends: T-007
       Files: `src/components/common/AppHelpDialog.vue`, `src/components/common/OnboardingProgress.vue`, `src/components/layout/BottomNav.vue`, `src/components/ProgressionMap.vue`, `src/components/WorkoutTimer.vue`
       Do: Remove every scoped block. Map flex/spacing/radius/opacity to Vuetify; move exact borders, pips, widths and ids to the canonical global classes. Keep the P2-3 radius change.
       Done when: these five files contain no `<style scoped>`; tests/build/lint pass.
       Out of scope: the unused legacy components' product behavior.
-      Notes: `ProgressionMap.vue` and `WorkoutTimer.vue` are legacy but are still in scope per the owner's "all components" decision.
+      Notes: `ProgressionMap.vue` and `WorkoutTimer.vue` are legacy but are still in scope per the owner's "all components" decision. Evidence: all five files have no style block; AppHelpDialog uses the canonical `.border-surface-variant`; WorkoutTimer uses the `.timer-controls` class instead of the id; `ProgressionMap` uses `.matrix-container`; `BottomNav` uses `.bottom-nav`, `.border-top-accent`, `.nav-btn`; `OnboardingProgress` uses `.progress-pip`. Full gate: `npm test` 240 passed; `npm run build`; full `npx eslint src/`.
 
 - [ ] T-009 (M-3, R4) Migrate the onboarding components
       Refs: R4, AC-4.1 (T3-1)

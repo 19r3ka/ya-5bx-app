@@ -59,7 +59,11 @@
         </ul>
       </div>
 
-      <v-card color="surface" rounded="lg" class="pa-3 mb-6 border-accent">
+      <v-card
+        color="surface"
+        rounded="lg"
+        class="pa-3 mb-6 border-surface-variant"
+      >
         <div class="d-flex align-center ga-2 text-secondary mb-1">
           <v-icon size="small">mdi-shield-check-outline</v-icon>
           <span class="fc-caption font-weight-bold text-uppercase">{{
@@ -93,9 +97,3 @@
     (e: 'update:modelValue', val: boolean): void
   }>()
 </script>
-
-<style scoped>
-  .border-accent {
-    border: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-</style>
