@@ -1,38 +1,33 @@
-# ROADMAP: YA-5BX
+# ROADMAP
 
-**Scope:** Target capabilities not yet built, grouped by the feature that owns them. Items here are not part of the 001-baseline acceptance criteria. Each item moves to a feature spec when its phase starts.
+> Target items for this project: wanted or documented, not built. Nothing here is a requirement until a feature spec pulls it in by ID. Agents never implement from this file. One line per item. Reviewed at the end of every feature.
 
-**Status key:** Target (not started) · Blocked (waiting on an open question or decision) · Satisfied (delivered by another phase)
+**Updated:** 2026-10-26
 
-| ID    | Capability                                                               | Spec reference                         | Plan phase | Blocked by | Status                                    |
-| ----- | ------------------------------------------------------------------------ | -------------------------------------- | ---------- | ---------- | ----------------------------------------- |
-| RM-01 | McMaster HIIT selection: strategy UI and default                         | R3, AC-3.2, Goal, Scope                | 5          | D-007      | Blocked                                   |
-| RM-02 | Automatic pause when the page is hidden or loses focus                   | R4, AC-4.4                             | 2          | D-005      | Target                                    |
-| RM-03 | Screen Wake Lock during active workouts, with no-op where unsupported    | R4b, Constitution §5                   | 2          | D-005      | Target                                    |
-| RM-04 | Rename `TelemetryService` to match Constitution §1                       | R5, Constitution §1                    | 5          | D-006      | Blocked                                   |
-| RM-05 | Periodic backup prompt, JSON export, and `.tcx` export                   | R7, AC-7.1, AC-7.2                     | 4          | Q1         | Blocked                                   |
-| RM-06 | Gamified level-up celebration                                            | R6, AC-6.2                             | 5          | Q2         | Blocked                                   |
-| RM-07 | Redirect unknown URLs to the dashboard                                   | AC-1.2                                 | 1          | None       | Implemented (002, pending review)         |
-| RM-08 | Guarded storage writes with user-visible errors                          | AC-2.3, Constitution §1                | 1          | None       | Implemented (002, pending review)         |
-| RM-09 | Invalid-input fallback and error banner for workout generation           | AC-3.3                                 | 1          | None       | Implemented (002, pending review)         |
-| RM-10 | Backup import with schema validation and rejection                       | AC-5.3                                 | 4          | D-004      | Blocked                                   |
-| RM-11 | Pre-workout health screening and acknowledgment gate                     | R11, AC-11.1                           | 5          | Q3, D-009  | Blocked                                   |
-| RM-12 | Automated test suite                                                     | Constitution quality gates 2 and 7     | 3          | None       | Satisfied (characterization suite, D-002) |
-| RM-13 | Accessibility audit and fixes: focus, accessible names, non-color status | R10, AC-10.1, AC-10.2, Constitution §6 | 6          | None       | Target                                    |
+| ID    | Description                                                              | Source                                      | Status  | Pulled into                            |
+| ----- | ------------------------------------------------------------------------ | ------------------------------------------- | ------- | -------------------------------------- |
+| RM-01 | McMaster HIIT selection: strategy UI and default                         | SPEC R3, AC-3.2; D-007                      | Target  | -                                      |
+| RM-02 | Automatic pause when the page is hidden or loses focus                   | SPEC R4, AC-4.4; D-005                      | Target  | -                                      |
+| RM-03 | Screen Wake Lock during active workouts, no-op where unsupported         | SPEC R4b; Constitution §5; D-005            | Target  | -                                      |
+| RM-04 | Rename the telemetry service to match Constitution §1                    | SPEC R5; Constitution §1; D-006             | Target  | -                                      |
+| RM-05 | Periodic backup prompt, JSON export and `.tcx` export                    | SPEC R7, AC-7.1, AC-7.2; Q1                 | Target  | -                                      |
+| RM-06 | Gamified level-up celebration                                            | SPEC R6, AC-6.2; Q2                         | Target  | -                                      |
+| RM-07 | Redirect unknown URLs to the dashboard                                   | SPEC AC-1.2                                 | Built   | `specs/002-gap-closure` (R1, AC-1.2)   |
+| RM-08 | Guarded storage writes with user-visible errors                          | SPEC AC-2.3; Constitution §1                | Built   | `specs/002-gap-closure` (R2, AC-2.3)   |
+| RM-09 | Invalid-input fallback and error banner for workout generation           | SPEC AC-3.3                                 | Built   | `specs/002-gap-closure` (R3, AC-3.3)   |
+| RM-10 | Backup import with schema validation and rejection                       | SPEC AC-5.3; D-004                          | Target  | -                                      |
+| RM-11 | Pre-workout health screening and acknowledgment gate                     | SPEC R11, AC-11.1; Q3, D-009                | Target  | -                                      |
+| RM-12 | Automated test suite                                                     | Constitution quality gates 2 and 7; D-002   | Built   | `specs/001-baseline` (T-007 to T-037)  |
+| RM-13 | Accessibility audit and fixes: focus, accessible names, non-color status | SPEC R10, AC-10.1, AC-10.2; Constitution §6 | Target  | -                                      |
+| RM-14 | Self-driven workout timer without reactive prop thrashing                | `specs/phase5/phase5-specs.md` T2-1         | Planned | `specs/006-production-completion` (R3) |
+| RM-15 | Workout setup lists exercises from the current chart and level           | `specs/phase5/phase5-specs.md` T1-5         | Planned | `specs/006-production-completion` (R2) |
 
-## Open questions and decisions referenced
+Status values: Target (wanted, not built) · Planned (pulled into a spec, not built) · Built (specs/NNN-slug) · Dropped (reason).
 
-- **Q1:** Backup reminder frequency (SPEC §8).
-- **Q2:** Celebration theme and reward sequence (SPEC §8).
-- **Q3:** Health screening criteria and disclaimers (SPEC §8).
-- **D-004:** Storage schema versioning, to write before Phase 4.
-- **D-005:** Background pause and wake lock policy, to write before Phase 2.
-- **D-006:** Telemetry naming and scope, to write before Phase 5.
-- **D-007:** Default strategy and selection rules, to write before Phase 5.
-- **D-008:** Invalid-input fallback policy, to write before Phase 1.
-- **D-009:** Health screening gate design, to write before Phase 5.
+## Rules
 
-## Not on this roadmap
-
-- **Legacy timer alignment** (`useTimer.ts`, AC-4.1). This is an open finding in PLAN §11.2, to be resolved in Phase 2 planning. It becomes a roadmap item only if the owner decides to keep the legacy timer.
-- **Cloud sync, accounts, social features, remote telemetry.** Out of scope permanently (SPEC §4).
+- Add a row only with a source. No source, no row.
+- To plan an item, name its ID in a spec's Scope. Set Planned and cite the spec requirement (`R#`) and feature folder in "Pulled into".
+- After the feature ships and is verified, set Built and link the folder.
+- Never delete or renumber rows; never reuse an ID.
+- Capabilities excluded from the product go to `specs/OUT_OF_SCOPE.md`, not here.

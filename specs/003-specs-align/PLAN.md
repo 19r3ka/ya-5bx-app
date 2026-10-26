@@ -6,7 +6,7 @@
 
 ## 1. Approach summary
 
-Move, do not rewrite: each historical phase document becomes the `design/` carrier of its feature, while four thin kit files describe it. The 2026-10-26 audit is the single evidence source for task status; unproven checks stay open. The roadmap is regenerated in the kit schema with the same RM IDs. Existing 001/002 task text is frozen; only headers, statuses and notes change. No source code is touched.
+Move, do not rewrite: each historical phase document becomes the `design/` carrier of its feature, while four thin kit files describe it. The 2026-10-26 audit is the single evidence source for task status; unproven checks stay open. The roadmap is regenerated in the kit schema with the same RM IDs, and permanently excluded capabilities move to one shared register so they can be reviewed per release. Existing 001/002 task text is frozen; only headers, statuses and notes change. No source code is touched.
 
 ## 2. Constitution check
 
@@ -82,32 +82,33 @@ No runtime data. Document-level identifiers:
 
 ## 7. File changes
 
-| Path                                                               | New / Modified | Purpose                                                        |
-| ------------------------------------------------------------------ | -------------- | -------------------------------------------------------------- |
-| `specs/003-specs-align/SPEC.md`                                    | New            | This feature's requirements (owner-saved; permission-guarded). |
-| `specs/003-specs-align/PLAN.md`                                    | New            | This plan.                                                     |
-| `specs/003-specs-align/TASKS.md`                                   | New            | Ordered execution.                                             |
-| `specs/003-specs-align/WALKTHROUGH.md`                             | New            | Session record.                                                |
-| `specs/ROADMAP.md`                                                 | Modified       | Kit schema; same IDs; Built/Planned rows.                      |
-| `specs/004-progression/{SPEC,PLAN,TASKS,WALKTHROUGH}.md`           | New            | Phase 3 as a feature.                                          |
-| `specs/004-progression/design/phase3-implementation.md`            | Moved          | Detailed design.                                               |
-| `specs/005-ux-implementation/{SPEC,PLAN,TASKS,WALKTHROUGH}.md`     | New            | Phase 4 as a feature.                                          |
-| `specs/005-ux-implementation/design/`                              | Moved          | UX spec, implementation plan, corrections, 16 mockups.         |
-| `specs/006-production-completion/{SPEC,PLAN,TASKS,WALKTHROUGH}.md` | New            | Phase 5 as a feature.                                          |
-| `specs/006-production-completion/design/phase5-specs.md`           | Moved          | Detailed production plan.                                      |
-| `specs/001-baseline/*.md`                                          | Modified       | True status, version, no banned names.                         |
-| `specs/002-gap-closure/*.md`                                       | Modified       | True status, version, stale notes removed.                     |
-| `DECISIONS.md`                                                     | Modified       | `D-012`.                                                       |
-| `specs/phase5/phase5-specs.md:Zone.Identifier`                     | Deleted        | Junk stream file.                                              |
-| `specs/phase3`, `specs/phase4`, `specs/phase5`                     | Deleted        | Empty after the moves.                                         |
+| Path                                                               | New / Modified | Purpose                                                            |
+| ------------------------------------------------------------------ | -------------- | ------------------------------------------------------------------ |
+| `specs/003-specs-align/SPEC.md`                                    | New            | This feature's requirements (owner-saved; permission-guarded).     |
+| `specs/003-specs-align/PLAN.md`                                    | New            | This plan.                                                         |
+| `specs/003-specs-align/TASKS.md`                                   | New            | Ordered execution.                                                 |
+| `specs/003-specs-align/WALKTHROUGH.md`                             | New            | Session record.                                                    |
+| `specs/ROADMAP.md`                                                 | Modified       | Kit schema; same IDs; Built/Planned rows; out-of-scope pointer.    |
+| `specs/OUT_OF_SCOPE.md`                                            | New            | Shared register of permanently excluded capabilities with sources. |
+| `specs/004-progression/{SPEC,PLAN,TASKS,WALKTHROUGH}.md`           | New            | Phase 3 as a feature.                                              |
+| `specs/004-progression/design/phase3-implementation.md`            | Moved          | Detailed design.                                                   |
+| `specs/005-ux-implementation/{SPEC,PLAN,TASKS,WALKTHROUGH}.md`     | New            | Phase 4 as a feature.                                              |
+| `specs/005-ux-implementation/design/`                              | Moved          | UX spec, implementation plan, corrections, 16 mockups.             |
+| `specs/006-production-completion/{SPEC,PLAN,TASKS,WALKTHROUGH}.md` | New            | Phase 5 as a feature.                                              |
+| `specs/006-production-completion/design/phase5-specs.md`           | Moved          | Detailed production plan.                                          |
+| `specs/001-baseline/*.md`                                          | Modified       | True status, version, no banned names.                             |
+| `specs/002-gap-closure/*.md`                                       | Modified       | True status, version, stale notes removed.                         |
+| `DECISIONS.md`                                                     | Modified       | `D-012`.                                                           |
+| `specs/phase5/phase5-specs.md:Zone.Identifier`                     | Deleted        | Junk stream file.                                                  |
+| `specs/phase3`, `specs/phase4`, `specs/phase5`                     | Deleted        | Empty after the moves.                                             |
 
 ## 8. Test strategy
 
 Documentation has no runtime test suite; every criterion is verified by a command with a pass condition. Run from the repository root.
 
 | Criterion     | Check type        | Location / command                                                                                                                                |
-| ------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | --- | ----------- | ------ | ------ | ----------- | ------------------------------ | ----------------------------------- | ----------------------------------- |
-| AC-1.1        | scripted          | `grep -n '^                                                                                                                                       | ID  | Description | Source | Status | Pulled into | ' specs/ROADMAP.md`and`awk -F' | ' 'NF>5{print $5}' specs/ROADMAP.md | sort -u` shows only the four values |
+| ------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AC-1.1        | scripted          | `sed -n '5p' specs/ROADMAP.md` names the five columns; every status cell is Target, Planned, Built or Dropped                                     |
 | AC-1.2        | scripted          | `grep -n 'RM-07' specs/ROADMAP.md` shows `Built` and `002-gap-closure`                                                                            |
 | AC-1.3        | scripted          | `grep -n 'RM-14' specs/ROADMAP.md` shows `Planned` and `006-production-completion`                                                                |
 | AC-2.1        | scripted          | loop `for f in SPEC PLAN TASKS WALKTHROUGH; do test -f specs/00N-slug/$f.md; done` for N = 4, 5, 6                                                |
@@ -128,14 +129,15 @@ Documentation has no runtime test suite; every criterion is verified by a comman
 
 ## 9. Risks and mitigations
 
-| Risk                                                                 | Likelihood | Impact               | Mitigation                                                                  |
-| -------------------------------------------------------------------- | ---------- | -------------------- | --------------------------------------------------------------------------- |
-| `SPEC.md` is permission-guarded for the agent                        | Certain    | Blocks file creation | The owner saves the draft; the plan and tasks proceed and cite it.          |
-| Design detail lost in conversion                                     | Medium     | High                 | Move originals into `design/`; never paraphrase detail into the four files. |
-| Broken relative links after the moves                                | Medium     | Medium               | Link check in section 8 runs before the cleanup commit.                     |
-| Binary mockups inflate the diff                                      | Certain    | Low                  | Move with `git mv`; review with `git diff --stat -M`.                       |
-| Scope creep into the two code regressions and the open phase-5 items | Medium     | Medium               | Non-goal in SPEC §4; recorded as tasks and DISCOVERED items, not fixed.     |
-| Tick copied without proof                                            | Low        | High                 | Evidence rule in section 6; AC-3.1 count check.                             |
+| Risk                                                                 | Likelihood | Impact               | Mitigation                                                                                                 |
+| -------------------------------------------------------------------- | ---------- | -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `SPEC.md` is permission-guarded for the agent                        | Certain    | Blocks file creation | The owner saves the draft; the plan and tasks proceed and cite it.                                         |
+| Design detail lost in conversion                                     | Medium     | High                 | Move originals into `design/`; never paraphrase detail into the four files.                                |
+| Broken relative links after the moves                                | Medium     | Medium               | Link check in section 8 runs before the cleanup commit.                                                    |
+| Binary mockups inflate the diff                                      | Certain    | Low                  | Move with `git mv`; review with `git diff --stat -M`.                                                      |
+| Scope creep into the two code regressions and the open phase-5 items | Medium     | Medium               | Non-goal in SPEC §4; recorded as tasks and DISCOVERED items, not fixed.                                    |
+| Tick copied without proof                                            | Low        | High                 | Evidence rule in section 6; AC-3.1 count check.                                                            |
+| Out-of-scope register drifts from the spec                           | Low        | Medium               | Every row cites a source; the register is reviewed at each release and changes only through a spec change. |
 
 ## 10. Key decisions
 

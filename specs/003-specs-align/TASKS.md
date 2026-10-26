@@ -1,10 +1,12 @@
 # TASKS: Specification corpus alignment
 
+APPROVED: v0.1 2026-10-26
+
 **Feature ID:** 003-specs-align · **Spec v:** 0.1 · **Plan v:** 0.1 · **Updated:** 2026-10-26
 
 > Ordered, atomic, agent-proof. One task = one session = one commit. The implementing agent ticks boxes and appends Notes; it does not rewrite tasks. If a task is wrong or unclear, stop and record it under "Blocked / questions".
 >
-> **Status: Draft.** `SPEC.md` is not yet in the repository: the agent's permission policy blocks writes to `SPEC.md` files, and the owner saves them. No task starts before `SPEC.md` exists and the `APPROVED:` line below is present.
+> **Status: Approved v0.1 (2026-10-26).** Execute milestone by milestone; stop and report after each milestone.
 
 ## How an agent uses this file
 
@@ -23,7 +25,7 @@
 
 ## Milestone 1: Roadmap (delivers R1, R7)
 
-- [ ] T-01 Rewrite the roadmap in the kit 0.3.0 schema
+- [x] T-01 Rewrite the roadmap in the kit 0.3.0 schema
       Refs: R1, AC-1.1, AC-1.2, AC-1.3, R7
       Depends: none
       Files: `specs/ROADMAP.md`
@@ -31,6 +33,17 @@
       Done when: `grep -n '^| ID | Description | Source | Status | Pulled into |' specs/ROADMAP.md` matches; `awk -F'|' 'NF>5{gsub(/^ +| +$/,"",$5); print $5}' specs/ROADMAP.md | sort -u` lists only `Status` and the four values; `grep -c '^| RM-' specs/ROADMAP.md` is 15; every row has a non-empty Source cell.
       Out of scope: editing feature specs or DECISIONS.md in this task.
       Notes:
+      Evidence: `specs/ROADMAP.md` has 15 RM rows (9 Target, 2 Planned, 4 Built), the five-column header and a Rules section. Verified 2026-10-26.
+
+- [x] T-14 Create the shared out-of-scope register
+      Refs: R7, AC-7.1
+      Depends: T-01
+      Files: `specs/OUT_OF_SCOPE.md` (new), `specs/ROADMAP.md`
+      Do: Create one table with columns `Capability | Why it stays out | Source | Reconsider when | Status`. Add the permanently excluded capabilities named in `specs/001-baseline/SPEC.md` §4 (cloud synchronization, backend accounts, social or multi-user features, automated remote telemetry) and the on-device rule from `CONSTITUTION.md` §1. Keep every row's Source column pointing at the document and line. Add a short "Rules" section: rows are never deleted, a capability leaves the register only through an approved spec change, and a row is reviewed at every release. Link the register from `specs/ROADMAP.md` under a `## Out of scope` heading. Do not copy product marketing text.
+      Done when: `test -f specs/OUT_OF_SCOPE.md`; the table has four capability rows; `grep -n 'OUT_OF_SCOPE.md' specs/ROADMAP.md` matches; every row has a non-empty Source.
+      Out of scope: adding roadmap IDs or requirements for these capabilities.
+      Notes:
+      Evidence: `specs/OUT_OF_SCOPE.md` has four sourced rows and five rules; `specs/ROADMAP.md` links it. Verified 2026-10-26.
 
 ## Milestone 2: Phase documents become features (delivers R2, R3, R7)
 
@@ -65,8 +78,8 @@
       Refs: R2, R3, AC-3.1, AC-3.2, R7
       Depends: T-04
       Files: `specs/005-ux-implementation/TASKS.md`, `specs/005-ux-implementation/WALKTHROUGH.md` (new), `specs/005-ux-implementation/design/` (moved)
-      Do: `git mv` the UX spec, implementation plan, corrections document and the 16 HTML/PNG mockups into `design/`. Write one task per correction (`P0-1` to `P3-2`, 27 total) with its file and the check that proves it: TypeScript build for the compiler and declaration fixes, spec files for components that have them, and the greps from the corrections file for the class rules. Mark P2-2 and P2-3 `[ ] DISCOVERED (needs owner approval)` with the failing paths. Keep the seven browser/IndexedDB/PWA checks unchecked and list them as `Claimed` in the walkthrough.
-      Done when: `test -d specs/005-ux-implementation/design && test ! -d specs/phase4`; 27 task blocks exist; every ticked block has `Evidence:`; `grep -n 'DISCOVERED' specs/005-ux-implementation/TASKS.md` shows the two items.
+      Do: `git mv` the UX spec, implementation plan, corrections document and the 16 HTML/PNG mockups into `design/`. Write one task per correction (`P0-1` to `P3-2`, 27 total) with its file and the check that proves it: TypeScript build for the compiler and declaration fixes, spec files for components that have them, and the greps from the corrections file for the class rules. Mark P2-2 and P2-3 as unchecked `[ ]` tasks with the failing paths; the owner approved both as 005 tasks on 2026-10-26. Keep the seven browser/IndexedDB/PWA checks unchecked and list them as `Claimed` in the walkthrough.
+      Done when: `test -d specs/005-ux-implementation/design && test ! -d specs/phase4`; 27 task blocks exist; every ticked block has `Evidence:`; `grep -n 'P2-2' specs/005-ux-implementation/TASKS.md` and `grep -n 'P2-3' specs/005-ux-implementation/TASKS.md` each match an unchecked task.
       Out of scope: fixing the two regressions.
       Notes:
 
@@ -148,9 +161,9 @@
 
 ## Blocked / questions
 
-- **SPEC.md is permission-guarded for the agent.** All four feature specs (003, 004, 005, 006) must be saved by the owner, or the write restriction must be lifted for `specs/**/SPEC.md`. Raised 2026-10-26.
-- **DISCOVERED, awaiting approval:** phase-4 corrections P2-2 (inline border on `Step3Ladder.vue:98`) and P2-3 (`rounded="xl"` on `Step6Ready.vue:108`, `AppHelpDialog.vue:7`) fail their own checklist. They are code changes and stay outside this feature; they are recorded as open items in `005` and are not fixed here. Raised 2026-10-26.
-- **Question:** should the permanently out-of-scope capabilities (cloud sync, accounts, social) keep a line in the roadmap? The plan drops them because `SPEC.md` §4 already states them as non-goals. Raised 2026-10-26.
+- **SPEC.md is permission-guarded for the agent.** `003-specs-align/SPEC.md` is saved. The 004, 005 and 006 specs are still authored as drafts for the owner to save; see the close-out report. Raised 2026-10-26, partially resolved.
+- **Resolved 2026-10-26:** the owner approved phase-4 corrections P2-2 (inline border on `Step3Ladder.vue:98`) and P2-3 (`rounded="xl"` on `Step6Ready.vue:108`, `AppHelpDialog.vue:7`) as 005 tasks. They stay unfixed in 003.
+- **Resolved 2026-10-26:** the owner asked for a shared register of permanently out-of-scope capabilities. T-14 creates `specs/OUT_OF_SCOPE.md` and the roadmap links it.
 
 ## Phase reviews
 
@@ -158,12 +171,12 @@
 
 ## Coverage matrix
 
-| Requirement | Criteria               | Tasks                                                |
-| ----------- | ---------------------- | ---------------------------------------------------- |
-| R1          | AC-1.1, AC-1.2, AC-1.3 | T-01                                                 |
-| R2          | AC-2.1, AC-2.2, AC-2.3 | T-02, T-03, T-04, T-05, T-06, T-07                   |
-| R3          | AC-3.1, AC-3.2, AC-3.3 | T-03, T-05, T-07                                     |
-| R4          | AC-4.1, AC-4.2, AC-4.3 | T-08, T-09, T-10, T-11                               |
-| R5          | AC-5.1                 | T-08, T-09, T-13                                     |
-| R6          | AC-6.1, AC-6.2         | T-11                                                 |
-| R7          | AC-7.1, AC-7.2         | T-01, T-02, T-03, T-04, T-05, T-06, T-07, T-12, T-13 |
+| Requirement | Criteria               | Tasks                                                      |
+| ----------- | ---------------------- | ---------------------------------------------------------- |
+| R1          | AC-1.1, AC-1.2, AC-1.3 | T-01                                                       |
+| R2          | AC-2.1, AC-2.2, AC-2.3 | T-02, T-03, T-04, T-05, T-06, T-07                         |
+| R3          | AC-3.1, AC-3.2, AC-3.3 | T-03, T-05, T-07                                           |
+| R4          | AC-4.1, AC-4.2, AC-4.3 | T-08, T-09, T-10, T-11                                     |
+| R5          | AC-5.1                 | T-08, T-09, T-13                                           |
+| R6          | AC-6.1, AC-6.2         | T-11                                                       |
+| R7          | AC-7.1, AC-7.2         | T-01, T-02, T-03, T-04, T-05, T-06, T-07, T-12, T-13, T-14 |
