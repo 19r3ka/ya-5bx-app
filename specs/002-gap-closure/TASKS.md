@@ -174,7 +174,7 @@
 
 ## Blocked / questions
 
-- **SPEC.md not yet in place.** The owner's permission rules deny agent edits to `**/SPEC.md`. Draft v0.1 is staged at `/tmp/opencode/002-gap-closure-SPEC.md`; the owner must save it as `specs/002-gap-closure/SPEC.md` before approval. (raised by agent, 2026-10-25)
+- **SPEC.md not yet in place.** The owner's permission rules deny agent edits to `**/SPEC.md`. The 2026-10-25 draft in `/tmp/opencode` was lost when temp storage was cleared; it was reconstructed on 2026-10-26 as `specs/002-gap-closure/SPEC-draft.md`. The owner must move that file to `specs/002-gap-closure/SPEC.md` (`mv specs/002-gap-closure/SPEC-draft.md specs/002-gap-closure/SPEC.md`). (raised by agent 2026-10-25, updated 2026-10-26)
 - ~~**Q1 (SPEC §9):** 30–34 row~~ Answered 2026-10-25: `C4_C+` (RCAF source); data corrected in T-14.
 
 ## Coverage matrix
