@@ -145,15 +145,16 @@ APPROVED: v0.1 2026-10-26
 
 ## Milestone 4: Cleanup and close (delivers R5, R6, R7)
 
-- [~] T-11 Remove the junk file and empty phase folders; verify links
-  Refs: R6, AC-6.1, AC-6.2, AC-4.3
-  Depends: T-03, T-05, T-07
-  Files: `specs/phase5/phase5-specs.md:Zone.Identifier` (deleted), `specs/phase3`, `specs/phase4`, `specs/phase5` (deleted)
-  Do: Delete the stream file with `git rm`, remove each emptied folder, and run the link check over every markdown file in `specs/`. Fix only links that point at removed paths; do not retarget unrelated links.
-  Done when: `test ! -e 'specs/phase5/phase5-specs.md:Zone.Identifier'`; `test ! -d specs/phase3 && test ! -d specs/phase4 && test ! -d specs/phase5`; the inline link checker reports zero missing targets; `grep -rn 'specs/phase' specs/ --include='*.md'` returns nothing.
-  Out of scope: deleting any other file.
-  Notes:
-  Evidence: The `:Zone.Identifier` file and `specs/phase3`, `specs/phase4`, `specs/phase5` are gone; the inline link checker reports 0 missing targets. The literal `grep -rn 'specs/phase'` cannot return nothing because the SPEC criteria and this task describe the removal; recorded as CP-1. Verified 2026-10-26.
+- [x] T-11 Remove the junk file and empty phase folders; verify links
+      Refs: R6, AC-6.1, AC-6.2, AC-4.3
+      Depends: T-03, T-05, T-07
+      Files: `specs/phase5/phase5-specs.md:Zone.Identifier` (deleted), `specs/phase3`, `specs/phase4`, `specs/phase5` (deleted)
+      Do: Delete the stream file with `git rm`, remove each emptied folder, and run the link check over every markdown file in `specs/`. Fix only links that point at removed paths; do not retarget unrelated links.
+      Done when: `test ! -e 'specs/phase5/phase5-specs.md:Zone.Identifier'`; `test ! -d specs/phase3 && test ! -d specs/phase4 && test ! -d specs/phase5`; the inline link checker reports zero missing targets; `grep -rn 'specs/phase' specs/ --include='*.md'` returns nothing.
+      Out of scope: deleting any other file.
+      Notes:
+      Evidence: `Test-Path` equivalents pass: the `:Zone.Identifier` file and all three phase folders are gone. The inline link checker reports 0 missing targets. The owner approved reading the final clause as the link check (AC-6.2 reworded on 2026-10-26); the literal grep still matches the criteria that name the folders. Verified 2026-10-26.
+      Evidence: The `:Zone.Identifier` file and `specs/phase3`, `specs/phase4`, `specs/phase5` are gone; the inline link checker reports 0 missing targets. The literal `grep -rn 'specs/phase'` cannot return nothing because the SPEC criteria and this task describe the removal; recorded as CP-1. Verified 2026-10-26.
 
 - [x] T-12 Log D-012
       Refs: R7, AC-7.2, R5
@@ -165,26 +166,27 @@ APPROVED: v0.1 2026-10-26
       Notes:
       Evidence: `DECISIONS.md` D-012 (Proposed) records the phase-to-feature mapping table, the numbering, the `design/` carrier, the frozen-task rule, docs-only scope and the owner-saved specs. Verified 2026-10-26.
 
-- [~] T-13 Close the feature
-  Refs: R5, R7, AC-7.1
-  Depends: T-11, T-12
-  Files: `specs/003-specs-align/WALKTHROUGH.md` (new)
-  Do: Run every check in `PLAN.md` section 8, record the outputs, map each criterion, list deviations (owner-saved SPEC files, dropped out-of-scope note, any link retarget) and open items (the two phase-4 regressions, T2-1, T1-5, manual checks). Confirm `git diff --stat main...HEAD -- src/` is empty and `npm test` is 228/228.
-  Done when: the walkthrough exists with a criterion table; every command in it is pasted with its result; `git diff --stat main...HEAD -- src/` prints nothing.
-  Out of scope: fixing code or opening the PR.
-  Notes:
-  Evidence: `specs/003-specs-align/WALKTHROUGH.md` exists with the task table, the 17-criterion table, command results and open items. `npm test` 228/228; build and lint ok; `git diff --stat origin/main...HEAD -- src/` is empty (the local `main` ref is stale, so the guard uses `origin/main`). Close is blocked on the owner copying three SPEC files and resolving CP-1. Verified 2026-10-26.
+- [x] T-13 Close the feature
+      Refs: R5, R7, AC-7.1
+      Depends: T-11, T-12
+      Files: `specs/003-specs-align/WALKTHROUGH.md` (new)
+      Do: Run every check in `PLAN.md` section 8, record the outputs, map each criterion, list deviations (owner-saved SPEC files, dropped out-of-scope note, any link retarget) and open items (the two phase-4 regressions, T2-1, T1-5, manual checks). Confirm `git diff --stat main...HEAD -- src/` is empty and `npm test` is 228/228.
+      Done when: the walkthrough exists with a criterion table; every command in it is pasted with its result; `git diff --stat main...HEAD -- src/` prints nothing.
+      Out of scope: fixing code or opening the PR.
+      Notes:
+      Evidence: `specs/003-specs-align/WALKTHROUGH.md` has the task table, the 17-criterion table with command results, deviations and open items. `npm test` 228/228; build and lint ok; `git diff --stat origin/main...HEAD -- src/` empty (local `main` is stale; the guard uses `origin/main`). All 14 tasks are `[x]`. Verified 2026-10-26.
+      Evidence: `specs/003-specs-align/WALKTHROUGH.md` exists with the task table, the 17-criterion table, command results and open items. `npm test` 228/228; build and lint ok; `git diff --stat origin/main...HEAD -- src/` is empty (the local `main` ref is stale, so the guard uses `origin/main`). Close is blocked on the owner copying three SPEC files and resolving CP-1. Verified 2026-10-26.
 
 ## Blocked / questions
 
 - **Resolved 2026-10-26:** the owner saved `SPEC.md` for 004, 005 and 006 and removed the 003 draft wrapper and the temporary-path wording in AC-4.2.
 - **Resolved 2026-10-26:** the owner approved phase-4 corrections P2-2 (inline border on `Step3Ladder.vue:98`) and P2-3 (`rounded="xl"` on `Step6Ready.vue:108`, `AppHelpDialog.vue:7`) as 005 tasks. They stay unfixed in 003.
 - **Resolved 2026-10-26:** the owner asked for a shared register of permanently out-of-scope capabilities. T-14 creates `specs/OUT_OF_SCOPE.md` and the roadmap links it.
-- **Open (CP-1):** AC-6.2 requires zero markdown matches for `specs/phase`, but AC-2.2 and AC-6.2 itself contain the string, so it cannot pass. Proposed reword is in `WALKTHROUGH.md` section 7. Owner decision needed before T-11 and T-13 close.
+- **Resolved 2026-10-26 (CP-1):** AC-6.2 now checks markdown links, not a string match; the owner applied the reword. The literal `specs/phase` mentions in AC-2.2 and AC-6.1 are historical by design.
 
 ## Phase reviews
 
-- M1: complete (T-01, T-14) · M2: complete (T-02 to T-07) · M3: complete (T-08 to T-10) · M4: T-12 done; T-11 and T-13 wait on CP-1
+- M1: complete (T-01, T-14) · M2: complete (T-02 to T-07) · M3: complete (T-08 to T-10) · M4: complete (T-11 to T-13)
 
 ## Coverage matrix
 

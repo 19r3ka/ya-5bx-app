@@ -88,7 +88,7 @@ The existing 001 and 002 features are close to the kit shape but carry stale sta
 **R6**
 
 - AC-6.1: Given the repository after the feature, when `specs/phase5` is inspected, then the `:Zone.Identifier` file and the folder itself are absent.
-- AC-6.2: Given the same repository, when searching markdown for `specs/phase`, then there are zero matches.
+- AC-6.2: Given the same repository, when markdown links are resolved, then no link targets a removed phase folder and the only other mentions are historical.
 
 **R7**
 
