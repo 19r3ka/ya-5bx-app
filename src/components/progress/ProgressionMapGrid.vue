@@ -63,7 +63,7 @@
 
     <!-- Legend -->
     <div
-      class="pa-6 bg-surface-elevated d-flex flex-wrap ga-6 align-center justify-center border-t-accent"
+      class="pa-6 bg-surface-elevated d-flex flex-wrap ga-6 align-center justify-center border-top-accent"
     >
       <div class="d-flex align-center ga-2">
         <div class="rounded legend-current"></div>
@@ -162,82 +162,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .border-surface-variant {
-    border: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .border-b-surface-variant {
-    border-bottom: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .border-t-accent {
-    border-top: 1px solid rgba(var(--v-theme-surface-variant), 0.5);
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .grid-container {
-    display: grid;
-    grid-template-columns: 36px repeat(12, minmax(28px, 1fr));
-    gap: 8px;
-    min-width: 680px;
-  }
-  .header-cell {
-    height: 28px;
-    font-size: 12px;
-  }
-  .progression-cell {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    min-width: 28px;
-    min-height: 28px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .progression-cell:hover {
-    transform: scale(1.1);
-  }
-  .cell-current {
-    background-color: rgb(var(--v-theme-primary-container));
-    border: 2px solid rgb(var(--v-theme-primary));
-    box-shadow: 0 0 12px rgba(245, 166, 35, 0.4);
-  }
-  .cell-completed {
-    background-color: rgb(var(--v-theme-secondary-dim));
-    color: rgb(var(--v-theme-secondary));
-  }
-  .cell-goal {
-    border: 2px dashed rgb(var(--v-theme-secondary));
-    background-color: rgba(var(--v-theme-surface-elevated), 0.3);
-  }
-  .cell-locked {
-    background-color: rgb(var(--v-theme-surface-elevated));
-    opacity: 0.3;
-  }
-  .legend-current {
-    width: 16px;
-    height: 16px;
-    background-color: rgb(var(--v-theme-primary-container));
-    border: 1.5px solid rgb(var(--v-theme-primary));
-  }
-  .legend-done {
-    width: 16px;
-    height: 16px;
-    background-color: rgb(var(--v-theme-secondary-dim));
-  }
-  .legend-goal {
-    width: 16px;
-    height: 16px;
-    border: 1.5px dashed rgb(var(--v-theme-secondary));
-    background-color: transparent;
-  }
-  .legend-locked {
-    width: 16px;
-    height: 16px;
-    background-color: rgb(var(--v-theme-surface-elevated));
-    opacity: 0.3;
-  }
-</style>

@@ -140,14 +140,14 @@ APPROVED: v0.4 2026-10-26
       Out of scope: dialog seal lifecycle and rep rules.
       Notes: `pulse-amber` is already global; do not duplicate it. Evidence: all four files have no style block; ExerciseInfoSheet maps its surface-variant border to `.border-surface-variant`; PostWorkoutDialog uses `.text-on-primary-container`; `rep-pop` and the timer animation classes resolve to the canonical sheet. Targeted `npx vitest run` on the timer, dialog, rep panel, ActiveWorkout and tutorial specs: 24 passed. `npm run build` and full `npx eslint src/` pass; Prettier ran on all four files.
 
-- [ ] T-011 (M-3, R4) Migrate the progression grid
+- [x] T-011 (M-3, R4) Migrate the progression grid
       Refs: R4, AC-4.1 (T3-1)
       Depends: T-010
       Files: `src/components/progress/ProgressionMapGrid.vue`
       Do: Remove the scoped block. Use the canonical `.grid-container`, `.header-cell`, `.progression-cell`, `.cell-*`, `.legend-*`, `.no-scrollbar` and border classes from T-007. Keep the existing rendering and tests.
       Done when: the file contains no `<style scoped>`; the six existing grid tests pass; build/lint pass.
       Out of scope: grid state rules.
-      Notes: The global classes must be updated to the grid's current values before the scoped block is removed.
+      Notes: The global classes must be updated to the grid's current values before the scoped block is removed. Evidence: the scoped block is gone, the legend now uses `.border-top-accent`, and all grid classes resolve to the canonical sheet. `npx vitest run src/components/progress/ProgressionMapGrid.spec.ts`: 6 passed; `npm run build`; full `npx eslint src/`.
 
 - [ ] T-012 (M-3, R4) Migrate the views
       Refs: R4, AC-4.1 (T3-1)
