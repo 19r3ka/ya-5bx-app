@@ -2,7 +2,9 @@
 
 **Feature ID:** 006-production-completion · **Spec v:** 0.1 · **Plan v:** 0.1 · **Updated:** 2026-10-26
 
-> Twelve items are delivered and proven; two are partly met and two are not met. The open items are real work and are not hidden behind a tick. No `APPROVED:` line exists because executing them needs a new owner "go".
+APPROVED: v0.1 2026-10-26
+
+> The owner approved the four open 006 items on 2026-10-26 as part of the 007 go. The twelve delivered items remain historical. Browser-only checks stay Claimed.
 
 ## How to read this file
 
