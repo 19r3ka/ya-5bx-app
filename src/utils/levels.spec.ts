@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
+import ageGroups from '@/data/ageGroups.json'
 import {
   extractChartAndLevel,
   getExercisesForLevel,
@@ -21,6 +22,32 @@ describe('getGoalLevelByAge', () => {
   it('returns null below the minimum age', () => {
     expect(getGoalLevelByAge(5)).toBeNull()
     expect(getGoalLevelByAge(0)).toBeNull()
+  })
+
+  it.each([
+    [6, 'C1_B'],
+    [7, 'C1_A'],
+    [8, 'C2_D-'],
+    [11, 'C2_A-'],
+    [12, 'C3_D+'],
+    [15, 'C4_D-'],
+    [16, 'C4_C+'],
+    [17, 'C4_C+'],
+    [24, 'C5_C'],
+    [25, 'C4_A+'],
+    [29, 'C4_A+'],
+    [30, 'C4_C+'],
+    [34, 'C4_C+'],
+    [35, 'C3_B'],
+    [39, 'C3_B'],
+    [40, 'C3_C'],
+    [43, 'C3_C'],
+    [44, 'C3_C'],
+    [45, 'C2_A+'],
+    [49, 'C2_A+'],
+    [50, 'C2_C+'],
+  ])('returns the pinned level for age %i', (age, expected) => {
+    expect(getGoalLevelByAge(age)).toBe(expected)
   })
 })
 
@@ -80,4 +107,47 @@ describe('getExercisesForLevel', () => {
 
     expect(shared.reps).toBe(20)
   })
+})
+
+describe('ageGroups table', () => {
+  // Literal copy of the RCAF goal table (fit450 transcription, Q1 resolved to
+  // C4_C+ for 30-34). Any data edit that is not mirrored here fails.
+  const EXPECTED_ROWS: Array<[number, number, string]> = [
+    [6, 6, 'C1_B'],
+    [7, 7, 'C1_A'],
+    [8, 8, 'C2_D-'],
+    [9, 9, 'C2_C-'],
+    [10, 10, 'C2_B-'],
+    [11, 11, 'C2_A-'],
+    [12, 12, 'C3_D+'],
+    [13, 13, 'C3_C+'],
+    [14, 14, 'C3_B+'],
+    [15, 15, 'C4_D-'],
+    [16, 17, 'C4_C+'],
+    [18, 24, 'C5_C'],
+    [25, 29, 'C4_A+'],
+    [30, 34, 'C4_C+'],
+    [35, 39, 'C3_B'],
+    [40, 44, 'C3_C'],
+    [45, 49, 'C2_A+'],
+    [50, 60, 'C2_C+'],
+  ]
+
+  it('contains exactly the pinned rows', () => {
+    expect(ageGroups).toEqual(
+      EXPECTED_ROWS.map(([minAge, maxAge, goalLevel]) => ({
+        minAge,
+        maxAge,
+        goalLevel,
+      }))
+    )
+  })
+
+  it.each(EXPECTED_ROWS)(
+    'maps both boundaries of %i-%i to %s',
+    (minAge, maxAge, goalLevel) => {
+      expect(getGoalLevelByAge(minAge)).toBe(goalLevel)
+      expect(getGoalLevelByAge(maxAge)).toBe(goalLevel)
+    }
+  )
 })

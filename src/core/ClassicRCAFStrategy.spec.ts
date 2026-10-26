@@ -104,16 +104,15 @@ describe('ClassicRCAFStrategy.generateWorkout', () => {
     })
   })
 
-  // CHARACTERIZATION: known gap, see SPEC AC-3.3.
-  // The strategy throws instead of falling back to Chart 1, Level D-.
-  it('throws for an unknown chart', () => {
+  // Contract: the strategy rejects invalid keys; the setup boundary resolves a
+  // valid target first, so this error never reaches the user (D-008, T-08).
+  it('rejects an unknown chart', () => {
     expect(() => strategy.generateWorkout(context({ chartNumber: 9 }))).toThrow(
       'Chart data not found for chart 9 level D-'
     )
   })
 
-  // CHARACTERIZATION: known gap, see SPEC AC-3.3.
-  it('throws for an unknown level', () => {
+  it('rejects an unknown level', () => {
     expect(() =>
       strategy.generateWorkout(context({ levelString: 'Z' }))
     ).toThrow('Chart data not found for chart 1 level Z')

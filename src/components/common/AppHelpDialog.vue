@@ -9,7 +9,7 @@
         <div class="d-flex align-center ga-2">
           <v-icon color="primary" size="28">mdi-information-outline</v-icon>
           <h3 class="fc-section text-primary text-uppercase mb-0">
-            ABOUT YA-5BX
+            {{ $t('help.title') }}
           </h3>
         </div>
         <v-btn
@@ -22,33 +22,39 @@
 
       <div class="mb-4">
         <p class="fc-body-strong text-on-surface mb-2">
-          The 11-Minute Physical Fitness Plan
+          {{ $t('help.subtitle') }}
         </p>
         <p class="fc-body text-on-surface-variant mb-3">
-          YA-5BX is based on the famous Royal Canadian Air Force 5 Basic
-          Exercises (5BX) system designed to achieve and maintain optimal
-          fitness in just 11 minutes a day, requiring no specialized equipment.
+          {{ $t('help.intro') }}
         </p>
         <p class="fc-body text-on-surface-variant mb-0">
-          The workout consists of 5 consecutive exercises:
+          {{ $t('help.listIntro') }}
         </p>
         <ul class="text-on-surface-variant pl-4 mt-2 fc-caption">
           <li>
-            <strong>01 Stretching</strong>: Forward & upward spinal mobility (2
-            min)
+            <strong>{{ $t('help.items.stretching.label') }}</strong
+            >:
+            {{ $t('help.items.stretching.detail') }}
           </li>
           <li>
-            <strong>02 Sit-Ups</strong>: Core abdominal conditioning (1 min)
+            <strong>{{ $t('help.items.sitUps.label') }}</strong
+            >:
+            {{ $t('help.items.sitUps.detail') }}
           </li>
           <li>
-            <strong>03 Back Extensions</strong>: Posterior chain endurance (1
-            min)
+            <strong>{{ $t('help.items.backExtensions.label') }}</strong
+            >:
+            {{ $t('help.items.backExtensions.detail') }}
           </li>
           <li>
-            <strong>04 Push-Ups</strong>: Upper-body pushing power (1 min)
+            <strong>{{ $t('help.items.pushUps.label') }}</strong
+            >:
+            {{ $t('help.items.pushUps.detail') }}
           </li>
           <li>
-            <strong>05 Aerobic / Run</strong>: Cardiovascular output (6 min)
+            <strong>{{ $t('help.items.aerobic.label') }}</strong
+            >:
+            {{ $t('help.items.aerobic.detail') }}
           </li>
         </ul>
       </div>
@@ -56,14 +62,12 @@
       <v-card color="surface" rounded="lg" class="pa-3 mb-6 border-accent">
         <div class="d-flex align-center ga-2 text-secondary mb-1">
           <v-icon size="small">mdi-shield-check-outline</v-icon>
-          <span class="fc-caption font-weight-bold text-uppercase"
-            >Progression Rule</span
-          >
+          <span class="fc-caption font-weight-bold text-uppercase">{{
+            $t('help.progressionTitle')
+          }}</span>
         </div>
         <p class="fc-caption text-on-surface-variant mb-0">
-          Gradually advance through charts and levels. Do not skip levels, and
-          hold at your current level if you experience soreness or stiff
-          muscles.
+          {{ $t('help.progressionBody') }}
         </p>
       </v-card>
 
@@ -74,7 +78,7 @@
         rounded="md"
         @click="emit('update:modelValue', false)"
       >
-        Understood
+        {{ $t('help.close') }}
       </v-btn>
     </v-card>
   </v-dialog>

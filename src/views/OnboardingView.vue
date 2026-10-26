@@ -54,7 +54,7 @@
       <v-window-item :value="6" class="fill-height pt-16">
         <Step6Ready
           :goal-chart="derivedGoalChart"
-          goal-level="A+"
+          :goal-level="goalLevel ?? ''"
           @complete="completeOnboarding"
         />
       </v-window-item>
@@ -76,7 +76,7 @@
   import Step5Tutorial from '@/components/onboarding/Step5Tutorial.vue'
   import Step6Ready from '@/components/onboarding/Step6Ready.vue'
   import { useUserStore } from '@/stores/useUserStore'
-  import { getGoalChartByAge } from '@/utils/ages'
+  import { extractChartAndLevel, getGoalLevelByAge } from '@/utils/levels'
 
   const router = useRouter()
   const userStore = useUserStore()
@@ -87,9 +87,17 @@
     set: (val: number) => userStore.setDraftStep(val),
   })
 
-  const derivedGoalChart = computed(() =>
-    userStore.draftAge ? getGoalChartByAge(userStore.draftAge) : 3
+  const goalLevel = computed(() =>
+    userStore.draftAge ? getGoalLevelByAge(userStore.draftAge) : null
   )
+
+  const derivedGoalChart = computed(() => {
+    const level = goalLevel.value
+    if (!level) return 3
+
+    const [chart] = extractChartAndLevel(level)
+    return Number(chart.replace('C', '')) || 3
+  })
 
   function nextStep(payload?: number) {
     if (currentStep.value === 2 && payload) {
@@ -112,7 +120,7 @@
       name: payload.name || undefined,
       age: userStore.draftAge ?? undefined,
       currentLevel: 'C1_D-',
-      goalLevel: `C${derivedGoalChart.value}_A+`,
+      goalLevel: goalLevel.value ?? undefined,
       preferredAerobic: userStore.draftAerobic,
     })
     if (router) {

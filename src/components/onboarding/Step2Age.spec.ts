@@ -46,7 +46,7 @@ describe('Step2Age', () => {
 
     const card = wrapper.findComponent(GoalChartCard)
     expect(card.exists()).toBe(true)
-    expect(card.props()).toMatchObject({ chartNumber: 6, ageRange: '18–25' })
+    expect(card.props()).toMatchObject({ chartNumber: 2, ageRange: '10' })
 
     await wrapper.find('input').setValue('30')
     expect(wrapper.findComponent(GoalChartCard).props()).toMatchObject({

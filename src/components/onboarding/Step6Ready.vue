@@ -3,11 +3,10 @@
     <div class="flex-grow-1 w-100 mx-auto" style="max-width: 600px">
       <div class="mb-8 mt-8">
         <h2 class="fc-exercise text-primary text-uppercase mb-2">
-          ONE LAST THING
+          {{ $t('onboarding.ready.eyebrow') }}
         </h2>
         <p class="fc-body text-on-surface-variant">
-          Personalize your training record before we begin the baseline
-          assessment.
+          {{ $t('onboarding.ready.intro') }}
         </p>
       </div>
 
@@ -15,11 +14,11 @@
         <label
           class="fc-caption text-on-surface-variant text-uppercase font-weight-bold d-block mb-2 tracking-wide"
         >
-          Your name (Optional)
+          {{ $t('onboarding.ready.nameLabel') }}
         </label>
         <v-text-field
           v-model="name"
-          :label="$t ? $t('onboarding.ready.namePlaceholder') : 'RECRUIT NAME'"
+          :label="$t('onboarding.ready.namePlaceholder')"
           variant="outlined"
           color="primary"
           rounded="lg"
@@ -30,7 +29,7 @@
 
       <div class="mb-8">
         <h3 class="fc-section text-primary text-uppercase mb-4">
-          YOUR STARTING POINT
+          {{ $t('onboarding.ready.startingPoint') }}
         </h3>
         <v-row>
           <v-col cols="6">
@@ -40,10 +39,13 @@
               class="pa-4 h-100 d-flex flex-column justify-space-between tier-card-start"
             >
               <div>
-                <span class="fc-caption text-on-surface-variant text-uppercase"
-                  >Current Tier</span
+                <span
+                  class="fc-caption text-on-surface-variant text-uppercase"
+                  >{{ $t('onboarding.ready.currentTier') }}</span
                 >
-                <h4 class="fc-exercise text-on-surface tier-title">CHART 1</h4>
+                <h4 class="fc-exercise text-on-surface tier-title">
+                  {{ $t('onboarding.ready.currentChart') }}
+                </h4>
               </div>
               <div class="text-right mt-4">
                 <span class="fc-rep-target text-error line-height-1">D-</span>
@@ -57,11 +59,12 @@
               class="pa-4 h-100 d-flex flex-column justify-space-between tier-card-goal"
             >
               <div>
-                <span class="fc-caption text-on-surface-variant text-uppercase"
-                  >Objective</span
+                <span
+                  class="fc-caption text-on-surface-variant text-uppercase"
+                  >{{ $t('onboarding.ready.objective') }}</span
                 >
                 <h4 class="fc-exercise text-on-surface tier-title">
-                  CHART {{ goalChart }}
+                  {{ $t('onboarding.ready.goalChart', { chart: goalChart }) }}
                 </h4>
               </div>
               <div class="text-right mt-4">
@@ -84,7 +87,9 @@
         class="mb-4 text-on-primary-fixed submit-btn"
         @click="handleProceed(true)"
       >
-        <span class="fc-exercise font-size-20">START MY FIRST WORKOUT</span>
+        <span class="fc-exercise font-size-20">{{
+          $t('onboarding.ready.startButton')
+        }}</span>
         <v-icon end size="28">mdi-play</v-icon>
       </v-btn>
       <v-btn
@@ -94,7 +99,7 @@
         class="fc-body-strong"
         @click="handleProceed(false)"
       >
-        Skip for now
+        {{ $t('onboarding.ready.skip') }}
       </v-btn>
     </div>
 
@@ -106,19 +111,11 @@
             >mdi-account-question-outline</v-icon
           >
           <h3 class="fc-section text-on-surface text-uppercase mb-0">
-            {{
-              $t
-                ? $t('onboarding.ready.confirmEmptyTitle')
-                : 'Leave name blank?'
-            }}
+            {{ $t('onboarding.ready.confirmEmptyTitle') }}
           </h3>
         </div>
         <p class="fc-body text-on-surface-variant mb-6">
-          {{
-            $t
-              ? $t('onboarding.ready.confirmEmptyMessage')
-              : "You haven't entered a name. Would you like to proceed as Recruit?"
-          }}
+          {{ $t('onboarding.ready.confirmEmptyMessage') }}
         </p>
         <div class="d-flex flex-column ga-2">
           <v-btn
@@ -128,11 +125,7 @@
             rounded="md"
             @click="confirmProceed"
           >
-            {{
-              $t
-                ? $t('onboarding.ready.confirmEmptyProceed')
-                : 'Continue as Recruit'
-            }}
+            {{ $t('onboarding.ready.confirmEmptyProceed') }}
           </v-btn>
           <v-btn
             variant="text"
@@ -140,7 +133,7 @@
             color="on-surface-variant"
             @click="showConfirmDialog = false"
           >
-            {{ $t ? $t('onboarding.ready.confirmEmptyCancel') : 'Enter Name' }}
+            {{ $t('onboarding.ready.confirmEmptyCancel') }}
           </v-btn>
         </div>
       </v-card>

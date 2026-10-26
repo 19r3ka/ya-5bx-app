@@ -52,7 +52,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import GoalChartCard from './GoalChartCard.vue'
-  import { getGoalChartByAge, getAgeRangeLabel } from '@/utils/ages'
+  import { extractChartAndLevel, getAgeGroupForAge } from '@/utils/levels'
 
   const emit = defineEmits<{
     next: [age: number]
@@ -64,13 +64,26 @@
     return age.value !== null && age.value >= 10 && age.value <= 99
   })
 
-  const goalChart = computed(() =>
-    isValidAge.value && age.value !== null ? getGoalChartByAge(age.value) : null
+  const goalAgeGroup = computed(() =>
+    isValidAge.value && age.value !== null ? getAgeGroupForAge(age.value) : null
   )
 
-  const ageRangeLabel = computed(() =>
-    isValidAge.value && age.value !== null ? getAgeRangeLabel(age.value) : ''
-  )
+  const goalChart = computed(() => {
+    const group = goalAgeGroup.value
+    if (!group) return null
+
+    const [chart] = extractChartAndLevel(group.goalLevel)
+    return Number(chart.replace('C', '')) || null
+  })
+
+  const ageRangeLabel = computed(() => {
+    const group = goalAgeGroup.value
+    if (!group) return ''
+
+    return group.minAge === group.maxAge
+      ? String(group.minAge)
+      : `${group.minAge}–${group.maxAge}`
+  })
 
   function onNext() {
     if (isValidAge.value && age.value !== null) {

@@ -57,17 +57,57 @@ describe('useUserStore', () => {
     expect(store.profile?.isOnboardingCompleted).toBe(true)
   })
 
-  // CHARACTERIZATION: known gap, see SPEC AC-2.3.
-  // persistDraft has no try/catch, so a storage write error propagates.
-  it('propagates localStorage write errors from persistDraft', () => {
+  it('reports a failed draft write without throwing', () => {
     const store = useUserStore()
-    const setItem = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
+    vi.spyOn(localStorage, 'setItem').mockImplementationOnce(() => {
       throw new Error('quota exceeded')
     })
 
-    expect(() => store.setDraftStep(3)).toThrow('quota exceeded')
+    expect(() => store.setDraftStep(3)).not.toThrow()
+    expect(store.storageWriteFailed).toBe(true)
+  })
 
-    setItem.mockRestore()
+  it('clears the write-failure flag after a later successful write', () => {
+    const store = useUserStore()
+    vi.spyOn(localStorage, 'setItem').mockImplementationOnce(() => {
+      throw new Error('quota exceeded')
+    })
+
+    store.setDraftStep(2)
+    expect(store.storageWriteFailed).toBe(true)
+
+    store.setDraftStep(3)
+    expect(store.storageWriteFailed).toBe(false)
+  })
+
+  it('keeps the previously stored profile when the profile write fails', () => {
+    seedUser({ age: 30, currentLevel: 'C1_D-' })
+    const store = useUserStore()
+    vi.spyOn(localStorage, 'setItem').mockImplementationOnce(() => {
+      throw new Error('quota exceeded')
+    })
+
+    store.completeOnboarding({ age: 31 })
+
+    const stored = JSON.parse(
+      localStorage.getItem(LOCALSTORAGE_USER_KEY) ?? '{}'
+    )
+    expect(stored.age).toBe(30)
+    expect(store.profile?.age).toBe(31)
+    expect(store.storageWriteFailed).toBe(true)
+  })
+
+  it('keeps the onboarding draft when the profile write fails', () => {
+    seedDraft({ step: 3, age: 30, aerobic: 'walk' })
+    const store = useUserStore()
+    vi.spyOn(localStorage, 'setItem').mockImplementationOnce(() => {
+      throw new Error('quota exceeded')
+    })
+
+    store.completeOnboarding({ age: 30 })
+
+    expect(localStorage.getItem(STORAGE_KEY_ONBOARDING_DRAFT)).not.toBeNull()
+    expect(store.storageWriteFailed).toBe(true)
   })
 
   it('completes onboarding with the draft aerobic option and clears the draft', () => {

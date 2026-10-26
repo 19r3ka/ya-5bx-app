@@ -12,7 +12,7 @@
   { "minAge": 16, "maxAge": 17, "goalLevel": "C4_C+" },
   { "minAge": 18, "maxAge": 24, "goalLevel": "C5_C" },
   { "minAge": 25, "maxAge": 29, "goalLevel": "C4_A+" },
-  { "minAge": 30, "maxAge": 34, "goalLevel": "C4_C-" },
+  { "minAge": 30, "maxAge": 34, "goalLevel": "C4_C+" },
   { "minAge": 35, "maxAge": 39, "goalLevel": "C3_B" },
   { "minAge": 40, "maxAge": 44, "goalLevel": "C3_C" },
   { "minAge": 45, "maxAge": 49, "goalLevel": "C2_A+" },
